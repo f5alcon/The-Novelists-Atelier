@@ -1469,7 +1469,7 @@ function mkSec(text='',inclusion='full'){return{text,inclusion}}
 function mkId(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
 
 const APP = {
-  tab: localStorage.getItem('na_tab') || 'series',
+  tab: localStorage.getItem('na_tab') || 'home',
   theme: localStorage.getItem('na_theme') || 'default',
   uiScale: parseFloat(localStorage.getItem('na_uiscale')) || 1.5,
   headerScale: parseFloat(localStorage.getItem('na_hscale')) || 1,
