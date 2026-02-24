@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Novelist's Atelier — 1.0 Beta</title>
+<title>The Novelist's Atelier — 1.1 Beta</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -151,6 +151,91 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--te
 .brand-logo{height:24px;vertical-align:middle;border-radius:3px}
 .brand-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#e0d3bc;letter-spacing:.02em}
 .brand-ver{font-family:'JetBrains Mono',monospace;font-size:9px;color:#3a3020;letter-spacing:.1em}
+.save-indicator{display:inline-block;margin-left:12px;font-size:11px;color:#4a8}
+.save-indicator.saving{color:#d80}
+.save-indicator.error{color:#d44}
+.save-time{font-size:10px;color:#605840;margin-left:8px}
+.backup-list{max-height:150px;overflow-y:auto}
+.backup-item{display:flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid #252015;font-size:11px}
+.backup-time{color:#c8a660;flex:1}
+.backup-restore{background:transparent;border:1px solid #3a3020;color:#a09080;padding:2px 6px;font-size:10px;cursor:pointer;border-radius:2px}
+.backup-restore:hover{background:#252015;color:#c8a660}
+.scene-navigator{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#0f0c09;border:1px solid #252015;z-index:1500;transition:right .3s ease;overflow-y:auto}
+.scene-navigator.open{right:0}
+.scene-nav-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#141209;border-bottom:1px solid #252015;position:sticky;top:0}
+.scene-nav-header h3{margin:0;font-size:13px;color:#c8a660}
+.scene-nav-close{background:none;border:none;color:#605840;font-size:18px;cursor:pointer}
+.scene-nav-close:hover{color:#c8a660}
+.scene-nav-toggle{background:transparent;border:none;color:#605840;font-size:10px;cursor:pointer;margin-left:12px;padding:4px 8px}
+.scene-nav-toggle:hover{color:#c8a660}
+.search-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:2000;align-items:center;justify-content:center}
+.search-modal-overlay.open{display:flex}
+.search-modal{background:#1a1512;border:1px solid #3a3020;width:90%;max-width:600px;border-radius:4px;max-height:80vh;display:flex;flex-direction:column}
+.search-modal-hd{display:flex;align-items:center;padding:12px 16px;background:#141209;border-bottom:1px solid #252015;gap:10px}
+.search-modal-hd h3{margin:0;font-size:14px;color:#c8a660;flex:1}
+.search-input{flex:1;padding:8px;background:#0f0c09;border:1px solid #3a3020;color:#c8a660;font-size:14px}
+.search-input:focus{outline:none;border-color:#c8a660}
+.search-options{display:flex;gap:8px;align-items:center;padding:8px 16px;background:#141209;border-bottom:1px solid #252015}
+.search-options label{font-size:11px;color:#605840;display:flex;align-items:center;gap:4px;cursor:pointer}
+.search-options input[type="checkbox"]{accent-color:#c8a660}
+.search-results{max-height:400px;overflow-y:auto;padding:8px}
+.search-result-item{padding:8px 12px;margin-bottom:4px;background:#141209;border:1px solid #252015;border-radius:3px;cursor:pointer}
+.search-result-item:hover{border-color:#c8a660}
+.search-result-type{font-size:10px;color:#c8a660;text-transform:uppercase;margin-bottom:2px}
+.search-result-title{font-size:12px;color:#c8a660;margin-bottom:2px}
+.search-result-snippet{font-size:11px;color:#a09080;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-result-snippet mark{background:#c8a66033;color:#c8a660;padding:0 2px}
+.search-results-count{font-size:11px;color:#605840;padding:8px 16px;border-top:1px solid #252015}
+.search-modal-ft{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;background:#141209;border-top:1px solid #252015}
+.search-btn{padding:8px 16px;border-radius:2px;font-size:12px;cursor:pointer;background:transparent;border:1px solid #3a3020;color:#a09080}
+.search-btn:hover{background:#252015;color:#c8a660}
+.search-btn-primary{background:#c8a660;border:none;color:#090807}
+.search-btn-primary:hover{background:#e0c080}
+.search-tab-btn{padding:6px 12px;background:transparent;border:1px solid #3a3020;color:#a09080;font-size:11px;cursor:pointer;border-radius:2px}
+.search-tab-btn:hover{background:#252015;color:#c8a660}
+.search-tab-btn.active{background:#c8a660;border-color:#c8a660;color:#090807}
+.scene-nav-content{padding:12px}
+.scene-nav-item{padding:8px;margin-bottom:6px;background:#141209;border:1px solid #252015;border-radius:3px;cursor:pointer}
+.scene-nav-item:hover{border-color:#c8a660}
+.scene-nav-item-title{font-size:12px;color:#c8a660;margin-bottom:4px}
+.scene-nav-item-meta{font-size:10px;color:#605840}
+
+.project-selector{position:relative;margin-left:auto}
+.project-current{
+  display:flex;align-items:center;gap:6px;padding:4px 10px;
+  background:#1a1512;border:1px solid #3a3020;border-radius:2px;
+  color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:9px;
+  cursor:pointer;letter-spacing:.03em
+}
+.project-current:hover{background:#252015;border-color:#c8a660}
+.project-caret{font-size:8px;color:#605840}
+.project-dropdown{
+  display:none;position:absolute;top:100%;right:0;margin-top:4px;
+  min-width:180px;background:#1a1512;border:1px solid #3a3020;
+  border-radius:2px;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.5)
+}
+.project-dropdown.open{display:block}
+.project-list{max-height:200px;overflow-y:auto;border-bottom:1px solid #252015}
+.project-item{
+  padding:8px 12px;font-size:11px;color:#a09080;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center
+}
+.project-item:hover{background:#252015;color:#e0d3bc}
+.project-item.active{background:#252015;color:#c8a660}
+.project-actions{padding:8px;display:flex;flex-direction:column;gap:4px}
+.project-action{
+  padding:6px 10px;background:transparent;border:1px solid #3a3020;
+  color:#807060;font-family:'JetBrains Mono',monospace;font-size:9px;
+  cursor:pointer;border-radius:2px;text-align:left
+}
+.project-action:hover{background:#252015;color:#c8a660;border-color:#c8a660}
+
+.stats-badge{
+  margin-left:12px;padding:4px 10px;background:#1a1512;border:1px solid #3a3020;
+  border-radius:2px;color:#605840;font-family:'JetBrains Mono',monospace;font-size:9px;
+  cursor:default;letter-spacing:.03em
+}
+.stats-badge:hover{border-color:#504830;color:#a09080}
 
 .tab-nav{display:flex;gap:2px}
 .tab-btn{
@@ -575,6 +660,230 @@ select.minput option{background:#0d0b08;color:#b8a878}
 .scard-hd #lmstudio_help_hd{display:inline;margin-right:4px}
 .scard-body{padding:13px}
 
+.stats-total{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px;background:#141209;border-radius:3px;margin-bottom:12px
+}
+.stats-label{color:#605840;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+.stats-value{color:#c8a660;font-size:22px;font-family:'JetBrains Mono',monospace}
+.stats-breakdown{padding:0 4px}
+.stats-row{
+  display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #1f1a12;
+  font-size:12px;color:#a89868
+}
+.stats-row:last-child{border-bottom:none}
+.stats-sec{min-width:90px;color:#605840}
+.stats-num{font-family:'JetBrains Mono',monospace;color:#c8a660;margin-left:auto}
+.stats-active{color:#504830;font-size:10px;margin-left:6px}
+.stats-counts{
+  display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid #252015;
+  font-size:11px;color:#605840
+}
+
+.template-modal-overlay{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center
+}
+.template-modal-overlay.open{display:flex}
+.template-modal{
+  background:#1a1512;border:1px solid #3a3020;width:90%;max-width:600px;max-height:90vh;
+  overflow-y:auto;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,0.6)
+}
+.template-modal-hd{
+  display:flex;justify-content:space-between;align-items:center;padding:12px 16px;
+  background:#141209;border-bottom:1px solid #252015
+}
+.template-modal-hd h3{margin:0;font-size:14px;color:#c8a660;font-weight:normal}
+.template-modal-close{
+  background:none;border:none;color:#605840;font-size:18px;cursor:pointer;padding:0;line-height:1
+}
+.template-modal-close:hover{color:#c8a660}
+.template-modal-body{padding:16px}
+.template-field{
+  margin-bottom:12px;padding:10px;background:#141209;border:1px solid #252015;border-radius:3px
+}
+.template-field-row{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.template-field-row input{flex:1;padding:6px 8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px}
+.template-field-row select{padding:6px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px}
+.template-field-remove{color:#b05040;cursor:pointer;font-size:14px;padding:4px}
+.template-field-remove:hover{color:#e07060}
+.template-add-field{
+  padding:6px 12px;background:transparent;border:1px solid #3a3020;
+  color:#807060;font-size:11px;cursor:pointer;border-radius:2px;margin-bottom:12px
+}
+.template-add-field:hover{background:#252015;color:#c8a660}
+.template-tpl-label{font-size:11px;color:#605840;margin-bottom:6px;display:block}
+.template-tpl textarea{
+  width:100%;min-height:120px;padding:10px;background:#141209;border:1px solid #3a3020;
+  color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.5;resize:vertical
+}
+.template-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;padding-top:16px;border-top:1px solid #252015}
+.template-btn{
+  padding:8px 16px;border-radius:2px;font-size:12px;cursor:pointer;transition:all .12s
+}
+.template-btn-primary{background:#c8a660;color:#090807;border:none}
+.template-btn-primary:hover{background:#e0c080}
+.template-btn-secondary{background:transparent;border:1px solid #3a3020;color:#a09080}
+.template-btn-secondary:hover{background:#252015;color:#c8a660}
+.template-preview{
+  margin-top:12px;padding:12px;background:#141209;border:1px solid #252015;border-radius:3px;
+  font-size:12px;color:#a09080;white-space:pre-wrap;max-height:150px;overflow-y:auto
+}
+
+.create-template-btn{
+  width:100%;padding:6px 10px;background:#1a1512;border:1px solid #3a3020;
+  color:#c8a660;font-size:11px;cursor:pointer;border-radius:2px;transition:all .12s
+}
+.create-template-btn:hover{background:#252015;border-color:#c8a660}
+.p-custom-header{
+  padding:8px 10px;font-size:10px;color:#605840;text-transform:uppercase;letter-spacing:.1em;
+  border-bottom:1px solid #1f1a12;margin-top:8px
+}
+.custom-prompt{position:relative;border-left:3px solid #c8a660!important}
+.custom-badge{
+  font-size:8px;padding:1px 5px;background:#c8a660;color:#090807;border-radius:2px;margin-left:4px
+}
+.pcrd-actions{
+  display:none;position:absolute;top:6px;right:6px;gap:4px
+}
+.custom-prompt:hover .pcrd-actions{display:flex}
+.pcrd-edit,.pcrd-delete{
+  font-size:9px;padding:2px 6px;background:#1a1512;border:1px solid #3a3020;border-radius:2px;cursor:pointer
+}
+.pcrd-edit:hover{color:#c8a660;border-color:#c8a660}
+.pcrd-delete:hover{color:#b05040;border-color:#b05040}
+
+.rel-item{
+  padding:10px;margin:6px 0;background:#141209;border:1px solid #252015;border-radius:3px
+}
+.rel-names{font-size:12px;color:#c8a660;margin-bottom:4px}
+.rel-arrow{color:#605840;margin:0 6px}
+.rel-type{font-size:10px;color:#807060;text-transform:uppercase;letter-spacing:.05em}
+.rel-desc{font-size:11px;color:#a09080;margin-top:6px;font-style:italic}
+.rel-actions{display:flex;gap:8px;margin-top:8px}
+.rel-edit,.rel-delete{
+  font-size:9px;padding:3px 8px;background:#1a1512;border:1px solid #3a3020;border-radius:2px;cursor:pointer;color:#a09080
+}
+.rel-edit:hover{color:#c8a660;border-color:#c8a660}
+.rel-delete:hover{color:#b05040;border-color:#b05040}
+.empty-msg{color:#504830;font-size:12px;font-style:italic;padding:12px}
+.divider{border:0;border-top:1px solid #252015;margin:16px 0}
+
+.rel-modal-overlay{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center
+}
+.rel-modal-overlay.open{display:flex}
+.rel-modal{background:#1a1512;border:1px solid #3a3020;width:90%;max-width:400px;border-radius:4px}
+.rel-modal-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#141209;border-bottom:1px solid #252015}
+.rel-modal-hd h3{margin:0;font-size:14px;color:#c8a660}
+.rel-modal-close{background:none;border:none;color:#605840;font-size:18px;cursor:pointer}
+.rel-modal-close:hover{color:#c8a660}
+.rel-modal-body{padding:16px}
+.rel-field{margin-bottom:12px}
+.rel-field label{display:block;font-size:11px;color:#605840;margin-bottom:4px}
+.rel-field select,.rel-field textarea{width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660;font-size:12px}
+.rel-field textarea{min-height:60px;resize:vertical}
+.rel-actions-row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.rel-btn-cancel,.rel-btn-save{padding:8px 16px;border-radius:2px;font-size:12px;cursor:pointer}
+.rel-btn-cancel{background:transparent;border:1px solid #3a3020;color:#a09080}
+.rel-btn-cancel:hover{background:#252015}
+.rel-btn-save{background:#c8a660;border:none;color:#090807}
+.rel-btn-save:hover{background:#e0c080}
+
+.rel-map-overlay{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.85);z-index:2000;align-items:center;justify-content:center
+}
+.rel-map-overlay.open{display:flex}
+.rel-map-modal{background:#1a1512;border:1px solid #3a3020;width:95%;height:90%;max-width:1200px;border-radius:4px;display:flex;flex-direction:column}
+.rel-map-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#141209;border-bottom:1px solid #252015}
+.rel-map-hd h3{margin:0;font-size:14px;color:#c8a660}
+.rel-map-close{background:none;border:none;color:#605840;font-size:18px;cursor:pointer}
+.rel-map-close:hover{color:#c8a660}
+.rel-map-body{flex:1;position:relative;overflow:hidden}
+.rel-map-body canvas{width:100%;height:100%;display:block}
+
+.story-subtabs{display:flex;gap:2px;margin-bottom:16px;border-bottom:1px solid #252015}
+.story-subtab{padding:10px 20px;background:transparent;border:none;color:#605840;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;transition:all .12s}
+.story-subtab:hover{color:#a09080}
+.story-subtab.active{color:#c8a660;border-bottom-color:#c8a660}
+
+.ch-item{padding:12px;margin:8px 0;background:#141209;border:1px solid #252015;border-radius:3px}
+.ch-item-hd{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ch-num{font-size:10px;color:#504830;min-width:20px}
+.ch-title{font-size:13px;color:#c8a660}
+.ch-item-bd{font-size:11px;color:#a09080;line-height:1.4;margin-bottom:8px}
+.ch-item-ft{display:flex;gap:8px}
+.ch-edit,.ch-delete{font-size:9px;padding:3px 8px;background:#1a1512;border:1px solid #3a3020;border-radius:2px;cursor:pointer;color:#a09080}
+.ch-edit:hover{color:#c8a660;border-color:#c8a660}
+.ch-delete:hover{color:#b05040;border-color:#b05040}
+
+.timeline-item{padding:12px;margin:8px 0;background:#141209;border:1px solid #252015;border-radius:3px}
+.timeline-title{font-size:13px;color:#c8a660;margin-bottom:4px}
+.timeline-type{font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.timeline-desc{font-size:11px;color:#a09080;margin-bottom:6px;font-style:italic}
+.timeline-meta{font-size:10px;color:#605840;margin-bottom:8px}
+.timeline-actions{display:flex;gap:8px}
+.timeline-edit,.timeline-delete{font-size:9px;padding:3px 8px;background:#1a1512;border:1px solid #3a3020;border-radius:2px;cursor:pointer;color:#a09080}
+.timeline-edit:hover{color:#c8a660;border-color:#c8a660}
+.timeline-delete:hover{color:#b05040;border-color:#b05040}
+
+.timeline-modal-overlay,.timeline-visual-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center}
+.timeline-modal-overlay.open,.timeline-visual-overlay.open{display:flex}
+.timeline-modal{background:#1a1512;border:1px solid #3a3020;width:90%;max-width:450px;border-radius:4px}
+.timeline-visual-modal{background:#1a1512;border:1px solid #3a3020;width:95%;height:90%;max-width:1000px;border-radius:4px;display:flex;flex-direction:column}
+.timeline-modal-hd,.timeline-visual-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#141209;border-bottom:1px solid #252015}
+.timeline-modal-hd h3,.timeline-visual-hd h3{margin:0;font-size:14px;color:#c8a660}
+.timeline-modal-close,.timeline-visual-close{background:none;border:none;color:#605840;font-size:18px;cursor:pointer}
+.timeline-modal-close:hover,.timeline-visual-close:hover{color:#c8a660}
+.timeline-modal-body{padding:16px}
+.timeline-field{margin-bottom:12px}
+.timeline-field label{display:block;font-size:11px;color:#605840;margin-bottom:4px}
+.timeline-field input,.timeline-field textarea,.timeline-field select{width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660;font-size:12px}
+.timeline-field textarea{min-height:60px;resize:vertical}
+.timeline-actions-row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.timeline-btn-cancel,.timeline-btn-save{padding:8px 16px;border-radius:2px;font-size:12px;cursor:pointer}
+.timeline-btn-cancel{background:transparent;border:1px solid #3a3020;color:#a09080}
+.timeline-btn-cancel:hover{background:#252015}
+.timeline-btn-save{background:#c8a660;border:none;color:#090807}
+.timeline-btn-save:hover{background:#e0c080}
+.timeline-visual-body{flex:1;overflow:auto;padding:20px}
+.timeline-visual-scroll{position:relative;padding:20px 0}
+.timeline-visual-line{position:absolute;left:50px;top:0;bottom:0;width:2px;background:#252015}
+.timeline-visual-event{position:relative;margin-bottom:20px;padding-left:70px}
+.timeline-visual-dot{position:absolute;left:42px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--color,#c8a660);border:2px solid #1a1512}
+.timeline-visual-card{background:#141209;border:1px solid #252015;border-radius:4px;padding:12px}
+.timeline-visual-title{font-size:13px;color:#c8a660;margin-bottom:4px}
+.timeline-visual-type{font-size:10px;color:#807060;text-transform:uppercase;margin-bottom:6px}
+.timeline-visual-desc{font-size:11px;color:#a09080;margin-bottom:6px}
+.timeline-visual-date{font-size:10px;color:#605840}
+
+.help-subtabs{display:flex;gap:2px;margin-bottom:16px;border-bottom:1px solid #252015}
+.help-subtab{padding:10px 20px;background:transparent;border:none;color:#605840;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;transition:all .12s}
+.help-subtab:hover{color:#a09080}
+.help-subtab.active{color:#c8a660;border-bottom-color:#c8a660}
+.help-section{color:#a89868}
+.help-section h3{color:#c8a660;margin:0 0 12px;font-size:16px;font-weight:normal}
+.help-section h4{color:#c8a660;margin:16px 0 8px;font-size:13px;font-weight:normal}
+.help-section p{line-height:1.6;margin-bottom:12px}
+.help-section ol,.help-section ul{padding-left:20px}
+.help-section li{margin-bottom:4px}
+.help-shortcut-group{margin-bottom:16px}
+.help-shortcut-group h4{color:#c8a660;font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.help-shortcut{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid #1f1a12}
+.help-key{font-family:'JetBrains Mono',monospace;font-size:11px;color:#c8a660;min-width:120px}
+.help-desc{font-size:12px;color:#807060}
+.help-guide{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #1f1a12}
+.help-guide h4{color:#c8a660;margin:0 0 6px;font-size:13px;font-weight:normal}
+.activity-log{max-height:400px;overflow-y:auto;background:#141209;border:1px solid #252015;border-radius:4px;padding:12px}
+.activity-entry{padding:8px 0;border-bottom:1px solid #1f1a12}
+.activity-entry:last-child{border-bottom:none}
+.activity-time{font-size:10px;color:#504830;margin-bottom:4px}
+.activity-desc{font-size:12px;color:#a09080}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
 .api-row{display:flex;gap:7px;align-items:flex-end}
 .api-row .meta-field{flex:1}
 .api-key-wrap{position:relative}
@@ -649,6 +958,15 @@ select.minput option{background:#0d0b08;color:#b8a878}
   cursor:pointer;transition:all .12s;letter-spacing:.05em;
 }
 .clear-all-btn:hover{background:#221414;border-color:#b05040}
+
+.export-import-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.export-btn,.import-btn{
+  padding:6px 14px;background:#1a1010;border:1px solid #3a3020;border-radius:2px;
+  color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:9px;
+  cursor:pointer;transition:all .12s;letter-spacing:.05em;
+}
+.export-btn:hover,.import-btn:hover{background:#252015;border-color:#c8a660}
+
 
 .max-tok-row{display:flex;align-items:center;gap:10px}
 .tok-note{font-size:12px;color:#40382a;font-style:italic}
@@ -750,8 +1068,31 @@ select.minput option{background:#0d0b08;color:#b8a878}
     <div class="brand">
       <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
       <span class="brand-title">The Novelist's Atelier</span>
-      <span class="brand-ver">1.0 Beta</span>
-
+      <span class="brand-ver">1.1 Beta</span>
+      <div class="project-selector" id="project_selector">
+        <button class="project-current" id="project_current_btn">
+          <span id="project_name_display">My Novel</span>
+          <span class="project-caret">▾</span>
+        </button>
+        <span id="save_indicator" class="save-indicator"></span>
+        <span id="save_time" class="save-time"></span>
+        <span id="style_dna_indicator" class="save-time" style="cursor:pointer" onclick="APP.tab='story';showTab('story');document.querySelector('[data-subtab=\'styledna\']').click()"></span>
+        <button id="scene_nav_toggle" class="scene-nav-toggle" onclick="toggleSceneNavigator()" title="Scene Navigator (Ctrl+J)">☰ Scenes</button>
+        <button id="search_btn" class="scene-nav-toggle" onclick="openSearchModal()" title="Search (Ctrl+F)">🔍</button>
+        <div class="project-dropdown" id="project_dropdown">
+          <div class="project-list" id="project_list"></div>
+          <div class="project-actions">
+            <button class="project-action" id="project_new">+ New Project</button>
+            <button class="project-action" id="project_load">Load</button>
+            <button class="project-action" id="project_save">Save</button>
+            <button class="project-action" id="project_import">Import</button>
+            <button class="project-action" id="project_export">Export</button>
+            <button class="project-action" id="project_rename">Rename</button>
+            <button class="project-action" id="project_delete">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div class="stats-badge" id="stats_badge" title="Click for detailed stats">0 words</div>
     </div>
     <nav class="tab-nav" id="tab-nav"></nav>
   </header>
@@ -760,9 +1101,19 @@ select.minput option{background:#0d0b08;color:#b8a878}
     <div id="panel-series" class="panel"></div>
     <div id="panel-book" class="panel"></div>
     <div id="panel-chapter" class="panel"></div>
+    <div id="panel-story" class="panel"></div>
     <div id="panel-prompts" class="panel"></div>
     <div id="panel-pipeline" class="panel"></div>
     <div id="panel-settings" class="panel"></div>
+    <div id="panel-help" class="panel"></div>
+    <div id="scene-navigator" class="scene-navigator">
+      <div class="scene-nav-header">
+        <h3>Scene Navigator</h3>
+        <button class="scene-nav-close" onclick="toggleSceneNavigator()">×</button>
+      </div>
+      <div class="scene-nav-content" id="scene_nav_content"></div>
+    </div>
+    <input type="file" id="import_file" accept=".json" style="display:none">
   </main>
 </div>
 
@@ -778,9 +1129,11 @@ const TABS = [
   { id:'series', icon:'◈', label:'Series' },
   { id:'book',   icon:'◉', label:'Book' },
   { id:'chapter',icon:'❒', label:'Chapter' },
+  { id:'story',  icon:'📖', label:'Story' },
   { id:'prompts',icon:'◆', label:'Prompts' },
   { id:'pipeline',icon:'⟹', label:'Pipeline' },
   { id:'settings',icon:'⚙', label:'Settings' },
+  { id:'help',   icon:'?', label:'Help' },
 ];
 
 const MODELS = [
@@ -816,6 +1169,209 @@ const MODELS = [
   { id:'local', name:'Load model in LM Studio, then click Test', provider:'lmstudio', ctx:'varies', color:'#888888' },
 ];
 
+// ═══════════════════════════════════════════════════════════
+// CUSTOM PROMPT TEMPLATES (GLOBAL)
+// ═══════════════════════════════════════════════════════════
+
+function getCustomTemplates() {
+  try {
+    return JSON.parse(localStorage.getItem('na_custom_templates')) || {};
+  } catch { return {}; }
+}
+
+function saveCustomTemplates(templates) {
+  localStorage.setItem('na_custom_templates', JSON.stringify(templates));
+}
+
+function getCustomTemplatesForCategory(catId) {
+  const all = getCustomTemplates();
+  return all[catId] || [];
+}
+
+function addCustomTemplate(catId, template) {
+  const all = getCustomTemplates();
+  if (!all[catId]) all[catId] = [];
+  template.id = 'custom-' + Date.now() + '-' + Math.random().toString(36).substr(2,6);
+  all[catId].push(template);
+  saveCustomTemplates(all);
+  return template.id;
+}
+
+function updateCustomTemplate(catId, templateId, template) {
+  const all = getCustomTemplates();
+  if (!all[catId]) return false;
+  const idx = all[catId].findIndex(t => t.id === templateId);
+  if (idx === -1) return false;
+  template.id = templateId;
+  all[catId][idx] = template;
+  saveCustomTemplates(all);
+  return true;
+}
+
+function deleteCustomTemplate(catId, templateId) {
+  const all = getCustomTemplates();
+  if (!all[catId]) return false;
+  all[catId] = all[catId].filter(t => t.id !== templateId);
+  saveCustomTemplates(all);
+  return true;
+}
+
+function getAllCustomTemplates() {
+  return getCustomTemplates();
+}
+
+function importCustomTemplates(jsonData, merge) {
+  const imported = JSON.parse(jsonData);
+  const all = merge ? getCustomTemplates() : {};
+  const cats = ['character', 'world', 'location', 'developmental', 'copy', 'line', 'punch', 'paragraph', 'custom'];
+  cats.forEach(cat => {
+    if (imported[cat] && Array.isArray(imported[cat])) {
+      if (!all[cat]) all[cat] = [];
+      imported[cat].forEach(t => {
+        if (typeof t.id !== 'string' || typeof t.title !== 'string' || typeof t.tpl !== 'string' || !Array.isArray(t.fields)) return;
+        if (!all[cat].find(existing => existing.id === t.id)) {
+          all[cat].push(t);
+        }
+      });
+    }
+  });
+  saveCustomTemplates(all);
+}
+
+function exportCustomTemplates() {
+  return JSON.stringify(getCustomTemplates(), null, 2);
+}
+
+// ═══════════════════════════════════════════════════════════
+// CHARACTER RELATIONSHIP MAP
+// ═══════════════════════════════════════════════════════════
+
+const DEFAULT_RELATIONSHIP_TYPES = [
+  { id: 'family', label: 'Family', color: '#e07070' },
+  { id: 'friend', label: 'Friend', color: '#70c0a0' },
+  { id: 'enemy', label: 'Enemy', color: '#8b3030' },
+  { id: 'romantic', label: 'Romantic', color: '#d87093' },
+  { id: 'mentor', label: 'Mentor', color: '#70b0e0' },
+  { id: 'rival', label: 'Rival', color: '#e0a070' },
+  { id: 'ally', label: 'Ally', color: '#70a0a0' },
+];
+
+function getRelationshipTypes() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('na_relationship_types'));
+    if (saved && saved.length > 0) return saved;
+  } catch {}
+  return [...DEFAULT_RELATIONSHIP_TYPES, { id: 'custom', label: 'Custom', color: '#c8a660' }];
+}
+
+function saveRelationshipTypes(types) {
+  localStorage.setItem('na_relationship_types', JSON.stringify(types));
+}
+
+function getBookRelationships() {
+  return APP.book?.relationships || [];
+}
+
+function saveBookRelationships(rels) {
+  if (!APP.book) APP.book = {};
+  APP.book.relationships = rels;
+  saveState();
+}
+
+function addRelationship(char1Id, char2Id, type, description, bidirectional) {
+  const rels = getBookRelationships();
+  const id = 'rel-' + Date.now() + '-' + Math.random().toString(36).substr(2,6);
+  rels.push({ id, char1Id, char2Id, type, description, bidirectional });
+  saveBookRelationships(rels);
+  return id;
+}
+
+function updateRelationship(id, updates) {
+  const rels = getBookRelationships();
+  const idx = rels.findIndex(r => r.id === id);
+  if (idx !== -1) {
+    rels[idx] = { ...rels[idx], ...updates };
+    saveBookRelationships(rels);
+    return true;
+  }
+  return false;
+}
+
+function deleteRelationship(id) {
+  const rels = getBookRelationships();
+  saveBookRelationships(rels.filter(r => r.id !== id));
+}
+
+function getCharacterById(id) {
+  return (APP.book?.chars || []).find(c => c.id === id);
+}
+
+function getRelationshipTypeColor(typeId) {
+  const types = getRelationshipTypes();
+  const t = types.find(t => t.id === typeId);
+  return t ? t.color : '#c8a660';
+}
+
+// ═══════════════════════════════════════════════════════════
+// TIMELINE (Series Level)
+// ═══════════════════════════════════════════════════════════
+
+const DEFAULT_EVENT_TYPES = [
+  { id: 'major', label: 'Major Plot', color: '#c8a660' },
+  { id: 'subplot', label: 'Subplot', color: '#70b0e0' },
+  { id: 'arc', label: 'Character Arc', color: '#70c0a0' },
+  { id: 'world', label: 'World Event', color: '#a070c0' },
+  { id: 'conflict', label: 'Conflict', color: '#e07070' },
+  { id: 'resolution', label: 'Resolution', color: '#70a0a0' },
+];
+
+function getEventTypes() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('na_event_types'));
+    if (saved && saved.length > 0) return saved;
+  } catch {}
+  return [...DEFAULT_EVENT_TYPES];
+}
+
+function getEventTypeColor(typeId) {
+  const types = getEventTypes();
+  const t = types.find(t => t.id === typeId);
+  return t ? t.color : '#c8a660';
+}
+
+function getSeriesTimeline() {
+  return APP.series?.timeline || [];
+}
+
+function saveSeriesTimeline(timeline) {
+  if (!APP.series) APP.series = { name: '', subName: '', bible: mkSec() };
+  APP.series.timeline = timeline;
+  saveState();
+}
+
+function addTimelineEvent(title, description, eventType, bookId, chapterId, date) {
+  const timeline = getSeriesTimeline();
+  const id = 'event-' + Date.now() + '-' + Math.random().toString(36).substr(2,6);
+  timeline.push({ id, title, description, eventType, bookId, chapterId, date, order: timeline.length });
+  saveSeriesTimeline(timeline);
+  return id;
+}
+
+function updateTimelineEvent(id, updates) {
+  const timeline = getSeriesTimeline();
+  const idx = timeline.findIndex(e => e.id === id);
+  if (idx !== -1) {
+    timeline[idx] = { ...timeline[idx], ...updates };
+    saveSeriesTimeline(timeline);
+    return true;
+  }
+  return false;
+}
+
+function deleteTimelineEvent(id) {
+  saveSeriesTimeline(getSeriesTimeline().filter(e => e.id !== id));
+}
+
 const CATEGORIES = [
   { id:'character',   label:'Character',        icon:'◑', color:'#e07070' },
   { id:'world',       label:'World Building',  icon:'◒', color:'#70b0e0' },
@@ -824,17 +1380,18 @@ const CATEGORIES = [
   { id:'copy',        label:'Copy Editor',      icon:'◎', color:'#87afc7' },
   { id:'line',        label:'Line Editor',      icon:'◐', color:'#c987c7' },
   { id:'punch',       label:'Impact & Punch',   icon:'◆', color:'#e0b870' },
-  { id:'paragraph',   label:'Paragraph',        icon:'¶', color:'#d8a098' },
+  { id:'paragraph',   label:'Paragraph',         icon:'¶', color:'#d8a098' },
   { id:'sentence',    label:'Sentence',         icon:'—', color:'#98c8d8' },
   { id:'chapter',     label:'Chapter Review',   icon:'❒', color:'#a098d8' },
   { id:'style',       label:'Style Analysis',   icon:'◈', color:'#c9a96e' },
+  { id:'custom',      label:'Custom',           icon:'✎', color:'#c8a660' },
 ];
 
 const CATEGORY_SECTIONS = [
   { id:'create', label:'Create', cats:['character','world','location'] },
   { id:'editors', label:'Editors', cats:['developmental','copy','line'] },
   { id:'improve', label:'Improve', cats:['punch','paragraph','sentence'] },
-  { id:'polish', label:'Polish', cats:['chapter','style'] },
+  { id:'polish', label:'Polish', cats:['chapter','style','custom'] },
 ];
 
 const GENRE_PRESETS = {
@@ -1505,22 +2062,1443 @@ if(APP.headerScale && APP.headerScale !== 1){
 }
 if(APP.theme && APP.theme !== 'default') document.body.classList.add('theme-' + APP.theme);
 
-// Load saved state
-try {
-  const saved = JSON.parse(localStorage.getItem('na_state')||'null');
-  if(saved){
-    if(saved.series) APP.series = {...APP.series,...saved.series};
-    if(saved.book) APP.book = {...APP.book,...saved.book};
-    if(saved.chapter) APP.chapter = {...APP.chapter,...saved.chapter};
+// ═══════════════════════════════════════════════════════════
+// SECURE KEY STORAGE
+// ═══════════════════════════════════════════════════════════
+
+let APP_KEY_PASSWORD = '';
+let SESSION_CACHED_KEYS = {};
+
+function getStorageMode() {
+  return localStorage.getItem('na_storage_mode') || 'encrypted';
+}
+
+function setStorageMode(mode) {
+  localStorage.setItem('na_storage_mode', mode);
+  if (mode !== 'encrypted') {
+    APP_KEY_PASSWORD = '';
+    localStorage.removeItem('na_key_salt');
+    localStorage.removeItem('na_encrypted_keys');
   }
-} catch(e){}
+}
+
+async function generateSalt() {
+  const arr = new Uint8Array(16);
+  crypto.getRandomValues(arr);
+  return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function deriveKey(password, salt) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']
+  );
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt: enc.encode(salt), iterations: 100000, hash: 'SHA-256' },
+    keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']
+  );
+}
+
+async function encryptKeys(keys, password) {
+  const salt = await generateSalt();
+  const key = await deriveKey(password, salt);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const enc = new TextEncoder();
+  const encrypted = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv: iv }, key, enc.encode(JSON.stringify(keys))
+  );
+  const encryptedArr = new Uint8Array(encrypted);
+  const combined = new Uint8Array(iv.length + encryptedArr.length);
+  combined.set(iv);
+  combined.set(encryptedArr, iv.length);
+  return JSON.stringify({ salt: salt, data: Array.from(combined) });
+}
+
+async function decryptKeys(encryptedBlob, password) {
+  const { salt, data } = JSON.parse(encryptedBlob);
+  const combined = new Uint8Array(data);
+  const iv = combined.slice(0, 12);
+  const encrypted = combined.slice(12);
+  const key = await deriveKey(password, salt);
+  const dec = new TextDecoder();
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: iv }, key, encrypted
+  );
+  return JSON.parse(dec.decode(decrypted));
+}
+
+function getAllApiKeys() {
+  return {
+    openrouter: APP.apiKeys.openrouter,
+    anthropic: APP.apiKeys.anthropic,
+    openai: APP.apiKeys.openai,
+    google: APP.apiKeys.google,
+    lmstudio: APP.apiKeys.lmstudio
+  };
+}
+
+function setAllApiKeys(keys) {
+  APP.apiKeys.openrouter = keys.openrouter || '';
+  APP.apiKeys.anthropic = keys.anthropic || '';
+  APP.apiKeys.openai = keys.openai || '';
+  APP.apiKeys.google = keys.google || '';
+  APP.apiKeys.lmstudio = keys.lmstudio || '';
+}
+
+async function saveKeysSecurely(password) {
+  const mode = getStorageMode();
+  const keys = getAllApiKeys();
+  if (mode === 'plaintext') {
+    localStorage.setItem('na_key', keys.openrouter);
+    localStorage.setItem('na_anthropic_key', keys.anthropic);
+    localStorage.setItem('na_openai_key', keys.openai);
+    localStorage.setItem('na_google_key', keys.google);
+    localStorage.setItem('na_lmstudio_key', keys.lmstudio);
+  } else if (mode === 'session') {
+    sessionStorage.setItem('na_key', keys.openrouter);
+    sessionStorage.setItem('na_anthropic_key', keys.anthropic);
+    sessionStorage.setItem('na_openai_key', keys.openai);
+    sessionStorage.setItem('na_google_key', keys.google);
+    sessionStorage.setItem('na_lmstudio_key', keys.lmstudio);
+  } else if (mode === 'encrypted') {
+    const encrypted = await encryptKeys(keys, password);
+    localStorage.setItem('na_key_salt', 'set');
+    localStorage.setItem('na_encrypted_keys', encrypted);
+    APP_KEY_PASSWORD = password;
+  }
+}
+
+async function loadKeysByMode() {
+  const mode = getStorageMode();
+  if (mode === 'prompt') {
+    return { openrouter: '', anthropic: '', openai: '', google: '', lmstudio: '' };
+  } else if (mode === 'session') {
+    return {
+      openrouter: sessionStorage.getItem('na_key') || '',
+      anthropic: sessionStorage.getItem('na_anthropic_key') || '',
+      openai: sessionStorage.getItem('na_openai_key') || '',
+      google: sessionStorage.getItem('na_google_key') || '',
+      lmstudio: sessionStorage.getItem('na_lmstudio_key') || ''
+    };
+  } else if (mode === 'encrypted') {
+    const encrypted = localStorage.getItem('na_encrypted_keys');
+    if (encrypted && APP_KEY_PASSWORD) {
+      try {
+        return await decryptKeys(encrypted, APP_KEY_PASSWORD);
+      } catch (e) {
+        console.error('Failed to decrypt keys:', e);
+        return { openrouter: '', anthropic: '', openai: '', google: '', lmstudio: '' };
+      }
+    }
+    return { openrouter: '', anthropic: '', openai: '', google: '', lmstudio: '' };
+  }
+  return {
+    openrouter: localStorage.getItem('na_key') || '',
+    anthropic: localStorage.getItem('na_anthropic_key') || '',
+    openai: localStorage.getItem('na_openai_key') || '',
+    google: localStorage.getItem('na_google_key') || '',
+    lmstudio: localStorage.getItem('na_lmstudio_key') || ''
+  };
+}
+
+function isKeysLocked() {
+  return getStorageMode() === 'encrypted' && !APP_KEY_PASSWORD;
+}
+
+async function showUnlockKeysModal() {
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.id = 'unlock-keys-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
+    overlay.innerHTML = `
+      <div style="background:#1a1512;border:1px solid #c8a660;padding:30px;width:400px;border-radius:4px">
+        <h3 style="color:#c8a660;margin:0 0 15px">🔐 Unlock API Keys</h3>
+        <p style="color:#a89070;font-size:13px;margin-bottom:15px">Enter your password to decrypt your API keys.</p>
+        <input type="password" id="unlock-password" placeholder="Password" style="width:100%;padding:10px;background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:monospace;margin-bottom:15px">
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button id="unlock-cancel" style="padding:8px 16px;background:transparent;border:1px solid #555;color:#888;cursor:pointer">Cancel</button>
+          <button id="unlock-confirm" style="padding:8px 16px;background:#c8a660;border:none;color:#0b0908;cursor:pointer;font-weight:bold">Unlock</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    
+    const input = overlay.querySelector('#unlock-password');
+    input.focus();
+    
+    overlay.querySelector('#unlock-cancel').onclick = () => {
+      overlay.remove();
+      resolve(null);
+    };
+    overlay.querySelector('#unlock-confirm').onclick = async () => {
+      const password = input.value;
+      if (!password) return;
+      const encrypted = localStorage.getItem('na_encrypted_keys');
+      try {
+        const keys = await decryptKeys(encrypted, password);
+        APP_KEY_PASSWORD = password;
+        setAllApiKeys(keys);
+        overlay.remove();
+        resolve(true);
+      } catch (e) {
+        input.style.borderColor = '#c06060';
+        input.value = '';
+        input.placeholder = 'Wrong password';
+      }
+    };
+    input.onkeydown = (e) => { if (e.key === 'Enter') overlay.querySelector('#unlock-confirm').click(); };
+  });
+}
+
+async function showPromptKeyModal(provider) {
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.id = 'prompt-key-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
+    const labels = { openrouter: 'OpenRouter', anthropic: 'Anthropic', openai: 'OpenAI', google: 'Google', lmstudio: 'LM Studio' };
+    overlay.innerHTML = `
+      <div style="background:#1a1512;border:1px solid #c8a660;padding:30px;width:450px;border-radius:4px">
+        <h3 style="color:#c8a660;margin:0 0 15px">🔑 Enter ${labels[provider]} Key</h3>
+        <p style="color:#a89070;font-size:13px;margin-bottom:15px">This key will be used for this session only and won't be stored.</p>
+        <input type="password" id="session-key-input" placeholder="API Key" style="width:100%;padding:10px;background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:monospace;margin-bottom:15px">
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button id="prompt-key-cancel" style="padding:8px 16px;background:transparent;border:1px solid #555;color:#888;cursor:pointer">Cancel</button>
+          <button id="prompt-key-confirm" style="padding:8px 16px;background:#c8a660;border:none;color:#0b0908;cursor:pointer;font-weight:bold">Use Key</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    
+    const input = overlay.querySelector('#session-key-input');
+    input.focus();
+    
+    overlay.querySelector('#prompt-key-cancel').onclick = () => {
+      overlay.remove();
+      resolve(null);
+    };
+    overlay.querySelector('#prompt-key-confirm').onclick = () => {
+      const key = input.value.trim();
+      if (key) {
+        SESSION_CACHED_KEYS[provider] = key;
+        APP.apiKeys[provider] = key;
+        overlay.remove();
+        resolve(key);
+      }
+    };
+    input.onkeydown = (e) => { if (e.key === 'Enter') overlay.querySelector('#prompt-key-confirm').click(); };
+  });
+}
+
+async function getApiKeyForProvider(provider) {
+  const mode = getStorageMode();
+  if (mode === 'prompt') {
+    if (SESSION_CACHED_KEYS[provider]) {
+      APP.apiKeys[provider] = SESSION_CACHED_KEYS[provider];
+      return SESSION_CACHED_KEYS[provider];
+    }
+    return await showPromptKeyModal(provider);
+  } else if (mode === 'encrypted' && isKeysLocked()) {
+    const unlocked = await showUnlockKeysModal();
+    if (!unlocked) return null;
+    return APP.apiKeys[provider] || '';
+  }
+  return APP.apiKeys[provider] || '';
+}
+
+// Initialize keys based on storage mode
+(async function initKeys() {
+  const mode = getStorageMode();
+  
+  // If encrypted mode but no password set yet, prompt to create one
+  if (mode === 'encrypted' && !localStorage.getItem('na_encrypted_keys')) {
+    const password = prompt('Set a password to encrypt your API keys:');
+    if (!password) {
+      // User cancelled, fall back to plaintext
+      setStorageMode('plaintext');
+    } else {
+      const confirm = prompt('Confirm password:');
+      if (confirm !== password) {
+        alert('Passwords do not match. Switching to plaintext mode.');
+        setStorageMode('plaintext');
+      } else {
+        // Save the current keys (if any) with the new password
+        const currentKeys = {
+          openrouter: localStorage.getItem('na_key') || '',
+          anthropic: localStorage.getItem('na_anthropic_key') || '',
+          openai: localStorage.getItem('na_openai_key') || '',
+          google: localStorage.getItem('na_google_key') || '',
+          lmstudio: localStorage.getItem('na_lmstudio_key') || ''
+        };
+        setAllApiKeys(currentKeys);
+        await saveKeysSecurely(password);
+      }
+    }
+  }
+  
+  const keys = await loadKeysByMode();
+  APP.apiKeys.openrouter = keys.openrouter;
+  APP.apiKeys.anthropic = keys.anthropic;
+  APP.apiKeys.openai = keys.openai;
+  APP.apiKeys.google = keys.google;
+  APP.apiKeys.lmstudio = keys.lmstudio;
+})();
+
+// ═══════════════════════════════════════════════════════════
+// PROJECT MANAGEMENT
+// ═══════════════════════════════════════════════════════════
+
+function generateProjectName(){
+  const s = APP.series?.name || '';
+  const b = APP.book?.title || '';
+  if(s || b) return (s + ' - ' + b).trim();
+  return 'My Novel';
+}
+
+function getProjects(){
+  try { return JSON.parse(localStorage.getItem('na_projects')||'null') || []; }
+  catch { return []; }
+}
+
+function saveProjects(projects){
+  localStorage.setItem('na_projects', JSON.stringify(projects));
+}
+
+function getCurrentProjectId(){
+  return localStorage.getItem('na_current_project') || 'default';
+}
+
+function setCurrentProjectId(pid){
+  localStorage.setItem('na_current_project', pid);
+}
+
+function getProjectState(pid){
+  try { return JSON.parse(localStorage.getItem('na_state_' + pid)||'null'); }
+  catch { return null; }
+}
+
+function saveProjectState(pid){
+  showSaveIndicator('saving');
+  try {
+    const data = {series:APP.series, book:APP.book, chapter:APP.chapter};
+    localStorage.setItem('na_state_' + pid, JSON.stringify(data));
+    localStorage.setItem('na_last_saved_' + pid, Date.now());
+    updateLastSavedTime(pid);
+    showSaveIndicator('saved');
+  } catch(e) {
+    console.error('Save error:', e);
+    showSaveIndicator('error');
+  }
+}
+
+function showSaveIndicator(status){
+  const el = document.getElementById('save_indicator');
+  if(!el) return;
+  el.className = 'save-indicator ' + status;
+  if(status === 'saving') el.textContent = 'Saving...';
+  else if(status === 'saved') el.textContent = 'Saved';
+  else if(status === 'error') el.textContent = 'Error';
+}
+
+function updateLastSavedTime(pid){
+  const el = document.getElementById('save_time');
+  if(!el) return;
+  const ts = localStorage.getItem('na_last_saved_' + pid);
+  if(!ts) { el.textContent = ''; return; }
+  const diff = Date.now() - parseInt(ts);
+  const mins = Math.floor(diff / 60000);
+  if(mins < 1) el.textContent = 'just now';
+  else if(mins === 1) el.textContent = '1 min ago';
+  else if(mins < 60) el.textContent = mins + ' mins ago';
+  else {
+    const date = new Date(parseInt(ts));
+    el.textContent = 'at ' + date.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  }
+}
+
+function autoSaveLoop(){
+  const pid = getCurrentProjectId();
+  if(pid) saveProjectState(pid);
+}
+
+function createHourlyBackup(pid){
+  if(!pid) return;
+  const hour = new Date().toISOString().slice(0, 13);
+  const data = {series:APP.series, book:APP.book, chapter:APP.chapter, timestamp:Date.now()};
+  localStorage.setItem('na_backup_' + pid + '_' + hour, JSON.stringify(data));
+  cleanupOldBackups(pid);
+}
+
+function cleanupOldBackups(pid){
+  const now = Date.now();
+  const maxAge = 24 * 60 * 60 * 1000;
+  const keysToRemove = [];
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+    if(key && key.startsWith('na_backup_' + pid + '_')){
+      const ts = parseInt(key.split('_').pop());
+      if(now - ts > maxAge){
+        keysToRemove.push(key);
+      }
+    }
+  }
+  keysToRemove.forEach(k => localStorage.removeItem(k));
+}
+
+function getBackupList(pid){
+  const backups = [];
+  for(let i = 0; i < localStorage.length; i++){
+    const key = localStorage.key(i);
+    if(key && key.startsWith('na_backup_' + pid + '_')){
+      const hourKey = key.replace('na_backup_' + pid + '_', '');
+      try {
+        const data = JSON.parse(localStorage.getItem(key));
+        backups.push({key, hour: hourKey, timestamp: data.timestamp});
+      } catch(e) {}
+    }
+  }
+  return backups.sort((a,b) => b.timestamp - a.timestamp);
+}
+
+function renderBackupList(){
+  const pid = getCurrentProjectId();
+  const el = document.getElementById('backup_list');
+  if(!el) return;
+  if(!pid) { el.innerHTML = '<p style="font-size:11px;color:#605840">No project selected</p>'; return; }
+  const backups = getBackupList(pid);
+  if(backups.length === 0) {
+    el.innerHTML = '<p style="font-size:11px;color:#605840">No backups yet. Backups created hourly.</p>';
+    return;
+  }
+  el.innerHTML = backups.slice(0,24).map(b => {
+    const date = new Date(b.timestamp);
+    const timeStr = date.toLocaleString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+    return '<div class="backup-item"><span class="backup-time">' + timeStr + '</span><button class="backup-restore" onclick="restoreBackup(\'' + pid + '\', \'' + b.hour + '\')">Restore</button></div>';
+  }).join('');
+}
+
+function restoreBackup(pid, hourKey){
+  const key = 'na_backup_' + pid + '_' + hourKey;
+  const data = localStorage.getItem(key);
+  if(!data) { alert('Backup not found'); return; }
+  if(confirm('Restore this backup? Current unsaved changes will be lost.')){
+    try {
+      const parsed = JSON.parse(data);
+      APP.series = parsed.series;
+      APP.book = parsed.book;
+      APP.chapter = parsed.chapter;
+      saveProjectState(pid);
+      renderAll();
+      showToast('Backup restored');
+    } catch(e) { alert('Failed to restore: ' + e.message); }
+  }
+}
+window.restoreBackup = restoreBackup;
+
+function toggleSceneNavigator() {
+  const nav = document.getElementById('scene-navigator');
+  if(nav.classList.contains('open')) {
+    nav.classList.remove('open');
+  } else {
+    nav.classList.add('open');
+    renderSceneNavigator();
+  }
+}
+window.toggleSceneNavigator = toggleSceneNavigator;
+
+// ═══════════════════════════════════════════════════════════
+// SEARCH FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+
+function openSearchModal() {
+  const modal = document.getElementById('search_modal');
+  modal.classList.add('open');
+  const input = document.getElementById('search_input');
+  input.value = '';
+  document.getElementById('search_results').innerHTML = '';
+  document.getElementById('search_results_count').innerHTML = '';
+  input.focus();
+  
+  // Add event listener for searching as you type
+  input.oninput = function() {
+    if(input.value.trim().length >= 2) {
+      performSearch();
+    }
+  };
+  
+  // Add event listener for Enter key
+  input.onkeydown = function(e) {
+    if(e.key === 'Enter') {
+      performSearch();
+    }
+  };
+}
+window.openSearchModal = openSearchModal;
+
+function closeSearchModal() {
+  document.getElementById('search_modal').classList.remove('open');
+}
+window.closeSearchModal = closeSearchModal;
+
+function performSearch() {
+  const query = document.getElementById('search_input').value.trim();
+  if(!query) return;
+  
+  const useRegex = document.getElementById('search_regex').checked;
+  const caseSensitive = document.getElementById('search_case').checked;
+  
+  const results = searchAll(query, { useRegex, caseSensitive });
+  displaySearchResults(results, query);
+}
+window.performSearch = performSearch;
+
+function searchAll(query, options) {
+  const results = [];
+  const maxResults = 100;
+  const { useRegex, caseSensitive } = options;
+  
+  let regex;
+  try {
+    if(useRegex) {
+      regex = new RegExp(query, caseSensitive ? 'g' : 'gi');
+    } else {
+      const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      regex = new RegExp(escaped, caseSensitive ? 'g' : 'gi');
+    }
+  } catch(e) {
+    return results;
+  }
+  
+  const sources = [
+    { data: APP.book?.chars || [], fields: ['name', 'text', 'tags'], label: 'Character', getTitle: (item) => item.name },
+    { data: APP.chapter?.fullChapters || [], fields: ['title', 'text', 'synopsis'], label: 'Chapter', getTitle: (item, idx) => item.title || 'Chapter ' + (idx + 1) },
+    { data: APP.chapter?.breakdowns || [], fields: ['text'], label: 'Breakdown', getTitle: (item, idx) => 'Breakdown ' + (idx + 1) },
+    { data: APP.chapter?.settings || [], fields: ['text'], label: 'Setting', getTitle: (item, idx) => item.title || 'Setting ' + (idx + 1) },
+    { data: APP.series?.bible ? [APP.series.bible] : [], fields: ['text'], label: 'Series Bible', getTitle: () => APP.series?.name || 'Series Bible' },
+    { data: APP.book?.bible ? [APP.book.bible] : [], fields: ['text'], label: 'Book Bible', getTitle: () => APP.book?.title || 'Book Bible' },
+    { data: APP.book?.outline ? [APP.book.outline] : [], fields: ['text'], label: 'Outline', getTitle: () => 'Outline' },
+    { data: APP.series?.timeline || [], fields: ['title', 'description'], label: 'Timeline', getTitle: (item) => item.title },
+    { data: APP.book?.relationships || [], fields: ['description'], label: 'Relationship', getTitle: (item) => 'Relationship' },
+  ];
+  
+  for(const source of sources) {
+    if(results.length >= maxResults) break;
+    
+    for(let i = 0; i < source.data.length; i++) {
+      if(results.length >= maxResults) break;
+      
+      const item = source.data[i];
+      const title = source.getTitle(item, i);
+      
+      for(const field of source.fields) {
+        if(results.length >= maxResults) break;
+        
+        const value = item[field];
+        if(!value) continue;
+        
+        const strValue = Array.isArray(value) ? value.join(' ') : String(value);
+        const matches = strValue.match(regex);
+        
+        if(matches && matches.length > 0) {
+          results.push({
+            type: source.label,
+            title: title,
+            field: field,
+            matchCount: matches.length,
+            snippet: getSnippet(strValue, query, useRegex),
+            item: item,
+            index: i,
+            fieldName: field
+          });
+          break;
+        }
+      }
+    }
+  }
+  
+  return results;
+}
+
+function getSnippet(text, query, useRegex) {
+  const maxLen = 100;
+  const lowerText = text.toLowerCase();
+  let idx;
+  
+  if(useRegex) {
+    try {
+      const regex = new RegExp(query, 'gi');
+      const match = regex.exec(text);
+      idx = match ? match.index : -1;
+    } catch(e) {
+      idx = -1;
+    }
+  } else {
+    idx = lowerText.indexOf(query.toLowerCase());
+  }
+  
+  if(idx === -1) {
+    return text.substring(0, maxLen) + (text.length > maxLen ? '...' : '');
+  }
+  
+  const start = Math.max(0, idx - 40);
+  const end = Math.min(text.length, idx + query.length + 40);
+  let snippet = '';
+  
+  if(start > 0) snippet += '...';
+  snippet += text.substring(start, end);
+  if(end < text.length) snippet += '...';
+  
+  return snippet;
+}
+
+function displaySearchResults(results, query) {
+  const container = document.getElementById('search_results');
+  const countEl = document.getElementById('search_results_count');
+  
+  if(results.length === 0) {
+    container.innerHTML = '<p style="font-size:12px;color:#605840;text-align:center;padding:20px">No results found</p>';
+    countEl.innerHTML = '';
+    return;
+  }
+  
+  const totalResults = results.length;
+  const displayResults = results.slice(0, 100);
+  
+  countEl.innerHTML = totalResults > 100 
+    ? 'Showing first 100 of ' + totalResults + ' results' 
+    : 'Found ' + totalResults + ' results';
+  
+  const useRegex = document.getElementById('search_regex').checked;
+  let highlightRegex;
+  try {
+    if(useRegex) {
+      highlightRegex = new RegExp('(' + query + ')', 'gi');
+    } else {
+      const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      highlightRegex = new RegExp('(' + escaped + ')', 'gi');
+    }
+  } catch(e) {
+    highlightRegex = null;
+  }
+  
+  container.innerHTML = displayResults.map((r, idx) => {
+    const escaped = escapeHtml(r.snippet);
+    const highlighted = highlightRegex 
+      ? escaped.replace(highlightRegex, '<mark>$1</mark>')
+      : escaped.replace(new RegExp('(' + escapeRegex(query) + ')', 'gi'), '<mark>$1</mark>');
+    
+    return '<div class="search-result-item" onclick="navigateToSearchResult(' + idx + ')">' +
+      '<div class="search-result-type">' + r.type + '</div>' +
+      '<div class="search-result-title">' + escapeHtml(r.title) + '</div>' +
+      '<div class="search-result-snippet">' + highlighted + '</div>' +
+      '</div>';
+  }).join('');
+  
+  window._currentSearchResults = displayResults;
+}
+
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function navigateToSearchResult(idx) {
+  const result = window._currentSearchResults[idx];
+  if(!result) return;
+  
+  closeSearchModal();
+  
+  if(result.type === 'Character') {
+    APP.tab = 'story';
+    showTab('story');
+    setTimeout(function() {
+      const charEls = document.querySelectorAll('.ch-item');
+      if(charEls[result.index]) {
+        charEls[result.index].scrollIntoView({behavior: 'smooth', block: 'center'});
+        charEls[result.index].style.boxShadow = '0 0 10px #c8a660';
+        setTimeout(function() { charEls[result.index].style.boxShadow = ''; }, 3000);
+      }
+    }, 100);
+  } else if(result.type === 'Chapter' || result.type === 'Breakdown') {
+    APP.tab = 'chapter';
+    showTab('chapter');
+    setTimeout(function() {
+      const chapterEls = document.querySelectorAll('.chapter-card');
+      if(chapterEls[result.index]) {
+        chapterEls[result.index].scrollIntoView({behavior: 'smooth', block: 'center'});
+        chapterEls[result.index].style.boxShadow = '0 0 10px #c8a660';
+        setTimeout(function() { chapterEls[result.index].style.boxShadow = ''; }, 3000);
+      }
+    }, 100);
+  } else if(result.type === 'Setting') {
+    APP.tab = 'chapter';
+    showTab('chapter');
+  } else if(result.type === 'Series Bible' || result.type === 'Book Bible' || result.type === 'Outline') {
+    APP.tab = 'story';
+    showTab('story');
+  } else if(result.type === 'Timeline') {
+    APP.tab = 'story';
+    showTab('story');
+    setTimeout(function() {
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      if(timelineItems[result.index]) {
+        timelineItems[result.index].scrollIntoView({behavior: 'smooth', block: 'center'});
+        timelineItems[result.index].style.boxShadow = '0 0 10px #c8a660';
+        setTimeout(function() { timelineItems[result.index].style.boxShadow = ''; }, 3000);
+      }
+    }, 100);
+  }
+}
+window.navigateToSearchResult = navigateToSearchResult;
+
+function showSearchTab(tab) {
+  document.getElementById('search_tab_content').style.display = tab === 'search' ? 'block' : 'none';
+  document.getElementById('find_tab_content').style.display = tab === 'find' ? 'block' : 'none';
+  document.getElementById('findall_tab_content').style.display = tab === 'findall' ? 'block' : 'none';
+  document.getElementById('search_tab_btn').className = tab === 'search' ? 'search-tab-btn active' : 'search-tab-btn';
+  document.getElementById('find_tab_btn').className = tab === 'find' ? 'search-tab-btn active' : 'search-tab-btn';
+  document.getElementById('findall_tab_btn').className = tab === 'findall' ? 'search-tab-btn active' : 'search-tab-btn';
+  
+  if(tab === 'search') {
+    document.getElementById('search_input').focus();
+  } else if(tab === 'find') {
+    document.getElementById('find_input').focus();
+  } else if(tab === 'findall') {
+    document.getElementById('findall_input').focus();
+  }
+}
+window.showSearchTab = showSearchTab;
+
+function openFindReplacePanel() {
+  document.getElementById('search_modal').classList.add('open');
+  showSearchTab('find');
+}
+window.openFindReplacePanel = openFindReplacePanel;
+
+function getFindRegex(inputId, caseId, regexId) {
+  const query = document.getElementById(inputId).value;
+  if(!query) return null;
+  
+  const useRegex = document.getElementById(regexId).checked;
+  const caseSensitive = document.getElementById(caseId).checked;
+  
+  try {
+    if(useRegex) {
+      return new RegExp(query, caseSensitive ? 'g' : 'gi');
+    } else {
+      const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return new RegExp(escaped, caseSensitive ? 'g' : 'gi');
+    }
+  } catch(e) {
+    return null;
+  }
+}
+
+function findNext() {
+  const regex = getFindRegex('find_input', 'find_case', 'find_regex');
+  if(!regex) return;
+  
+  const allChapters = document.getElementById('find_all_chapters').checked;
+  // For now, just show alert - actual implementation would search in the editor
+  alert('Find Next: ' + regex + (allChapters ? ' (all chapters)' : ' (current chapter)'));
+}
+window.findNext = findNext;
+
+function replaceOne() {
+  const regex = getFindRegex('find_input', 'find_case', 'find_regex');
+  const replaceWith = document.getElementById('replace_input').value;
+  if(!regex) return;
+  
+  alert('Replace One: ' + regex + ' with ' + replaceWith);
+}
+window.replaceOne = replaceOne;
+
+function replaceAll() {
+  const regex = getFindRegex('find_input', 'find_case', 'find_regex');
+  const replaceWith = document.getElementById('replace_input').value;
+  const allChapters = document.getElementById('find_all_chapters').checked;
+  if(!regex) return;
+  
+  let count = 0;
+  const chapters = APP.chapter?.fullChapters || [];
+  
+  for(const chap of chapters) {
+    if(chap.text) {
+      const matches = chap.text.match(regex);
+      if(matches) count += matches.length;
+    }
+    if(chap.scenes) {
+      for(const scene of chap.scenes) {
+        if(scene.content) {
+          const matches = scene.content.match(regex);
+          if(matches) count += matches.length;
+        }
+      }
+    }
+  }
+  
+  if(count > 0 && confirm('Replace ' + count + ' occurrences?')) {
+    // Perform the replacements
+    for(const chap of chapters) {
+      if(chap.text) {
+        chap.text = chap.text.replace(regex, replaceWith);
+      }
+      if(chap.scenes) {
+        for(const scene of chap.scenes) {
+          if(scene.content) {
+            scene.content = scene.content.replace(regex, replaceWith);
+          }
+        }
+      }
+    }
+    saveProjectState(getCurrentProjectId());
+    renderAll();
+    alert('Replaced ' + count + ' occurrences!');
+  }
+}
+window.replaceAll = replaceAll;
+
+function findAllOccurrences() {
+  const regex = getFindRegex('findall_input', 'findall_case', 'findall_regex');
+  if(!regex) return;
+  
+  const results = [];
+  const maxResults = 100;
+  const chapters = APP.chapter?.fullChapters || [];
+  
+  for(let cIdx = 0; cIdx < chapters.length && results.length < maxResults; cIdx++) {
+    const chap = chapters[cIdx];
+    const chapTitle = chap.title || 'Chapter ' + (cIdx + 1);
+    
+    // Search in chapter text
+    if(chap.text) {
+      let match;
+      const regexCopy = new RegExp(regex.source, regex.flags);
+      while((match = regexCopy.exec(chap.text)) !== null) {
+        const start = Math.max(0, match.index - 30);
+        const end = Math.min(chap.text.length, match.index + match[0].length + 30);
+        let snippet = '';
+        if(start > 0) snippet += '...';
+        snippet += chap.text.substring(start, end);
+        if(end < chap.text.length) snippet += '...';
+        
+        results.push({
+          type: 'Chapter',
+          index: cIdx,
+          title: chapTitle,
+          snippet: snippet,
+          match: match[0],
+          field: 'text'
+        });
+        
+        if(results.length >= maxResults) break;
+      }
+    }
+    
+    // Search in scenes
+    if(chap.scenes) {
+      for(let sIdx = 0; sIdx < chap.scenes.length && results.length < maxResults; sIdx++) {
+        const scene = chap.scenes[sIdx];
+        if(scene.content) {
+          let match;
+          const regexCopy = new RegExp(regex.source, regex.flags);
+          while((match = regexCopy.exec(scene.content)) !== null) {
+            const start = Math.max(0, match.index - 30);
+            const end = Math.min(scene.content.length, match.index + match[0].length + 30);
+            let snippet = scene.content.substring(start, end);
+            if(start > 0) snippet = '...' + snippet;
+            if(end < scene.content.length) snippet += '...';
+            
+            results.push({
+              type: 'Scene',
+              index: cIdx,
+              sceneIndex: sIdx,
+              title: chapTitle + ' - Scene ' + (sIdx + 1),
+              snippet: snippet,
+              match: match[0],
+              field: 'content'
+            });
+            
+            if(results.length >= maxResults) break;
+          }
+        }
+      }
+    }
+  }
+  
+  const container = document.getElementById('findall_results');
+  const countEl = document.getElementById('findall_count');
+  
+  if(results.length === 0) {
+    container.innerHTML = '<p style="font-size:12px;color:#605840;text-align:center;padding:20px">No occurrences found</p>';
+    countEl.innerHTML = '';
+    return;
+  }
+  
+  const totalResults = results.length;
+  const displayResults = results.slice(0, 100);
+  
+  countEl.innerHTML = totalResults > 100 
+    ? 'Showing first 100 of ' + totalResults + ' occurrences' 
+    : 'Found ' + totalResults + ' occurrences';
+  
+  container.innerHTML = displayResults.map(function(r, idx) {
+    const highlighted = r.snippet.replace(regex, '<mark>' + r.match + '</mark>');
+    return '<div class="search-result-item" onclick="goToFindResult(' + r.index + ', ' + (r.sceneIndex || 0) + ', \'' + r.field + '\')">' +
+      '<div class="search-result-type">' + r.type + '</div>' +
+      '<div class="search-result-title">' + escapeHtml(r.title) + '</div>' +
+      '<div class="search-result-snippet">' + highlighted + '</div>' +
+      '</div>';
+  }).join('');
+  
+  window._findAllResults = displayResults;
+}
+window.findAllOccurrences = findAllOccurrences;
+
+function goToFindResult(chapIdx, sceneIdx, field) {
+  closeSearchModal();
+  APP.tab = 'chapter';
+  showTab('chapter');
+  
+  setTimeout(function() {
+    const chapterEls = document.querySelectorAll('.chapter-card');
+    if(chapterEls[chapIdx]) {
+      chapterEls[chapIdx].scrollIntoView({behavior: 'smooth', block: 'center'});
+      chapterEls[chapIdx].style.boxShadow = '0 0 10px #c8a660';
+      setTimeout(function() { chapterEls[chapIdx].style.boxShadow = ''; }, 3000);
+    }
+  }, 100);
+}
+window.goToFindResult = goToFindResult;
+
+// ═══════════════════════════════════════════════════════════
+// STYLE DNA FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+
+function getStyleDNA(){
+  return APP.writingPrefs?.styleDNA || '';
+}
+window.getStyleDNA = getStyleDNA;
+
+function isStyleDNA(){
+  return !!getStyleDNA();
+}
+window.isStyleDNA = isStyleDNA;
+
+function isStyleDNALocked(){
+  return APP.writingPrefs?.styleDNALocked || false;
+}
+window.isStyleDNALocked = isStyleDNALocked;
+
+function lockStyleDNA(text){
+  if(!text || !text.trim()){
+    alert('No Style DNA content to lock');
+    return;
+  }
+  if(isStyleDNA() && !confirm('Replace existing Style DNA?')) return;
+  if(!APP.writingPrefs) APP.writingPrefs={};
+  APP.writingPrefs.styleDNA=text.trim();
+  APP.writingPrefs.styleDNALocked=true;
+  APP.writingPrefs.styleDNATimestamp=Date.now();
+  saveProjectState(getCurrentProjectId());
+  updateStyleDNAIndicator();
+  showToast('Style DNA locked');
+}
+window.lockStyleDNA = lockStyleDNA;
+
+function unlockStyleDNA(){
+  if(!confirm('Unlock Style DNA? You can then lock a new analysis.')) return;
+  if(APP.writingPrefs){
+    APP.writingPrefs.styleDNALocked=false;
+  }
+  saveProjectState(getCurrentProjectId());
+  updateStyleDNAIndicator();
+  showToast('Style DNA unlocked');
+}
+window.unlockStyleDNA = unlockStyleDNA;
+
+function updateStyleDNAIndicator(){
+  const indicator=document.getElementById('style_dna_indicator');
+  if(!indicator) return;
+  if(isStyleDNA()){
+    indicator.innerHTML='<span style="color:#4a8">🔒 Style DNA</span>';
+  } else {
+    indicator.innerHTML='<span style="color:#605840">Style DNA</span>';
+  }
+}
+window.updateStyleDNAIndicator = updateStyleDNAIndicator;
+
+function exportStyleDNA(){
+  if(!isStyleDNA()){
+    alert('No Style DNA to export');
+    return;
+  }
+  const name=prompt('Enter name for export:','My Style DNA');
+  if(!name) return;
+  const data={
+    version:'1.0',
+    name:name,
+    styleDNA:getStyleDNA(),
+    created:new Date().toISOString()
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='style-dna-'+name.toLowerCase().replace(/\s+/g,'-')+'-'+Date.now()+'.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Exported: '+name);
+}
+window.exportStyleDNA = exportStyleDNA;
+
+function importStyleDNA(file){
+  if(!file) return;
+  const r=new FileReader();
+  r.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!data.styleDNA) throw new Error('Invalid Style DNA file');
+      if(!APP.writingPrefs) APP.writingPrefs={};
+      APP.writingPrefs.styleDNA=data.styleDNA;
+      APP.writingPrefs.styleDNALocked=true;
+      APP.writingPrefs.styleDNATimestamp=Date.now();
+      saveProjectState(getCurrentProjectId());
+      updateStyleDNAIndicator();
+      renderAll();
+      showToast('Imported: '+(data.name||'Style DNA'));
+    }catch(err){alert('Failed to import: '+err.message);}
+  };
+  r.readAsText(file);
+}
+window.importStyleDNA = importStyleDNA;
+
+function editCharacter(idx) {
+  const chars = APP.book?.chars || [];
+  if(idx < 0 || idx >= chars.length) return;
+  const char = chars[idx];
+  const name = char.name || '';
+  const text = char.text || '';
+  const tags = (char.tags || []).join(', ');
+  const incl = char.inclusion || 'full';
+  
+  const html = '<div id="char_edit_modal" class="char-edit-modal-overlay" style="display:flex;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:2000;align-items:center;justify-content:center">' +
+    '<div class="char-edit-modal" style="background:#1a1512;border:1px solid #3a3020;width:90%;max-width:500px;border-radius:4px;padding:20px">' +
+      '<h3 style="color:#c8a660;margin:0 0 15px 0">Edit Character</h3>' +
+      '<div style="margin-bottom:12px"><label style="font-size:11px;color:#605840">Name</label><input type="text" id="char_edit_name" value="'+esc(name)+'" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660"></div>' +
+      '<div style="margin-bottom:12px"><label style="font-size:11px;color:#605840">Description</label><textarea id="char_edit_text" rows="6" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660;resize:vertical">'+esc(text)+'</textarea></div>' +
+      '<div style="margin-bottom:12px"><label style="font-size:11px;color:#605840">Tags (comma separated)</label><input type="text" id="char_edit_tags" value="'+esc(tags)+'" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660"></div>' +
+      '<div style="margin-bottom:15px"><label style="font-size:11px;color:#605840">Inclusion</label><select id="char_edit_incl" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660"><option value="full"'+(incl==='full'?' selected':'')+'>Full</option><option value="brief"'+(incl==='brief'?' selected':'')+'>Brief</option><option value="off"'+(incl==='off'?' selected':'')+'>Off</option></select></div>' +
+      '<div style="display:flex;gap:10px;justify-content:flex-end"><button onclick="document.getElementById(\'char_edit_modal\').remove()" style="padding:8px 16px;background:transparent;border:1px solid #3a3020;color:#a09080;cursor:pointer">Cancel</button><button onclick="saveCharEdit('+idx+')" style="padding:8px 16px;background:#c8a660;border:none;color:#090807;cursor:pointer">Save</button></div>' +
+    '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+window.editCharacter = editCharacter;
+
+function saveCharEdit(idx) {
+  const chars = APP.book?.chars || [];
+  if(idx < 0 || idx >= chars.length) return;
+  chars[idx].name = document.getElementById('char_edit_name').value;
+  chars[idx].text = document.getElementById('char_edit_text').value;
+  chars[idx].tags = document.getElementById('char_edit_tags').value.split(',').map(t=>t.trim()).filter(t=>t);
+  chars[idx].inclusion = document.getElementById('char_edit_incl').value;
+  saveProjectState(getCurrentProjectId());
+  document.getElementById('char_edit_modal').remove();
+  renderStoryCharacters(document.getElementById('story-sub-content'));
+}
+window.saveCharEdit = saveCharEdit;
+
+function deleteCharacter(idx) {
+  const chars = APP.book?.chars || [];
+  if(idx < 0 || idx >= chars.length) return;
+  if(confirm('Delete this character?')) {
+    chars.splice(idx, 1);
+    saveProjectState(getCurrentProjectId());
+    const container = document.getElementById('story-sub-content');
+    if(container) renderStoryCharacters(container);
+  }
+}
+window.deleteCharacter = deleteCharacter;
+
+function renderStyleDNASection(container){
+  const dna = getStyleDNA();
+  const locked = isStyleDNALocked();
+  container.innerHTML = `
+    <div class="list-hd">
+      <span class="list-lbl">Style DNA ${locked?'🔒':''}</span>
+      ${locked?'<button class="add-btn" onclick="unlockStyleDNA()">Unlock</button>':''}
+      <button class="add-btn" onclick="exportStyleDNA()">Export</button>
+      <button class="add-btn" onclick="document.getElementById(\'style_dna_import\').click()">Import</button>
+      <input type="file" id="style_dna_import" accept=".json" style="display:none" onchange="importStyleDNA(this.files[0]);this.value=''">
+    </div>
+    ${dna?'<div class="style-dna-content" style="background:#141209;padding:12px;border-radius:4px;margin-top:8px;font-size:12px;color:#a09080;max-height:200px;overflow-y:auto;white-space:pre-wrap">'+esc(dna.substring(0,3000))+'</div>':'<p style="font-size:11px;color:#605840;margin-top:8px">No Style DNA. Run Style DNA analysis in Prompts tab, then click "Lock Style DNA".</p>'}
+    <p style="font-size:10px;color:#d44;margin-top:8px">⚠️ Style DNA requires AI usage to analyze your writing and apply the voice.</p>
+  `;
+}
+window.renderStyleDNASection = renderStyleDNASection;
+
+function renderSceneNavigator() {
+  const content = document.getElementById('scene_nav_content');
+  if(!content) return;
+  
+  const chapters = APP.chapter?.fullChapters || APP.chapter?.chapters || [];
+  if(chapters.length === 0) {
+    content.innerHTML = '<p style="font-size:11px;color:#605840">No chapters yet.</p>';
+    return;
+  }
+  
+  content.innerHTML = chapters.map((chap, idx) => {
+    const scenes = chap.scenes || [];
+    const title = chap.title || 'Chapter ' + (idx + 1);
+    return '<div class="scene-nav-item" onclick="goToChapter(' + idx + ')"><div class="scene-nav-item-title">' + (idx + 1) + '. ' + esc(title) + '</div><div class="scene-nav-item-meta">' + scenes.length + ' scenes</div></div>';
+  }).join('');
+}
+
+function goToChapter(idx) {
+  APP.tab = 'chapter';
+  showTab('chapter');
+  // Highlight the chapter
+  setTimeout(function() {
+    const el = document.querySelector('.chapter-card[data-idx="' + idx + '"]');
+    if(el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'});
+      el.style.boxShadow = '0 0 10px #c8a660';
+      setTimeout(function() { el.style.boxShadow = ''; }, 2000);
+    }
+  }, 100);
+}
+window.goToChapter = goToChapter;
+
+function getGenreCompare(pid){
+  try { return JSON.parse(localStorage.getItem('na_genre_' + pid)||'null'); }
+  catch { return null; }
+}
+
+function saveGenreCompare(pid, data){
+  localStorage.setItem('na_genre_' + pid, JSON.stringify(data));
+}
+
+// Migration: convert old single-project data to new multi-project format
+function migrateToProjects(){
+  const projects = getProjects();
+  if(projects.length > 0) return;
+  
+  const oldState = localStorage.getItem('na_state');
+  const oldGenre = localStorage.getItem('na_genre');
+  
+  const pid = 'project-' + Date.now() + '-' + Math.random().toString(36).substr(2,9);
+  const name = generateProjectName();
+  
+  const newProjects = [{id: pid, name: name}];
+  saveProjects(newProjects);
+  setCurrentProjectId(pid);
+  
+  if(oldState){
+    try {
+      const data = JSON.parse(oldState);
+      localStorage.setItem('na_state_' + pid, oldState);
+      if(data.series) APP.series = {...APP.series,...data.series};
+      if(data.book) APP.book = {...APP.book,...data.book};
+      if(data.chapter) APP.chapter = {...APP.chapter,...data.chapter};
+    } catch(e){}
+  }
+  if(oldGenre){
+    saveGenreCompare(pid, JSON.parse(oldGenre));
+  }
+}
+
+function switchProject(pid){
+  const currentPid = getCurrentProjectId();
+  if(currentPid) saveProjectState(currentPid);
+  
+  setCurrentProjectId(pid);
+  const state = getProjectState(pid);
+  if(state){
+    if(state.series) APP.series = state.series;
+    if(state.book) APP.book = state.book;
+    if(state.chapter) APP.chapter = state.chapter;
+  } else {
+    APP.series = { name:'', subName:'', bible: mkSec() };
+    APP.book = { title:'', bookNum:'', totalBooks:'', subNum:'', totalSub:'', bible:mkSec(), outline:mkSec(), chars:[{id:mkId(),...mkSec()}] };
+    APP.chapter = { mode:'chapter', chapterNum:'', sceneNum:'', useFullChapters:true, fullChapters:[], breakdown:mkSec(), settings:[{id:mkId(),...mkSec()}] };
+  }
+  
+  const genre = getGenreCompare(pid);
+  if(genre) APP.genreCompare = genre;
+  else APP.genreCompare = { preset: 'fantasy', customText: '' };
+  
+  renderProjectSelector();
+  renderSeries(); renderBook(); renderChapter();
+  saveState();
+}
+
+function createNewProject(){
+  const name = prompt('Enter project name:', 'New Project');
+  if(!name) return;
+  
+  const projects = getProjects();
+  const pid = 'project-' + Date.now() + '-' + Math.random().toString(36).substr(2,9);
+  projects.push({id: pid, name: name});
+  saveProjects(projects);
+  
+  setCurrentProjectId(pid);
+  APP.series = { name:'', subName:'', bible: mkSec() };
+  APP.book = { title:'', bookNum:'', totalBooks:'', subNum:'', totalSub:'', bible:mkSec(), outline:mkSec(), chars:[{id:mkId(),...mkSec()}] };
+  APP.chapter = { mode:'chapter', chapterNum:'', sceneNum:'', useFullChapters:true, fullChapters:[], breakdown:mkSec(), settings:[{id:mkId(),...mkSec()}] };
+  APP.genreCompare = { preset: 'fantasy', customText: '' };
+  
+  saveProjectState(pid);
+  saveGenreCompare(pid, APP.genreCompare);
+  renderProjectSelector();
+  renderSeries(); renderBook(); renderChapter();
+  saveState();
+}
+
+function renameProject(){
+  const projects = getProjects();
+  const currentPid = getCurrentProjectId();
+  const current = projects.find(p => p.id === currentPid);
+  if(!current) return;
+  
+  const newName = prompt('Enter new project name:', current.name);
+  if(!newName || newName === current.name) return;
+  
+  current.name = newName;
+  saveProjects(projects);
+  renderProjectSelector();
+}
+
+function deleteProject(){
+  const projects = getProjects();
+  const currentPid = getCurrentProjectId();
+  
+  if(projects.length <= 1){
+    alert('Cannot delete the last project. Create a new project first.');
+    return;
+  }
+  
+  if(!confirm('Delete this project? This cannot be undone.')) return;
+  
+  const newProjects = projects.filter(p => p.id !== currentPid);
+  saveProjects(newProjects);
+  
+  localStorage.removeItem('na_state_' + currentPid);
+  localStorage.removeItem('na_genre_' + currentPid);
+  
+  switchProject(newProjects[0].id);
+}
+
+function renderProjectSelector(){
+  const projects = getProjects();
+  const currentPid = getCurrentProjectId();
+  const current = projects.find(p => p.id === currentPid);
+  
+  document.getElementById('project_name_display').textContent = current ? current.name : 'Select Project';
+  
+  const listEl = document.getElementById('project_list');
+  listEl.innerHTML = projects.map(p => 
+    '<div class="project-item' + (p.id === currentPid ? ' active' : '') + '" data-pid="' + p.id + '">' + 
+    '<span>' + p.name + '</span>' + 
+    '</div>'
+  ).join('');
+  
+  listEl.querySelectorAll('.project-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const pid = item.dataset.pid;
+      if(pid !== currentPid) switchProject(pid);
+      document.getElementById('project_dropdown').classList.remove('open');
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// WORD COUNT STATS
+// ═══════════════════════════════════════════════════════════
+
+function countWords(text) {
+  if (!text || typeof text !== 'string' || !text.trim()) return 0;
+  return text.trim().split(/\s+/).filter(w => w.length > 0).length;
+}
+
+function isActiveInclusion(item) {
+  return item && item.inclusion && item.inclusion !== 'off';
+}
+
+function getStats() {
+  const stats = {
+    total: 0,
+    series: { total: 0, active: 0 },
+    book: { total: 0, active: 0 },
+    chapter: { total: 0, active: 0 },
+    writingPrefs: 0,
+    counts: { chapters: 0, characters: 0, settings: 0 }
+  };
+  
+  // Series Bible
+  if (APP.series?.bible?.text) {
+    const w = countWords(APP.series.bible.text);
+    stats.series.total += w;
+    if (APP.series.bible.inclusion !== 'off') stats.series.active += w;
+  }
+  
+  // Book Bible
+  if (APP.book?.bible?.text) {
+    const w = countWords(APP.book.bible.text);
+    stats.book.total += w;
+    if (APP.book.bible.inclusion !== 'off') stats.book.active += w;
+  }
+  
+  // Book Outline
+  if (APP.book?.outline?.text) {
+    const w = countWords(APP.book.outline.text);
+    stats.book.total += w;
+    if (APP.book.outline.inclusion !== 'off') stats.book.active += w;
+  }
+  
+  // Characters
+  if (APP.book?.chars?.length) {
+    stats.counts.characters = APP.book.chars.length;
+    APP.book.chars.forEach(c => {
+      if (c.text) {
+        const w = countWords(c.text);
+        stats.book.total += w;
+        if (isActiveInclusion(c)) stats.book.active += w;
+      }
+      if (c.appearance) stats.book.total += countWords(c.appearance);
+      if (c.personality) stats.book.total += countWords(c.personality);
+      if (c.background) stats.book.total += countWords(c.background);
+    });
+  }
+  
+  // Full Chapters/Scenes
+  if (APP.chapter?.fullChapters?.length) {
+    stats.counts.chapters = APP.chapter.fullChapters.length;
+    APP.chapter.fullChapters.forEach(c => {
+      if (c.text) {
+        const w = countWords(c.text);
+        stats.chapter.total += w;
+        if (c.inclusion !== 'off') stats.chapter.active += w;
+      }
+    });
+  }
+  
+  // Breakdowns (scene-level breakdown notes)
+  if (APP.chapter?.breakdowns?.length) {
+    APP.chapter.breakdowns.forEach(b => {
+      if (b.text) {
+        const w = countWords(b.text);
+        stats.chapter.total += w;
+        if (b.inclusion !== 'off') stats.chapter.active += w;
+      }
+    });
+  }
+  
+  // Chapter Breakdown main text
+  if (APP.chapter?.breakdown?.text) {
+    const w = countWords(APP.chapter.breakdown.text);
+    stats.chapter.total += w;
+    if (APP.chapter.breakdown.inclusion !== 'off') stats.chapter.active += w;
+  }
+  
+  // Chapter Settings
+  if (APP.chapter?.settings?.length) {
+    stats.counts.settings = APP.chapter.settings.length;
+    APP.chapter.settings.forEach(s => {
+      if (s.text) {
+        const w = countWords(s.text);
+        stats.chapter.total += w;
+        if (isActiveInclusion(s)) stats.chapter.active += w;
+      }
+      if (s.setting) stats.chapter.total += countWords(s.setting);
+      if (s.goal) stats.chapter.total += countWords(s.goal);
+      if (s.conflict) stats.chapter.total += countWords(s.conflict);
+      if (s.resolution) stats.chapter.total += countWords(s.resolution);
+    });
+  }
+  
+  // WritingPrefs AI Avoidance Rules
+  if (APP.writingPrefs) {
+    if (APP.writingPrefs.doNotUseWords) {
+      stats.writingPrefs += countWords(APP.writingPrefs.doNotUseWords);
+    }
+    // Count all the boolean rule fields
+    const rules = ['noEmDashes', 'noSemicolons', 'noColons', 'noTripletFraming', 
+      'noGoldenSunset', 'noInspirationalPivot', 'noAIBookending', 'varySentence', 
+      'avoidFilterWords', 'snappyDialogue', 'specificOverGeneric'];
+    rules.forEach(r => {
+      if (APP.writingPrefs[r]) stats.writingPrefs += 1;
+    });
+  }
+  
+  // Totals
+  stats.total = stats.series.total + stats.book.total + stats.chapter.total + stats.writingPrefs;
+  
+  return stats;
+}
+
+function formatNumber(num) {
+  return num.toLocaleString();
+}
+
+function updateStatsDisplay() {
+  const stats = getStats();
+  const badge = document.getElementById('stats_badge');
+  const homeCard = document.getElementById('stats_card_content');
+  
+  if (badge) {
+    badge.textContent = formatNumber(stats.total) + ' words';
+  }
+  
+  if (homeCard) {
+    homeCard.innerHTML = 
+      '<div class="stats-total">' +
+        '<span class="stats-label">Total Words</span>' +
+        '<span class="stats-value">' + formatNumber(stats.total) + '</span>' +
+      '</div>' +
+      '<div class="stats-breakdown">' +
+        '<div class="stats-row"><span class="stats-sec">Series</span><span class="stats-num">' + formatNumber(stats.series.total) + '</span><span class="stats-active">(' + formatNumber(stats.series.active) + ' active)</span></div>' +
+        '<div class="stats-row"><span class="stats-sec">Book</span><span class="stats-num">' + formatNumber(stats.book.total) + '</span><span class="stats-active">(' + formatNumber(stats.book.active) + ' active)</span></div>' +
+        '<div class="stats-row"><span class="stats-sec">Chapter</span><span class="stats-num">' + formatNumber(stats.chapter.total) + '</span><span class="stats-active">(' + formatNumber(stats.chapter.active) + ' active)</span></div>' +
+        '<div class="stats-row"><span class="stats-sec">Writing Prefs</span><span class="stats-num">' + formatNumber(stats.writingPrefs) + '</span></div>' +
+      '</div>' +
+      '<div class="stats-counts">' +
+        '<span>' + stats.counts.chapters + ' Chapters</span>' +
+        '<span>' + stats.counts.characters + ' Characters</span>' +
+        '<span>' + stats.counts.settings + ' Settings</span>' +
+      '</div>';
+  }
+}
+
+migrateToProjects();
+renderProjectSelector();
+
+// Load saved state (per-project)
+const pid = getCurrentProjectId();
+const saved = getProjectState(pid);
+if(saved){
+  if(saved.series) APP.series = {...APP.series,...saved.series};
+  if(saved.book) APP.book = {...APP.book,...saved.book};
+  if(saved.chapter) APP.chapter = {...APP.chapter,...saved.chapter};
+}
+const genre = getGenreCompare(pid);
+if(genre) APP.genreCompare = genre;
+
+// Update stats after loading project data
+updateStatsDisplay();
 
 // Debounced save
 let saveTimer = null;
 function saveState(){
   clearTimeout(saveTimer);
   saveTimer = setTimeout(()=>{
-    localStorage.setItem('na_state', JSON.stringify({series:APP.series,book:APP.book,chapter:APP.chapter}));
+    const pid = getCurrentProjectId();
+    saveProjectState(pid);
+    saveGenreCompare(pid, APP.genreCompare);
+    updateStatsDisplay();
   },400);
 }
 
@@ -1735,7 +3713,7 @@ function getFullChapterText(){
 
 async function callAPI(prompt, onChunk, onDone, onError, signal){
   const provider = APP.provider;
-  const apiKey = APP.apiKey;
+  const apiKey = await getApiKeyForProvider(provider);
   
   if(!apiKey){onError('No API key — add it in Settings.'); return;}
   
@@ -1792,14 +3770,15 @@ async function callAPI(prompt, onChunk, onDone, onError, signal){
       if(e.name==='AbortError') return;
       onError(e.message);
     }
-  } else if(provider === 'google'){
+    } else if(provider === 'google'){
     // Google Gemini API
     try{
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${APP.model}:streamGenerateContent?key=${apiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${APP.model}:streamGenerateContent`;
       const res = await fetch(url,{
         method:'POST',
         headers:{
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+          'x-goog-api-key': apiKey
         },
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
@@ -1992,7 +3971,7 @@ function dlMd(text,fname){
   document.body.removeChild(a); URL.revokeObjectURL(u);
 }
 
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
 function addHelp(parent, text){
   const icon = document.createElement('span');
@@ -2124,12 +4103,22 @@ function renderSB(containerId, stateRef, key, opts={}){
 // ═══════════════════════════════════════════════════════════
 
 function renderHome(){
+  updateStatsDisplay();
   const p=document.getElementById('panel-home');
   p.innerHTML=`
     <div class="ctx-scroll" style="max-width:700px">
       <div class="ctx-head">
         <h2>Welcome to The Novelist's Atelier</h2>
         <p>Your AI-powered writing assistant for editing and world-building.</p>
+      </div>
+
+      <div class="scard" style="margin-bottom:20px">
+        <div class="scard-hd" style="display:flex;justify-content:space-between;align-items:center">
+          <span>📊 Project Stats</span>
+        </div>
+        <div class="scard-body" id="stats_card_content">
+          <div style="color:#605840;font-size:12px">Loading stats...</div>
+        </div>
       </div>
 
       <div class="home-section">
@@ -2163,12 +4152,17 @@ function renderHome(){
           <div class="home-card" onclick="showTab('book')" style="cursor:pointer">
             <span class="home-icon">◉</span>
             <h4>Book</h4>
-            <p>Individual book details. Characters, plot outline, and book-specific bible.</p>
+            <p>Individual book details. Plot outline and book-specific bible. (Characters & Timeline in Story tab)</p>
           </div>
           <div class="home-card" onclick="showTab('chapter')" style="cursor:pointer">
             <span class="home-icon">❒</span>
             <h4>Chapter</h4>
             <p>Current chapter/scene text. Settings and context for the scene you're working on.</p>
+          </div>
+          <div class="home-card" onclick="showTab('story')" style="cursor:pointer">
+            <span class="home-icon">📖</span>
+            <h4>Story</h4>
+            <p>Characters, relationships, and timeline. Build your story elements at the series level.</p>
           </div>
           <div class="home-card" onclick="showTab('prompts')" style="cursor:pointer">
             <span class="home-icon">◆</span>
@@ -2185,6 +4179,11 @@ function renderHome(){
             <h4>Settings</h4>
             <p>Configure API keys, choose models, adjust generation settings, and customize themes.</p>
           </div>
+          <div class="home-card" onclick="showTab('help')" style="cursor:pointer">
+            <span class="home-icon">?</span>
+            <h4>Help</h4>
+            <p>Documentation, keyboard shortcuts, tab guides, and activity log.</p>
+          </div>
         </div>
       </div>
 
@@ -2196,6 +4195,7 @@ function renderHome(){
           <li>Use "Brief" for long sections where you want a summary included</li>
           <li>Use Pipeline to chain multiple edits on the same text</li>
           <li>Local models via LM Studio work offline and keep your data private</li>
+          <li>Use the Story tab for characters, relationships, and timeline - saved at series level for multi-book projects</li>
         </ul>
       </div>
 
@@ -2286,7 +4286,7 @@ function renderBook(){
     <div class="ctx-scroll">
       <div class="ctx-head">
         <h2>Book</h2>
-        <p>Book-level details, bible, outline, and character profiles for this specific volume.</p>
+        <p>Book-level details, bible, and outline. Characters and relationships are in the Story tab.</p>
       </div>
       <div class="meta-row">
         <div class="meta-field" style="flex:2">
@@ -2303,12 +4303,6 @@ function renderBook(){
       </div>
       <div id="sb_book_bible"></div>
       <div id="sb_book_outline"></div>
-      <hr class="divider">
-      <div class="list-hd">
-        <span class="list-lbl">Character Profiles (<span id="char_cnt">${APP.book.chars.length}</span>)</span>
-        <button class="add-btn" id="add_char">+ Add Character File</button>
-      </div>
-      <div id="chars_list"></div>
     </div>`;
 
   ['b_title','b_num','b_tot','b_snum','b_stot'].forEach(id=>{
@@ -2320,24 +4314,15 @@ function renderBook(){
   renderSB('sb_book_bible',APP.book,'bible',{title:'Book Bible',desc:'Characters, current plot state, active subplots, unresolved threads, world-building',rows:10,exportFn:()=>`book-bible.md`});
   renderSB('sb_book_outline',APP.book,'outline',{title:'Book Outline',desc:'Chapter-by-chapter outline with POV, function, and plot beats',rows:8,exportFn:()=>'book-outline.md'});
 
-  p.querySelector('#add_char').addEventListener('click',()=>{
-    APP.book.chars.push({id:mkId(),...mkSec()});
-    saveState();
-    renderCharsList();
-  });
-
   p.querySelector('#gen_book_bible').addEventListener('click',()=>{
     generateBookBibleFromChapters();
   });
 
-  // Add help icons
   addHelp(p.querySelector('#b_title').parentElement, 'The title of this specific book');
   addHelp(p.querySelector('#b_num').parentElement, 'This book\'s number in the series (e.g., Book 2)');
   addHelp(p.querySelector('#b_tot').parentElement, 'Total number of books in the series');
   addHelp(p.querySelector('#b_snum').parentElement, 'Sub-series or trilogy number (e.g., Book 3 of 3 in a trilogy)');
   addHelp(p.querySelector('#b_stot').parentElement, 'Total books in the sub-series/trilogy');
-
-  renderCharsList();
 }
 
 function renderCharsList(){
@@ -2374,7 +4359,163 @@ function renderCharsList(){
     const sbId=`sb_char_${char.id}`;
     // render into it
     const tmpState={val:char};
-    renderSBDirect(sbId, APP.book.chars, idx, {title:`Character Profile${APP.book.chars.length>1?' '+(i+1):''}`,desc:'Name, role, goal, appearance, psychology, arc, speech style — multiple characters can be in one file',rows:7,exportFn:()=>`characters-${i+1}.md`});
+    renderSBDirect(sbId, APP.book.chars, idx, {title:`Character Profile${APP.book.chars.length>1?' '+(i+1):''}`,desc:'Name, role, goal, appearance, psychology, arc, speech style',rows:7,exportFn:()=>`characters-${i+1}.md`});
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// RELATIONSHIP MAP UI
+// ═══════════════════════════════════════════════════════════
+
+function renderRelsList(){
+  const list=document.getElementById('rels_list');
+  if(!list) return;
+  const cnt=document.getElementById('rel_cnt');
+  const rels=getBookRelationships();
+  if(cnt) cnt.textContent=rels.length;
+  if(rels.length===0){
+    list.innerHTML='<div class="empty-msg">No relationships defined. Add at least 2 characters, then click to the Book tab "+ Add Relationship" above to connect them. Use "View Map" to see a visual diagram.</div>';
+    return;
+  }
+  list.innerHTML=rels.map(r=>{
+    const c1=getCharacterById(r.char1Id);
+    const c2=getCharacterById(r.char2Id);
+    const typeInfo=getRelationshipTypes().find(t=>t.id===r.type);
+    return '<div class="rel-item" style="border-left:3px solid '+(typeInfo?.color||'#c8a660')+'">' +
+      '<div class="rel-names">'+(c1?.data?.text?.split('\n')[0]||'Unknown')+' <span class="rel-arrow">'+(r.bidirectional?'↔':'→')+'</span> '+(c2?.data?.text?.split('\n')[0]||'Unknown')+'</div>' +
+      '<div class="rel-type">'+(typeInfo?.label||r.type)+'</div>' +
+      (r.description?'<div class="rel-desc">'+esc(r.description)+'</div>':'') +
+      '<div class="rel-actions">' +
+        '<button class="rel-edit" data-id="'+r.id+'">Edit</button>' +
+        '<button class="rel-delete" data-id="'+r.id+'">Delete</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  list.querySelectorAll('.rel-edit').forEach(btn=>{btn.addEventListener('click',()=>{openRelationshipModal(btn.dataset.id);});});
+  list.querySelectorAll('.rel-delete').forEach(btn=>{btn.addEventListener('click',()=>{if(confirm('Delete this relationship?')){deleteRelationship(btn.dataset.id);renderRelsList();}});});
+}
+
+window.openRelationshipModal = function(editId){
+  const rels=getBookRelationships();
+  const existing=editId?rels.find(r=>r.id===editId):null;
+  const chars=APP.book?.chars||[];
+  const types=getRelationshipTypes();
+  const isOpen=document.getElementById('rel_modal');
+  if(isOpen){isOpen.remove();}
+  const html='<div class="rel-modal-overlay" id="rel_modal">' +
+    '<div class="rel-modal">' +
+      '<div class="rel-modal-hd"><h3>'+(existing?'Edit Relationship':'Add Relationship')+'</h3><button class="rel-modal-close" onclick="closeRelationshipModal()">×</button></div>' +
+      '<div class="rel-modal-body">' +
+        '<div class="rel-field"><label>Character 1</label><select id="rel_char1">'+(chars.map(c=>'<option value="'+c.id+'" '+(existing?.char1Id===c.id?'selected':'')+'>'+esc(c.text?.split('\n')[0]||'Unnamed')+'</option>').join(''))+'</select></div>' +
+        '<div class="rel-field"><label>Character 2</label><select id="rel_char2">'+(chars.map(c=>'<option value="'+c.id+'" '+(existing?.char2Id===c.id?'selected':'')+'>'+esc(c.text?.split('\n')[0]||'Unnamed')+'</option>').join(''))+'</select></div>' +
+        '<div class="rel-field"><label>Relationship Type</label><select id="rel_type">'+(types.map(t=>'<option value="'+t.id+'" '+(existing?.type===t.id?'selected':'')+'>'+t.label+'</option>').join(''))+'</select></div>' +
+        '<div class="rel-field"><label>Description</label><textarea id="rel_desc" placeholder="Describe the relationship...">'+(existing?.description||'')+'</textarea></div>' +
+        '<div class="rel-field"><label><input type="checkbox" id="rel_bi" '+(existing?.bidirectional?'checked':'')+'> Bidirectional (mutual)</label></div>' +
+        '<div class="rel-actions-row"><button class="rel-btn-cancel" onclick="closeRelationshipModal()">Cancel</button><button class="rel-btn-save" onclick="saveRelationshipFromModal(\''+(editId||'')+'\')">'+(existing?'Update':'Add')+'</button></div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+  document.body.insertAdjacentHTML('beforeend',html);
+  document.getElementById('rel_modal').classList.add('open');
+  document.getElementById('rel_modal').addEventListener('click',(e)=>{if(e.target.id==='rel_modal')closeRelationshipModal();});
+};
+
+window.closeRelationshipModal = function(){const m=document.getElementById('rel_modal');if(m)m.remove();};
+
+window.saveRelationshipFromModal = function(editId){
+  const char1Id=document.getElementById('rel_char1').value;
+  const char2Id=document.getElementById('rel_char2').value;
+  if(!char1Id||!char2Id||char1Id===char2Id){alert('Please select two different characters');return;}
+  const type=document.getElementById('rel_type').value;
+  const description=document.getElementById('rel_desc').value;
+  const bidirectional=document.getElementById('rel_bi').checked;
+  if(editId){updateRelationship(editId,{char1Id,char2Id,type,description,bidirectional});}
+  else{addRelationship(char1Id,char2Id,type,description,bidirectional);}
+  closeRelationshipModal();
+  renderRelsList();
+};
+
+window.openRelationshipMapModal = function(){
+  const chars=APP.book?.chars||[];
+  const rels=getBookRelationships();
+  if(chars.length<2){alert('Add at least 2 characters to view the relationship map.');return;}
+  const isOpen=document.getElementById('rel_map_modal');
+  if(isOpen){isOpen.remove();}
+  const html='<div class="rel-map-overlay" id="rel_map_modal">' +
+    '<div class="rel-map-modal">' +
+      '<div class="rel-map-hd"><h3>Character Relationship Map</h3><button class="rel-map-close" onclick="closeRelationshipMapModal()">×</button></div>' +
+      '<div class="rel-map-body"><canvas id="rel_map_canvas"></canvas></div>' +
+    '</div>' +
+  '</div>';
+  document.body.insertAdjacentHTML('beforeend',html);
+  document.getElementById('rel_map_modal').classList.add('open');
+  setTimeout(initRelationshipMap,100);
+  document.getElementById('rel_map_modal').addEventListener('click',(e)=>{if(e.target.id==='rel_map_modal')closeRelationshipMapModal();});
+};
+
+window.closeRelationshipMapModal = function(){const m=document.getElementById('rel_map_modal');if(m)m.remove();};
+
+window.initRelationshipMap = function(){
+  const canvas=document.getElementById('rel_map_canvas');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const chars=APP.book?.chars||[];
+  const rels=getBookRelationships();
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=rect.width*dpr;
+  canvas.height=rect.height*dpr;
+  ctx.scale(dpr,dpr);
+  ctx.fillStyle='#090807';
+  ctx.fillRect(0,0,rect.width,rect.height);
+  const nodeRadius=30;
+  const nodes=chars.map((c,i)=>{
+    const angle=(2*Math.PI*i)/chars.length - Math.PI/2;
+    const cx=rect.width/2 + (Math.min(rect.width,rect.height)/2 - 60)*Math.cos(angle);
+    const cy=rect.height/2 + (Math.min(rect.width,rect.height)/2 - 60)*Math.sin(angle);
+    return{cx,cy,id:c.id,name:c.text?.split('\n')[0]||'Unnamed',x:cx,y:cy};
+  });
+  rels.forEach(r=>{
+    const n1=nodes.find(n=>n.id===r.char1Id);
+    const n2=nodes.find(n=>n.id===r.char2Id);
+    if(n1&&n2){
+      ctx.beginPath();
+      ctx.moveTo(n1.x,n1.y);
+      ctx.lineTo(n2.x,n2.y);
+      ctx.strokeStyle=getRelationshipTypeColor(r.type);
+      ctx.lineWidth=2;
+      ctx.stroke();
+      if(!r.bidirectional){
+        const mx=(n1.x+n2.x)/2,my=(n1.y+n2.y)/2;
+        const ang=Math.atan2(n2.y-n1.y,n2.x-n1.x);
+        ctx.beginPath();
+        ctx.moveTo(mx,my);
+        ctx.lineTo(mx-8*Math.cos(ang-0.4),my-8*Math.sin(ang-0.4));
+        ctx.lineTo(mx-8*Math.cos(ang+0.4),my-8*Math.sin(ang+0.4));
+        ctx.closePath();
+        ctx.fillStyle=getRelationshipTypeColor(r.type);
+        ctx.fill();
+      }
+    }
+  });
+  nodes.forEach(n=>{
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,nodeRadius,0,2*Math.PI);
+    ctx.fillStyle='#1a1512';
+    ctx.fill();
+    ctx.strokeStyle='#c8a660';
+    ctx.lineWidth=2;
+    ctx.stroke();
+    ctx.fillStyle='#c8a660';
+    ctx.font='11px JetBrains Mono';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    const initials=n.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    ctx.fillText(initials,n.x,n.y);
+    ctx.fillStyle='#a09080';
+    ctx.font='10px JetBrains Mono';
+    const labelY=n.y+nodeRadius+12;
+    ctx.fillText(n.name.substring(0,12),n.x,labelY);
   });
 }
 
@@ -2451,6 +4592,10 @@ function renderChapter(){
       <div class="ctx-head">
         <h2>Chapter / Scene</h2>
         <p>The current chapter or scene you're working on. This granular context is injected into editing prompts.</p>
+        <div style="margin-top:8px">
+          <button class="add-btn" onclick="autoToggleContext()" style="background:#1a1512;border-color:#c8a660;color:#c8a660;margin-right:8px">🧠 Smart Context</button>
+          <button class="add-btn" onclick="analyzeLocalText()" style="background:#1a1512;border-color:#7aac74;color:#7aac74">📊 Local Analysis</button>
+        </div>
       </div>
       <div class="mtog">
         <button class="mbtn${isChapter?' mon':''}" id="ch_mode_chapter">◈ Chapter Level</button>
@@ -2467,6 +4612,7 @@ function renderChapter(){
       <div class="fc-toggle" id="fc_toggle">
         <button class="fc-btn${!APP.chapter.useFullChapters?' fcon':''}" id="fc_mode_breakdown">◈ Breakdown Mode</button>
         <button class="fc-btn${APP.chapter.useFullChapters?' fcon':''}" id="fc_mode_full">◉ Full Chapters</button>
+        <button class="fc-btn" id="find_replace_btn" onclick="openFindReplacePanel()">Find/Replace</button>
       </div>
       
       <div id="ch_breakdown_section" style="display:${APP.chapter.useFullChapters?'none':'block'}">
@@ -2491,6 +4637,8 @@ function renderChapter(){
       </div>
       <div id="settings_list"></div>
       <div class="export-bar">
+        <button class="add-btn" onclick="autoToggleContext()" style="background:#1a1512;border-color:#c8a660;color:#c8a660;margin-right:8px">🧠 Smart Context</button>
+        <button class="add-btn" onclick="analyzeLocalText()" style="background:#1a1512;border-color:#7aac74;color:#7aac74;margin-right:8px">📊 Local Analysis</button>
         <span class="export-lbl">Export complete chapter package as a single .md file</span>
         <button class="export-btn" id="ch_export">↓ Export Chapter .md</button>
       </div>
@@ -2875,6 +5023,329 @@ ${sourceText}`;
 // ═══════════════════════════════════════════════════════════
 // PANEL: PROMPTS
 // ═══════════════════════════════════════════════════════════
+// STORY TAB (Characters + Relationships + Timeline)
+// ═══════════════════════════════════════════════════════════
+
+let storySubTab = localStorage.getItem('na_story_subtab') || 'characters';
+
+function renderStory(){
+  const p=document.getElementById('panel-story');
+  if(!p) return;
+  
+  p.innerHTML = `
+    <div class="ctx-scroll" style="max-width:900px">
+      <div class="ctx-head">
+        <h2>Story Elements</h2>
+        <p>Characters, relationships, and timeline for your story.</p>
+      </div>
+      
+      <div class="story-subtabs">
+        <button class="story-subtab ${storySubTab==='characters'?'active':''}" data-subtab="characters">Characters</button>
+        <button class="story-subtab ${storySubTab==='relationships'?'active':''}" data-subtab="relationships">Relationships</button>
+        <button class="story-subtab ${storySubTab==='timeline'?'active':''}" data-subtab="timeline">Timeline</button>
+        <button class="story-subtab ${storySubTab==='styledna'?'active':''}" data-subtab="styledna">Style DNA</button>
+      </div>
+      
+      <div id="story-content"></div>
+    </div>
+  `;
+  
+  p.querySelectorAll('.story-subtab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      storySubTab = btn.dataset.subtab;
+      localStorage.setItem('na_story_subtab', storySubTab);
+      renderStory();
+    });
+  });
+  
+  renderStoryContent();
+}
+
+function renderStoryContent(){
+  const container = document.getElementById('story-content');
+  if(!container) return;
+  
+  if(storySubTab === 'characters'){
+    renderStoryCharacters(container);
+  } else if(storySubTab === 'relationships'){
+    renderStoryRelationships(container);
+  } else if(storySubTab === 'timeline'){
+    renderStoryTimeline(container);
+  } else if(storySubTab === 'styledna'){
+    renderStyleDNASection(container);
+  }
+}
+
+function renderStoryCharacters(container){
+  if(!APP.book) APP.book = {title:'',bookNum:'',totalBooks:'',subNum:'',totalSub:'',bible:mkSec(),outline:mkSec(),chars:[{id:mkId(),...mkSec()}]};
+  const chars = APP.book.chars || [];
+  
+  container.innerHTML = `
+    <div class="list-hd">
+      <span class="list-lbl">Characters (${chars.length})</span>
+      <button class="add-btn" onclick="addCharacter()">+ Add Character</button>
+    </div>
+    <div id="story-chars-list"></div>
+  `;
+  
+  renderStoryCharsList();
+}
+
+function renderStoryCharsList(){
+  const list = document.getElementById('story-chars-list');
+  if(!list) return;
+  const chars = APP.book?.chars || [];
+  
+  if(chars.length === 0){
+    list.innerHTML = '<div class="empty-msg">No characters yet. Click "+ Add Character" to create one.</div>';
+    return;
+  }
+  
+  list.innerHTML = chars.map((c,i)=>`
+    <div class="ch-item" data-idx="${i}">
+      <div class="ch-item-hd">
+        <span class="ch-num">${i+1}</span>
+        <span class="ch-title">${esc(c.data?.text?.split('\n')[0]||'Unnamed')}</span>
+      </div>
+      <div class="ch-item-bd">${esc(c.data?.text||'').substring(0,100)}${c.data?.text?.length>100?'...':''}</div>
+      <div class="ch-item-ft">
+        <button class="ch-edit" data-idx="${i}" onclick="editCharacter(${i})">Edit</button>
+        <button class="ch-delete" data-idx="${i}" onclick="deleteCharacter(${i})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+  
+  list.querySelectorAll('.ch-edit').forEach(btn=>{
+    btn.addEventListener('click',()=>{editCharacter(parseInt(btn.dataset.idx));});
+  });
+  list.querySelectorAll('.ch-delete').forEach(btn=>{
+    btn.addEventListener('click',()=>{if(confirm('Delete this character?')){deleteCharacter(parseInt(btn.dataset.idx));renderStoryCharsList();}});
+  });
+}
+
+function renderStoryRelationships(container){
+  const rels = getBookRelationships();
+  const chars = APP.book?.chars || [];
+  
+  container.innerHTML = `
+    <div class="list-hd">
+      <span class="list-lbl">Relationships (${rels.length})</span>
+      <button class="add-btn" onclick="openRelationshipModal()">+ Add Relationship</button>
+      <button class="add-btn" onclick="openRelationshipMapModal()" style="margin-left:8px;background:#1a1512;border-color:#3a3020;color:#c8a660">View Map</button>
+    </div>
+    <div id="story-rels-list"></div>
+  `;
+  
+  renderRelsList();
+}
+
+function renderStoryTimeline(container){
+  const timeline = getSeriesTimeline();
+  const books = [APP.book].filter(b=>b && b.title);
+  const chapters = APP.chapter?.fullChapters || [];
+  
+  container.innerHTML = `
+    <div class="list-hd">
+      <span class="list-lbl">Timeline Events (${timeline.length})</span>
+      <button class="add-btn" onclick="openTimelineEventModal()">+ Add Event</button>
+      <button class="add-btn" onclick="openTimelineVisualModal()" style="margin-left:8px;background:#1a1512;border-color:#3a3020;color:#c8a660">View Timeline</button>
+    </div>
+    <div id="story-timeline-list"></div>
+  `;
+  
+  renderTimelineList();
+}
+
+function renderTimelineList(){
+  const list = document.getElementById('story-timeline-list');
+  if(!list) return;
+  const timeline = getSeriesTimeline();
+  
+  if(timeline.length === 0){
+    list.innerHTML = '<div class="empty-msg">No timeline events yet. Click "+ Add Event" to create one. Events are saved at the series level and can span multiple books.</div>';
+    return;
+  }
+  
+  list.innerHTML = timeline.map(e=>{
+    const type = getEventTypes().find(t=>t.id===e.eventType);
+    return `<div class="timeline-item" style="border-left:3px solid ${type?.color||'#c8a660'}">
+      <div class="timeline-title">${esc(e.title)}</div>
+      <div class="timeline-type" style="color:${type?.color||'#c8a660'}">${type?.label||e.eventType}</div>
+      ${e.description?'<div class="timeline-desc">'+esc(e.description)+'</div>':''}
+      <div class="timeline-meta">
+        ${e.date?'<span>📅 '+esc(e.date)+'</span>':''}
+      </div>
+      <div class="timeline-actions">
+        <button class="timeline-edit" data-id="${e.id}">Edit</button>
+        <button class="timeline-delete" data-id="${e.id}">Delete</button>
+      </div>
+    </div>`;
+  }).join('');
+  
+  list.querySelectorAll('.timeline-edit').forEach(btn=>{
+    btn.addEventListener('click',()=>{openTimelineEventModal(btn.dataset.id);});
+  });
+  list.querySelectorAll('.timeline-delete').forEach(btn=>{
+    btn.addEventListener('click',()=>{if(confirm('Delete this event?')){deleteTimelineEvent(btn.dataset.id);renderTimelineList();}});
+  });
+}
+
+// Timeline Modal Functions
+window.openTimelineEventModal = function(editId){
+  const timeline = getSeriesTimeline();
+  const existing = editId ? timeline.find(e=>e.id===editId) : null;
+  const books = [APP.book].filter(b=>b && b.title);
+  const chapters = APP.chapter?.fullChapters || [];
+  const types = getEventTypes();
+  
+  const isOpen = document.getElementById('timeline_modal');
+  if(isOpen){isOpen.remove();}
+  
+  const html = `<div class="timeline-modal-overlay" id="timeline_modal">
+    <div class="timeline-modal">
+      <div class="timeline-modal-hd">
+        <h3>${existing?'Edit Event':'Add Timeline Event'}</h3>
+        <button class="timeline-modal-close" onclick="closeTimelineEventModal()">×</button>
+      </div>
+      <div class="timeline-modal-body">
+        <div class="timeline-field"><label>Title *</label><input type="text" id="timeline_title" value="${existing?esc(existing.title):''}" placeholder="Event title"></div>
+        <div class="timeline-field"><label>Event Type</label><select id="timeline_type">${types.map(t=>`<option value="${t.id}" ${existing?.eventType===t.id?'selected':''}>${t.label}</option>`).join('')}</select></div>
+        <div class="timeline-field"><label>Description</label><textarea id="timeline_desc" placeholder="What happens...">${existing?esc(existing.description):''}</textarea></div>
+        <div class="timeline-field"><label>Book (optional)</label><select id="timeline_book"><option value="">-- None --</option>${books.map(b=>`<option value="book" ${existing?.bookId==='book'?'selected':''}>${esc(b.title)}</option>`).join('')}</select></div>
+        <div class="timeline-field"><label>Chapter (optional)</label><select id="timeline_chapter"><option value="">-- None --</option>${chapters.map((c,i)=>`<option value="${c.id}" ${existing?.chapterId===c.id?'selected':''}>Chapter ${i+1}: ${esc(c.title||c.text?.substring(0,20)||'Untitled')}</option>`).join('')}</select></div>
+        <div class="timeline-field"><label>Date/Order</label><input type="text" id="timeline_date" value="${existing?esc(existing.date):''}" placeholder="e.g., Year 1, Day 45, etc."></div>
+        <div class="timeline-actions-row"><button class="timeline-btn-cancel" onclick="closeTimelineEventModal()">Cancel</button><button class="timeline-btn-save" onclick="saveTimelineEvent('${editId||''}')">${existing?'Update':'Add'}</button></div>
+      </div>
+    </div>
+  </div>`;
+  
+  document.body.insertAdjacentHTML('beforeend',html);
+  document.getElementById('timeline_modal').classList.add('open');
+  document.getElementById('timeline_modal').addEventListener('click',(e)=>{if(e.target.id==='timeline_modal')closeTimelineEventModal();});
+};
+
+window.closeTimelineEventModal = function(){
+  const m = document.getElementById('timeline_modal');
+  if(m) m.remove();
+};
+
+window.saveTimelineEvent = function(editId){
+  const title = document.getElementById('timeline_title').value.trim();
+  if(!title){alert('Title is required');return;}
+  const description = document.getElementById('timeline_desc').value;
+  const eventType = document.getElementById('timeline_type').value;
+  const bookId = document.getElementById('timeline_book').value;
+  const chapterId = document.getElementById('timeline_chapter').value;
+  const date = document.getElementById('timeline_date').value;
+  
+  if(editId){
+    updateTimelineEvent(editId,{title,description,eventType,bookId,chapterId,date});
+  } else {
+    addTimelineEvent(title,description,eventType,bookId,chapterId,date);
+  }
+  closeTimelineEventModal();
+  renderTimelineList();
+};
+
+window.openTimelineVisualModal = function(){
+  const timeline = getSeriesTimeline();
+  if(timeline.length === 0){alert('Add some events first!');return;}
+  
+  const isOpen = document.getElementById('timeline_visual_modal');
+  if(isOpen){isOpen.remove();}
+  
+  const html = `<div class="timeline-visual-overlay" id="timeline_visual_modal">
+    <div class="timeline-visual-modal">
+      <div class="timeline-visual-hd">
+        <h3>Story Timeline</h3>
+        <button class="timeline-visual-close" onclick="closeTimelineVisualModal()">×</button>
+      </div>
+      <div class="timeline-visual-body"><div id="timeline_visual_container"></div></div>
+    </div>
+  </div>`;
+  
+  document.body.insertAdjacentHTML('beforeend',html);
+  document.getElementById('timeline_visual_modal').classList.add('open');
+  document.getElementById('timeline_visual_modal').addEventListener('click',(e)=>{if(e.target.id==='timeline_visual_modal')closeTimelineVisualModal();});
+  setTimeout(renderTimelineVisual,100);
+};
+
+window.closeTimelineVisualModal = function(){
+  const m = document.getElementById('timeline_visual_modal');
+  if(m) m.remove();
+};
+
+function renderTimelineVisual(){
+  const container = document.getElementById('timeline_visual_container');
+  if(!container) return;
+  const timeline = getSeriesTimeline();
+  const types = getEventTypes();
+  
+  container.innerHTML = `<div class="timeline-visual-scroll">
+    <div class="timeline-visual-line"></div>
+    ${timeline.map((e,i)=>{
+      const type = types.find(t=>t.id===e.eventType);
+      return `<div class="timeline-visual-event" style="--color:${type?.color||'#c8a660'}">
+        <div class="timeline-visual-dot"></div>
+        <div class="timeline-visual-card">
+          <div class="timeline-visual-title">${esc(e.title)}</div>
+          <div class="timeline-visual-type">${type?.label||e.eventType}</div>
+          ${e.description?'<div class="timeline-visual-desc">'+esc(e.description)+'</div>':''}
+          ${e.date?'<div class="timeline-visual-date">'+esc(e.date)+'</div>':''}
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+// Timeline Import/Export
+window.exportTimeline = function(){
+  const data = JSON.stringify(getSeriesTimeline(), null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'novelist-atelier-timeline-' + Date.now() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
+window.importTimeline = function(){
+  const input = document.getElementById('timeline_import_file');
+  input.click();
+};
+
+window.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('timeline_import_file').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(event){
+      try{
+        const data = JSON.parse(event.target.result);
+        if(!Array.isArray(data)) throw new Error('Invalid format');
+        const merge = confirm('Merge with existing timeline? OK to merge, Cancel to replace all.');
+        if(merge){
+          const existing = getSeriesTimeline();
+          data.forEach(ev=>{if(!existing.find(e=>e.id===ev.id))existing.push(ev);});
+          saveSeriesTimeline(existing);
+        } else {
+          saveSeriesTimeline(data);
+        }
+        renderTimelineList();
+        alert('Timeline imported successfully!');
+      } catch(err){
+        alert('Error importing: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+    this.value = '';
+  });
+});
+
+ // ═══════════════════════════════════════════════════════════
 
 function renderPrompts(){
   const p=document.getElementById('panel-prompts');
@@ -2916,6 +5387,8 @@ function renderPromptList(){
   const list=document.getElementById('p_list'); if(!list) return;
   const cat=CATEGORIES.find(c=>c.id===APP.prompts.cat);
   const catPrompts=PROMPTS[APP.prompts.cat]||[];
+  const customPrompts=getCustomTemplatesForCategory(APP.prompts.cat)||[];
+  const allPrompts = [...catPrompts, ...customPrompts];
   const showExtract = ['character','world','location'].includes(APP.prompts.cat);
   const extractBtn = APP.prompts.cat === 'character' ? '<button class="extract-btn" id="extract_chars">Extract Characters</button>' :
                      APP.prompts.cat === 'world' ? '<button class="extract-btn" id="extract_world">Extract World Building</button>' :
@@ -2924,7 +5397,10 @@ function renderPromptList(){
     <div class="p-list-hd">
       <div class="p-list-bar" style="--cc:${cat.color}"></div>
       <div class="p-list-name" style="--cc:${cat.color}"><span style="color:${cat.color}">${cat.icon}</span>${cat.label}</div>
-      <div class="p-list-cnt">${catPrompts.length} prompt${catPrompts.length!==1?'s':''}</div>
+      <div class="p-list-cnt">${allPrompts.length} prompt${allPrompts.length!==1?'s':''}</div>
+    </div>
+    <div style="padding:8px 10px;border-bottom:1px solid #181510">
+      <button class="create-template-btn" onclick="openTemplateModal('${APP.prompts.cat}', null)">+ Create Template</button>
     </div>
     ${showExtract ? `
     <div class="extract-section" style="padding:10px;border-bottom:1px solid #181510;margin-bottom:8px">
@@ -2941,6 +5417,16 @@ function renderPromptList(){
       <button class="pcrd${APP.prompts.promptId===pr.id?' pcra':''}" data-pid="${pr.id}" style="--cc:${cat.color}">
         <div class="pcrd-t">${esc(pr.title)}</div>
         <div class="pcrd-d">${esc(pr.desc)}</div>
+      </button>`).join('')}
+    ${customPrompts.length > 0 ? '<div class="p-custom-header">Custom Templates</div>' : ''}
+    ${customPrompts.map(pr=>`
+      <button class="pcrd custom-prompt${APP.prompts.promptId===pr.id?' pcra':''}" data-pid="${pr.id}" data-custom="true" style="--cc:${cat.color}">
+        <div class="pcrd-t">${esc(pr.title)} <span class="custom-badge">Custom</span></div>
+        <div class="pcrd-d">${esc(pr.desc)}</div>
+        <div class="pcrd-actions">
+          <span class="pcrd-edit" onclick="event.stopPropagation();openTemplateModal('${APP.prompts.cat}', '${pr.id}')">Edit</span>
+          <span class="pcrd-delete" onclick="event.stopPropagation();deleteTemplate('${APP.prompts.cat}', '${pr.id}')">Delete</span>
+        </div>
       </button>`).join('')}`;
 
   list.querySelectorAll('.pcrd').forEach(btn=>{
@@ -2961,7 +5447,32 @@ function renderPromptList(){
 
 function renderPromptEditor(){
   const editor=document.getElementById('p_editor'); if(!editor) return;
-  const pr=APP.prompts.promptId?(PROMPTS[APP.prompts.cat]||[]).find(p=>p.id===APP.prompts.promptId):null;
+  // First check built-in prompts
+  let pr=APP.prompts.promptId?(PROMPTS[APP.prompts.cat]||[]).find(p=>p.id===APP.prompts.promptId):null;
+  // Then check custom templates
+  if(!pr && APP.prompts.promptId && APP.prompts.promptId.startsWith('custom-')){
+    const customList=getCustomTemplatesForCategory(APP.prompts.cat)||[];
+    const customTpl=customList.find(t=>t.id===APP.prompts.promptId);
+    if(customTpl){
+      // Convert string template to function using a safer method
+      pr={
+        id: customTpl.id,
+        title: customTpl.title,
+        desc: customTpl.desc,
+        fields: customTpl.fields,
+        tpl: function(f) {
+          let result = customTpl.tpl;
+          if (customTpl.fields) {
+            customTpl.fields.forEach(field => {
+              const regex = new RegExp('\\$\\{f\\.' + field.key + '\\}', 'g');
+              result = result.replace(regex, f[field.key] || '');
+            });
+          }
+          return result;
+        }
+      };
+    }
+  }
   if(!pr){
     const pills=getContextPills();
     editor.innerHTML=`<div class="p-empty">
@@ -3000,6 +5511,7 @@ function renderPromptEditor(){
           <button class="sec-btn" id="copy_prompt_btn">Copy Prompt</button>
           <button class="sec-btn" id="copy_out_btn" disabled>Copy Output</button>
           <button class="sec-btn" id="dl_out_btn" disabled>↓ .md</button>
+          <button class="sec-btn" onclick="showTokenBreakdown(APP.prompts.tpl, APP.prompts.fields)" style="margin-left:8px">📊 Breakdown</button>
           <button class="stop-btn" id="stop_btn" style="display:none">■ Stop</button>
           <button class="run-btn" id="run_btn" ${APP.apiKey?'':'title="Add API key in Settings"'}>▶ Run</button>
         </div>
@@ -3130,6 +5642,10 @@ function renderPromptEditor(){
         setRunState(false,`Done · ${((Date.now()-t0)/1000).toFixed(1)}s`);
         document.getElementById('copy_out_btn').disabled=false;
         document.getElementById('dl_out_btn').disabled=false;
+        // Log to activity
+        const pr = APP.prompts;
+        const cat = CATEGORIES.find(c=>c.id===pr.cat);
+        addActivityLogEntry(`Generated: ${pr.promptId} (${cat?.label||pr.cat})`);
       },
       err=>{
         APP.prompts.running=false;
@@ -3334,6 +5850,10 @@ function renderStepBody(step, i, pr){
         <input type="checkbox" id="useprev_${step.id}" ${step.usePrev?'checked':''}>
         <label for="useprev_${step.id}">Use output from previous step as "${esc(firstTA.label)}"</label>
       </div>`:''}
+    <div class="pipe-tog">
+      <input type="checkbox" id="style_dna_${step.id}" ${step.applyStyleDNA?'checked':''}>
+      <label for="style_dna_${step.id}">🎨 Apply Style DNA <span style="color:#d44;font-size:10px">(requires AI)</span></label>
+    </div>
     ${pr.fields.map(f=>{
       const isPiped=canPipe&&step.usePrev&&f===firstTA;
       return `
@@ -3352,6 +5872,12 @@ function renderStepBody(step, i, pr){
     body.querySelector(`#useprev_${step.id}`).addEventListener('change',e=>{
       step.usePrev=e.target.checked;
       renderStepBody(step,i,pr);
+    });
+  }
+  const styleDnaCheck = body.querySelector(`#style_dna_${step.id}`);
+  if(styleDnaCheck){
+    styleDnaCheck.addEventListener('change',e=>{
+      step.applyStyleDNA=e.target.checked;
     });
   }
   body.querySelectorAll('[data-key]').forEach(el=>{
@@ -3502,6 +6028,45 @@ function renderSettings(){
   p.innerHTML=`
     <div class="settings-scroll">
       <div class="settings-section">
+        <div class="scard" style="background:#1a1512;border-color:#c8a660">
+          <div class="scard-hd" style="color:#c8a660">🔒 Security Notice</div>
+          <div class="scard-body">
+            <p style="color:#a89070;font-size:13px;line-height:1.5">Your API keys can be stored in different ways. Choose the option that best fits your security needs:</p>
+            
+            <div style="margin-top:12px;padding:10px;background:#0b0908;border-radius:3px">
+              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">🔐 Password-Encrypted (Recommended)</div>
+              <p style="color:#a89070;font-size:11px;margin:0">Keys encrypted with AES-256 before storing. You'll be prompted for your password when needed. Most secure option. <strong>Default mode.</strong></p>
+            </div>
+            
+            <div style="margin-top:8px;padding:10px;background:#0b0908;border-radius:3px">
+              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">📄 Plaintext</div>
+              <p style="color:#a89070;font-size:11px;margin:0">Keys stored directly in browser localStorage. Convenient but readable by browser extensions.</p>
+            </div>
+            
+            <div style="margin-top:8px;padding:10px;background:#0b0908;border-radius:3px">
+              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">⌨️ Prompt Each Session</div>
+              <p style="color:#a89070;font-size:11px;margin:0">Keys never stored. You'll be prompted to enter them when you first use the AI. Highest security - nothing stored.</p>
+            </div>
+            
+            <div style="margin-top:8px;padding:10px;background:#0b0908;border-radius:3px">
+              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">⏱️ Session Only</div>
+              <p style="color:#a89070;font-size:11px;margin:0">Keys stored in sessionStorage. Cleared automatically when you close the browser tab.</p>
+            </div>
+            
+            <div style="margin-top:15px;padding-top:15px;border-top:1px solid #252015">
+              <label class="mlabel" style="color:#c8a660">API Key Storage Mode</label>
+              <select id="storage_mode_select" style="background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;border-radius:2px;width:100%;margin-top:5px">
+                <option value="plaintext" ${getStorageMode()==='plaintext'?'selected':''}>Plaintext</option>
+                <option value="encrypted" ${getStorageMode()==='encrypted'?'selected':''}>Password-Encrypted (Recommended)</option>
+                <option value="prompt" ${getStorageMode()==='prompt'?'selected':''}>Prompt Each Session</option>
+                <option value="session" ${getStorageMode()==='session'?'selected':''}>Session Only (sessionStorage)</option>
+              </select>
+              <div id="storage_mode_actions" style="margin-top:10px"></div>
+              <div id="storage_mode_status" style="color:#7aac74;font-size:12px;margin-top:8px"></div>
+            </div>
+          </div>
+        </div>
+
         <div class="settings-hd">
           <h2>Settings</h2>
           <p>Configure your API access and model preferences.</p>
@@ -3775,35 +6340,35 @@ function renderSettings(){
         </div>
 
         <div class="scard">
-          <div class="scard-hd">Genre/Author Comparison (for Developmental & Line Editing)</div>
-          <div class="scard-body">
-            <div class="genre-compare-row">
-              <div class="meta-field">
-                <label class="mlabel">Genre Preset</label>
-                <select class="gc-select" id="genre_preset">
-                  <option value="fantasy" ${APP.genreCompare.preset==='fantasy'?'selected':''}>Fantasy</option>
-                  <option value="sci-fi" ${APP.genreCompare.preset==='sci-fi'?'selected':''}>Science Fiction</option>
-                  <option value="thriller" ${APP.genreCompare.preset==='thriller'?'selected':''}>Thriller</option>
-                  <option value="romance" ${APP.genreCompare.preset==='romance'?'selected':''}>Romance</option>
-                  <option value="horror" ${APP.genreCompare.preset==='horror'?'selected':''}>Horror</option>
-                  <option value="literary" ${APP.genreCompare.preset==='literary'?'selected':''}>Literary Fiction</option>
-                  <option value="mystery" ${APP.genreCompare.preset==='mystery'?'selected':''}>Mystery</option>
-                  <option value="adventure" ${APP.genreCompare.preset==='adventure'?'selected':''}>Adventure</option>
-                  <option value="custom" ${APP.genreCompare.preset==='custom'?'selected':''}>Custom</option>
-                </select>
-              </div>
-            </div>
-            <div id="custom_genre_row" style="display:${APP.genreCompare.preset==='custom'?'block':'none'}">
-              <label class="mlabel">Custom Reference Text</label>
-              <textarea class="gc-ref-text" id="genre_custom" placeholder="Paste reference text to compare against...">${esc(APP.genreCompare.customText||'')}</textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="scard">
           <div class="scard-hd">Data Management</div>
           <div class="scard-body">
             <p class="api-note" style="margin-bottom:10px">All project data (Series, Book, Chapter) is automatically saved to your browser's local storage.</p>
+            <div class="export-import-row">
+              <button class="export-btn" id="export_btn">Export Project</button>
+              <button class="import-btn" id="import_btn">Import Project</button>
+              <input type="file" id="import_file" accept=".json" style="display:none">
+            </div>
+
+            <div class="import-status" id="import_status" style="margin-top:8px;font-size:12px;color:#c8a660"></div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid #252015">
+              <p class="api-note" style="margin-bottom:10px">Backup History (last 24 hours)</p>
+              <div class="backup-list" id="backup_list"></div>
+            </div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid #252015">
+              <p class="api-note" style="margin-bottom:10px">Custom Prompt Templates (global across all projects)</p>
+              <div class="export-import-row">
+                <button class="export-btn" onclick="exportTemplates()">Export Templates</button>
+                <button class="import-btn" onclick="importTemplates()">Import Templates</button>
+              </div>
+            </div>
+            <div style="margin-top:15px;padding-top:15px;border-top:1px solid #252015">
+              <p class="api-note" style="margin-bottom:10px">Timeline Events (series-level, multi-book)</p>
+              <div class="export-import-row">
+                <button class="export-btn" onclick="exportTimeline()">Export Timeline</button>
+                <button class="import-btn" onclick="importTimeline()">Import Timeline</button>
+              </div>
+            </div>
+            <hr style="border:0;border-top:1px solid #252015;margin:15px 0">
             <button class="clear-all-btn" id="clear_data_btn">Clear All Saved Data</button>
           </div>
         </div>
@@ -3830,6 +6395,111 @@ function renderSettings(){
     updateTabDot();
   });
 
+  // Storage mode selector
+  const storageSelect = p.querySelector('#storage_mode_select');
+  const storageActions = p.querySelector('#storage_mode_actions');
+  const storageStatus = p.querySelector('#storage_mode_status');
+  
+  function updateStorageModeUI() {
+    const mode = getStorageMode();
+    if (mode === 'encrypted') {
+      storageActions.innerHTML = `
+        <button id="set_password_btn" class="add-btn" style="background:#1a1512;border-color:#c8a660;color:#c8a660;margin-top:5px">${localStorage.getItem('na_encrypted_keys') ? 'Change Password' : 'Set Password'}</button>
+        ${APP_KEY_PASSWORD ? '<span style="color:#7aac74;font-size:12px;margin-left:10px">✓ Keys Unlocked</span>' : ''}
+      `;
+      storageStatus.textContent = APP_KEY_PASSWORD ? 'Keys are unlocked for this session' : 'Keys are locked - password required on next use';
+    } else if (mode === 'prompt') {
+      storageActions.innerHTML = '<span style="color:#c8a660;font-size:12px">You will be prompted for API keys when needed</span>';
+      storageStatus.textContent = '';
+    } else if (mode === 'session') {
+      storageActions.innerHTML = '<span style="color:#c8a660;font-size:12px">Keys cleared when browser closes</span>';
+      storageStatus.textContent = '';
+    } else {
+      storageActions.innerHTML = '';
+      storageStatus.textContent = '';
+    }
+  }
+  
+  storageSelect.addEventListener('change', async function() {
+    const newMode = this.value;
+    if (newMode === 'encrypted') {
+      const password = prompt('Set a password for encrypting your API keys:');
+      if (!password) {
+        this.value = getStorageMode();
+        return;
+      }
+      const confirm = prompt('Confirm password:');
+      if (confirm !== password) {
+        alert('Passwords do not match');
+        this.value = getStorageMode();
+        return;
+      }
+      setStorageMode('encrypted');
+      await saveKeysSecurely(password);
+      updateStorageModeUI();
+      renderSettings();
+    } else if (newMode === 'prompt') {
+      if (confirm('This will clear all stored API keys. You will be prompted for keys when needed. Continue?')) {
+        localStorage.removeItem('na_key');
+        localStorage.removeItem('na_anthropic_key');
+        localStorage.removeItem('na_openai_key');
+        localStorage.removeItem('na_google_key');
+        localStorage.removeItem('na_lmstudio_key');
+        sessionStorage.clear();
+        setStorageMode('prompt');
+        APP.apiKeys = { openrouter: '', anthropic: '', openai: '', google: '', lmstudio: '' };
+        updateStorageModeUI();
+        renderSettings();
+      } else {
+        this.value = getStorageMode();
+      }
+    } else if (newMode === 'session') {
+      if (confirm('This will move keys to session storage. Keys will be cleared when you close the browser. Continue?')) {
+        localStorage.removeItem('na_key');
+        localStorage.removeItem('na_anthropic_key');
+        localStorage.removeItem('na_openai_key');
+        localStorage.removeItem('na_google_key');
+        localStorage.removeItem('na_lmstudio_key');
+        localStorage.removeItem('na_encrypted_keys');
+        localStorage.removeItem('na_key_salt');
+        setStorageMode('session');
+        await saveKeysSecurely('');
+        updateStorageModeUI();
+        renderSettings();
+      } else {
+        this.value = getStorageMode();
+      }
+    } else {
+      if (confirm('Switch back to plaintext storage? Your keys will be stored without encryption.')) {
+        localStorage.removeItem('na_encrypted_keys');
+        localStorage.removeItem('na_key_salt');
+        setStorageMode('plaintext');
+        await saveKeysSecurely('');
+        updateStorageModeUI();
+        renderSettings();
+      } else {
+        this.value = getStorageMode();
+      }
+    }
+  });
+  
+  p.addEventListener('click', async function(e) {
+    if (e.target.id === 'set_password_btn') {
+      const password = prompt('Enter new password for encrypting API keys:');
+      if (!password) return;
+      const confirm = prompt('Confirm password:');
+      if (confirm !== password) {
+        alert('Passwords do not match');
+        return;
+      }
+      await saveKeysSecurely(password);
+      updateStorageModeUI();
+      storageStatus.textContent = 'Password updated!';
+    }
+  });
+  
+  updateStorageModeUI();
+
   // OpenRouter key
   const keyInp = p.querySelector('#api_key_inp');
   p.querySelector('#api_show').addEventListener('click', function() {
@@ -3839,7 +6509,7 @@ function renderSettings(){
   });
   keyInp.addEventListener('input', e => {
     APP.apiKeys.openrouter = e.target.value.trim();
-    localStorage.setItem('na_key', APP.apiKeys.openrouter);
+    saveKeysSecurely(APP_KEY_PASSWORD);
     updateTabDot();
   });
 
@@ -3852,7 +6522,7 @@ function renderSettings(){
   });
   keyAnt.addEventListener('input', e => {
     APP.apiKeys.anthropic = e.target.value.trim();
-    localStorage.setItem('na_anthropic_key', APP.apiKeys.anthropic);
+    saveKeysSecurely(APP_KEY_PASSWORD);
     updateTabDot();
   });
 
@@ -3865,7 +6535,7 @@ function renderSettings(){
   });
   keyOai.addEventListener('input', e => {
     APP.apiKeys.openai = e.target.value.trim();
-    localStorage.setItem('na_openai_key', APP.apiKeys.openai);
+    saveKeysSecurely(APP_KEY_PASSWORD);
     updateTabDot();
   });
 
@@ -3951,7 +6621,7 @@ function renderSettings(){
   });
   keyGoogle.addEventListener('input', e => {
     APP.apiKeys.google = e.target.value.trim();
-    localStorage.setItem('na_google_key', APP.apiKeys.google);
+    saveKeysSecurely(APP_KEY_PASSWORD);
     updateTabDot();
   });
 
@@ -3960,7 +6630,9 @@ function renderSettings(){
     const status = p.querySelector('#api_status_google');
     status.className = 'api-status checking'; status.textContent = 'Testing…';
     try {
-      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models?key=' + APP.apiKeys.google);
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
+        headers: { 'x-goog-api-key': APP.apiKeys.google }
+      });
       if (res.ok) {
         status.className = 'api-status ok';
         status.textContent = '✓ Connected';
@@ -3991,7 +6663,7 @@ function renderSettings(){
   });
   keyLmstudio.addEventListener('input', e => {
     APP.apiKeys.lmstudio = e.target.value.trim();
-    localStorage.setItem('na_lmstudio_key', APP.apiKeys.lmstudio);
+    saveKeysSecurely(APP_KEY_PASSWORD);
     updateTabDot();
   });
 
@@ -4104,16 +6776,165 @@ function renderSettings(){
     localStorage.setItem('na_maxtok',APP.maxTokens);
   });
 
-  // Clear data
+  // Clear data (per-project)
   p.querySelector('#clear_data_btn').addEventListener('click',()=>{
     if(confirm('Clear all saved project data (Series, Book, Chapter)? This cannot be undone.')){
-      localStorage.removeItem('na_state');
+      const pid = getCurrentProjectId();
+      localStorage.removeItem('na_state_' + pid);
       APP.series={name:'',subName:'',bible:mkSec()};
       APP.book={title:'',bookNum:'',totalBooks:'',subNum:'',totalSub:'',bible:mkSec(),outline:mkSec(),chars:[{id:mkId(),...mkSec()}]};
       APP.chapter={mode:'chapter',chapterNum:'',sceneNum:'',useFullChapters:false,sceneLevel:false,fullChapters:[],breakdowns:[],breakdown:mkSec(),settings:[{id:mkId(),...mkSec()}]};
       // Re-render context tabs
       renderSeries(); renderBook(); renderChapter();
+      saveState();
     }
+  });
+
+  // Export Project
+  const projects = getProjects();
+  const currentPid = getCurrentProjectId();
+  const currentProject = projects.find(p => p.id === currentPid);
+  p.querySelector('#export_btn').addEventListener('click',()=>{
+    const exportData = {
+      version: '1.0-beta',
+      exportedAt: new Date().toISOString(),
+      projectName: currentProject ? currentProject.name : 'Unnamed Project',
+      series: APP.series,
+      book: APP.book,
+      chapter: APP.chapter,
+      genreCompare: APP.genreCompare
+    };
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const safeName = (currentProject ? currentProject.name : 'project').replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    a.download = 'novelist-atelier-' + safeName + '-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // Import Project
+  const importFileInput = p.querySelector('#import_file');
+  const importOptions = p.querySelector('#import_options');
+  const importStatus = p.querySelector('#import_status');
+
+  p.querySelector('#import_btn').addEventListener('click',()=>{
+    importFileInput.click();
+  });
+
+  importFileInput.addEventListener('change',(e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      try {
+        const data = JSON.parse(event.target.result);
+        // Validate required fields
+        if(!data.series || !data.book || !data.chapter) {
+          throw new Error('Invalid project file: missing required data');
+        }
+        
+        const importAsNew = confirm('Import as a NEW project? Click OK for new project, Cancel to merge with current project.');
+        
+        if(importAsNew) {
+          // Create new project from import
+          const projName = data.projectName || prompt('Enter project name:', 'Imported Project') || 'Imported Project';
+          const pid = 'project-' + Date.now() + '-' + Math.random().toString(36).substr(2,9);
+          const projects = getProjects();
+          projects.push({id: pid, name: projName});
+          saveProjects(projects);
+          
+          APP.series = data.series || {name:'',subName:'',bible:mkSec()};
+          APP.book = data.book || {title:'',bookNum:'',totalBooks:'',subNum:'',totalSub:'',bible:mkSec(),outline:mkSec(),chars:[{id:mkId(),...mkSec()}]};
+          APP.chapter = data.chapter || {mode:'chapter',chapterNum:'',sceneNum:'',useFullChapters:false,sceneLevel:false,fullChapters:[],breakdowns:[],breakdown:mkSec(),settings:[{id:mkId(),...mkSec()}]};
+          APP.genreCompare = data.genreCompare || { preset: 'fantasy', customText: '' };
+          
+          setCurrentProjectId(pid);
+          saveProjectState(pid);
+          saveGenreCompare(pid, APP.genreCompare);
+          renderProjectSelector();
+        } else {
+          const wipeFirst = p.querySelector('#import_wipe').checked;
+          if(wipeFirst) {
+            const pid = getCurrentProjectId();
+            APP.series = data.series || {name:'',subName:'',bible:mkSec()};
+            APP.book = data.book || {title:'',bookNum:'',totalBooks:'',subNum:'',totalSub:'',bible:mkSec(),outline:mkSec(),chars:[{id:mkId(),...mkSec()}]};
+            APP.chapter = data.chapter || {mode:'chapter',chapterNum:'',sceneNum:'',useFullChapters:false,sceneLevel:false,fullChapters:[],breakdowns:[],breakdown:mkSec(),settings:[{id:mkId(),...mkSec()}]};
+            if(data.genreCompare) {
+              APP.genreCompare = {...data.genreCompare};
+              saveGenreCompare(pid, APP.genreCompare);
+            }
+          } else {
+            // Merge mode - combine data
+            if(data.series) {
+              if(data.series.name) APP.series.name = data.series.name;
+              if(data.series.subName) APP.series.subName = data.series.subName;
+              if(data.series.bible?.text) APP.series.bible.text = (APP.series.bible.text || '') + '\n\n' + data.series.bible.text;
+            }
+            if(data.book) {
+              if(data.book.title) APP.book.title = data.book.title;
+              if(data.book.bookNum) APP.book.bookNum = data.book.bookNum;
+              if(data.book.totalBooks) APP.book.totalBooks = data.book.totalBooks;
+              if(data.book.subNum) APP.book.subNum = data.book.subNum;
+              if(data.book.totalSub) APP.book.totalSub = data.book.totalSub;
+              if(data.book.bible?.text) APP.book.bible.text = (APP.book.bible.text || '') + '\n\n' + data.book.bible.text;
+              if(data.book.outline?.text) APP.book.outline.text = (APP.book.outline.text || '') + '\n\n' + data.book.outline.text;
+              if(data.book.chars?.length) {
+                data.book.chars.forEach(c => {
+                  if(!APP.book.chars.find(existing => existing.id === c.id)) {
+                    APP.book.chars.push(c);
+                  }
+                });
+              }
+            }
+            if(data.chapter) {
+              if(data.chapter.mode) APP.chapter.mode = data.chapter.mode;
+              if(data.chapter.chapterNum) APP.chapter.chapterNum = data.chapter.chapterNum;
+              if(data.chapter.sceneNum) APP.chapter.sceneNum = data.chapter.sceneNum;
+              if(data.chapter.useFullChapters !== undefined) APP.chapter.useFullChapters = data.chapter.useFullChapters;
+              if(data.chapter.fullChapters?.length) {
+                data.chapter.fullChapters.forEach(c => {
+                  if(!APP.chapter.fullChapters.find(existing => existing.id === c.id)) {
+                    APP.chapter.fullChapters.push(c);
+                  }
+                });
+              }
+              if(data.chapter.breakdown?.text) APP.chapter.breakdown.text = (APP.chapter.breakdown.text || '') + '\n\n' + data.chapter.breakdown.text;
+              if(data.chapter.settings?.length) {
+                data.chapter.settings.forEach(s => {
+                  if(!APP.chapter.settings.find(existing => existing.id === s.id)) {
+                    APP.chapter.settings.push(s);
+                  }
+                });
+              }
+            }
+            if(data.genreCompare) {
+              const pid = getCurrentProjectId();
+              APP.genreCompare = {...APP.genreCompare,...data.genreCompare};
+              saveGenreCompare(pid, APP.genreCompare);
+            }
+          }
+        }
+        saveState();
+        renderSeries(); renderBook(); renderChapter();
+        importStatus.textContent = importAsNew ? 'Imported as new project!' : 'Import successful!';
+        importStatus.style.color = '#50a060';
+        setTimeout(()=>{ importStatus.textContent = ''; }, 3000);
+      } catch(err) {
+        importStatus.textContent = 'Error: ' + err.message;
+        importStatus.style.color = '#b05040';
+      }
+    };
+    reader.readAsText(file);
+    importFileInput.value = '';
+  });
+
+  // Show import options on hover/click hint
+  p.querySelector('#import_btn').addEventListener('mouseenter',()=>{
+    importOptions.style.display = 'block';
   });
 
   // Theme
@@ -4186,25 +7007,17 @@ function renderSettings(){
   });
 
   // Do Not Use Words
-  p.querySelector('#do_not_use').addEventListener('input',e=>{
-    APP.writingPrefs.doNotUseWords = e.target.value;
-    saveWritingPrefs();
-  });
-
-  // Genre Compare
-  p.querySelector('#genre_preset').addEventListener('change',e=>{
-    APP.genreCompare.preset = e.target.value;
-    document.getElementById('custom_genre_row').style.display = e.target.value === 'custom' ? 'block' : 'none';
-    localStorage.setItem('na_genre', JSON.stringify(APP.genreCompare));
-  });
-
-  p.querySelector('#genre_custom').addEventListener('input',e=>{
-    APP.genreCompare.customText = e.target.value;
-    localStorage.setItem('na_genre', JSON.stringify(APP.genreCompare));
-  });
+  const doNotUseEl = p.querySelector('#do_not_use');
+  if(doNotUseEl) {
+    doNotUseEl.addEventListener('input',e=>{
+      APP.writingPrefs.doNotUseWords = e.target.value;
+      saveWritingPrefs();
+    });
+  }
 
   // Add help icons for Settings
-  addHelp(p.querySelector('#provider_select').parentElement, 'Choose which AI service to use. OpenRouter routes to multiple providers.');
+  const providerSel = p.querySelector('#provider_select');
+  if(providerSel) addHelp(providerSel.parentElement, 'Choose which AI service to use. OpenRouter routes to multiple providers.');
   const openrouterCard = p.querySelector('#openrouter_card');
   if(openrouterCard) addHelp(openrouterCard.querySelector('.scard-hd'), 'Get your key at openrouter.ai/keys');
   const anthropicCard = p.querySelector('#anthropic_card');
@@ -4216,19 +7029,365 @@ function renderSettings(){
   const lmstudioCard = p.querySelector('#lmstudio_card');
   if(lmstudioCard){
     addHelp(lmstudioCard.querySelector('#lmstudio_help_hd'), '1. Download LM Studio<br>2. Load a model<br>3. Go to Developer tab, enable "Start Server"<br>4. Go to Settings → App Settings → Enable "Allow CORS"<br>5. Click Test to fetch models');
-    addHelp(lmstudioCard.querySelector('#lmstudio_url').parentElement, 'Server address for local models (default: http://localhost:1234)');
-    addHelp(lmstudioCard.querySelector('#api_key_lmstudio').parentElement, 'Optional API key for network access to LM Studio');
+    const lmUrl = lmstudioCard.querySelector('#lmstudio_url');
+    if(lmUrl) addHelp(lmUrl.parentElement, 'Server address for local models (default: http://localhost:1234)');
+    const lmKey = lmstudioCard.querySelector('#api_key_lmstudio');
+    if(lmKey) addHelp(lmKey.parentElement, 'Optional API key for network access to LM Studio');
   }
-  addHelp(p.querySelector('#max_tok').parentElement, 'Maximum words in AI response. Higher = longer output.');
-  addHelp(p.querySelector('#tok_boost').parentElement, 'Add extra tokens for this single run (doesn\'t change default).');
-  addHelp(p.querySelector('#genre_preset').parentElement, 'Choose a genre to optimize prompts for that writing style.');
+  const maxTokEl = p.querySelector('#max_tok');
+  if(maxTokEl) addHelp(maxTokEl.parentElement, 'Maximum words in AI response. Higher = longer output.');
+  const tokBoostEl = p.querySelector('#tok_boost');
+  if(tokBoostEl) addHelp(tokBoostEl.parentElement, 'Add extra tokens for this single run (doesn\'t change default).');
+  
+  // Render backup list
+  renderBackupList();
+}
+
+// ═══════════════════════════════════════════════════════════
+// HELP TAB
+// ═══════════════════════════════════════════════════════════
+
+let helpSubTab = localStorage.getItem('na_help_subtab') || 'welcome';
+
+function renderHelp(){
+  const p = document.getElementById('panel-help');
+  if(!p) return;
+  
+  p.innerHTML = `
+    <div class="ctx-scroll" style="max-width:900px">
+      <div class="ctx-head">
+        <h2>Help & Documentation</h2>
+        <p>Everything you need to know about The Novelist's Atelier.</p>
+      </div>
+      
+      <div class="help-subtabs">
+        <button class="help-subtab ${helpSubTab==='welcome'?'active':''}" data-subtab="welcome">Welcome</button>
+        <button class="help-subtab ${helpSubTab==='shortcuts'?'active':''}" data-subtab="shortcuts">Keyboard Shortcuts</button>
+        <button class="help-subtab ${helpSubTab==='guides'?'active':''}" data-subtab="guides">Tab Guides</button>
+        <button class="help-subtab ${helpSubTab==='log'?'active':''}" data-subtab="log">Activity Log</button>
+      </div>
+      
+      <div id="help-content"></div>
+    </div>
+  `;
+  
+  p.querySelectorAll('.help-subtab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      helpSubTab = btn.dataset.subtab;
+      localStorage.setItem('na_help_subtab', helpSubTab);
+      renderHelp();
+    });
+  });
+  
+  renderHelpContent();
+}
+
+function renderHelpContent(){
+  const container = document.getElementById('help-content');
+  if(!container) return;
+  
+  if(helpSubTab === 'welcome'){
+    renderHelpWelcome(container);
+  } else if(helpSubTab === 'shortcuts'){
+    renderHelpShortcuts(container);
+  } else if(helpSubTab === 'guides'){
+    renderHelpGuides(container);
+  } else if(helpSubTab === 'log'){
+    renderHelpLog(container);
+  }
+}
+
+function renderHelpWelcome(container){
+  container.innerHTML = `
+    <div class="help-section">
+      <h3>Welcome to The Novelist's Atelier</h3>
+      <p>Your AI-powered writing assistant for editing and world-building across multi-book projects.</p>
+      
+      <h4>Quick Start</h4>
+      <ol style="color:#a89868;line-height:1.8">
+        <li>Start in <b>Series</b> to set up your world-building and genre</li>
+        <li>Add your first <b>Book</b> with title and outline</li>
+        <li>Use <b>Story</b> tab to create characters and plan your timeline</li>
+        <li>Work on <b>Chapter</b> level with scene settings and text</li>
+        <li>Use <b>Prompts</b> for AI-powered editing and generation</li>
+        <li>Chain prompts in <b>Pipeline</b> for complex workflows</li>
+      </ol>
+      
+      <h4>Key Concepts</h4>
+      <ul style="color:#a89868;line-height:1.8">
+        <li><b>Inclusion Modes</b> - Control what gets included in AI prompts (Full, Brief, Extended, Custom, Off)</li>
+        <li><b>Projects</b> - Organize separate stories in different projects</li>
+        <li><b>Series Level</b> - Timeline and some elements span multiple books</li>
+        <li><b>Custom Templates</b> - Create your own prompt templates in Prompts tab</li>
+      </ul>
+    </div>
+  `;
+}
+
+function renderHelpShortcuts(container){
+  container.innerHTML = `
+    <div class="help-section">
+      <h3>Keyboard Shortcuts</h3>
+      <p style="color:#a89868;margin-bottom:16px">Use these shortcuts to work faster. Works with Ctrl (Windows/Linux) or Cmd (Mac).</p>
+      
+      <div class="help-shortcut-group">
+        <h4>Navigation</h4>
+        <div class="help-shortcut"><span class="help-key">Ctrl/Cmd + 1-8</span><span class="help-desc">Switch to tab (1=Home, 2=Series, 3=Book, etc.)</span></div>
+      </div>
+      
+      <div class="help-shortcut-group">
+        <h4>Actions</h4>
+        <div class="help-shortcut"><span class="help-key">Ctrl/Cmd + S</span><span class="help-desc">Force save immediately</span></div>
+        <div class="help-shortcut"><span class="help-key">Ctrl/Cmd + N</span><span class="help-desc">Create new item (character in Story, chapter in Chapter, etc.)</span></div>
+        <div class="help-shortcut"><span class="help-key">Ctrl/Cmd + Enter</span><span class="help-desc">Run prompt (in Prompts tab)</span></div>
+        <div class="help-shortcut"><span class="help-key">Ctrl/Cmd + F</span><span class="help-desc">Open Global Search</span></div>
+        <div class="help-shortcut"><span class="help-key">Ctrl/Cmd + J</span><span class="help-desc">Open Scene Navigator</span></div>
+      </div>
+      
+      <div class="help-shortcut-group">
+        <h4>Other</h4>
+        <div class="help-shortcut"><span class="help-key">Escape</span><span class="help-desc">Close any open modal</span></div>
+        <div class="help-shortcut"><span class="help-key">F1</span><span class="help-desc">Open Help tab</span></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderHelpGuides(container){
+  container.innerHTML = `
+    <div class="help-section">
+      <h3>Tab Guides</h3>
+      
+      <div class="help-guide">
+        <h4>📖 Series Tab</h4>
+        <p>Global context for your entire series. Set up genre, tone, world-building bible, and series overview. Timeline and some settings here apply to all books.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📖 Book Tab</h4>
+        <p>Individual book details. Title, book number, outline, and book-specific bible. Characters and timeline are managed in the Story tab.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📖 Chapter Tab</h4>
+        <p>Current chapter or scene. Work on your text, set up scene context (setting, goal, conflict, resolution), and manage multiple scenes.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📖 Story Tab</h4>
+        <p>Central hub for story elements: Characters, Relationships (visual map), and Timeline. Saved at series level for multi-book projects. Genre Compare settings are also here.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📖 Prompts Tab</h4>
+        <p>AI-powered editing tools. Choose from categories like Character Creation, Copy Editing, Line Editing. Use built-in prompts or create custom templates.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📖 Pipeline Tab</h4>
+        <p>Chain multiple prompts together. Each step's output feeds into the next, enabling complex editing workflows.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📖 Settings Tab</h4>
+        <p>Configure API keys, choose AI models, adjust generation settings, manage projects, and export/import data.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>🔍 Global Search</h4>
+        <p>Click the 🔍 button in the header or press Ctrl/Cmd+F to search across all your project data. Searches chapters, characters, settings, bibles, timeline, and relationships. Results are limited to 100 with an indicator.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>🔍 Find & Replace</h4>
+        <p>In the Chapter tab, click "Find/Replace" to open the search panel. Use Find Next to locate occurrences, Replace to change one at a time, or Replace All to change all. Supports regex patterns and case-sensitive matching.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>🔍 Find All</h4>
+        <p>In the search modal's "Find All" tab, see all occurrences of your search term across all chapters. Click any result to jump to that location. Limited to 100 results.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>🧠 Smart Context</h4>
+        <p>Click the 🧠 Smart Context button in the Chapter tab to automatically optimize context sections. The AI analyzes your prompt and toggles context inclusions on/off to maximize relevance while saving tokens.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📊 Local Analysis</h4>
+        <p>Click the 📊 Local Analysis button in the Chapter tab to analyze your chapter text. Shows word count, sentence stats, readability score, sentiment, and common words.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>📊 Token Breakdown</h4>
+        <p>Click the 📊 Breakdown button in the Prompts tab to see how tokens are distributed across all context sections. Helps optimize your prompts to stay within limits.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>🎨 Style DNA</h4>
+        <p>In the Story tab's Style DNA tab, define your unique writing style with sample text. Export/Import presets, or use the built-in styles. Enable "Apply Style DNA" in Pipeline steps to have AI match your voice.</p>
+      </div>
+      
+      <div class="help-guide">
+        <h4>🔐 Secure API Key Storage</h4>
+        <p>In Settings, choose how to store your API keys: <strong>Password-Encrypted</strong> (recommended, AES-256), <strong>Prompt Each Session</strong> (enter when needed), or <strong>Session Only</strong> (cleared on browser close). The default is Password-Encrypted for security.</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderHelpLog(container){
+  const log = getActivityLog();
+  container.innerHTML = `
+    <div class="help-section">
+      <h3>Activity Log</h3>
+      <p style="color:#a89868;margin-bottom:16px">Recent AI generations (last ${log.length} of 50). Newest entries appear at bottom.</p>
+      
+      <div class="activity-log">
+        ${log.length === 0 ? '<div class="empty-msg">No AI generations yet. Use the Prompts tab to generate content.</div>' : 
+          log.map(entry => `
+            <div class="activity-entry">
+              <div class="activity-time">${entry.time}</div>
+              <div class="activity-desc">${entry.desc}</div>
+            </div>
+          `).join('')
+        }
+      </div>
+    </div>
+  `;
+}
+
+// Activity Log Functions
+function getActivityLog(){
+  try {
+    return JSON.parse(localStorage.getItem('na_activity_log')) || [];
+  } catch { return []; }
+}
+
+function addActivityLogEntry(desc){
+  const log = getActivityLog();
+  const entry = {
+    time: new Date().toLocaleString(),
+    desc: desc
+  };
+  log.push(entry);
+  if(log.length > 50){
+    log.shift(); // Remove oldest
+  }
+  localStorage.setItem('na_activity_log', JSON.stringify(log));
+}
+
+// ═══════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════════════
+
+document.addEventListener('keydown', function(e){
+  const isMod = e.ctrlKey || e.metaKey;
+  const key = e.key.toLowerCase();
+  
+  // Escape - close modals
+  if(key === 'escape'){
+    const modals = document.querySelectorAll('[class$="modal-overlay"], [class$="modal-overlay open"]');
+    modals.forEach(m => {
+      if(m.classList.contains('open')){
+        m.classList.remove('open');
+        if(m.id) window['close' + m.id.charAt(0).toUpperCase() + m.id.slice(1).replace('_', '').replace('modal', 'Modal') + 'Modal']?.();
+      }
+    });
+    return;
+  }
+  
+  // F1 - Open Help
+  if(key === 'f1'){
+    e.preventDefault();
+    showTab('help');
+    return;
+  }
+  
+  if(!isMod) return;
+  
+  // Ctrl/Cmd + Number - Switch tabs
+  if(key >= '1' && key <= '8'){
+    e.preventDefault();
+    const tabIndex = parseInt(key) - 1;
+    const tabs = TABS[tabIndex];
+    if(tabs){
+      showTab(tabs.id);
+    }
+    return;
+  }
+  
+  // Ctrl/Cmd + S - Force save
+  if(key === 's'){
+    e.preventDefault();
+    clearTimeout(saveTimer);
+    const pid = getCurrentProjectId();
+    saveProjectState(pid);
+    saveGenreCompare(pid, APP.genreCompare);
+    updateStatsDisplay();
+    showToast('Saved!');
+    return;
+  }
+  
+  // Ctrl/Cmd + J - Scene Navigator
+  if(key === 'j'){
+    e.preventDefault();
+    toggleSceneNavigator();
+    return;
+  }
+  
+  // Ctrl/Cmd + F - Search
+  if(key === 'f'){
+    e.preventDefault();
+    openSearchModal();
+    return;
+  }
+  
+  // Ctrl/Cmd + N - New item
+  if(key === 'n'){
+    e.preventDefault();
+    if(APP.tab === 'story'){
+      window.addCharacter?.();
+    } else if(APP.tab === 'chapter'){
+      if(APP.chapter.useFullChapters){
+        APP.chapter.fullChapters.push({id:mkId(),title:'',text:''});
+      } else {
+        APP.chapter.breakdowns.push({id:mkId(),text:''});
+      }
+      saveState();
+      renderChapter();
+    } else if(APP.tab === 'series'){
+      // Add new series section if needed
+    }
+    showToast('New item added');
+    return;
+  }
+  
+  // Ctrl/Cmd + Enter - Run prompt
+  if(key === 'enter'){
+    e.preventDefault();
+    const runBtn = document.querySelector('#prompt-editor-run');
+    if(runBtn) runBtn.click();
+    return;
+  }
+});
+
+function showToast(msg){
+  const existing = document.getElementById('toast-notification');
+  if(existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.id = 'toast-notification';
+  toast.textContent = msg;
+  toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#1a1512;border:1px solid #c8a660;color:#c8a660;padding:10px 20px;border-radius:4px;font-size:12px;z-index:9999;animation:fadeIn 0.2s';
+  document.body.appendChild(toast);
+  setTimeout(()=>{toast.remove();}, 2000);
 }
 
 // ═══════════════════════════════════════════════════════════
 // TAB NAVIGATION
 // ═══════════════════════════════════════════════════════════
 
-const RENDER_FNS={home:renderHome,series:renderSeries,book:renderBook,chapter:renderChapter,prompts:renderPrompts,pipeline:renderPipeline,settings:renderSettings};
+const RENDER_FNS={home:renderHome,series:renderSeries,book:renderBook,chapter:renderChapter,story:renderStory,prompts:renderPrompts,pipeline:renderPipeline,settings:renderSettings,help:renderHelp};
 const rendered={};
 
 function showTab(id){
@@ -4288,9 +7447,7 @@ function setupExtractButtons(){
 }
 
 function generateBookBibleFromChapters(){
-  console.log('generateBookBibleFromChapters called');
   const chapters = APP.chapter.fullChapters?.filter(c => c.text?.trim()) || [];
-  console.log('Chapters found:', chapters.length);
   if(chapters.length === 0){
     alert('No chapters found. Add chapters in the Chapter tab first.');
     return;
@@ -4497,6 +7654,166 @@ function showGeneratedOutput(text, title){
   });
 }
 
+// ═══════════════════════════════════════════════════════════
+// SMART FEATURES
+// ═══════════════════════════════════════════════════════════
+
+function getFullChapterText() {
+  let text = '';
+  if (APP.chapter.useFullChapters && APP.chapter.fullChapters) {
+    APP.chapter.fullChapters.forEach(ch => {
+      if (ch.text) text += ch.text + ' ';
+      if (ch.scenes) {
+        ch.scenes.forEach(s => {
+          if (s.content) text += s.content + ' ';
+        });
+      }
+    });
+  } else if (APP.chapter.breakdowns) {
+    APP.chapter.breakdowns.forEach(b => {
+      if (b.text) text += b.text + ' ';
+    });
+  }
+  return text;
+}
+
+function autoToggleContext() {
+  const chapterText = getFullChapterText();
+  if (!chapterText) {
+    alert('Please add some chapter text first to analyze context.');
+    return;
+  }
+
+  const textLower = chapterText.toLowerCase();
+  let toggledCount = 0;
+
+  if (APP.book && APP.book.chars) {
+    APP.book.chars.forEach(char => {
+      const nameLine = char.text ? char.text.split('\n')[0].toLowerCase().trim() : '';
+      if (nameLine && textLower.includes(nameLine)) {
+        char.inclusion = 'full';
+        toggledCount++;
+      } else {
+        char.inclusion = 'off';
+      }
+    });
+  }
+
+  if (APP.chapter && APP.chapter.settings) {
+    APP.chapter.settings.forEach(setting => {
+      const nameLine = setting.text ? setting.text.split('\n')[0].toLowerCase().trim() : '';
+      if (nameLine && textLower.includes(nameLine)) {
+        setting.inclusion = 'full';
+        toggledCount++;
+      } else {
+        setting.inclusion = 'off';
+      }
+    });
+  }
+
+  saveProjectState(getCurrentProjectId());
+  renderChapter();
+  showToast('Smart Context: toggled ' + toggledCount + ' items');
+}
+
+function analyzeLocalText() {
+  const chapterText = getFullChapterText();
+  if (!chapterText) {
+    alert('Please add some chapter text first to analyze.');
+    return;
+  }
+
+  const adverbs = (chapterText.match(/\b\w+ly\b/gi) || []).length;
+  const passive = (chapterText.match(/\b(was|were|is|are|been|being|be)\s+\w+ed\b/gi) || []).length;
+  const filterWords = (chapterText.match(/\b(saw|felt|heard|noticed|realized|watched|looked|seemed)\b/gi) || []).length;
+  
+  let crutchCount = 0;
+  if (APP.writingPrefs && APP.writingPrefs.doNotUseWords) {
+    const crutchWords = APP.writingPrefs.doNotUseWords.split(',').map(w => w.trim()).filter(w => w);
+    if (crutchWords.length > 0) {
+      const regex = new RegExp('\\b(' + crutchWords.join('|') + ')\\b', 'gi');
+      crutchCount = (chapterText.match(regex) || []).length;
+    }
+  }
+
+  const wordCount = chapterText.split(/\s+/).filter(w => w.length > 0).length;
+
+  const report = '📊 Local Text Analysis Report\n' +
+    '-----------------------------------\n' +
+    'Word Count: ' + wordCount + '\n\n' +
+    '🏃 Adverbs (-ly): ' + adverbs + ' (' + ((adverbs/wordCount)*100).toFixed(1) + '%)\n' +
+    '🥱 Passive Voice: ' + passive + ' instances\n' +
+    '👁️ Filter Words: ' + filterWords + ' instances\n' +
+    '🚫 Crutch Words: ' + crutchCount + ' instances\n\n' +
+    'Tip: Try to keep adverbs under 1.5% and minimize filter words to strengthen your prose!';
+
+  alert(report);
+}
+
+function getGranularTokenBreakdown(promptTemplate, fields) {
+  const ctxParts = { series: 0, book: 0, characters: 0, chapter: 0, settings: 0, prompt: 0 };
+  const est = (text) => text ? Math.round(text.length / 4) : 0;
+
+  if (APP.series && APP.series.bible && APP.series.bible.inclusion !== 'off' && APP.series.bible.text) {
+    ctxParts.series += est(APP.series.bible.text);
+  }
+
+  if (APP.book) {
+    if (APP.book.bible && APP.book.bible.inclusion !== 'off' && APP.book.bible.text) {
+      ctxParts.book += est(APP.book.bible.text);
+    }
+    if (APP.book.outline && APP.book.outline.inclusion !== 'off' && APP.book.outline.text) {
+      ctxParts.book += est(APP.book.outline.text);
+    }
+    if (APP.book.chars) {
+      APP.book.chars.forEach(c => {
+        if (c.inclusion !== 'off' && c.text) ctxParts.characters += est(c.text);
+      });
+    }
+  }
+
+  if (APP.chapter) {
+    if (APP.chapter.useFullChapters && APP.chapter.fullChapters) {
+      APP.chapter.fullChapters.forEach(c => {
+        if (c.text) ctxParts.chapter += est(c.text);
+        if (c.scenes) c.scenes.forEach(s => { if (s.content) ctxParts.chapter += est(s.content); });
+      });
+    } else if (APP.chapter.breakdowns) {
+      APP.chapter.breakdowns.forEach(b => { if (b.text) ctxParts.chapter += est(b.text); });
+    }
+
+    if (APP.chapter.settings) {
+      APP.chapter.settings.forEach(s => { if (s.inclusion !== 'off' && s.text) ctxParts.settings += est(s.text); });
+    }
+  }
+
+  const prefs = buildWritingPrefsInstructions ? buildWritingPrefsInstructions() : '';
+  const genre = buildGenreCompareInstructions ? buildGenreCompareInstructions() : '';
+  const basePrompt = genre + prefs + (promptTemplate ? promptTemplate(fields || {}) : '');
+  ctxParts.prompt = est(basePrompt);
+
+  const total = Object.values(ctxParts).reduce((a, b) => a + b, 0);
+  return { parts: ctxParts, total };
+}
+
+function showTokenBreakdown(promptTemplate, fields) {
+  const breakdown = getGranularTokenBreakdown(promptTemplate, fields);
+  const limit = APP.maxTokens + (parseInt(document.getElementById('tok_boost')?.value) || 0);
+  const pct = (val) => ((val / breakdown.total) * 100).toFixed(1);
+  
+  const msg = '🧮 Token Usage Breakdown\n' +
+    '-----------------------------------\n' +
+    'Total Estimated Tokens: ~' + breakdown.total + ' / ' + limit + '\n\n' +
+    '📖 Series Bible: ~' + breakdown.parts.series + ' (' + pct(breakdown.parts.series) + '%)\n' +
+    '📘 Book Context: ~' + breakdown.parts.book + ' (' + pct(breakdown.parts.book) + '%)\n' +
+    '👥 Characters: ~' + breakdown.parts.characters + ' (' + pct(breakdown.parts.characters) + '%)\n' +
+    '📝 Chapter Text: ~' + breakdown.parts.chapter + ' (' + pct(breakdown.parts.chapter) + '%)\n' +
+    '🗺️ Settings: ~' + breakdown.parts.settings + ' (' + pct(breakdown.parts.settings) + '%)\n' +
+    '🤖 Prompt & Rules: ~' + breakdown.parts.prompt + ' (' + pct(breakdown.parts.prompt) + '%)';
+  
+  alert(msg);
+}
+
 // Build nav
 function initNav(){
   const nav=document.getElementById('tab-nav');
@@ -4519,17 +7836,483 @@ window.onerror = function(msg, url, line, col, error) {
 };
 
 try {
-  console.log('Starting init...');
   initNav();
-  console.log('Nav initialized');
+  
+  // Project dropdown - available from any tab
+  const projectDropdown = document.querySelector('#project_dropdown');
+  if (projectDropdown) {
+    document.querySelector('#project_current_btn').addEventListener('click',(e)=>{
+      e.stopPropagation();
+      projectDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+    });
+    projectDropdown.addEventListener('click',(e)=>{
+      e.stopPropagation();
+    });
+    
+    // Project actions
+    document.querySelector('#project_new').addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+      createNewProject();
+    });
+    document.querySelector('#project_load').addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+      document.getElementById('import_file').click();
+    });
+    document.querySelector('#project_save').addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+      saveProjectState(getCurrentProjectId());
+      alert('Project saved!');
+    });
+    document.querySelector('#project_import').addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+      document.getElementById('import_file').click();
+    });
+    document.querySelector('#project_export').addEventListener('click',()=>{
+      try {
+        projectDropdown.classList.remove('open');
+        const pid = getCurrentProjectId();
+        const projects = getProjects();
+        const currentProject = projects.find(p => p.id === pid);
+        const exportData = {
+          version: '1.0-beta',
+          exportedAt: new Date().toISOString(),
+          projectName: currentProject ? currentProject.name : 'Unnamed Project',
+          series: APP.series,
+          book: APP.book,
+          chapter: APP.chapter,
+          genreCompare: APP.genreCompare
+        };
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const safeName = (currentProject ? currentProject.name : 'project').replace(/[^a-z0-9]/gi, '-').toLowerCase();
+        a.download = 'novelist-atelier-' + safeName + '-' + Date.now() + '.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch(e) {
+        console.error('Export error:', e);
+        alert('Export failed: ' + e.message);
+      }
+    });
+    
+    // Global import handler for project dropdown
+    document.getElementById('import_file').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        try {
+          const data = JSON.parse(event.target.result);
+          if (!data.series || !data.book || !data.chapter) {
+            throw new Error('Invalid project file: missing required data');
+          }
+          
+          const importAsNew = confirm('Import as a NEW project? Click OK for new project, Cancel to merge with current project.');
+          
+          if (importAsNew) {
+            const projName = data.projectName || prompt('Enter project name:', 'Imported Project') || 'Imported Project';
+            const pid = 'project-' + Date.now() + '-' + Math.random().toString(36).substr(2,9);
+            const projects = getProjects();
+            projects.push({id: pid, name: projName});
+            saveProjects(projects);
+            
+            APP.series = data.series || {name:'',subName:'',bible:mkSec()};
+            APP.book = data.book || {title:'',bookNum:'',totalBooks:'',subNum:'',totalSub:'',bible:mkSec(),outline:mkSec(),chars:[{id:mkId(),...mkSec()}]};
+            APP.chapter = data.chapter || {mode:'chapter',chapterNum:'',sceneNum:'',useFullChapters:false,sceneLevel:false,fullChapters:[],breakdowns:[],breakdown:mkSec(),settings:[{id:mkId(),...mkSec()}]};
+            APP.genreCompare = data.genreCompare || { preset: 'fantasy', customText: '' };
+            
+            setCurrentProjectId(pid);
+            saveProjectState(pid);
+            saveGenreCompare(pid, APP.genreCompare);
+            renderProjectSelector();
+          } else {
+            const pid = getCurrentProjectId();
+            APP.series = data.series || {name:'',subName:'',bible:mkSec()};
+            APP.book = data.book || {title:'',bookNum:'',totalBooks:'',subNum:'',totalSub:'',bible:mkSec(),outline:mkSec(),chars:[{id:mkId(),...mkSec()}]};
+            APP.chapter = data.chapter || {mode:'chapter',chapterNum:'',sceneNum:'',useFullChapters:false,sceneLevel:false,fullChapters:[],breakdowns:[],breakdown:mkSec(),settings:[{id:mkId(),...mkSec()}]};
+            if (data.genreCompare) {
+              APP.genreCompare = {...data.genreCompare};
+              saveGenreCompare(pid, APP.genreCompare);
+            }
+            saveProjectState(pid);
+            renderProjectSelector();
+          }
+          
+          showTab(APP.tab);
+          alert('Project imported successfully!');
+        } catch (err) {
+          alert('Error importing project: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+    
+    document.querySelector('#project_rename').addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+      renameProject();
+    });
+    document.querySelector('#project_delete').addEventListener('click',()=>{
+      projectDropdown.classList.remove('open');
+      deleteProject();
+    });
+  }
+  
   showTab(APP.tab);
-  console.log('Tab shown');
   updateTabDot();
-  console.log('Init complete');
+  
+  // Auto-save every 30 seconds
+  setInterval(function(){ var pid = getCurrentProjectId(); if(pid) autoSaveLoop(); }, 30000);
+  
+  // Hourly backup
+  setInterval(function(){ var pid = getCurrentProjectId(); if(pid) createHourlyBackup(pid); }, 3600000);
+  
+  // Update save time display every minute
+  setInterval(function(){ var pid = getCurrentProjectId(); if(pid) updateLastSavedTime(pid); }, 60000);
 } catch(e) {
-  console.error('Init error:', e);
-  document.getElementById('app-main').innerHTML = '<div style="padding:20px;color:#c06060">Error: '+e.message+'<br><pre style="font-size:10px">'+e.stack+'</pre></div>';
+  document.getElementById('app-main').innerHTML = '<div style="padding:20px;color:#c06060">Error: '+esc(e.message)+'<br><pre style="font-size:10px">'+esc(e.stack)+'</pre></div>';
 }
+
+// ═══════════════════════════════════════════════════════════
+// CUSTOM TEMPLATE MODAL
+// ═══════════════════════════════════════════════════════════
+let editingTemplateId = null;
+let editingTemplateCat = null;
+
+function openTemplateModal(catId, templateId) {
+  const modal = document.getElementById('template_modal');
+  const titleInput = document.getElementById('template_title');
+  const descInput = document.getElementById('template_desc');
+  const catSelect = document.getElementById('template_cat');
+  const fieldsContainer = document.getElementById('template_fields');
+  const tplInput = document.getElementById('template_tpl');
+  const previewDiv = document.getElementById('template_preview');
+  
+  catSelect.value = catId;
+  editingTemplateCat = catId;
+  
+  if (templateId) {
+    editingTemplateId = templateId;
+    const custom = getCustomTemplatesForCategory(catId);
+    const tpl = custom.find(t => t.id === templateId);
+    if (tpl) {
+      titleInput.value = tpl.title || '';
+      descInput.value = tpl.desc || '';
+      tplInput.value = tpl.tpl || '';
+      renderTemplateFields(tpl.fields || []);
+    }
+  } else {
+    editingTemplateId = null;
+    titleInput.value = '';
+    descInput.value = '';
+    tplInput.value = '';
+    renderTemplateFields([{key:'', label:'', type:'text'}]);
+  }
+  
+  previewDiv.textContent = '';
+  modal.classList.add('open');
+}
+
+function closeTemplateModal() {
+  document.getElementById('template_modal').classList.remove('open');
+  editingTemplateId = null;
+  editingTemplateCat = null;
+}
+
+function renderTemplateFields(fields) {
+  const container = document.getElementById('template_fields');
+  container.innerHTML = fields.map((f, i) => 
+    '<div class="template-field-row">' +
+      '<input type="text" placeholder="key" value="' + (f.key||'') + '" class="field-key">' +
+      '<input type="text" placeholder="label" value="' + (f.label||'') + '" class="field-label">' +
+      '<select class="field-type">' +
+        '<option value="text"' + (f.type==='text'?' selected':'') + '>Text</option>' +
+        '<option value="textarea"' + (f.type==='textarea'?' selected':'') + '>Textarea</option>' +
+      '</select>' +
+      '<span class="template-field-remove" onclick="removeTemplateField(' + i + ')">×</span>' +
+    '</div>'
+  ).join('');
+}
+
+function addTemplateField() {
+  const container = document.getElementById('template_fields');
+  const div = document.createElement('div');
+  div.className = 'template-field-row';
+  div.innerHTML = 
+    '<input type="text" placeholder="key" class="field-key">' +
+    '<input type="text" placeholder="label" class="field-label">' +
+    '<select class="field-type">' +
+      '<option value="text">Text</option>' +
+      '<option value="textarea">Textarea</option>' +
+    '</select>' +
+    '<span class="template-field-remove" onclick="this.parentElement.remove()">×</span>';
+  container.appendChild(div);
+}
+
+function removeTemplateField(idx) {
+  const container = document.getElementById('template_fields');
+  if (container.children[idx]) {
+    container.children[idx].remove();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CUSTOM TEMPLATE MODAL HTML
+// ═══════════════════════════════════════════════════════════
+document.write(`
+<div class="template-modal-overlay" id="template_modal">
+  <div class="template-modal">
+    <div class="template-modal-hd">
+      <h3 id="template_modal_title">Create Custom Template</h3>
+      <button class="template-modal-close" onclick="closeTemplateModal()">×</button>
+    </div>
+    <div class="template-modal-body">
+      <div class="template-field">
+        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Category</label>
+        <select id="template_cat" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+          <option value="character">Character</option>
+          <option value="world">World Building</option>
+          <option value="location">Locations</option>
+          <option value="developmental">Developmental</option>
+          <option value="copy">Copy Editor</option>
+          <option value="line">Line Editor</option>
+          <option value="punch">Impact & Punch</option>
+          <option value="paragraph">Paragraph</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div class="template-field">
+        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Title</label>
+        <input type="text" id="template_title" placeholder="My Custom Prompt" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+      </div>
+      <div class="template-field">
+        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Description</label>
+        <input type="text" id="template_desc" placeholder="What this prompt does..." style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+      </div>
+      <div class="template-field">
+        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Fields</label>
+        <div id="template_fields"></div>
+        <button class="template-add-field" onclick="addTemplateField()">+ Add Field</button>
+      </div>
+      <div class="template-field">
+        <label class="template-tpl-label">Template (use \${f.fieldname} for variables)</label>
+        <textarea id="template_tpl" placeholder="Write your prompt here...&#10;Example: Analyze this \${f.text} for \${f.focus}"></textarea>
+      </div>
+      <div id="template_preview" class="template-preview"></div>
+      <div class="template-actions">
+        <button class="template-btn template-btn-secondary" onclick="previewTemplate()">Preview</button>
+        <button class="template-btn template-btn-primary" onclick="saveTemplate()">Save Template</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" id="template_import_file" accept=".json" style="display:none">
+<input type="file" id="timeline_import_file" accept=".json" style="display:none">
+`);
+
+function getTemplateFieldsFromUI() {
+  const rows = document.querySelectorAll('#template_fields .template-field-row');
+  const fields = [];
+  rows.forEach(row => {
+    const key = row.querySelector('.field-key').value.trim();
+    const label = row.querySelector('.field-label').value.trim();
+    const type = row.querySelector('.field-type').value;
+    if (key && label) {
+      fields.push({key, label, type});
+    }
+  });
+  return fields;
+}
+
+function previewTemplate() {
+  const title = document.getElementById('template_title').value;
+  const fields = getTemplateFieldsFromUI();
+  let tpl = document.getElementById('template_tpl').value;
+  
+  // Replace ${f.fieldname} with [fieldname] for preview
+  fields.forEach(f => {
+    const regex = new RegExp('\\$\\{f\\.' + f.key + '\\}', 'g');
+    tpl = tpl.replace(regex, '[' + f.label + ']');
+  });
+  
+  document.getElementById('template_preview').textContent = tpl || '(No template content)';
+}
+
+function saveTemplate() {
+  const title = document.getElementById('template_title').value.trim();
+  const desc = document.getElementById('template_desc').value.trim();
+  const catId = document.getElementById('template_cat').value;
+  const fields = getTemplateFieldsFromUI();
+  const tpl = document.getElementById('template_tpl').value;
+  
+  if (!title) {
+    alert('Title is required');
+    return;
+  }
+  if (fields.length === 0) {
+    alert('At least one field is required');
+    return;
+  }
+  if (!tpl.trim()) {
+    alert('Template content is required');
+    return;
+  }
+  
+  // Check all fields are used in template
+  const usedKeys = [];
+  fields.forEach(f => {
+    if (tpl.includes('${f.' + f.key + '}')) {
+      usedKeys.push(f.key);
+    }
+  });
+  if (usedKeys.length < fields.length) {
+    const unused = fields.filter(f => !usedKeys.includes(f.key)).map(f => f.key).join(', ');
+    alert('Warning: These fields are not used in template: ' + unused);
+  }
+  
+  const template = {title, desc, fields, tpl};
+  
+  if (editingTemplateId) {
+    updateCustomTemplate(editingTemplateCat, editingTemplateId, template);
+  } else {
+    addCustomTemplate(catId, template);
+  }
+  
+  closeTemplateModal();
+  // Refresh prompts panel
+  if (APP.currentTab === 'prompts') {
+    renderPrompts();
+  }
+}
+
+function deleteTemplate(catId, templateId) {
+  if (!confirm('Delete this custom template? This cannot be undone.')) return;
+  deleteCustomTemplate(catId, templateId);
+  if (APP.prompts.promptId === templateId) {
+    APP.prompts.promptId = null;
+    APP.prompts.fields = {};
+    APP.prompts.output = '';
+  }
+  if (APP.currentTab === 'prompts') {
+    renderPromptList();
+    renderPromptEditor();
+  }
+}
+
+// Template Export/Import
+function exportTemplates() {
+  const data = exportCustomTemplates();
+  const blob = new Blob([data], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'novelist-atelier-templates-' + Date.now() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importTemplates() {
+  const input = document.getElementById('template_import_file');
+  input.click();
+}
+
+document.getElementById('template_import_file').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      JSON.parse(event.target.result); // Validate JSON
+      const merge = confirm('Merge with existing templates? Click OK to merge, Cancel to replace all.');
+      importCustomTemplates(event.target.result, merge);
+      if (APP.currentTab === 'prompts') renderPrompts();
+      alert('Templates imported successfully!');
+    } catch(err) {
+      alert('Error importing templates: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  this.value = '';
+});
+
 </script>
+<div id="search_modal" class="search-modal-overlay">
+  <div class="search-modal">
+    <div class="search-modal-hd">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button class="search-tab-btn active" id="search_tab_btn" onclick="showSearchTab('search')">🔍 Search</button>
+        <button class="search-tab-btn" id="find_tab_btn" onclick="showSearchTab('find')">Find/Replace</button>
+        <button class="search-tab-btn" id="findall_tab_btn" onclick="showSearchTab('findall')">Find All</button>
+      </div>
+    </div>
+    
+    <!-- Search Tab -->
+    <div id="search_tab_content">
+      <div class="search-modal-hd">
+        <input type="text" id="search_input" class="search-input" placeholder="Search chapters, characters, settings..." autofocus>
+      </div>
+      <div class="search-options">
+        <label><input type="checkbox" id="search_regex"> Regex</label>
+        <label><input type="checkbox" id="search_case"> Case sensitive</label>
+      </div>
+      <div class="search-results" id="search_results"></div>
+      <div class="search-results-count" id="search_results_count"></div>
+    </div>
+    
+    <!-- Find/Replace Tab -->
+    <div id="find_tab_content" style="display:none">
+      <div style="padding:12px">
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:#605840;display:block;margin-bottom:4px">Find:</label>
+          <input type="text" id="find_input" class="search-input" placeholder="Find text...">
+        </div>
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:#605840;display:block;margin-bottom:4px">Replace:</label>
+          <input type="text" id="replace_input" class="search-input" placeholder="Replace with...">
+        </div>
+        <div class="search-options" style="padding:8px 0">
+          <label><input type="checkbox" id="find_regex"> Regex</label>
+          <label><input type="checkbox" id="find_case"> Case sensitive</label>
+          <label><input type="checkbox" id="find_all_chapters" checked> All chapters</label>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="search-btn" onclick="findNext()">Find Next</button>
+          <button class="search-btn" onclick="replaceOne()">Replace</button>
+          <button class="search-btn" onclick="replaceAll()">Replace All</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Find All Tab -->
+    <div id="findall_tab_content" style="display:none">
+      <div style="padding:12px">
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:#605840;display:block;margin-bottom:4px">Find:</label>
+          <input type="text" id="findall_input" class="search-input" placeholder="Find all occurrences...">
+        </div>
+        <div class="search-options" style="padding:8px 0">
+          <label><input type="checkbox" id="findall_regex"> Regex</label>
+          <label><input type="checkbox" id="findall_case"> Case sensitive</label>
+        </div>
+        <button class="search-btn search-btn-primary" style="width:100%;margin-bottom:12px" onclick="findAllOccurrences()">Find All</button>
+        <div class="search-results" id="findall_results" style="max-height:300px"></div>
+        <div class="search-results-count" id="findall_count"></div>
+      </div>
+    </div>
+    
+    <div class="search-modal-ft">
+      <button class="search-btn" onclick="closeSearchModal()">Close</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

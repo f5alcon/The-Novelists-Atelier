@@ -14,6 +14,23 @@ AI-powered writing assistant for editing and world-building. Features multiple A
   - Developmental editing
   - And more...
 - **Pipeline Mode**: Chain multiple prompts together for complex workflows
+- **Auto-Save & Backups**:
+  - Auto-save every 30 seconds
+  - Visual save indicator in header
+  - Last saved timestamp
+  - Automatic hourly backups (24 per project)
+  - Restore from any backup
+- **Scene Navigator**: Quick access sidebar to jump to any chapter
+- **Organization**: Tags/labels for characters and timeline events
+- **Global Search**: Search across all chapters, characters, settings, timelines
+- **Find & Replace**: Find Next, Replace, Replace All with regex support
+- **Find All**: Find all occurrences across all chapters
+- **Export**: Export to JSON or directly to Obsidian (Markdown/ZIP)
+- **Style DNA**: Define your unique writing style and apply it to AI generations
+- **Smart Context Auto-Toggling**: Automatically optimize context for each prompt
+- **Local Text Analysis**: Analyze chapter text for word count, readability, sentiment
+- **Token Breakdown**: See exactly how tokens are distributed in your prompts
+- **Secure API Key Storage**: Password-encrypted (AES-256), Prompt Each Session, or Session Only options
 - **Privacy-Focused**: All data stored locally in your browser
 
 ## Getting Started
@@ -62,9 +79,19 @@ Toggle sections On/Off in the Chapter tab to control what context the AI receive
 - Use Pipeline to chain multiple edits on the same text
 - Local models via LM Studio work offline and keep your data private
 
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| Ctrl/Cmd + F | Open Search |
+| Ctrl/Cmd + J | Open Scene Navigator |
+| Ctrl/Cmd + S | Force save |
+| Ctrl/Cmd + Enter | Run AI prompt |
+| F1 | Open Help |
+
 ## Version
 
-1.0 Beta
+1.1 Beta
 
 ## License
 
