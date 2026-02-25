@@ -1478,7 +1478,7 @@ developmental:[
 {id:'d1',title:'Chapter Structure Audit',desc:'Big-picture analysis of a chapter\'s structural integrity',
  fields:[{key:'synopsis',label:'Story context / where we are in the novel',type:'text'},{key:'chapter',label:'Paste the chapter (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const chapterText = f.chapter?.trim() || getFullChapterText() || '[PASTE CHAPTER]';
+   const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a world-class developmental editor. Read this chapter and provide a structural audit.
 
 Analyze:
@@ -1500,7 +1500,7 @@ ${chapterText}
 {id:'d2',title:'Pacing Analysis',desc:'Scene-by-scene pacing map with recommendations',
  fields:[{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a developmental editor specializing in narrative pacing. Create a pacing map of this text.
 
 For each distinct scene or section:
@@ -1522,7 +1522,7 @@ ${text}
 {id:'d3',title:'Character Arc Tracker',desc:'Track emotional and behavioral change across a section',
  fields:[{key:'character',label:'Character name',type:'text'},{key:'arc_goal',label:'Intended arc in this section (optional)',type:'text'},{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a developmental editor analyzing character arc. Track ${f.character||'[CHARACTER]'}'s internal journey through this text.
 
 Map:
@@ -1545,7 +1545,7 @@ copy:[
 {id:'c1',title:'Full Copy Edit Pass',desc:'Grammar, consistency, fact-checking, and correctness',
  fields:[{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a meticulous copy editor. Perform a full copy edit pass.
 
 Flag and correct:
@@ -1567,7 +1567,7 @@ ${text}
 {id:'c2',title:'Dialogue Mechanics Check',desc:'Audit all dialogue tags, beats, and punctuation',
  fields:[{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a copy editor specializing in dialogue. Audit all dialogue in this text.
 
 Check for:
@@ -1589,7 +1589,7 @@ line:[
 {id:'l1',title:'Line Edit for Clarity & Flow',desc:'Sharpen prose without changing the author\'s voice',
  fields:[{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a line editor. Cardinal rule: never sacrifice the author's voice for clarity.
 
 Target:
@@ -1609,7 +1609,7 @@ ${text}
 {id:'l2',title:'Show vs. Tell Audit',desc:'Find telling that should be showing, and vice versa',
  fields:[{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a line editor. Audit this text for show vs. tell balance.
 
 TELLING TO FLAG Abstract emotional statements, (needs showing): character trait announcements, summarized reactions that could be dramatized.
@@ -1627,7 +1627,7 @@ ${text}
 {id:'l3',title:'Sensory Depth Pass',desc:'Identify where sensory detail is missing or underdeveloped',
  fields:[{key:'text',label:'Paste the text (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const text = f.text?.trim() || getFullChapterText() || '[PASTE TEXT]';
+   const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a line editor. Do a sensory depth pass on this text.
 
 Map which senses are active in each scene: sight, sound, smell, touch, taste, proprioception, temperature.
@@ -1847,7 +1847,7 @@ chapter:[
 {id:'cr0',title:'Overused Phrases & Words',desc:'Find repetitive or clichéd language and suggest alternatives',
  fields:[{key:'context',label:'Novel context / character names / setting notes',type:'text'},{key:'chapter',label:'Paste the chapter (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const chapterText = f.chapter?.trim() || getFullChapterText() || '[PASTE CHAPTER]';
+   const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a prose editor specializing in eliminating overused, repetitive, and clichéd language.
 
 NOVEL CONTEXT: ${f.context||'[CONTEXT]'}
@@ -1876,7 +1876,7 @@ ${chapterText}
 {id:'cr1a',title:'Pronoun Usage Analysis',desc:'Check pronoun density and sentence-start pronouns',
  fields:[{key:'context',label:'Main POV character name(s)',type:'text'},{key:'chapter',label:'Paste the chapter (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const chapterText = f.chapter?.trim() || getFullChapterText() || '[PASTE CHAPTER]';
+   const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a prose editor specializing in varied, strong sentence construction.
 
 Analyze the following chapter for pronoun usage patterns. The goal is to keep total pronoun usage under 15% and sentences starting with pronouns under 30%.
@@ -1907,7 +1907,7 @@ ${chapterText}
 {id:'cr1',title:'Full Chapter Review',desc:'Comprehensive editorial read covering all dimensions',
  fields:[{key:'context',label:'Where are we in the novel? Stakes, what just happened',type:'text'},{key:'chapter',label:'Paste the chapter (or leave empty to use Chapter tab)',type:'textarea'}],
  tpl:(f)=>{
-   const chapterText = f.chapter?.trim() || getFullChapterText() || '[PASTE CHAPTER]';
+   const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
    return `You are a senior editor at a major literary publishing house. Full editorial read.
 
 NOVEL CONTEXT: ${f.context||'[CONTEXT]'}
