@@ -5554,6 +5554,167 @@ ${text}
 ---`;
           }
         },
+        {
+          id: 'l5', title: 'AI Detection Check', desc: 'Analyze text for AI-generated patterns',
+          fields: [{ key: 'text', label: 'Paste the chapter text to analyze', type: 'textarea' }],
+          tpl: (f) => {
+            const text = f.text?.trim() || '[PASTE CHAPTER HERE]';
+            return `CHAPTER TEXT:
+${text}
+
+---
+
+## ANALYSIS FRAMEWORK
+
+Evaluate the chapter across these six dimensions and score each 1–10 (10 = strongly AI-generated):
+
+---
+
+### 1. LINGUISTIC FINGERPRINTS
+Flag any of the following AI-characteristic phrases and constructions:
+
+**Transition overuse:**
+- "It's worth noting that…" / "It is important to note…"
+- "Furthermore," / "Moreover," / "Additionally," / "In addition,"
+- "It goes without saying…" / "Needless to say…"
+- "As previously mentioned…" / "As noted above…"
+- "In conclusion," / "To summarize," / "In summary,"
+- "This is not to say…" / "That said," / "With that in mind,"
+
+**Hedging & qualification clusters:**
+- "It's important to remember that…"
+- "Of course, this is not always the case…"
+- "While there are many factors to consider…"
+- "The answer, of course, is complex…"
+- "There is no one-size-fits-all answer…"
+- "It depends on a variety of factors…"
+
+**Hollow affirmations:**
+- "Absolutely!" / "Certainly!" / "Of course!" / "Great question!"
+- "You raise an excellent point…"
+- "This is a fascinating topic…"
+
+**Filler constructions:**
+- "At the end of the day…"
+- "In the grand scheme of things…"
+- "It's a double-edged sword…"
+- "All things considered…"
+- "In today's [world/society/landscape]…"
+- "Throughout history, humans have…"
+
+**Score (1–10):** ___
+**Evidence found:** [list specific examples with line references]
+
+---
+
+### 2. VOCABULARY PATTERNS
+Flag repeated use of AI-favored words and terms:
+
+**Overused descriptors:**
+delve, dive into, explore, unpack, navigate, foster, leverage, utilize, facilitate,
+tapestry, mosaic, kaleidoscope, labyrinth, nuanced, multifaceted, robust, holistic,
+comprehensive, pivotal, crucial, paramount, essential, fundamental, intricate,
+vibrant, dynamic, transformative, groundbreaking, revolutionary, game-changing,
+profound, significant, notable, remarkable, unprecedented
+
+**Abstract noun clusters:**
+synergy, paradigm, framework, ecosystem, landscape, journey, intersection,
+intersection of [X] and [Y], the realm of, the world of, the fabric of
+
+**Verb inflation:**
+"showcases" instead of "shows"
+"demonstrates" instead of "proves"
+"highlights" instead of "points to"
+"underscores" instead of "confirms"
+"encompasses" instead of "includes"
+
+**Score (1–10):** ___
+**Evidence found:** [list specific examples]
+
+---
+
+### 3. STRUCTURAL PATTERNS
+Look for these AI-characteristic organizational habits:
+
+- **The Rule-of-Three Obsession:** Ideas consistently grouped in threes; lists of exactly three examples
+- **Symmetric Paragraph Architecture:** Every paragraph begins with a topic sentence, develops with two supporting points, and ends with a wrap-up
+- **The Balanced Caveat:** Each positive claim immediately followed by an equal-length counterpoint
+- **Section Bookending:** Chapters open and close with near-identical language or themes
+- **Exhaustive Enumeration:** Tendency to list "not just A, but also B, C, and D" when A would suffice
+- **Rhetorical Question Reliance:** Using questions ("But what does this mean?") to manufacture forward momentum
+- **Artificial Escalation:** Moving from "small" to "global" scale at the end of paragraphs or sections
+
+**Score (1–10):** ___
+**Structural issues identified:** [describe]
+
+---
+
+### 4. VOICE & AUTHENTICITY MARKERS
+Human writing typically includes:
+- Idiosyncratic word choices that aren't "optimal"
+- Incomplete thoughts or tangents that reveal a thinking mind
+- Contradictions or genuine uncertainty (not performed uncertainty)
+- Sensory specificity that feels lived-in, not researched
+- Humor or irony that takes genuine risks
+- An opinion the author seems to actually hold, with weight behind it
+
+AI writing typically includes:
+- Consistent emotional temperature (never too hot, never too cold)
+- "Safe" opinions that acknowledge all sides before landing on nothing
+- Wisdom that sounds good but is empty on reflection ("The journey is just as important as the destination")
+- Absence of authorial personality or a personality that reads as performed
+- Information presented without surprise or confusion — as though the author never discovered it
+
+**Score (1–10):** ___
+**Voice assessment:** [describe what the author's voice feels like — or fails to feel like]
+
+---
+
+### 5. KNOWLEDGE TEXTURE
+Examine how knowledge is handled:
+
+- **Sourcing:** Does the author cite specific, verifiable sources or lean on vague authority ("studies show," "experts agree," "research suggests")?
+- **Specificity:** Are examples concrete and traceable, or generic and illustrative? ("In 1987, linguist X argued Y in journal Z" vs. "Linguists have long argued that…")
+- **Surprising Facts:** Does the chapter contain information that feels genuinely unexpected, or does it confirm what you already assumed?
+- **Gaps:** Are there obvious follow-up questions the author ignores that a real expert would have addressed?
+
+**Score (1–10):** ___
+**Knowledge texture notes:** [describe]
+
+---
+
+### 6. CONSISTENCY & COHERENCE ANOMALIES
+Check for:
+- Contradictions between sections that suggest stitched-together outputs
+- Sudden shifts in register (formal to casual, technical to accessible) without motivation
+- Ideas referenced as "discussed earlier" that weren't actually discussed
+- Character or subject descriptions that reset between sections
+- Overlong scene-setting before any content is delivered
+- Tonal flatness: no paragraph is significantly more energetic or urgent than other
+
+**Score (1–10):** ___
+**Anomalies found:** [describe]
+
+---
+
+## VERDICT
+
+**Total Score:** ___ / 60
+
+| Range | Interpretation |
+|-------|---------------|
+| 6–18 | Likely human-written — minor AI-style tendencies at most |
+| 19–30 | Ambiguous — may be AI-assisted or human writing with AI habits |
+| 31–44 | Probably AI-generated or heavily AI-edited |
+| 45–60 | Almost certainly AI-generated |
+
+**Summary judgment:** [2–4 sentences: overall assessment, strongest signals, confidence level]
+
+**Most suspicious passages:** [quote 2–3 specific excerpts with brief explanation of why they read as AI]
+
+**Recommendations:** [If ambiguous, what additional information or comparison material would help confirm?]`;
+          }
+        },
       ],
       character: [
         {
@@ -5704,6 +5865,167 @@ TEXT:
 ---
 ${f.text || '[PASTE TEXT]'}
 ---`},
+        {
+          id: 'l5', title: 'AI Detection Check', desc: 'Analyze text for AI-generated patterns',
+          fields: [{ key: 'text', label: 'Paste the chapter text to analyze', type: 'textarea' }],
+          tpl: (f) => {
+            const text = f.text?.trim() || '[PASTE CHAPTER HERE]';
+            return `CHAPTER TEXT:
+${text}
+
+---
+
+## ANALYSIS FRAMEWORK
+
+Evaluate the chapter across these six dimensions and score each 1–10 (10 = strongly AI-generated):
+
+---
+
+### 1. LINGUISTIC FINGERPRINTS
+Flag any of the following AI-characteristic phrases and constructions:
+
+**Transition overuse:**
+- "It's worth noting that…" / "It is important to note…"
+- "Furthermore," / "Moreover," / "Additionally," / "In addition,"
+- "It goes without saying…" / "Needless to say…"
+- "As previously mentioned…" / "As noted above…"
+- "In conclusion," / "To summarize," / "In summary,"
+- "This is not to say…" / "That said," / "With that in mind,"
+
+**Hedging & qualification clusters:**
+- "It's important to remember that…"
+- "Of course, this is not always the case…"
+- "While there are many factors to consider…"
+- "The answer, of course, is complex…"
+- "There is no one-size-fits-all answer…"
+- "It depends on a variety of factors…"
+
+**Hollow affirmations:**
+- "Absolutely!" / "Certainly!" / "Of course!" / "Great question!"
+- "You raise an excellent point…"
+- "This is a fascinating topic…"
+
+**Filler constructions:**
+- "At the end of the day…"
+- "In the grand scheme of things…"
+- "It's a double-edged sword…"
+- "All things considered…"
+- "In today's [world/society/landscape]…"
+- "Throughout history, humans have…"
+
+**Score (1–10):** ___
+**Evidence found:** [list specific examples with line references]
+
+---
+
+### 2. VOCABULARY PATTERNS
+Flag repeated use of AI-favored words and terms:
+
+**Overused descriptors:**
+delve, dive into, explore, unpack, navigate, foster, leverage, utilize, facilitate,
+tapestry, mosaic, kaleidoscope, labyrinth, nuanced, multifaceted, robust, holistic,
+comprehensive, pivotal, crucial, paramount, essential, fundamental, intricate,
+vibrant, dynamic, transformative, groundbreaking, revolutionary, game-changing,
+profound, significant, notable, remarkable, unprecedented
+
+**Abstract noun clusters:**
+synergy, paradigm, framework, ecosystem, landscape, journey, intersection,
+intersection of [X] and [Y], the realm of, the world of, the fabric of
+
+**Verb inflation:**
+"showcases" instead of "shows"
+"demonstrates" instead of "proves"
+"highlights" instead of "points to"
+"underscores" instead of "confirms"
+"encompasses" instead of "includes"
+
+**Score (1–10):** ___
+**Evidence found:** [list specific examples]
+
+---
+
+### 3. STRUCTURAL PATTERNS
+Look for these AI-characteristic organizational habits:
+
+- **The Rule-of-Three Obsession:** Ideas consistently grouped in threes; lists of exactly three examples
+- **Symmetric Paragraph Architecture:** Every paragraph begins with a topic sentence, develops with two supporting points, and ends with a wrap-up
+- **The Balanced Caveat:** Each positive claim immediately followed by an equal-length counterpoint
+- **Section Bookending:** Chapters open and close with near-identical language or themes
+- **Exhaustive Enumeration:** Tendency to list "not just A, but also B, C, and D" when A would suffice
+- **Rhetorical Question Reliance:** Using questions ("But what does this mean?") to manufacture forward momentum
+- **Artificial Escalation:** Moving from "small" to "global" scale at the end of paragraphs or sections
+
+**Score (1–10):** ___
+**Structural issues identified:** [describe]
+
+---
+
+### 4. VOICE & AUTHENTICITY MARKERS
+Human writing typically includes:
+- Idiosyncratic word choices that aren't "optimal"
+- Incomplete thoughts or tangents that reveal a thinking mind
+- Contradictions or genuine uncertainty (not performed uncertainty)
+- Sensory specificity that feels lived-in, not researched
+- Humor or irony that takes genuine risks
+- An opinion the author seems to actually hold, with weight behind it
+
+AI writing typically includes:
+- Consistent emotional temperature (never too hot, never too cold)
+- "Safe" opinions that acknowledge all sides before landing on nothing
+- Wisdom that sounds good but is empty on reflection ("The journey is just as important as the destination")
+- Absence of authorial personality or a personality that reads as performed
+- Information presented without surprise or confusion — as though the author never discovered it
+
+**Score (1–10):** ___
+**Voice assessment:** [describe what the author's voice feels like — or fails to feel like]
+
+---
+
+### 5. KNOWLEDGE TEXTURE
+Examine how knowledge is handled:
+
+- **Sourcing:** Does the author cite specific, verifiable sources or lean on vague authority ("studies show," "experts agree," "research suggests")?
+- **Specificity:** Are examples concrete and traceable, or generic and illustrative? ("In 1987, linguist X argued Y in journal Z" vs. "Linguists have long argued that…")
+- **Surprising Facts:** Does the chapter contain information that feels genuinely unexpected, or does it confirm what you already assumed?
+- **Gaps:** Are there obvious follow-up questions the author ignores that a real expert would have addressed?
+
+**Score (1–10):** ___
+**Knowledge texture notes:** [describe]
+
+---
+
+### 6. CONSISTENCY & COHERENCE ANOMALIES
+Check for:
+- Contradictions between sections that suggest stitched-together outputs
+- Sudden shifts in register (formal to casual, technical to accessible) without motivation
+- Ideas referenced as "discussed earlier" that weren't actually discussed
+- Character or subject descriptions that reset between sections
+- Overlong scene-setting before any content is delivered
+- Tonal flatness: no paragraph is significantly more energetic or urgent than any other
+
+**Score (1–10):** ___
+**Anomalies found:** [describe]
+
+---
+
+## VERDICT
+
+**Total Score:** ___ / 60
+
+| Range | Interpretation |
+|-------|---------------|
+| 6–18 | Likely human-written — minor AI-style tendencies at most |
+| 19–30 | Ambiguous — may be AI-assisted or human writing with AI habits |
+| 31–44 | Probably AI-generated or heavily AI-edited |
+| 45–60 | Almost certainly AI-generated |
+
+**Summary judgment:** [2–4 sentences: overall assessment, strongest signals, confidence level]
+
+**Most suspicious passages:** [quote 2–3 specific excerpts with brief explanation of why they read as AI]
+
+**Recommendations:** [If ambiguous, what additional information or comparison material would help confirm?]`;
+          }
+        },
       ],
       punch: [
         {
