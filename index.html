@@ -5099,27 +5099,270 @@ ${text}
 ---`;
           }
         },
+        // --- STRUCTURE & PLOT ---
         {
-          id: 'd3', title: 'Character Arc Tracker', desc: 'Track emotional and behavioral change across a section',
-          fields: [{ key: 'character', label: 'Character name', type: 'text' }, { key: 'arc_goal', label: 'Intended arc in this section (optional)', type: 'text' }, { key: 'text', label: 'Paste the text (or leave empty to use Chapter tab)', type: 'textarea' }],
+          id: 'story-arc', title: 'Story Arc', desc: 'Analyze story arc structure and proportions',
+          fields: [{ key: 'synopsis', label: 'Story context / where we are in the novel', type: 'text' }, { key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
           tpl: (f) => {
-            const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
-            return `You are a developmental editor analyzing character arc. Track ${f.character || '[CHARACTER]'}'s internal journey through this text.
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a developmental editor with expertise in narrative structure. Analyze the following manuscript excerpt and evaluate the story arc.
 
-Map:
-- Their emotional state at the START
-- Key moments where their internal world shifts (quote the line, explain the shift)
-- Their emotional state at the END
-- Whether their external actions align with their internal state
-- Any moments where they act inconsistently without earned reason
+Specifically assess:
+- Whether the setup, rising action, climax, falling action, and resolution are clearly defined and proportionate
+- Whether the protagonist's transformation (internal arc) mirrors or meaningfully contrasts with the external plot arc
+- Any structural imbalances — sections that drag, rush, or feel tonally disconnected
 
-Intended arc: ${f.arc_goal || 'Not specified — infer from context'}
+Return your feedback as:
+1. A one-paragraph overall assessment
+2. A bulleted list of specific structural issues with line or chapter references where possible
+3. One concrete revision suggestion for the most critical issue
 
-Assess: Is the arc visible and felt, or merely stated? What's the single biggest gap?
-
-TEXT:
+STORY CONTEXT: ${f.synopsis || '[CONTEXT]'}
+CHAPTER:
 ---
-${text}
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'stakes-escalation', title: 'Stakes Escalation', desc: 'Analyze how stakes escalate throughout narrative',
+          fields: [{ key: 'synopsis', label: 'Story context', type: 'text' }, { key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a developmental editor specializing in pacing and tension. Analyze the following manuscript excerpt for how effectively the stakes escalate throughout the narrative.
+
+Specifically assess:
+- Whether each act raises the cost of failure for the protagonist (personally, professionally, relationally, or existentially)
+- Whether the reader is made to feel the weight of those stakes through scene construction — not just told about them
+- Any moments where stakes deflate prematurely or plateau for too long
+
+Return your feedback as:
+1. A stakes "heat map" summary — identify where tension peaks, plateaus, and dips
+2. A bulleted list of specific moments where escalation succeeds or fails
+3. One concrete revision suggestion for the weakest escalation point
+
+STORY CONTEXT: ${f.synopsis || '[CONTEXT]'}
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'subplot-resolution', title: 'Subplot Resolution', desc: 'Evaluate how subplots are introduced and resolved',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a developmental editor with expertise in multi-threaded narratives. Analyze the following manuscript excerpt and evaluate how subplots are introduced and resolved.
+
+Specifically assess:
+- Whether each subplot introduced is meaningfully resolved or intentionally left open (and whether the intent reads clearly)
+- Whether subplots connect thematically or causally to the main plot, or feel like detours
+- Whether the timing of subplot resolutions disrupts or enhances the main narrative's momentum
+
+Return your feedback as:
+1. A list of all identified subplots with a status (resolved / unresolved / abandoned)
+2. A bulleted list of subplots that need attention, with specific reasoning
+3. One concrete revision suggestion for the most problematic subplot
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'plot-holes', title: 'Plot Holes & Contradictions', desc: 'Find plot holes, logical inconsistencies, and internal contradictions',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a continuity editor and story analyst. Analyze the following manuscript excerpt for plot holes, logical inconsistencies, and internal contradictions.
+
+Specifically look for:
+- Events that could not logically occur given prior established facts
+- Character knowledge that appears or disappears without explanation
+- Timeline inconsistencies, geography errors, or world-rule violations
+- Chekhov's Guns that are introduced but never fired (or fired without introduction)
+
+Return your feedback as:
+1. A numbered list of identified issues ranked by severity (critical / moderate / minor)
+2. For each issue: what the contradiction is, where it occurs, and why it breaks internal logic
+3. A brief note on any issues that may be intentional (unreliable narrator, mystery setup, etc.) that should be verified with the author
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        // --- CHARACTER ---
+        {
+          id: 'character-motivations', title: 'Character Motivations', desc: 'Evaluate whether character motivations are clear, believable, and consistent',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a developmental editor specializing in character psychology. Analyze the following manuscript excerpt and evaluate whether character motivations are clear, believable, and consistent.
+
+Specifically assess:
+- Whether each major character's want (external goal) and need (internal wound or truth) are discernible
+- Whether character decisions feel motivated by who they are — or merely by what the plot requires
+- Any moments where a character acts in a way that contradicts their established psychology without sufficient justification
+
+Return your feedback as:
+1. A character-by-character breakdown of want vs. need as you understand them from the text
+2. A bulleted list of moments where motivation feels unclear, forced, or contradictory
+3. One concrete revision suggestion for the character whose motivations are least convincing
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        // --- THEME ---
+        {
+          id: 'thematic-weaving', title: 'Thematic Cohesion', desc: 'Analyze how effectively central themes are woven through the narrative',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a literary editor with expertise in thematic analysis. Analyze the following manuscript excerpt and evaluate how effectively the central theme(s) are woven through the narrative.
+
+Specifically assess:
+- Whether the theme is embodied in action, image, and subtext — rather than stated outright through dialogue or narration
+- Whether supporting characters, subplots, and settings serve as thematic mirrors or counterpoints to the protagonist's arc
+- Any sections where the theme feels absent, heavy-handed, or contradicted without purpose
+
+Return your feedback as:
+1. A statement of what you believe the central theme(s) to be, based solely on the text
+2. A bulleted list of the strongest and weakest moments of thematic integration
+3. One concrete revision suggestion to deepen thematic resonance in the weakest area
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        // --- SCENE CONSTRUCTION ---
+        {
+          id: 'scene-purpose', title: 'Scene Purpose', desc: 'Evaluate whether each scene earns its place in the story',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a story editor evaluating narrative efficiency. Analyze each scene in the following manuscript excerpt and assess whether it earns its place in the story.
+
+For each scene, determine whether it accomplishes at least two of the following:
+- Advances the plot (something changes as a result of this scene)
+- Reveals character (we learn something new and meaningful about who someone is)
+- Raises the stakes (the cost of failure increases or a new threat emerges)
+- Establishes theme (a thematic idea is dramatized, not just stated)
+
+Return your feedback as:
+1. A scene-by-scene table: Scene | Primary Function | Secondary Function | Verdict (Keep / Cut / Merge / Rewrite)
+2. A brief explanation for any scene marked Cut, Merge, or Rewrite
+3. One concrete revision suggestion for the scene doing the least narrative work
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'scene-openings', title: 'Scene Openings', desc: 'Analyze the opening lines of each scene',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a line editor and story analyst focused on reader engagement. Analyze the opening lines of each scene in the following manuscript excerpt.
+
+Specifically assess whether each scene opening:
+- Drops the reader into action, tension, or a compelling sensory moment (rather than orientation or weather)
+- Establishes whose scene it is and what they want within the first few lines
+- Creates an implicit question that pulls the reader forward
+
+Return your feedback as:
+1. A list of each scene opening with a one-line verdict (Strong / Weak / Needs Work) and a brief reason
+2. Rewrite suggestions for the two weakest scene openings, preserving the author's voice
+3. A pattern note — if the author has a recurring scene-opening weakness, name it specifically
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'scene-endings', title: 'Scene Endings & Momentum', desc: 'Analyze the ending lines of each scene',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a story editor specializing in pacing and reader compulsion. Analyze the ending lines of each scene in the following manuscript excerpt.
+
+Specifically assess whether each scene ending:
+- Closes one question while opening another (the "yes, but / no, and" principle)
+- Ends on a moment of change, revelation, decision, or unresolved tension — rather than a tidy wrap-up
+- Creates forward momentum that makes stopping feel difficult
+
+Return your feedback as:
+1. A list of each scene ending with a one-line verdict (Propulsive / Flat / Closed Too Neatly) and a brief reason
+2. Rewrite suggestions for the two flattest scene endings, preserving the author's voice
+3. A pattern note — if the author tends toward a particular type of weak ending, name and explain it
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'pov-consistency', title: 'POV Consistency', desc: 'Analyze POV consistency within each scene',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a line editor with expertise in point-of-view craft. Analyze the following manuscript excerpt for POV consistency within each scene.
+
+Specifically look for:
+- Head-hopping (shifting between character consciousnesses within a single scene without a clear break)
+- POV intrusions — moments where information, observations, or language couldn't plausibly belong to the POV character
+- Distance inconsistency — unearned shifts from deep interiority to remote, cinematic narration within the same scene
+
+Return your feedback as:
+1. The identified POV mode (First Person / Third Limited / Third Omniscient / Second / Mixed) and whether it's applied consistently
+2. A numbered list of specific POV violations with line references and explanation of the problem
+3. One concrete revision suggestion for the most disorienting POV break
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'scene-conflict', title: 'Scene-Level Conflict', desc: 'Analyze each scene for the presence and quality of conflict',
+          fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a story editor evaluating dramatic tension. Analyze each scene in the following manuscript excerpt for the presence and quality of conflict.
+
+Conflict can be:
+- Interpersonal (character vs. character)
+- Internal (character vs. self)
+- Environmental (character vs. world, nature, system)
+- Philosophical (character vs. idea or belief)
+
+Specifically assess:
+- Whether every scene contains at least one active form of conflict
+- Whether the conflict in each scene connects to the scene's core dramatic question
+- Any scenes that feel static — where characters talk, move, or exist without meaningful opposition
+
+Return your feedback as:
+1. A scene-by-scene conflict audit: Scene | Conflict Type | Strength (Strong / Present / Weak / Absent)
+2. A bulleted list of scenes where conflict is weak or absent, with explanation
+3. One concrete revision suggestion for the most conflict-deficient scene
+
+CHAPTER:
+---
+${chapterText}
 ---`;
           }
         },
@@ -5233,6 +5476,77 @@ For each scene or section:
 - Flag which are absent or underused where they'd deepen immersion
 - Identify passages that feel visually over-loaded
 - Suggest 2–3 specific sensory additions (concrete, not generic) that would most elevate the scene
+
+TEXT:
+---
+${text}
+---`;
+          }
+        },
+        {
+          id: 'sentence-variety', title: 'Sentence Variety & Rhythm', desc: 'Analyze sentence variety and rhythmic quality',
+          fields: [{ key: 'text', label: 'Paste the text (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a prose stylist and line editor. Analyze the following manuscript excerpt for sentence variety and rhythmic quality.
+
+Specifically assess:
+- Whether the author varies sentence length meaningfully — using short sentences for impact and longer sentences for momentum, immersion, or complexity
+- Whether syntactic patterns repeat in ways that create monotony (e.g., subject-verb-object dominance, constant participial openers)
+- Whether the prose rhythm matches the emotional register of the scene (terse in action, expansive in reflection, staccato in panic)
+
+Return your feedback as:
+1. A prose rhythm profile — describe the author's dominant patterns in plain language
+2. Two or three representative passages that illustrate both strengths and weaknesses
+3. Specific revision suggestions for the most rhythmically flat or monotonous passage, with a rewritten example
+
+TEXT:
+---
+${text}
+---`;
+          }
+        },
+        {
+          id: 'word-choice', title: 'Word Choice Precision', desc: 'Analyze precision and intentionality of word choice',
+          fields: [{ key: 'text', label: 'Paste the text (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a line editor with a focus on diction and specificity. Analyze the following manuscript excerpt for the precision and intentionality of word choice.
+
+Specifically look for:
+- Vague, generic, or overused words that could be replaced with more precise, evocative alternatives (e.g., "walked" vs. "shuffled," "nice" vs. a specific quality)
+- Adverb and adjective overuse that signals weak verb/noun choices
+- Tonal inconsistencies where word choice doesn't match the scene's emotional register or the POV character's voice
+- Clichés, dead metaphors, or mixed metaphors
+
+Return your feedback as:
+1. A list of the ten most problematic word choices or phrases, each with a suggested alternative and a brief reason
+2. A note on whether the author's diction is generally precise, imprecise, or inconsistent — and what drives the pattern
+3. One passage rewritten with improved word choice precision as a model for revision
+
+TEXT:
+---
+${text}
+---`;
+          }
+        },
+        {
+          id: 'dialogue-naturalism', title: 'Dialogue Naturalism', desc: 'Analyze dialogue for naturalism, distinctiveness, and dramatic function',
+          fields: [{ key: 'text', label: 'Paste the text (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const text = f.text?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `You are a dialogue editor and script consultant. Analyze the dialogue in the following manuscript excerpt for naturalism, distinctiveness, and dramatic function.
+
+Specifically assess:
+- Whether each character has a distinct voice — vocabulary, rhythm, deflection patterns, and verbal habits that belong only to them
+- Whether dialogue sounds like how people actually speak (with interruption, subtext, indirection, and evasion) rather than how they conveniently explain things
+- Whether dialogue is doing double or triple duty (revealing character AND advancing plot AND suggesting subtext) or merely conveying information
+- Overuse of dialogue tags beyond "said," on-the-nose exposition delivered through speech, or characters who speak in complete grammatical paragraphs
+
+Return your feedback as:
+1. A character-by-character voice assessment — is each speaker distinguishable without dialogue tags?
+2. A bulleted list of specific dialogue exchanges that are too on-the-nose, expository, or unnatural, with brief notes
+3. One dialogue passage rewritten to demonstrate stronger subtext and voice distinction
 
 TEXT:
 ---
@@ -7788,7 +8102,7 @@ ${f.text || '[PASTE TEXT]'}
           <div class="home-card" onclick="showTab('prompts')" style="cursor:pointer">
             <span class="home-icon">◆</span>
             <h4>Prompts</h4>
-            <p>AI-powered editing tools. Character creation, copy editing, line editing, and more.</p>
+            <p>AI-powered editing tools. Character creation, world-building, copy editing, line editing, developmental editing, and more.</p>
           </div>
           <div class="home-card" onclick="showTab('pipeline')" style="cursor:pointer">
             <span class="home-icon">⟹</span>
@@ -10801,7 +11115,7 @@ ${sourceText}`;
       
       <div class="help-guide">
         <h4>📖 Prompts Tab</h4>
-        <p>AI-powered editing tools. Choose from categories like Character Creation, Copy Editing, Line Editing. Use built-in prompts or create custom templates.</p>
+        <p>AI-powered editing tools. Choose from categories like Character Creation, World-Building, Copy Editing, Line Editing, and Developmental Editing. Use built-in prompts or create custom templates. Includes Story Arc, Stakes Escalation, Subplot Resolution, Plot Holes, Character Motivations, Thematic Cohesion, Scene Purpose, Scene Openings, Scene Endings, POV Consistency, Scene-Level Conflict, Sentence Variety, Word Choice, and Dialogue Naturalism.</p>
       </div>
       
       <div class="help-guide">

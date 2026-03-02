@@ -7,11 +7,21 @@ AI-powered writing assistant for editing and world-building. Features multiple A
 - **Multiple AI Providers**: OpenRouter, Anthropic Direct (Claude), OpenAI Direct (GPT), Google Direct (Gemini), and LM Studio (local models)
 - **Flexible Context**: Add details at Series, Book, or Chapter level to customize AI prompts
 - **AI-Powered Editing Tools**:
-  - Character creation
+  - Character creation & motivations
   - World-building & locations
   - Copy editing
-  - Line editing
-  - Developmental editing
+  - Line editing (sentence variety, word choice, dialogue naturalism)
+  - Developmental editing:
+    - Story arc structure
+    - Stakes escalation
+    - Subplot resolution
+    - Plot holes & contradictions
+    - Character motivations
+    - Thematic cohesion
+    - Scene purpose
+    - Scene openings & endings
+    - POV consistency
+    - Scene-level conflict
   - And more...
 - **Pipeline Mode**: Chain multiple prompts together for complex workflows
 - **Auto-Save & Backups**:
