@@ -5366,6 +5366,164 @@ ${chapterText}
 ---`;
           }
         },
+        // --- CHAPTER ANALYSIS ---
+        {
+          id: 'chapter-purpose', title: 'Chapter Purpose/Theme Identification', desc: 'Analyze core narrative purpose and thematic function within larger story',
+          fields: [{ key: 'synopsis', label: 'Story context / where we are in the novel', type: 'text' }, { key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Analyze this chapter and identify its core narrative purpose and thematic function within the larger story. Determine what this chapter is designed to accomplish — whether it advances plot, deepens character, establishes atmosphere, raises stakes, or shifts tone. Identify any central themes present (e.g., betrayal, identity, sacrifice) and explain how the chapter embodies or develops them. Note whether the thematic intent is clearly executed or muddled by competing elements. Flag any moments where the chapter loses focus or drifts from its primary purpose. Provide a concise statement of what this chapter should make the reader feel, know, or question by its final line.
+
+STORY CONTEXT: ${f.synopsis || '[CONTEXT]'}
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'key-events', title: 'Key Events Summary', desc: 'Identify and summarize key events in order',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Identify and summarize the key events in this chapter in the order they occur. Focus only on events that carry narrative weight — those that change circumstances, shift relationships, reveal information, or create consequences. Distinguish between plot events (external action) and emotional/internal events (decisions, realizations, shifts in feeling). Flag any events that are underdeveloped, rushed, or given disproportionate page time relative to their importance. Note whether each key event connects logically and causally to what precedes and follows it. Identify any events that feel extraneous or could be cut without damaging the chapter's purpose.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'character-growth', title: 'Character Growth Analysis', desc: 'Analyze character development and arc changes',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Analyze the character development that occurs in this chapter for each named character with a significant presence. For each character, identify where they begin emotionally, psychologically, or motivationally at the chapter's opening and where they end. Determine whether meaningful growth, regression, or revelation has occurred and whether it feels earned by the events on the page. Flag any character whose arc feels stagnant, contradictory, or inconsistent with their established traits. Note moments where a character's change feels forced, unearned, or conveniently timed. Identify missed opportunities where growth could have been more clearly dramatized or deepened.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'backstory-revealed', title: 'Backstory Revealed', desc: 'Identify and evaluate backstory delivery',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Identify all backstory introduced in this chapter — information about characters, world, history, or events that occurred before the chapter's present timeline. For each instance of backstory, evaluate whether it is delivered at the right moment (i.e., when the reader most needs or wants it), whether it is proportionate in length to its narrative importance, and whether it is integrated naturally into the scene or delivered artificially (e.g., forced flashbacks, unprompted explanation). Flag any backstory that halts narrative momentum, over-explains, or could be cut without consequence. Note any backstory the chapter withholds that the reader urgently needs for clarity or emotional investment.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'character-interactions', title: 'Character Interactions', desc: 'Analyze exchanges between characters',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Analyze every significant interaction between characters in this chapter. For each exchange — dialogue or physical — evaluate whether the interaction feels authentic to both characters' established voices and motivations. Determine what each character wants from the other in the scene and whether that tension is present and active on the page. Flag dialogue that feels expository, on-the-nose, or out of character. Identify subtext: note where what characters say diverges from what they mean or want, and evaluate whether that subtext is effectively written. Highlight any interactions that feel unresolved, underwritten, or that miss an opportunity to deepen relationship dynamics.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'exposition-delivery', title: 'Exposition Delivery', desc: 'Evaluate expository passages and delivery methods',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Identify all expository passages in this chapter — sections where the narrative pauses to deliver information about setting, world-building, character history, or context. For each, evaluate the delivery method (narration, dialogue, internal thought, environmental detail) and determine whether the method suits the scene's tone and pacing. Flag exposition that is front-loaded, excessive, repetitive, or delivered through unnatural dialogue ("as you know" constructions). Assess whether the reader is given enough information to remain oriented without being over-explained. Suggest where exposition could be compressed, cut, or redistributed into action and scene rather than summary.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'information-clarity', title: 'Information Clarity', desc: 'Evaluate clarity of information delivery',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Evaluate the clarity of information delivery throughout this chapter from the perspective of a reader experiencing it for the first time. Identify any passages where it is unclear who is speaking, who is in the scene, where the scene is taking place, or what is happening and why. Flag pronoun ambiguity, unclear scene transitions, confusing timelines, or moments where the narrative assumes knowledge the reader does not yet have. Note where information is repeated unnecessarily. Assess whether key plot points, character motivations, and cause-and-effect relationships are legible without being over-explained. Provide specific line-level examples where clarity breaks down.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'information-relevance', title: 'Information Relevance', desc: 'Assess relevance of information to story needs',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Evaluate every piece of information delivered in this chapter — plot details, character facts, world-building, backstory, and context — and assess its relevance to the story's present needs. For each significant block of information, determine whether it serves an immediate narrative purpose (advancing plot, deepening character, creating tension) or whether it is included out of the author's attachment rather than the reader's need. Flag information that is redundant, premature, or so tangential that it dilutes focus. Identify any details that are introduced but never paid off, and any critical information the chapter fails to deliver when the narrative demands it. Distinguish between information that enriches and information that merely fills space.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'new-character-intro', title: 'New Character Introduction', desc: 'Evaluate effectiveness of new character introductions',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Identify every new character introduced in this chapter and evaluate the effectiveness of each introduction. For each character, assess whether the reader is given enough immediate information to distinguish them — voice, physical presence, attitude, role — without being overwhelmed by detail. Determine whether the character's introduction is motivated by the scene (they appear because the story requires them) or feels forced or convenient. Evaluate whether the character makes a distinct impression on first appearance and whether their purpose in the narrative is at least partially legible. Flag introductions that are too sparse to be memorable, too dense to be digestible, or that drop a character into the scene without sufficient grounding. Note whether any new character risks being confused with an existing one.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'setting-worldbuilding', title: 'Setting & World-Building', desc: 'Analyze setting and world-building passages',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Analyze how setting and world-building are handled in this chapter. Identify every passage where the physical environment, time period, social context, or world rules are established or developed. Evaluate whether setting is rendered through specific, sensory detail or delivered as vague generality. Assess whether the world-building is integrated into the action and character experience or front-loaded as passive description. Determine whether the setting actively influences the scene — affecting character behavior, mood, and conflict — or functions as inert backdrop. Flag any world-building that halts pacing, over-explains rules or history, or assumes the reader shares context the text has not yet established. Note any setting details that feel inconsistent with what has been previously established in the story.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'tropes-identification', title: 'Tropes Identification', desc: 'Identify recognizable narrative tropes',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Identify all recognizable narrative tropes present in this chapter — character archetypes, plot devices, relationship dynamics, dialogue patterns, and situational conventions drawn from genre tradition or broader storytelling culture. For each trope identified, name it clearly, cite the specific passage or element where it appears, and assess how consciously it appears to be employed. Distinguish between tropes that are used with intention and craft versus those that appear to have slipped in as defaults. Evaluate whether each trope serves the story's specific needs or whether it substitutes for original character, plot, or emotional work. Note any tropes that risk undermining reader trust or creating predictability that works against narrative tension.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
+        {
+          id: 'trope-subversion', title: 'Trope Subversion', desc: 'Analyze deliberate trope inversions and subversions',
+          fields: [{ key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
+          tpl: (f) => {
+            const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
+            return `Analyze this chapter for instances where familiar tropes, conventions, or reader expectations are deliberately subverted, inverted, or complicated. For each subversion identified, evaluate whether it is executed with sufficient clarity — that is, whether the reader can recognize the expectation being undermined in order to feel the impact of its departure. Assess whether the subversion serves a meaningful narrative or thematic purpose or whether it functions only as a surface-level surprise. Flag subversions that are undermined by inconsistent execution, that rely on the reader having knowledge the text hasn't established, or that inadvertently introduce new clichés in place of the ones being avoided. Identify any moments where a trope could have been subverted more effectively but was instead played straight without apparent intention.
+
+CHAPTER:
+---
+${chapterText}
+---`;
+          }
+        },
       ],
       copy: [
         {
@@ -7297,7 +7455,7 @@ ${f.text || '[PASTE TEXT]'}
       const name = prompt('Enter name for export:', 'My Style DNA');
       if (!name) return;
       const data = {
-        version: '1.0',
+        version: '1.2 Beta',
         name: name,
         styleDNA: getStyleDNA(),
         created: new Date().toISOString()
@@ -8426,7 +8584,7 @@ ${f.text || '[PASTE TEXT]'}
           <div class="home-card" onclick="showTab('prompts')" style="cursor:pointer">
             <span class="home-icon">◆</span>
             <h4>Prompts</h4>
-            <p>AI-powered editing tools. Character creation, world-building, copy editing, line editing, developmental editing, and more.</p>
+            <p>AI-powered editing tools. Character creation, world-building, copy editing, line editing, developmental editing, chapter analysis, tropes, and more.</p>
           </div>
           <div class="home-card" onclick="showTab('pipeline')" style="cursor:pointer">
             <span class="home-icon">⟹</span>
@@ -11439,7 +11597,7 @@ ${sourceText}`;
       
       <div class="help-guide">
         <h4>📖 Prompts Tab</h4>
-        <p>AI-powered editing tools. Choose from categories like Character Creation, World-Building, Copy Editing, Line Editing, and Developmental Editing. Use built-in prompts or create custom templates. Includes Story Arc, Stakes Escalation, Subplot Resolution, Plot Holes, Character Motivations, Thematic Cohesion, Scene Purpose, Scene Openings, Scene Endings, POV Consistency, Scene-Level Conflict, Sentence Variety, Word Choice, and Dialogue Naturalism.</p>
+        <p>AI-powered editing tools. Choose from categories like Character Creation, World-Building, Copy Editing, Line Editing, and Developmental Editing. Use built-in prompts or create custom templates. Includes Chapter Purpose/Theme, Key Events, Character Growth, Backstory, Character Interactions, Exposition Delivery, Information Clarity, Information Relevance, New Character Introduction, Setting & World-Building, Tropes, Trope Subversion, Story Arc, Stakes Escalation, Subplot Resolution, Plot Holes, Character Motivations, Thematic Cohesion, Scene Purpose, Scene Openings, Scene Endings, POV Consistency, Scene-Level Conflict, Sentence Variety, Word Choice, Dialogue Naturalism, and AI Detection.</p>
       </div>
       
       <div class="help-guide">
