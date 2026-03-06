@@ -26,7 +26,7 @@ Welcome to The Novelist's Atelier, a free AI-powered writing and editing tool de
 ## 1. Series Tab
 
 # My Project
-<image-card alt="Book Tab" src="book.jpg"></image-card>
+<image-card alt="Book Tab" src="book.jpg" ></image-card>
 
 ### Overview
 
