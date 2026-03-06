@@ -44,7 +44,7 @@ The Series tab is your command center for managing multi-book series. It stores 
 
 ### Series Bible Entries
 
-![Series Tab](series.jpg)
+![Series Tab](Series Page.jpg)
 
 Each series bible entry contains:
 - **Title** - Name of the entry (e.g., "Magic System," "Main Faction," "Historical Timeline")
