@@ -2,6 +2,10 @@
 
 AI-powered writing assistant for editing and world-building. Features multiple AI providers (Claude, GPT, Gemini), flexible context management at Series/Book/Chapter levels, and a privacy-first design with all data stored locally in your browser.
 
+## Tutorial
+[Youtube Tutorial](https://youtu.be/watch?v=9akdLTKwpg0)
+
+
 ## Features
 
 - **Multiple AI Providers**: OpenRouter, Anthropic Direct (Claude), OpenAI Direct (GPT), Google Direct (Gemini), and LM Studio (local models)
