@@ -5006,6 +5006,9 @@
       { id: 'chapter', label: 'Chapter Review', icon: '❒', color: '#a098d8' },
       { id: 'style', label: 'Style Analysis', icon: '◈', color: '#c9a96e' },
       { id: 'custom', label: 'Custom', icon: '✎', color: '#c8a660' },
+      { id: 'tension', label: 'Tension & Engagement', icon: '⚡', color: '#ff6b6b' },
+      { id: 'prose', label: 'Prose & Style', icon: '✒', color: '#845ec2' },
+      { id: 'readerexperience', label: 'Reader Experience', icon: '👁', color: '#00c9a7' },
 
       { id: 'essential', label: 'Triage First (Essential)', icon: '⭐', color: '#ffd700' },
       { id: 'phase1', label: 'Phase 1 — Orientation', icon: '1️⃣', color: '#c8a660' },
@@ -5038,6 +5041,7 @@
     const CATEGORY_SECTIONS = [
       { id: 'essentials', label: 'Essentials', cats: ['essential'] },
       { id: 'phases', label: 'Recommended Phases', cats: ['phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'phase9', 'phase10'] },
+      { id: 'engagement', label: 'Engagement', cats: ['tension', 'prose', 'readerexperience'] },
       { id: 'create', label: 'Create', cats: ['character', 'world', 'location'] },
       { id: 'editors', label: 'Editors', cats: ['developmental', 'copy', 'line'] },
       { id: 'improve', label: 'Improve', cats: ['punch', 'paragraph', 'sentence'] },
@@ -6788,7 +6792,95 @@ ${f.text || '[PASTE TEXT]'}
       'mg-complexity': {
         id: 'mg-complexity', title: 'Age-Appropriate Complexity', desc: 'Moral complexity calibration',
         fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
-        tpl: (f) => `Is emotional complexity challenging without being overwhelming?\n\nCHAPTER:\n---\n${f.chapter || '[PASTE TEXT]'}\n---`
+        tpl: (f) => `Is emotional complexity challenging without being overwhelming?
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      // Tension & Engagement
+      'micro-tension': {
+        id: 'micro-tension', title: 'Micro-Tension Audit', desc: 'Sentence-by-sentence tension analysis',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `You are a line editor. Audit this chapter for micro-tension at sentence level. Flag flat passages. Return tension heat map + 3 specific fixes.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      'curiosity-tracker': {
+        id: 'curiosity-tracker', title: 'Reader Curiosity Tracker', desc: 'Map questions raised vs answered',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Map reader curiosity - what questions are planted vs answered. Flag momentum killers.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      'hook-cliffhanger': {
+        id: 'hook-cliffhanger', title: 'Hook & Cliffhanger Audit', desc: 'Evaluate opening/closing effectiveness',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Evaluate the opening hook and closing cliffhanger. Provide rewrites if needed.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      // Prose & Style
+      'voice-style-audit': {
+        id: 'voice-style-audit', title: 'Voice & Style Audit', desc: 'Analyze narrative voice consistency',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Analyze narrative voice - is it consistent? Flag shifts in tone, style, POV distance.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      'sentence-variety': {
+        id: 'sentence-variety', title: 'Sentence Variety Analysis', desc: 'Audit rhythm and sentence structure',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Analyze sentence variety - length, structure, rhythm. Flag monotony patterns.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      'imagery-audit': {
+        id: 'imagery-audit', title: 'Imagery & Metaphor Audit', desc: 'Evaluate sensory language',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Evaluate imagery, metaphor, and sensory language. Flag clichés and weak comparisons.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      // Reader Experience
+      'confusion-mapping': {
+        id: 'confusion-mapping', title: 'Confusion Mapping', desc: 'Identify reader confusion points',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Read as a fresh reader. Flag every moment of confusion - unclear pronouns, geography, timeline. Rank by severity.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
+      },
+      'emotional-payoff': {
+        id: 'emotional-payoff', title: 'Emotional Payoff Audit', desc: 'Evaluate emotional promises and delivery',
+        fields: [{ key: 'chapter', label: 'Paste chapter', type: 'textarea' }],
+        tpl: (f) => `Identify emotional promises made and evaluate if they land. Flag unearned or rushed payoffs.
+
+CHAPTER:
+---
+${f.chapter || '[PASTE TEXT]'}
+---`
       }
     };
 
@@ -6814,6 +6906,23 @@ ${f.text || '[PASTE TEXT]'}
     PROMPTS.paragraph.push(NEW_PROMPTS['white-space'], NEW_PROMPTS['echo-crutch']);
     if (!PROMPTS.copy) PROMPTS.copy = [];
     PROMPTS.copy.push(NEW_PROMPTS['dialogue-tags']);
+
+    PROMPTS.tension = [
+      NEW_PROMPTS['micro-tension'],
+      NEW_PROMPTS['curiosity-tracker'],
+      NEW_PROMPTS['hook-cliffhanger']
+    ];
+
+    PROMPTS.prose = [
+      NEW_PROMPTS['voice-style-audit'],
+      NEW_PROMPTS['sentence-variety'],
+      NEW_PROMPTS['imagery-audit']
+    ];
+
+    PROMPTS.readerexperience = [
+      NEW_PROMPTS['confusion-mapping'],
+      NEW_PROMPTS['emotional-payoff']
+    ];
 
     PROMPTS.phase1 = [
       getPromptById('chapter-purpose') || NEW_PROMPTS['chapter-purpose'],
@@ -12259,9 +12368,14 @@ ${sourceText}`;
 
       <details class="help-guide">
         <summary><h4>📝 Prompts Tab</h4></summary>
-        <p><strong>Overview:</strong> AI-powered editing tools with 12+ prompt categories.</p>
+        <p><strong>Overview:</strong> AI-powered editing tools with 20+ prompt categories.</p>
         <p><strong>Categories:</strong></p>
         <ul>
+          <li><strong>Essential (Triage):</strong> Quick first-pass edits</li>
+          <li><strong>Phase 1-10:</strong> 10-phase editing workflow</li>
+          <li><strong>Tension & Engagement:</strong> Micro-tension, curiosity, hooks</li>
+          <li><strong>Prose & Style:</strong> Voice, sentence variety, imagery</li>
+          <li><strong>Reader Experience:</strong> Confusion mapping, emotional payoff</li>
           <li><strong>Character:</strong> Development, dialogue, arcs</li>
           <li><strong>World Building:</strong> Magic systems, history, factions</li>
           <li><strong>Locations:</strong> Setting development</li>
@@ -12274,6 +12388,7 @@ ${sourceText}`;
           <li><strong>Chapter Review:</strong> Full analysis</li>
           <li><strong>Style Analysis:</strong> Voice consistency</li>
           <li><strong>Custom:</strong> Your own prompts</li>
+          <li><strong>Genre-Specific:</strong> 14 genre categories</li>
         </ul>
         <p><strong>Data Sources:</strong> Select Series Bible, Book Bible, Characters, Relationships, Timeline, Chapters to include in AI context.</p>
       </details>
