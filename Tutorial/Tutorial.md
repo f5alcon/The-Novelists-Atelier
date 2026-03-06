@@ -25,7 +25,8 @@ Welcome to The Novelist's Atelier, a free AI-powered writing and editing tool de
 
 ## 1. Series Tab
 
-[IMAGE: Series Tab Overview - Shows series name field, subtitle field, and series bible entries section](Book.jpg)
+# My Project
+<image-card alt="Book Tab" src="book.jpg"></image-card>
 
 ### Overview
 
