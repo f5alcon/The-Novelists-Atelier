@@ -4,7 +4,7 @@ AI-powered writing assistant for editing and world-building. Features multiple A
 
 ## Tutorial
 [Youtube Tutorial](https://youtu.be/watch?v=9akdLTKwpg0)
-
+[Written Tutorial](https://github.com/f5alcon/The-Novelists-Atelier/blob/main/Tutorial/Tutorial.md)
 
 ## Features
 
