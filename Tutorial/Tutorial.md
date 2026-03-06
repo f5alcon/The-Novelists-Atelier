@@ -26,7 +26,7 @@ Welcome to The Novelist's Atelier, a free AI-powered writing and editing tool de
 ## 1. Series Tab
 
 # My Project
-<image-card alt="Book Tab" src="book.jpg" ></image-card>
+
 
 ### Overview
 
@@ -44,7 +44,7 @@ The Series tab is your command center for managing multi-book series. It stores 
 
 ### Series Bible Entries
 
-[IMAGE: Series Bible Entry Editor - Shows title and content fields]
+![Series Tab](series.jpg)
 
 Each series bible entry contains:
 - **Title** - Name of the entry (e.g., "Magic System," "Main Faction," "Historical Timeline")
