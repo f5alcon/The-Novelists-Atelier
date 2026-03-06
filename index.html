@@ -3531,8 +3531,8 @@
     }
 
     .help-guide {
-      margin-bottom: 16px;
-      padding-bottom: 16px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
       border-bottom: 1px solid #1f1a12
     }
 
@@ -3541,6 +3541,55 @@
       margin: 0 0 6px;
       font-size: 13px;
       font-weight: normal
+    }
+
+    .help-guide details {
+      margin-top: 8px;
+    }
+
+    .help-guide summary {
+      cursor: pointer;
+      color: #c8a660;
+      padding: 8px 12px;
+      background: #1a1610;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .help-guide summary:hover {
+      background: #252018;
+    }
+
+    .help-guide summary h4 {
+      display: inline;
+      color: inherit;
+      margin: 0;
+    }
+
+    .help-guide details[open] summary {
+      background: #2a2318;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .help-guide details p,
+    .help-guide details ul {
+      margin: 12px;
+      padding: 12px;
+      background: #15120d;
+      border-radius: 0 0 4px 4px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #a89868;
+    }
+
+    .help-guide details ul {
+      margin: 8px 12px;
+      padding-left: 20px;
+    }
+
+    .help-guide details li {
+      margin-bottom: 4px;
     }
 
     .activity-log {
@@ -12131,81 +12180,217 @@ ${sourceText}`;
       container.innerHTML = `
     <div class="help-section">
       <h3>Tab Guides</h3>
+      <p style="color:#a89868;margin-bottom:16px">Click any section to expand.</p>
 
-      <div class="help-guide">
-        <h4>📖 Series Tab</h4>
-        <p>Global context for your entire series. Set up genre, tone, world-building bible, and series overview. Timeline and some settings here apply to all books.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>📖 Series Tab</h4></summary>
+        <p><strong>Overview:</strong> Global context for your entire series. Set up series name, subtitle, and series bible entries that apply to all books.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li><strong>Series Name:</strong> Your series title</li>
+          <li><strong>Subtitle:</strong> Optional tagline</li>
+          <li><strong>Series Bible:</strong> Add entries for magic systems, factions, history - anything that spans all books</li>
+          <li><strong>Export:</strong> Download series data as Markdown</li>
+        </ul>
+        <p><strong>Tips:</strong> Use the Series Bible for world-building elements that stay consistent across all books. Reference this content in AI prompts.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📖 Book Tab</h4>
-        <p>Individual book details. Title, book number, outline, and book-specific bible. Characters and timeline are managed in the Story tab.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>📖 Book Tab</h4></summary>
+        <p><strong>Overview:</strong> Individual book metadata within your series.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li><strong>Book Title:</strong> This book's name</li>
+          <li><strong>Book Number:</strong> Position in series (#1, #2, etc.)</li>
+          <li><strong>Book Bible:</strong> Book-specific world-building entries</li>
+        </ul>
+        <p><strong>Tips:</strong> Use Book Bible for magic variations, unique locations, or characters that only appear in this book.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📖 Chapter Tab</h4>
-        <p>Current chapter or scene. Work on your text, set up scene context (setting, goal, conflict, resolution), and manage multiple scenes.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>📖 Chapter Tab</h4></summary>
+        <p><strong>Overview:</strong> Your main editing workspace with real-time prose analysis.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li><strong>Prose Pulse:</strong> Real-time pacing analysis, dialogue %, and sentiment tracking</li>
+          <li><strong>Entity Links:</strong> Click any character/location to see all mentions</li>
+          <li><strong>Chapter Goals (S+C+R):</strong> Setting, Conflict, Resolution framework</li>
+          <li><strong>Document List:</strong> Select which chapter to edit</li>
+        </ul>
+        <p><strong>Tips:</strong> Aim for 20-40% dialogue. Use S+C+R to prevent sagging middles.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📖 Story Tab</h4>
-        <p>Central hub for story elements: Characters, Relationships (visual map), and Timeline. Saved at series level for multi-book projects. Genre Compare settings are also here.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>👤 Characters Tab</h4></summary>
+        <p><strong>Overview:</strong> View and manage all characters in your project.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li><strong>Character List:</strong> All characters with role badges</li>
+          <li><strong>Roles:</strong> Protagonist, Antagonist, Mentor, Ally, etc.</li>
+          <li><strong>Edit:</strong> Click any character to modify details</li>
+          <li><strong>Add:</strong> Create new characters</li>
+        </ul>
+        <p><strong>Fields:</strong> Name, Role, Age, Description, Goals, Conflicts, Arc, Inclusion level</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📖 Prompts Tab</h4>
-        <p>AI-powered editing tools. Choose from categories like Character Creation, World-Building, Copy Editing, Line Editing, and Developmental Editing. Use built-in prompts or create custom templates. Includes Chapter Purpose/Theme, Key Events, Character Growth, Backstory, Character Interactions, Exposition Delivery, Information Clarity, Information Relevance, New Character Introduction, Setting & World-Building, Tropes, Trope Subversion, Story Arc, Stakes Escalation, Subplot Resolution, Plot Holes, Character Motivations, Thematic Cohesion, Scene Purpose, Scene Openings, Scene Endings, POV Consistency, Scene-Level Conflict, Sentence Variety, Word Choice, Dialogue Naturalism, and AI Detection.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>💜 Relationships Tab</h4></summary>
+        <p><strong>Overview:</strong> Visualize and manage character connections.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li><strong>Relationship Types:</strong> Related, Friend, Family, Romantic, Rival, Enemy, Conflict, Mentor, Ally</li>
+          <li><strong>Strength Rating:</strong> 1-10 scale with visual bar</li>
+          <li><strong>Relationship Map:</strong> Interactive node diagram of all connections</li>
+        </ul>
+        <p><strong>Tips:</strong> Use the map to spot isolated characters or relationship clusters.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📖 Pipeline Tab</h4>
-        <p>Chain multiple prompts together. Each step's output feeds into the next, enabling complex editing workflows.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>🌍 World Tab</h4></summary>
+        <p><strong>Overview:</strong> Manage locations and world-building elements.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li><strong>Locations:</strong> Add places with type, description</li>
+          <li><strong>Sensory Palette:</strong> Sight, Sound, Smell, Touch, Taste keywords</li>
+          <li><strong>World Elements:</strong> Factions, religions, technologies</li>
+        </ul>
+        <p><strong>Tips:</strong> Use all five senses for immersive settings. Reference in AI prompts for vivid scene-setting.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📖 Settings Tab</h4>
-        <p>Configure API keys, choose AI models, adjust generation settings, manage projects, and export/import data.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>📝 Prompts Tab</h4></summary>
+        <p><strong>Overview:</strong> AI-powered editing tools with 12+ prompt categories.</p>
+        <p><strong>Categories:</strong></p>
+        <ul>
+          <li><strong>Character:</strong> Development, dialogue, arcs</li>
+          <li><strong>World Building:</strong> Magic systems, history, factions</li>
+          <li><strong>Locations:</strong> Setting development</li>
+          <li><strong>Developmental:</strong> Structure, pacing, plot holes</li>
+          <li><strong>Copy Editor:</strong> Grammar, consistency</li>
+          <li><strong>Line Editor:</strong> Sentence-level improvements</li>
+          <li><strong>Impact & Punch:</strong> Tighten weak prose</li>
+          <li><strong>Paragraph:</strong> Flow and structure</li>
+          <li><strong>Sentence:</strong> Clarity and variety</li>
+          <li><strong>Chapter Review:</strong> Full analysis</li>
+          <li><strong>Style Analysis:</strong> Voice consistency</li>
+          <li><strong>Custom:</strong> Your own prompts</li>
+        </ul>
+        <p><strong>Data Sources:</strong> Select Series Bible, Book Bible, Characters, Relationships, Timeline, Chapters to include in AI context.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>🔍 Global Search</h4>
-        <p>Click the 🔍 button in the header or press Ctrl/Cmd+F to search across all your project data. Searches chapters, characters, settings, bibles, timeline, and relationships. Results are limited to 100 with an indicator.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>🔄 Pipeline Tab</h4></summary>
+        <p><strong>Overview:</strong> Chain multiple AI prompts together for automated workflows.</p>
+        <p><strong>Modes:</strong></p>
+        <ul>
+          <li><strong>Refine:</strong> Each step's output feeds into the next (sequential)</li>
+          <li><strong>Parallel:</strong> All steps analyze same input independently</li>
+        </ul>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Add multiple steps with different prompts</li>
+          <li>Toggle "Use output from previous step"</li>
+          <li>Apply Style DNA option</li>
+          <li>Save/Load presets</li>
+        </ul>
+        <p><strong>Tips:</strong> Save common workflows as presets. Start with fewer steps and add as needed.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>🔍 Find & Replace</h4>
-        <p>In the Chapter tab, click "Find/Replace" to open the search panel. Use Find Next to locate occurrences, Replace to change one at a time, or Replace All to change all. Supports regex patterns and case-sensitive matching.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>⚙️ Settings Tab</h4></summary>
+        <p><strong>Overview:</strong> Configure API, display, and writing preferences.</p>
+        <p><strong>API Configuration:</strong></p>
+        <ul>
+          <li><strong>Provider:</strong> OpenRouter, Anthropic, OpenAI, Google, LM Studio</li>
+          <li><strong>Model:</strong> Claude 3.5 Sonnet, GPT-4o, Gemini Pro, etc.</li>
+          <li><strong>API Key:</strong> Password-encrypted storage (recommended)</li>
+        </ul>
+        <p><strong>Display:</strong> 14 themes, UI/Header scale 0.5x-2.0x</p>
+        <p><strong>Writing Preferences:</strong></p>
+        <ul>
+          <li><strong>POV:</strong> First Person, Third Person, Mixed</li>
+          <li><strong>AI Avoidance Rules:</strong> Punctuation Group, No Triplet Framing, Vary Sentence Structure, Filter Words, Snappy Dialogue, and more</li>
+        </ul>
+      </details>
 
-      <div class="help-guide">
-        <h4>🔍 Find All</h4>
-        <p>In the search modal's "Find All" tab, see all occurrences of your search term across all chapters. Click any result to jump to that location. Limited to 100 results.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>📅 Timeline Tab</h4></summary>
+        <p><strong>Overview:</strong> Manage chronological events with list and visual views.</p>
+        <p><strong>Event Types:</strong> Event, Birth, Death, War, Magic</p>
+        <p><strong>Fields:</strong> Year, Title, Description, Type</p>
+        <p><strong>Tips:</strong> Use negative years for "before" events. Link events to characters in descriptions.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>🧠 Smart Context</h4>
+      <details class="help-guide">
+        <summary><h4>📊 Analysis Tab</h4></summary>
+        <p><strong>Overview:</strong> Quantitative text analysis.</p>
+        <p><strong>Metrics:</strong></p>
+        <ul>
+          <li>Word count, sentence count</li>
+          <li>Average words per sentence</li>
+          <li>Passive voice count</li>
+          <li>Adverb count</li>
+          <li>Dialogue percentage</li>
+          <li>Common word frequency</li>
+        </ul>
+        <p><strong>Tips:</strong> Aim for 15-20 words/sentence average. Minimize passive voice.</p>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>🔍 Find Tab</h4></summary>
+        <p><strong>Overview:</strong> Search and replace across chapters.</p>
+        <p><strong>Options:</strong></p>
+        <ul>
+          <li><strong>Case Sensitive:</strong> Match exact case</li>
+          <li><strong>Regex:</strong> Use regular expressions</li>
+          <li><strong>Whole Word:</strong> Match complete words</li>
+        </ul>
+        <p><strong>Scope:</strong> Current chapter or all chapters</p>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>📈 Stats Tab</h4></summary>
+        <p><strong>Overview:</strong> Project statistics and word count breakdown.</p>
+        <p><strong>Shows:</strong></p>
+        <ul>
+          <li>Word count by section (Series, Book, Chapters)</li>
+          <li>Total chapters, characters, locations</li>
+          <li>Export to Markdown</li>
+        </ul>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>🌿 Branches Tab</h4></summary>
+        <p><strong>Overview:</strong> Delta versioning for "what-if" story branches.</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li><strong>Create Branch:</strong> Snapshot current version</li>
+          <li><strong>Switch:</strong> Work on different versions</li>
+          <li><strong>Merge:</strong> Combine branches with AI help</li>
+          <li><strong>Delete:</strong> Remove branches</li>
+        </ul>
+        <p><strong>Use Cases:</strong> Try different plot directions, keep multiple drafts, test co-author inputs.</p>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>🔍 Global Search</h4></summary>
+        <p>Click the 🔍 button in the header or press Ctrl/Cmd+F to search across all project data. Searches chapters, characters, settings, bibles, timeline, and relationships. Results limited to 100.</p>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>🧠 Smart Context</h4></summary>
         <p>Click the 🧠 Smart Context button in the Chapter tab to automatically optimize context sections. The AI analyzes your prompt and toggles context inclusions on/off to maximize relevance while saving tokens.</p>
-      </div>
+      </details>
 
-      <div class="help-guide">
-        <h4>📊 Local Analysis</h4>
-        <p>Click the 📊 Local Analysis button in the Chapter tab to analyze your chapter text. Shows word count, sentence stats, readability score, sentiment, and common words.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>🎨 Style DNA</h4></summary>
+        <p>In the Story tab's Style DNA tab, define your unique writing style with sample text. Export/Import presets, or use built-in styles. Enable "Apply Style DNA" in Pipeline steps to have AI match your voice.</p>
+      </details>
 
-      <div class="help-guide">
-        <h4>📊 Token Breakdown</h4>
-        <p>Click the 📊 Breakdown button in the Prompts tab to see how tokens are distributed across all context sections. Helps optimize your prompts to stay within limits.</p>
-      </div>
-
-      <div class="help-guide">
-        <h4>🎨 Style DNA</h4>
-        <p>In the Story tab's Style DNA tab, define your unique writing style with sample text. Export/Import presets, or use the built-in styles. Enable "Apply Style DNA" in Pipeline steps to have AI match your voice.</p>
-      </div>
-
-      <div class="help-guide">
-        <h4>🔐 Secure API Key Storage</h4>
-        <p>In Settings, choose how to store your API keys: <strong>Password-Encrypted</strong> (recommended, AES-256), <strong>Prompt Each Session</strong> (enter when needed), or <strong>Session Only</strong> (cleared on browser close). The default is Password-Encrypted for security.</p>
-      </div>
+      <details class="help-guide">
+        <summary><h4>🔐 Secure API Key Storage</h4></summary>
+        <p>In Settings, choose how to store your API keys: <strong>Password-Encrypted</strong> (recommended, AES-256), <strong>Prompt Each Session</strong> (enter when needed), or <strong>Session Only</strong> (cleared on browser close).</p>
+      </details>
     </div>
   `;
     }
