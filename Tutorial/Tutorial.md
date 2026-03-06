@@ -44,7 +44,8 @@ The Series tab is your command center for managing multi-book series. It stores 
 
 ### Series Bible Entries
 
-![Series Tab](Series Page.jpg)
+![Series Page](https://github.com/user-attachments/assets/c550681b-3915-41e3-9179-e558f5e95b59)
+
 
 Each series bible entry contains:
 - **Title** - Name of the entry (e.g., "Magic System," "Main Faction," "Historical Timeline")
@@ -73,7 +74,8 @@ Each series bible entry contains:
 
 ## 2. Book Tab
 
-[IMAGE: Book Tab Overview - Shows book title, number fields, and book bible section]
+![Book](https://github.com/user-attachments/assets/da3a448e-cc45-419c-8401-43dcc2c7b1d6)
+
 
 ### Overview
 
@@ -116,7 +118,8 @@ Similar to Series Bible but specific to this book:
 
 ## 3. Chapter Tab
 
-[IMAGE: Chapter Tab - Shows Prose Pulse analysis, document list, and chapter goals]
+![Chapter](https://github.com/user-attachments/assets/78cf48dc-4088-4ccc-b568-5938c7adba18)
+
 
 ### Overview
 
@@ -326,7 +329,8 @@ The World tab manages locations, settings, and world-building elements with rich
 
 ## 7. Prompts Tab
 
-[IMAGE: Prompts Tab - Shows category grid and prompt library]
+![Prompts](https://github.com/user-attachments/assets/6540fad9-bb61-48a5-9ca6-9fa64d8cf21f)
+
 
 ### Overview
 
@@ -334,7 +338,6 @@ The Prompts tab is your AI-powered editing toolkit with 12+ prompt categories co
 
 ### Prompt Categories
 
-[IMAGE: Category Grid - Shows all 12 categories with icons and colors]
 
 | Category | Icon | Color | Purpose |
 |----------|------|-------|---------|
@@ -410,7 +413,8 @@ Before running a prompt, select what context to include:
 
 ## 8. Pipeline Tab
 
-[IMAGE: Pipeline Tab - Shows Refine and Parallel modes with step configuration]
+![pipeline](https://github.com/user-attachments/assets/42e7c41a-98da-41cc-b049-d7df3c980137)
+
 
 ### Overview
 
@@ -427,7 +431,6 @@ The Pipeline tab lets you chain multiple AI prompts together for automated multi
 
 #### Pipeline Steps
 
-[IMAGE: Pipeline Step Editor - Shows category, prompt, and toggle options]
 
 Each step includes:
 - **Category** - Which prompt category
@@ -472,7 +475,10 @@ Each step includes:
 
 ## 9. Settings Tab
 
-[IMAGE: Settings Tab - Shows API, Display, Generation, and Writing Preferences sections]
+
+![settings 2](https://github.com/user-attachments/assets/25d43fc0-f229-43b3-9451-b0226ddbcef8)
+![settings 1](https://github.com/user-attachments/assets/aa5262b8-c9eb-468c-9fbe-6ca0feb72413)
+![settings 3](https://github.com/user-attachments/assets/59a7f3cb-87f1-49ce-ab8d-3f790e3ea508)
 
 ### Overview
 
@@ -768,7 +774,6 @@ The Stats tab displays comprehensive project statistics including word counts an
 
 ## 14. Branches Tab
 
-[IMAGE: Branches Tab - Shows branch list and delta versioning interface]
 
 ### Overview
 
