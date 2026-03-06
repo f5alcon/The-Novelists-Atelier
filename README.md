@@ -2,7 +2,7 @@
 
 AI-powered writing assistant for editing and world-building. Features multiple AI providers (Claude, GPT, Gemini), flexible context management at Series/Book/Chapter levels, and a privacy-first design with all data stored locally in your browser.
 
-## Tutorial
+## Tutorials
 [Youtube Tutorial](https://youtu.be/watch?v=9akdLTKwpg0)
 [Written Tutorial](https://github.com/f5alcon/The-Novelists-Atelier/blob/main/Tutorial/Tutorial.md)
 
