@@ -7958,7 +7958,13 @@ ${f.text || '[PASTE TEXT]'}
 
     function editCharacter(idx) {
       const chars = APP.book?.chars || [];
-      if (idx < 0 || idx >= chars.length) return;
+      const isNew = idx < 0 || idx >= chars.length;
+      if (isNew) {
+        idx = chars.length;
+        if (!APP.book) APP.book = {};
+        if (!APP.book.chars) APP.book.chars = [];
+        APP.book.chars.push({ id: mkId(), name: '', text: '', tags: [], inclusion: 'full' });
+      }
       const char = chars[idx];
       const name = char.name || '';
       const text = char.text || '';
@@ -7977,6 +7983,15 @@ ${f.text || '[PASTE TEXT]'}
       document.body.insertAdjacentHTML('beforeend', html);
     }
     window.editCharacter = editCharacter;
+
+    function addCharacter() {
+      if (!APP.book) APP.book = {};
+      if (!APP.book.chars) APP.book.chars = [];
+      const newIdx = APP.book.chars.length;
+      APP.book.chars.push({ id: mkId(), name: '', text: '', tags: [], inclusion: 'full' });
+      editCharacter(newIdx);
+    }
+    window.addCharacter = addCharacter;
 
     function saveCharEdit(idx) {
       const chars = APP.book?.chars || [];
@@ -11890,9 +11905,11 @@ ${sourceText}`;
       });
 
       // Show import options on hover/click hint
-      p.querySelector('#import_btn').addEventListener('mouseenter', () => {
-        importOptions.style.display = 'block';
-      });
+      if (importOptions) {
+        p.querySelector('#import_btn').addEventListener('mouseenter', () => {
+          importOptions.style.display = 'block';
+        });
+      }
 
       // Theme
       document.getElementById('theme_select').addEventListener('change', (e) => {
