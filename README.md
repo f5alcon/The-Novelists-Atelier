@@ -2,6 +2,9 @@
 
 AI-powered writing assistant for editing and world-building. Features multiple AI providers (Claude, GPT, Gemini), flexible context management at Series/Book/Chapter levels, and a privacy-first design with all data stored locally in your browser.
 
+## Disclaimer
+Many traditional publishers require zero AI usage to be published, if you are persuing this distribution method you are using this tool at your own risk. For self publishing refer to your local laws and regulations. [Authors Guild stance on AI](https://authorsguild.org/resource/ai-best-practices-for-authors/)
+
 ## Tutorials
 [Youtube Tutorial](https://youtu.be/watch?v=9akdLTKwpg0)
 [Written Tutorial](https://github.com/f5alcon/The-Novelists-Atelier/blob/main/Tutorial/Tutorial.md)
@@ -105,7 +108,7 @@ Toggle sections On/Off in the Chapter tab to control what context the AI receive
 
 ## Version
 
-1.1 Beta
+1.3 Beta
 
 ## License
 
