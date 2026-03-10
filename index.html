@@ -5079,6 +5079,40 @@
       filterWords: true,
       snappyDialogue: true,
       specificOverGeneric: true,
+      // New AI Rules (49 total)
+      quietlyAdverbs: true,
+      delveFriends: true,
+      tapestry: true,
+      servesAs: true,
+      negativeParallel: true,
+      notXNotY: true,
+      theXA_Y: true,
+      anaphora: true,
+      tricolon: true,
+      worthNoting: true,
+      superficial: true,
+      falseRanges: true,
+      gerund: true,
+      shortPunchy: true,
+      listicle: true,
+      hereKicker: true,
+      thinkOf: true,
+      imagine: true,
+      falseVuln: true,
+      truthSimple: true,
+      grandiose: true,
+      letsBreak: true,
+      vagueAttr: true,
+      invented: true,
+      boldBullets: true,
+      unicode: true,
+      fractal: true,
+      deadMetaphor: true,
+      historical: true,
+      onePoint: true,
+      duplication: true,
+      signposted: true,
+      despite: true,
       doNotUseWords: '',
       includeStyleDNA: false
     };
@@ -7079,7 +7113,7 @@ ${f.chapter || '[PASTE TEXT]'}
       get apiKey() { return this.apiKeys[this.provider] || ''; },
       model: localStorage.getItem('na_model') || 'anthropic/claude-sonnet-4-5',
       maxTokens: parseInt(localStorage.getItem('na_maxtok') || '4000'),
-      writingPrefs: JSON.parse(localStorage.getItem('na_writing_prefs') || 'null') || { ...WRITING_PREFS_DEFAULT },
+      writingPrefs: { ...WRITING_PREFS_DEFAULT, ...JSON.parse(localStorage.getItem('na_writing_prefs') || '{}') },
       genreCompare: JSON.parse(localStorage.getItem('na_genre') || 'null') || { preset: 'fantasy', customText: '' },
       series: { name: '', subName: '', bible: mkSec() },
       book: { title: '', bookNum: '', totalBooks: '', subNum: '', totalSub: '', bible: mkSec(), outline: mkSec(), chars: [{ id: mkId(), ...mkSec() }] },
@@ -8616,6 +8650,52 @@ ${f.chapter || '[PASTE TEXT]'}
       if (p.filterWords) rules.push('Use the "Ugly" Rule: Avoid filter words (e.g., "She saw the bird fly" → "The bird flew").');
       if (p.snappyDialogue) rules.push('Keep dialogue SNAPPY and INDIRECT: Use subtext and interruptions.');
       if (p.specificOverGeneric) rules.push('PREFER SPECIFIC over GENERIC: Instead of "he felt sad," describe the specific physical sensation.');
+      
+      // New AI Writing Tropes - Word Choice
+      if (p.quietlyAdverbs) rules.push('AVOID "quietly", "deeply", "fundamentally", "remarkably", "arguably" — magic adverbs that make mundane descriptions feel significant.');
+      if (p.delveFriends) rules.push('AVOID "delve", "certainly", "utilize", "leverage", "robust", "streamline", "harness" — overused AI vocabulary.');
+      if (p.tapestry) rules.push('AVOID "tapestry", "landscape", "paradigm", "synergy", "ecosystem", "framework" where simpler words would do.');
+      if (p.servesAs) rules.push('AVOID "serves as", "stands as", "marks", "represents" — replace with simple "is/are".');
+      
+      // New AI Writing Tropes - Sentence Structure
+      if (p.negativeParallel) rules.push('AVOID "It\'s not X — it\'s Y" pattern. This is the most common AI writing tell. One instance can be effective; ten is insulting.');
+      if (p.notXNotY) rules.push('AVOID "Not X. Not Y. Just Z." dramatic countdown pattern.');
+      if (p.theXA_Y) rules.push('AVOID "The X? A Y." rhetorical questions answered immediately.');
+      if (p.anaphora) rules.push('AVOID repeating the same sentence opening multiple times (Anaphora).');
+      if (p.tricolon) rules.push('AVOID overusing rule-of-three, especially extended to four or five.');
+      if (p.worthNoting) rules.push('AVOID filler transitions: "It\'s worth noting", "Importantly", "Interestingly", "Notably".');
+      if (p.superficial) rules.push('AVOID shallow "-ing" phrases: "highlighting its importance", "reflecting broader trends".');
+      if (p.falseRanges) rules.push('AVOID "from X to Y" where X and Y aren\'t on any real scale.');
+      if (p.gerund) rules.push('AVOID streams of verbless gerund fragments: "Fixing bugs. Writing features. Implementing tickets."');
+      
+      // New AI Writing Tropes - Paragraph Structure
+      if (p.shortPunchy) rules.push('AVOID excessive short sentence fragments as standalone paragraphs.');
+      if (p.listicle) rules.push('AVOID numbered points disguised as prose: "The first wall... The second wall..."');
+      
+      // New AI Writing Tropes - Tone
+      if (p.hereKicker) rules.push('AVOID "Here\'s the kicker", "Here\'s the thing" — false suspense that delivers unremarkable points.');
+      if (p.thinkOf) rules.push('AVOID "Think of it as..." and "It\'s like a..." patronizing analogies.');
+      if (p.imagine) rules.push('AVOID "Imagine a world where..." invitations to futurism.');
+      if (p.falseVuln) rules.push('AVOID simulated self-awareness: "And yes, I\'m openly in love with...". Real vulnerability is specific.');
+      if (p.truthSimple) rules.push('AVOID asserting things are obvious: "The reality is simpler", "History is clear".');
+      if (p.grandiose) rules.push('AVOID inflating everything to world-historical significance.');
+      if (p.letsBreak) rules.push('AVOID "Let\'s break this down", "Let\'s unpack this" — assumes reader needs hand-holding.');
+      if (p.vagueAttr) rules.push('AVOID "experts argue", "observers note" without naming anyone.');
+      if (p.invented) rules.push('AVOID invented compound labels: "supervision paradox", "acceleration trap".');
+      
+      // New AI Writing Tropes - Formatting
+      if (p.boldBullets) rules.push('AVOID every bullet starting with bold text: "**Security**: Environment-based..."');
+      if (p.unicode) rules.push('AVOID unicode arrows (->), smart quotes. Use straight quotes and -> or =>.');
+      
+      // New AI Writing Tropes - Composition
+      if (p.fractal) rules.push('AVOID "What I\'m going to tell you; what I\'m telling you" at every level.');
+      if (p.deadMetaphor) rules.push('AVOID latching onto a single metaphor and repeating it 5-10 times.');
+      if (p.historical) rules.push('AVOID rapid-fire historical listing: "Apple didn\'t build Uber. Facebook didn\'t build Spotify..."');
+      if (p.onePoint) rules.push('AVOID making one argument and restating it in 10 different ways.');
+      if (p.duplication) rules.push('AVOID repeating entire sections verbatim within the same piece.');
+      if (p.signposted) rules.push('AVOID "In conclusion", "To sum up", "In summary". The reader can feel it.');
+      if (p.despite) rules.push('AVOID "Despite its challenges..." rigid formula with immediate dismissal.');
+      
       if (p.doNotUseWords && p.doNotUseWords.trim()) {
         const words = p.doNotUseWords.split(',').map(w => w.trim()).filter(w => w);
         if (words.length) rules.push(`DO NOT use these words: ${words.join(', ')}`);
@@ -9813,7 +9893,9 @@ ${f.chapter || '[PASTE TEXT]'}
       if (addBdBtn) {
         addBdBtn.addEventListener('click', () => {
           APP.chapter.breakdowns = APP.chapter.breakdowns || [];
-          APP.chapter.breakdowns.push({ type: 'chapter', number: APP.chapter.breakdowns.length + 1, text: '', inclusion: 'full' });
+          // Get next available number (highest + 1)
+          const maxNum = APP.chapter.breakdowns.reduce((max, b) => Math.max(max, b.number || 0), 0);
+          APP.chapter.breakdowns.push({ type: 'chapter', number: maxNum + 1, text: '', inclusion: 'full' });
           saveState();
           renderBreakdowns();
         });
@@ -9927,7 +10009,15 @@ ${f.chapter || '[PASTE TEXT]'}
       });
 
       div.querySelector('.fc-chap-num').addEventListener('input', e => {
-        APP.chapter.fullChapters[idx].number = parseInt(e.target.value) || 0;
+        let num = parseInt(e.target.value) || 1;
+        if (num < 1) num = 1;
+        APP.chapter.fullChapters[idx].number = num;
+        saveState();
+      });
+
+      div.querySelector('.fc-chap-num').addEventListener('change', e => {
+        // Auto-sort after number change
+        APP.chapter.fullChapters.sort((a, b) => (a.number || 0) - (b.number || 0));
         saveState();
         renderFullChapters();
       });
@@ -10005,7 +10095,15 @@ ${f.chapter || '[PASTE TEXT]'}
         });
 
         div.querySelector('.breakdown-num').addEventListener('input', e => {
-          APP.chapter.breakdowns[idx].number = parseInt(e.target.value) || 0;
+          let num = parseInt(e.target.value) || 1;
+          if (num < 1) num = 1;  // Prevent negative/zero
+          APP.chapter.breakdowns[idx].number = num;
+          saveState();
+        });
+
+        div.querySelector('.breakdown-num').addEventListener('change', e => {
+          // Auto-sort after number change
+          APP.chapter.breakdowns.sort((a, b) => (a.number || 0) - (b.number || 0));
           saveState();
           renderBreakdowns();
         });
@@ -11148,6 +11246,20 @@ ${sourceText}`;
     // PANEL: SETTINGS
     // ═══════════════════════════════════════════════════════════
 
+    function togglePrefGroup(groupId) {
+      const sub = document.getElementById(groupId + '_sub');
+      const icon = document.getElementById(groupId + '_icon');
+      if (sub) {
+        if (sub.style.display === 'none') {
+          sub.style.display = 'block';
+          if (icon) icon.textContent = '▼';
+        } else {
+          sub.style.display = 'none';
+          if (icon) icon.textContent = '▶';
+        }
+      }
+    }
+
     function renderSettings() {
       const p = document.getElementById('panel-settings');
       // Filter models by current provider
@@ -11421,46 +11533,113 @@ ${sourceText}`;
               </div>
             </div>
             <div class="pref-section">
-              <div class="pref-section-lbl">AI Avoidance Rules (all ON by default)</div>
+              <div class="pref-section-lbl">AI Avoidance Rules (49 rules - all ON by default)</div>
+              
+              <!-- Basic Rules - Always Visible -->
               <div class="pref-group">
-                <div class="pref-group-lbl">
-                  <input type="checkbox" id="punctuation_grp" ${APP.writingPrefs.punctuation ? 'checked' : ''} style="accent-color:#c8a660">
-                  Punctuation Group
-                </div>
-                <div class="pref-sub" style="display:${APP.writingPrefs.punctuation ? 'block' : 'none'}" id="punctuation_sub">
-                  <div class="pref-row"><label>No em-dashes (—)</label><input type="checkbox" id="avoid_emdashes" ${APP.writingPrefs.avoidEmDashes ? 'checked' : ''}></div>
-                  <div class="pref-row"><label>No semicolons</label><input type="checkbox" id="avoid_semicolons" ${APP.writingPrefs.avoidSemicolons ? 'checked' : ''}></div>
-                  <div class="pref-row"><label>No colons</label><input type="checkbox" id="avoid_colons" ${APP.writingPrefs.avoidColons ? 'checked' : ''}></div>
+                <div class="pref-group-lbl"><input type="checkbox" id="ai_rules_basic_all" checked style="accent-color:#c8a660"> Basic Rules (11)</div>
+                <div class="pref-sub" id="basic_rules_sub">
+                  <div class="pref-row"><label title="Avoid em-dashes for dramatic pauses">No em-dashes (—)</label><input type="checkbox" id="avoid_emdashes" ${APP.writingPrefs.avoidEmDashes ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid semicolons">No semicolons</label><input type="checkbox" id="avoid_semicolons" ${APP.writingPrefs.avoidSemicolons ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid colons">No colons</label><input type="checkbox" id="avoid_colons" ${APP.writingPrefs.avoidColons ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid grouping ideas in threes">No Triplet Framing</label><input type="checkbox" id="avoid_triplet" ${APP.writingPrefs.avoidTriplet ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid over-description at chapter ends">No Golden Sunset</label><input type="checkbox" id="avoid_golden_sunset" ${APP.writingPrefs.avoidGoldenSunset ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid sudden tonal shifts">No Inspirational Pivot</label><input type="checkbox" id="avoid_inspirational" ${APP.writingPrefs.avoidInspirationalPivot ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid repeating opening themes">No AI Bookending</label><input type="checkbox" id="avoid_show_summarize" ${APP.writingPrefs.avoidShowDontSummarize ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Mix sentence lengths">Vary sentence structure</label><input type="checkbox" id="vary_sentence" ${APP.writingPrefs.varySentenceStructure ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Avoid felt, saw, heard...">Avoid filter words</label><input type="checkbox" id="filter_words" ${APP.writingPrefs.filterWords ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Natural dialogue">Snappy dialogue</label><input type="checkbox" id="snappy_dialogue" ${APP.writingPrefs.snappyDialogue ? 'checked' : ''}></div>
+                  <div class="pref-row"><label title="Be specific not vague">Specific over generic</label><input type="checkbox" id="specific_generic" ${APP.writingPrefs.specificOverGeneric ? 'checked' : ''}></div>
                 </div>
               </div>
+
+              <!-- Word Choice -->
               <div class="pref-group">
-                <div class="pref-group-lbl">
-                  <input type="checkbox" id="avoid_triplet" ${APP.writingPrefs.avoidTriplet ? 'checked' : ''} style="accent-color:#c8a660">
-                  No Triplet Framing
+                <div class="pref-group-lbl" onclick="togglePrefGroup('word_choice')" style="cursor:pointer">
+                  <span id="word_choice_icon">▶</span> Word Choice (4)
+                </div>
+                <div class="pref-sub" id="word_choice_sub" style="display:none">
+                  <div class="pref-row"><label title="Avoid quietly, deeply, fundamentally...">"Quietly" and Magic Adverbs</label><input type="checkbox" id="rule_quietly_adverbs" checked></div>
+                  <div class="pref-row"><label title="Avoid delve, utilize, leverage...">"Delve" and Friends</label><input type="checkbox" id="rule_delve_friends" checked></div>
+                  <div class="pref-row"><label title="Avoid tapestry, landscape...">"Tapestry" and "Landscape"</label><input type="checkbox" id="rule_tapestry" checked></div>
+                  <div class="pref-row"><label title="Avoid serves as, stands as...">The "Serves As" Dodge</label><input type="checkbox" id="rule_serves_as" checked></div>
                 </div>
               </div>
+
+              <!-- Sentence Structure -->
               <div class="pref-group">
-                <div class="pref-group-lbl">
-                  <input type="checkbox" id="avoid_golden_sunset" ${APP.writingPrefs.avoidGoldenSunset ? 'checked' : ''} style="accent-color:#c8a660">
-                  No Golden Sunset (over-description)
+                <div class="pref-group-lbl" onclick="togglePrefGroup('sentence_structure')" style="cursor:pointer">
+                  <span id="sentence_structure_icon">▶</span> Sentence Structure (9)
+                </div>
+                <div class="pref-sub" id="sentence_structure_sub" style="display:none">
+                  <div class="pref-row"><label title="Avoid It's not X — it's Y">Negative Parallelism</label><input type="checkbox" id="rule_negative_parallel" checked></div>
+                  <div class="pref-row"><label title="Avoid Not X. Not Y. Just Z.">"Not X. Not Y. Just Z."</label><input type="checkbox" id="rule_not_x_not_y" checked></div>
+                  <div class="pref-row"><label title="Avoid The X? A Y.">"The X? A Y."</label><input type="checkbox" id="rule_the_x_a_y" checked></div>
+                  <div class="pref-row"><label title="Avoid repeating sentence openings">Anaphora Abuse</label><input type="checkbox" id="rule_anaphora" checked></div>
+                  <div class="pref-row"><label title="Avoid overusing rule-of-three">Tricolon Abuse</label><input type="checkbox" id="rule_tricolon" checked></div>
+                  <div class="pref-row"><label title="Avoid It's worth noting...">"It's Worth Noting"</label><input type="checkbox" id="rule_worth_noting" checked></div>
+                  <div class="pref-row"><label title="Avoid shallow -ing phrases">Superficial Analyses</label><input type="checkbox" id="rule_superficial" checked></div>
+                  <div class="pref-row"><label title="Avoid from X to Y without scale">False Ranges</label><input type="checkbox" id="rule_false_ranges" checked></div>
+                  <div class="pref-row"><label title="Avoid gerund fragment streams">Gerund Fragment Litany</label><input type="checkbox" id="rule_gerund" checked></div>
                 </div>
               </div>
+
+              <!-- Paragraph Structure -->
               <div class="pref-group">
-                <div class="pref-group-lbl">
-                  <input type="checkbox" id="avoid_inspirational" ${APP.writingPrefs.avoidInspirationalPivot ? 'checked' : ''} style="accent-color:#c8a660">
-                  No Inspirational Pivot
+                <div class="pref-group-lbl" onclick="togglePrefGroup('paragraph_structure')" style="cursor:pointer">
+                  <span id="paragraph_structure_icon">▶</span> Paragraph Structure (2)
+                </div>
+                <div class="pref-sub" id="paragraph_structure_sub" style="display:none">
+                  <div class="pref-row"><label title="Avoid excessive fragments">Short Punchy Fragments</label><input type="checkbox" id="rule_short_punchy" checked></div>
+                  <div class="pref-row"><label title="Avoid disguised listicles">Listicle in a Trench Coat</label><input type="checkbox" id="rule_listicle" checked></div>
                 </div>
               </div>
+
+              <!-- Tone -->
               <div class="pref-group">
-                <div class="pref-group-lbl">
-                  <input type="checkbox" id="avoid_show_summarize" ${APP.writingPrefs.avoidShowDontSummarize ? 'checked' : ''} style="accent-color:#c8a660">
-                  No AI Bookending
+                <div class="pref-group-lbl" onclick="togglePrefGroup('tone_rules')" style="cursor:pointer">
+                  <span id="tone_rules_icon">▶</span> Tone (9)
+                </div>
+                <div class="pref-sub" id="tone_rules_sub" style="display:none">
+                  <div class="pref-row"><label title="Avoid Here's the kicker">"Here's the Kicker"</label><input type="checkbox" id="rule_here_kicker" checked></div>
+                  <div class="pref-row"><label title="Avoid Think of it as...">"Think of It As..."</label><input type="checkbox" id="rule_think_of" checked></div>
+                  <div class="pref-row"><label title="Avoid Imagine a world where...">"Imagine a World Where..."</label><input type="checkbox" id="rule_imagine" checked></div>
+                  <div class="pref-row"><label title="Avoid performative honesty">False Vulnerability</label><input type="checkbox" id="rule_false_vuln" checked></div>
+                  <div class="pref-row"><label title="Avoid The truth is simple">"The Truth Is Simple"</label><input type="checkbox" id="rule_truth_simple" checked></div>
+                  <div class="pref-row"><label title="Avoid world-historical stakes">Grandiose Stakes Inflation</label><input type="checkbox" id="rule_grandiose" checked></div>
+                  <div class="pref-row"><label title="Avoid Let's break this down">"Let's Break This Down"</label><input type="checkbox" id="rule_lets_break" checked></div>
+                  <div class="pref-row"><label title="Avoid experts say without naming">Vague Attributions</label><input type="checkbox" id="rule_vague_attr" checked></div>
+                  <div class="pref-row"><label title="Avoid supervision paradox...">Invented Concept Labels</label><input type="checkbox" id="rule_invented" checked></div>
                 </div>
               </div>
-              <div class="pref-row"><label>Vary sentence structure</label><input type="checkbox" id="vary_sentence" ${APP.writingPrefs.varySentenceStructure ? 'checked' : ''}></div>
-              <div class="pref-row"><label>Avoid filter words</label><input type="checkbox" id="filter_words" ${APP.writingPrefs.filterWords ? 'checked' : ''}></div>
-              <div class="pref-row"><label>Snappy dialogue</label><input type="checkbox" id="snappy_dialogue" ${APP.writingPrefs.snappyDialogue ? 'checked' : ''}></div>
-              <div class="pref-row"><label>Specific over generic</label><input type="checkbox" id="specific_generic" ${APP.writingPrefs.specificOverGeneric ? 'checked' : ''}></div>
+
+              <!-- Formatting -->
+              <div class="pref-group">
+                <div class="pref-group-lbl" onclick="togglePrefGroup('formatting_rules')" style="cursor:pointer">
+                  <span id="formatting_rules_icon">▶</span> Formatting (2)
+                </div>
+                <div class="pref-sub" id="formatting_rules_sub" style="display:none">
+                  <div class="pref-row"><label title="Avoid **Bold**: text">Bold-First Bullets</label><input type="checkbox" id="rule_bold_bullets" checked></div>
+                  <div class="pref-row"><label title="Avoid →, smart quotes">Unicode Decoration</label><input type="checkbox" id="rule_unicode" checked></div>
+                </div>
+              </div>
+
+              <!-- Composition -->
+              <div class="pref-group">
+                <div class="pref-group-lbl" onclick="togglePrefGroup('composition_rules')" style="cursor:pointer">
+                  <span id="composition_rules_icon">▶</span> Composition (7)
+                </div>
+                <div class="pref-sub" id="composition_rules_sub" style="display:none">
+                  <div class="pref-row"><label title="Avoid summary at every level">Fractal Summaries</label><input type="checkbox" id="rule_fractal" checked></div>
+                  <div class="pref-row"><label title="Avoid repeating same metaphor">The Dead Metaphor</label><input type="checkbox" id="rule_dead_metaphor" checked></div>
+                  <div class="pref-row"><label title="Avoid Apple didn't build...">Historical Analogy Stacking</label><input type="checkbox" id="rule_historical" checked></div>
+                  <div class="pref-row"><label title="Avoid restating same point">One-Point Dilution</label><input type="checkbox" id="rule_one_point" checked></div>
+                  <div class="pref-row"><label title="Avoid repeating verbatim">Content Duplication</label><input type="checkbox" id="rule_duplication" checked></div>
+                  <div class="pref-row"><label title="Avoid In conclusion...">The Signposted Conclusion</label><input type="checkbox" id="rule_signposted" checked></div>
+                  <div class="pref-row"><label title="Avoid Despite challenges...">"Despite Its Challenges..."</label><input type="checkbox" id="rule_despite" checked></div>
+                </div>
+              </div>
+
             </div>
             <div class="pref-section">
               <div class="pref-section-lbl">Do Not Use Words (comma-separated)</div>
@@ -12113,7 +12292,7 @@ ${sourceText}`;
       });
 
       // Writing Preferences
-      const wpPrefs = ['inner_monologue', 'avoid_emdashes', 'avoid_semicolons', 'avoid_colons', 'avoid_triplet', 'avoid_golden_sunset', 'avoid_inspirational', 'avoid_show_summarize', 'vary_sentence', 'filter_words', 'snappy_dialogue', 'specific_generic'];
+      const wpPrefs = ['inner_monologue', 'avoid_emdashes', 'avoid_semicolons', 'avoid_colons', 'avoid_triplet', 'avoid_golden_sunset', 'avoid_inspirational', 'avoid_show_summarize', 'vary_sentence', 'filter_words', 'snappy_dialogue', 'specific_generic', 'rule_quietly_adverbs', 'rule_delve_friends', 'rule_tapestry', 'rule_serves_as', 'rule_negative_parallel', 'rule_not_x_not_y', 'rule_the_x_a_y', 'rule_anaphora', 'rule_tricolon', 'rule_worth_noting', 'rule_superficial', 'rule_false_ranges', 'rule_gerund', 'rule_short_punchy', 'rule_listicle', 'rule_here_kicker', 'rule_think_of', 'rule_imagine', 'rule_false_vuln', 'rule_truth_simple', 'rule_grandiose', 'rule_lets_break', 'rule_vague_attr', 'rule_invented', 'rule_bold_bullets', 'rule_unicode', 'rule_fractal', 'rule_dead_metaphor', 'rule_historical', 'rule_one_point', 'rule_duplication', 'rule_signposted', 'rule_despite'];
       wpPrefs.forEach(id => {
         const el = p.querySelector('#' + id);
         if (el) el.addEventListener('change', e => {
@@ -12123,12 +12302,46 @@ ${sourceText}`;
         });
       });
 
-      // Punctuation group toggle
-      p.querySelector('#punctuation_grp').addEventListener('change', e => {
-        APP.writingPrefs.punctuation = e.target.checked;
-        document.getElementById('punctuation_sub').style.display = e.target.checked ? 'block' : 'none';
-        saveWritingPrefs();
+      // New AI Rules checkboxes - use event delegation
+      const newRuleIds = [
+        'rule_quietly_adverbs', 'rule_delve_friends', 'rule_tapestry', 'rule_serves_as',
+        'rule_negative_parallel', 'rule_not_x_not_y', 'rule_the_x_a_y', 'rule_anaphora', 'rule_tricolon',
+        'rule_worth_noting', 'rule_superficial', 'rule_false_ranges', 'rule_gerund',
+        'rule_short_punchy', 'rule_listicle',
+        'rule_here_kicker', 'rule_think_of', 'rule_imagine', 'rule_false_vuln', 'rule_truth_simple',
+        'rule_grandiose', 'rule_lets_break', 'rule_vague_attr', 'rule_invented',
+        'rule_bold_bullets', 'rule_unicode',
+        'rule_fractal', 'rule_dead_metaphor', 'rule_historical', 'rule_one_point',
+        'rule_duplication', 'rule_signposted', 'rule_despite'
+      ];
+      
+      newRuleIds.forEach(id => {
+        const el = p.querySelector('#' + id);
+        if (el) {
+          el.addEventListener('change', e => {
+            const key = id.replace(/_([a-z])/g, (m, c) => c.toUpperCase());
+            APP.writingPrefs[key] = e.target.checked;
+            saveWritingPrefs();
+          });
+        }
       });
+
+      // Basic rules "select all" checkbox
+      const basicAllEl = p.querySelector('#ai_rules_basic_all');
+      if (basicAllEl) {
+        basicAllEl.addEventListener('change', e => {
+          const basicIds = ['avoid_emdashes', 'avoid_semicolons', 'avoid_colons', 'avoid_triplet', 'avoid_golden_sunset', 'avoid_inspirational', 'avoid_show_summarize', 'vary_sentence', 'filter_words', 'snappy_dialogue', 'specific_generic'];
+          basicIds.forEach(id => {
+            const el = p.querySelector('#' + id);
+            if (el) {
+              el.checked = e.target.checked;
+              const key = id.replace(/_([a-z])/g, (m, c) => c.toUpperCase());
+              APP.writingPrefs[key] = e.target.checked;
+            }
+          });
+          saveWritingPrefs();
+        });
+      }
 
       // POV
       p.querySelectorAll('input[name="pov"]').forEach(el => {
