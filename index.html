@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Novelist's Atelier — 1.3 Beta</title>
+  <title>The Novelist's Atelier — 1.35 Beta</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap"
     rel="stylesheet">
   <style>
     *,
@@ -39,6 +39,27 @@
       --accent: #c8a660;
       --accent2: #7aac74;
       --accent3: #c06050;
+
+      /* ── Design System Tokens ── */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 32px;
+      --space-6: 48px;
+
+      --r-sm:   5px;
+      --r-md:   8px;
+      --r-lg:   12px;
+      --r-pill: 999px;
+
+      --shadow-sm:  0 1px 4px rgba(0,0,0,0.4);
+      --shadow-md:  0 4px 14px rgba(0,0,0,0.5);
+      --shadow-lg:  0 8px 28px rgba(0,0,0,0.6);
+      --shadow-glow: 0 0 0 2px rgba(200,166,96,0.35);
+
+      --ease:       cubic-bezier(0.4,0,0.2,1);
+      --transition: all 0.18s var(--ease);
     }
 
     /* Theme: Soft Beach */
@@ -322,8 +343,16 @@
 
     body {
       background: var(--bg);
-      font-family: 'Crimson Pro', Georgia, serif;
-      color: var(--text)
+      font-family: 'Inter', 'Crimson Pro', Georgia, sans-serif;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Editor textarea keeps Lora for comfortable reading */
+    #editor-area, .chapter-body, .ctx-scroll p {
+      font-family: 'Lora', 'Crimson Pro', Georgia, serif;
+      line-height: 1.75;
     }
 
     /* Main content scaled */
@@ -389,7 +418,7 @@
 
     ::-webkit-scrollbar-thumb {
       background: #2a2118;
-      border-radius: 2px
+      border-radius: var(--r-pill)
     }
 
     /* ─── LAYOUT ─────────────────────────────────────── */
@@ -408,10 +437,11 @@
       padding: 0 20px;
       height: 50px;
       border-bottom: 1px solid var(--border);
-      background: #0b0a08;
+      background: linear-gradient(180deg, #0d0c0a 0%, #0b0a08 100%);
       flex-shrink: 0;
       font-size: 17px;
       position: relative;
+      box-shadow: 0 1px 0 rgba(200,166,96,0.05);
     }
 
     .brand {
@@ -564,13 +594,15 @@
       right: 0;
       bottom: 0;
       background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
       z-index: 2000;
       align-items: center;
-      justify-content: center
+      justify-content: center;
     }
 
     .search-modal-overlay.open {
-      display: flex
+      display: flex;
     }
 
     .search-modal {
@@ -578,10 +610,11 @@
       border: 1px solid #3a3020;
       width: 90%;
       max-width: 600px;
-      border-radius: 4px;
+      border-radius: var(--r-lg);
       max-height: 80vh;
       display: flex;
-      flex-direction: column
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
     }
 
     .search-modal-hd {
@@ -590,28 +623,32 @@
       padding: 12px 16px;
       background: #141209;
       border-bottom: 1px solid #252015;
-      gap: 10px
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      gap: 10px;
     }
 
     .search-modal-hd h3 {
       margin: 0;
       font-size: 14px;
       color: #c8a660;
-      flex: 1
+      flex: 1;
     }
 
     .search-input {
       flex: 1;
-      padding: 8px;
+      padding: 8px 10px;
       background: #0f0c09;
       border: 1px solid #3a3020;
+      border-radius: var(--r-sm);
       color: #c8a660;
-      font-size: 14px
+      font-size: 14px;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     .search-input:focus {
       outline: none;
-      border-color: #c8a660
+      border-color: #c8a660;
+      box-shadow: 0 0 0 2px rgba(200,166,96,0.15);
     }
 
     .search-options {
@@ -899,13 +936,13 @@
       background: transparent;
       border: 1px solid transparent;
       color: #50483a;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Inter', 'JetBrains Mono', monospace;
       font-size: 9px;
       letter-spacing: .08em;
       text-transform: uppercase;
       cursor: pointer;
-      border-radius: 2px;
-      transition: all .12s;
+      border-radius: var(--r-sm);
+      transition: var(--transition);
       display: flex;
       align-items: center;
       gap: 5px;
@@ -913,13 +950,15 @@
 
     .tab-btn:hover {
       color: #a09070;
-      border-color: #2a2118
+      border-color: #2a2118;
+      background: rgba(200,166,96,0.04);
     }
 
     .tab-btn.active {
       color: #c8a660;
       border-color: #3a3020;
-      background: #141109
+      background: #141109;
+      box-shadow: inset 0 1px 0 rgba(200,166,96,0.08);
     }
 
     .tab-dot {
@@ -958,7 +997,9 @@
     .ctx-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 24px
+      overflow-x: hidden;
+      padding: 20px 24px;
+      min-width: 0;
     }
 
     .ctx-head {
@@ -1554,30 +1595,31 @@
 
     .pcatbtn {
       width: 100%;
-      padding: 6px 13px;
+      padding: 7px 13px;
       background: transparent;
       border: none;
       border-left: 2px solid transparent;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 7px;
-      font-family: 'Crimson Pro', serif;
-      font-size: 13px;
+      gap: 8px;
+      font-family: 'Inter', 'Crimson Pro', serif;
+      font-size: 12.5px;
       color: #60584a;
       text-align: left;
-      transition: all .12s;
+      transition: var(--transition);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
     }
 
     .pcatbtn:hover {
       color: #a89868;
-      background: #0f0d09
+      background: rgba(200,166,96,0.05);
     }
 
     .pcatbtn.pca {
       color: #e0d3bc;
-      background: #0f0d09;
-      border-left-color: var(--cc)
+      background: rgba(200,166,96,0.07);
+      border-left-color: var(--cc);
     }
 
     .pci {
@@ -1632,43 +1674,45 @@
 
     .pcrd {
       margin: 3px 7px;
-      padding: 7px 9px;
+      padding: 8px 10px;
       background: transparent;
       border: 1px solid transparent;
-      border-radius: 3px;
+      border-radius: var(--r-sm);
       cursor: pointer;
       text-align: left;
-      transition: all .12s;
+      transition: var(--transition);
       width: calc(100% - 14px);
     }
 
     .pcrd:hover {
-      background: #0f0d09;
-      border-color: #1e1910
+      background: rgba(200,166,96,0.04);
+      border-color: #242010;
+      box-shadow: var(--shadow-sm);
     }
 
     .pcrd.pcra {
       background: #120f08;
-      border-color: var(--cc)
+      border-color: var(--cc);
+      box-shadow: 0 0 0 1px rgba(var(--cc), 0.08);
     }
 
     .pcrd-t {
-      font-family: 'Crimson Pro', serif;
-      font-size: 13px;
-      font-weight: 600;
+      font-family: 'Inter', 'Crimson Pro', serif;
+      font-size: 12.5px;
+      font-weight: 500;
       color: #a89868;
-      margin-bottom: 2px
+      margin-bottom: 3px;
     }
 
     .pcra .pcrd-t {
-      color: #e0d3bc
+      color: #e0d3bc;
     }
 
     .pcrd-d {
-      font-size: 11px;
+      font-size: 10.5px;
       color: #40382a;
       font-style: italic;
-      line-height: 1.4
+      line-height: 1.45;
     }
 
     /* prompt editor */
@@ -1676,7 +1720,8 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      overflow: hidden
+      overflow: hidden;
+      min-width: 0;
     }
 
     .p-empty {
@@ -1722,11 +1767,13 @@
     .p-ebody {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 14px 18px;
       display: flex;
       flex-direction: column;
       gap: 11px;
-      min-height: 0
+      min-height: 0;
+      min-width: 0;
     }
 
     .pfl {
@@ -1756,6 +1803,8 @@
       transition: border-color .12s;
       resize: vertical;
       width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .pfl input:focus,
@@ -1833,6 +1882,8 @@
       flex-direction: column;
       max-height: 45vh;
       min-height: 120px;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .out-toolbar {
@@ -1844,6 +1895,7 @@
       flex-shrink: 0;
       gap: 8px;
       flex-wrap: wrap;
+      min-width: 0;
     }
 
     .out-status {
@@ -1879,50 +1931,58 @@
     }
 
     .run-btn {
-      padding: 4px 14px;
+      padding: 5px 16px;
       background: #c8a660;
       color: #090807;
       border: none;
-      border-radius: 2px;
-      font-family: 'JetBrains Mono', monospace;
+      border-radius: var(--r-sm);
+      font-family: 'Inter', 'JetBrains Mono', monospace;
       font-size: 9px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      letter-spacing: .05em;
-      transition: all .12s;
+      letter-spacing: .06em;
+      transition: var(--transition);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset, var(--shadow-sm);
     }
 
     .run-btn:hover {
-      background: #dbb870
+      background: #dbb870;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, var(--shadow-md);
+      transform: translateY(-1px);
     }
+
+    .run-btn:active { transform: translateY(0); }
 
     .run-btn:disabled {
       background: #2a2418;
       color: #504830;
-      cursor: not-allowed
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
     }
 
     .run-btn.running {
       background: #8a6a30;
-      color: #e0d3bc
+      color: #e0d3bc;
     }
 
     .stop-btn {
-      padding: 4px 10px;
+      padding: 5px 12px;
       background: #2a1010;
       border: 1px solid #4a2020;
-      border-radius: 2px;
+      border-radius: var(--r-sm);
       color: #c06050;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Inter', 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
-      transition: all .12s;
+      transition: var(--transition);
       letter-spacing: .05em;
     }
 
     .stop-btn:hover {
       background: #381818;
-      border-color: #c06050
+      border-color: #c06050;
+      box-shadow: 0 0 0 2px rgba(192,96,80,0.15);
     }
 
     .sec-btn {
@@ -1952,6 +2012,7 @@
     .out-text {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 10px 18px;
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
@@ -1959,6 +2020,9 @@
       line-height: 1.75;
       white-space: pre-wrap;
       word-break: break-word;
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .out-placeholder {
@@ -1998,7 +2062,8 @@
       flex: 1;
       display: flex;
       overflow: hidden;
-      gap: 0
+      gap: 0;
+      min-width: 0;
     }
 
     .pipe-builder {
@@ -2013,11 +2078,13 @@
     .pipe-results {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 0;
-      background: var(--bg)
+      background: var(--bg);
+      min-width: 0;
     }
 
     .pipe-hd {
@@ -2215,37 +2282,38 @@
     .step-field textarea {
       background: #090806;
       border: 1px solid #181510;
-      border-radius: 2px;
+      border-radius: var(--r-sm);
       color: #a89868;
-      font-family: 'Crimson Pro', serif;
+      font-family: 'Inter', 'Crimson Pro', serif;
       font-size: 13px;
-      padding: 5px 8px;
+      padding: 6px 10px;
       outline: none;
       resize: vertical;
       width: 100%;
-      transition: border-color .12s;
+      transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
     }
 
     .step-field input:focus,
     .step-field textarea:focus {
-      border-color: #3a3018
+      border-color: #3a3018;
+      box-shadow: 0 0 0 2px rgba(200,166,96,0.12);
     }
 
     .step-field input::placeholder,
     .step-field textarea::placeholder {
-      color: #1c1810
+      color: #2a2418;
     }
 
     .step-field textarea {
       min-height: 70px;
-      line-height: 1.6
+      line-height: 1.65;
     }
 
     .step-piped {
-      padding: 5px 8px;
+      padding: 5px 10px;
       background: #0e1208;
       border: 1px solid #1e2618;
-      border-radius: 2px;
+      border-radius: var(--r-sm);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       color: #7aac74;
@@ -2442,6 +2510,10 @@
       white-space: pre-wrap;
       word-break: break-word;
       min-height: 60px;
+      min-width: 0;
+      overflow-x: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* ─── SETTINGS PANEL ──────────────────────────────── */
@@ -2478,28 +2550,29 @@
     .scard {
       margin-bottom: 18px;
       border: 1px solid var(--border);
-      border-radius: 3px;
-      overflow: hidden
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease);
+    }
+
+    .scard:hover {
+      border-color: var(--border2);
+      box-shadow: var(--shadow-sm);
     }
 
     .scard-hd {
-      padding: 9px 13px;
+      padding: 9px 14px;
       background: var(--bg3);
       border-bottom: 1px solid var(--border);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Inter', 'JetBrains Mono', monospace;
       font-size: 9px;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--text5);
     }
 
-    .scard-hd #lmstudio_help_hd {
-      display: inline;
-      margin-right: 4px
-    }
-
     .scard-body {
-      padding: 13px
+      padding: var(--space-3);
     }
 
     .stats-total {
@@ -4395,287 +4468,144 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px;
+      padding: 8px 10px;
       background: #0d0b08;
       border: 1px solid #1e1a12;
-      border-radius: 2px;
-      margin-bottom: 10px
+      border-radius: var(--r-sm);
+      margin-bottom: 10px;
     }
 
     .pipeline-style-opt input[type=checkbox] {
-      accent-color: #c8a660
+      accent-color: #c8a660;
     }
 
     .pipeline-style-opt label {
       font-size: 12px;
       color: #a89868;
-      flex: 1
+      flex: 1;
+    }
+
+    /* ── Global Polish ───────────────────────── */
+
+    /* Universal flex-child overflow fix — prevents text from busting out of narrow flex columns */
+    .panel, .panel > *, .panel > * > * {
+      min-width: 0;
+    }
+
+    /* Checkbox accent */
+    input[type=checkbox] { accent-color: var(--accent); }
+
+    /* All buttons get a base transition */
+    button { transition: var(--transition); }
+
+    /* Modal overlays get a subtle backdrop blur */
+    [class*="-overlay"]:not(.search-modal-overlay) {
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    /* Context heading uses Playfair for headings */
+    .ctx-head h2 {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.01em;
+    }
+
+    /* Subtle gradient mesh on the main bg panels */
+    .panel {
+      background-image: radial-gradient(ellipse at 80% 10%, rgba(200,166,96,0.025) 0%, transparent 55%);
+    }
+
+    /* Section heading in prompts panel */
+    .p-list-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: #e0d3bc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Manuscript category special badge */
+    .pcatbtn[data-cat="manuscript"] .pci {
+      filter: drop-shadow(0 0 4px rgba(232,201,110,0.5));
+    }
+
+    /* Better spacing in scard */
+    .scard-hd #lmstudio_help_hd {
+      display: inline;
+      margin-right: 4px;
+    }
+
+    /* Fade-in animation for modal content */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .search-modal { animation: fadeInUp 0.18s var(--ease) both; }
+
+    /* Print baseline */
+    @media print {
+      .tab-btn, #app-header nav, .p-list, .p-sidebar { display: none !important; }
     }
   </style>
 
-  <!-- REDESIGN GOOGLE FONTS -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600&display=swap"
-    rel="stylesheet">
-  <!-- REDESIGN STYLES -->
+  <!-- REDESIGN GOOGLE FONTS — consolidated into main link above, this block intentionally minimal -->
   <style>
-    /* Modern Overrides */
-    :root {
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 16px;
-      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.15);
-      --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
-      --glass-bg: color-mix(in srgb, var(--bg) 80%, transparent);
-      --glass-border: color-mix(in srgb, var(--border) 50%, transparent);
-      --font-ui: 'Inter', sans-serif;
-      --font-heading: 'Lora', serif;
-    }
-
-    html,
-    body {
-      font-family: var(--font-ui) !important;
-      /* subtle gradient background */
-      background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--bg2) 80%, var(--accent) 10%), var(--bg) 60%) !important;
-      background-attachment: fixed !important;
-    }
-
-    h1,
-    h2,
-    h3,
-    .brand-title,
-    .ctx-head h2,
-    .settings-hd h2,
-    .pipe-hd h2 {
-      font-family: var(--font-heading) !important;
-    }
-
-    .brand-title {
-      font-size: 22px !important;
-      letter-spacing: -0.02em !important;
-    }
-
-    #app-header {
-      background: var(--glass-bg) !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-      border-bottom: 1px solid var(--glass-border) !important;
-      height: 64px !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
-      z-index: 2000 !important;
-    }
-
-    /* Cards & Containers */
-    .home-card,
-    .sb,
-    .p-list,
-    .pipe-step,
-    .ch-item,
-    .timeline-item,
-    .scard {
-      background: color-mix(in srgb, var(--bg) 95%, transparent) !important;
-      border-radius: var(--radius-md) !important;
-      border: 1px solid var(--border) !important;
-      box-shadow: var(--shadow-sm) !important;
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, border-color 0.2s ease !important;
-    }
-
-    .home-card:hover,
-    .ch-item:hover,
-    .timeline-item:hover {
-      transform: translateY(-4px) !important;
-      box-shadow: var(--shadow-md) !important;
-      border-color: color-mix(in srgb, var(--accent) 50%, transparent) !important;
-    }
-
-    /* Inputs, Textareas, Selects */
-    .sb-ta,
-    input.minput,
-    select.minput,
-    .step-sel,
-    .step-field input,
-    .step-field textarea,
-    .pfl input,
-    .pfl textarea,
-    .template-field-row input,
-    .template-field-row select,
-    .api-key-wrap input,
-    .fc-chap textarea {
-      border-radius: var(--radius-sm) !important;
-      background: color-mix(in srgb, var(--bg) 70%, rgba(0, 0, 0, 0.1)) !important;
-      border: 1px solid var(--border) !important;
-      font-family: var(--font-ui) !important;
-      transition: all 0.2s ease !important;
-    }
-
-    .sb-ta:focus,
-    input.minput:focus,
-    select.minput:focus,
-    .step-field input:focus,
-    .step-field textarea:focus,
-    .pfl input:focus,
-    .pfl textarea:focus,
-    .api-key-wrap input:focus,
-    .fc-chap textarea:focus {
-      border-color: var(--accent) !important;
-      box-shadow: var(--shadow-focus) !important;
-      background: var(--bg) !important;
-      outline: none !important;
-    }
-
-    /* Primary Buttons */
-    .run-btn,
-    .search-btn-primary,
-    .template-btn-primary,
-    .rel-btn-save,
-    .timeline-btn-save,
-    .pipe-run-btn {
-      border-radius: var(--radius-sm) !important;
-      font-family: var(--font-ui) !important;
-      font-weight: 600 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.05em !important;
-      box-shadow: 0 4px 10px color-mix(in srgb, var(--accent) 20%, transparent) !important;
-      transition: all 0.2s ease !important;
-      padding: 8px 16px !important;
-    }
-
-    .run-btn:hover,
-    .search-btn-primary:hover,
-    .template-btn-primary:hover,
-    .rel-btn-save:hover,
-    .timeline-btn-save:hover,
-    .pipe-run-btn:hover {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 14px color-mix(in srgb, var(--accent) 35%, transparent) !important;
-    }
-
-    /* Stop / Danger Buttons */
-    .stop-btn,
-    .pcrd-delete,
-    .ch-delete,
-    .timeline-delete,
-    .rel-delete {
-      border-radius: var(--radius-sm) !important;
-    }
-
-    /* Secondary Buttons */
-    .sec-btn,
-    .search-btn,
-    .template-btn-secondary,
-    .project-current,
-    .tab-btn {
-      border-radius: var(--radius-sm) !important;
-      font-family: var(--font-ui) !important;
-      transition: all 0.2s ease !important;
-    }
-
-    /* Tabs */
-    .tab-btn {
-      padding: 8px 16px !important;
-      font-weight: 500 !important;
-      border: 1px solid transparent !important;
-    }
-
-    .tab-btn.active {
-      background: color-mix(in srgb, var(--accent) 10%, transparent) !important;
-      color: var(--accent) !important;
-      border-color: color-mix(in srgb, var(--accent) 30%, transparent) !important;
-      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent) !important;
-    }
-
-    /* Headlines Redesign */
-    .ctx-head h2,
-    .settings-hd h2,
-    .pipe-hd h2 {
-      font-family: var(--font-heading) !important;
-      font-weight: 600 !important;
-      font-style: normal !important;
-      font-size: 32px !important;
-      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      margin-bottom: 12px !important;
-    }
-
-    /* Layout Padding Fixes for breathing room */
-    .ctx-scroll,
-    .settings-scroll,
-    .pipe-results {
-      padding: 32px 40px !important;
-    }
-
-    /* Icons replacement (Using borders and backgrounds to make them look like soft badges) */
-    .home-icon {
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      background: color-mix(in srgb, var(--accent) 15%, transparent) !important;
-      width: 48px !important;
-      height: 48px !important;
-      border-radius: 50% !important;
-      margin-bottom: 16px !important;
-      font-size: 24px !important;
-      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent) !important;
-    }
-
-    /* Modals */
-    .search-modal,
+    /* ── Additional Modal Polish ── */
     .template-modal,
     .rel-modal,
     .timeline-modal,
     .timeline-visual-modal,
     .rel-map-modal {
-      border-radius: var(--radius-lg) !important;
-      border: 1px solid var(--border) !important;
-      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5) !important;
-      background: color-mix(in srgb, var(--bg) 95%, transparent) !important;
-      backdrop-filter: blur(16px) !important;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
     }
 
-    .search-modal-hd,
     .template-modal-hd,
     .rel-modal-hd,
     .timeline-modal-hd,
     .timeline-visual-hd,
     .rel-map-hd {
-      border-top-left-radius: var(--radius-lg) !important;
-      border-top-right-radius: var(--radius-lg) !important;
-      background: transparent !important;
-      border-bottom: 1px solid var(--border) !important;
-      padding: 16px 24px !important;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
     }
 
-    /* Micro animations */
-    .home-card h4::after {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: var(--accent);
-      margin-top: 8px;
-      transition: width 0.3s ease;
-      border-radius: 2px;
+    /* ── Breathing room in scroll areas ── */
+    .settings-scroll {
+      padding: 28px 32px;
     }
 
-    .home-card:hover h4::after {
-      width: 40px;
+    /* ── Consistent small button radius ── */
+    .sec-btn,
+    .search-btn,
+    .template-btn-secondary,
+    .template-btn-primary,
+    .rel-btn-save,
+    .timeline-btn-save,
+    .pipe-run-btn {
+      border-radius: var(--r-sm);
+      transition: var(--transition);
+      font-family: 'Inter', 'JetBrains Mono', monospace;
     }
 
-    /* Scrollbars Overrides */
-    ::-webkit-scrollbar {
-      width: 8px !important;
-      height: 8px !important;
+    /* ── Subtle card lift on hover for interactive cards ── */
+    .home-card:hover,
+    .ch-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border2);
     }
 
-    ::-webkit-scrollbar-thumb {
-      background: var(--border) !important;
-      border-radius: 4px !important;
+    /* ── Gradient headings in major section titles ── */
+    .ctx-head h2 {
+      background: linear-gradient(120deg, var(--text) 0%, var(--accent) 120%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
+    /* ── Scrollbar hover tint ── */
     ::-webkit-scrollbar-thumb:hover {
-      background: color-mix(in srgb, var(--accent) 50%, var(--border)) !important;
+      background: #3a3020;
     }
   </style>
 </head>
@@ -4686,7 +4616,7 @@
       <div class="brand">
         <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
         <span class="brand-title">The Novelist's Atelier</span>
-        <span class="brand-ver">1.3 Beta</span>
+        <span class="brand-ver">1.35 Beta</span>
         <div class="project-selector" id="project_selector">
           <button class="project-current" id="project_current_btn">
             <span id="project_name_display">My Novel</span>
@@ -5009,6 +4939,7 @@
       { id: 'tension', label: 'Tension & Engagement', icon: '⚡', color: '#ff6b6b' },
       { id: 'prose', label: 'Prose & Style', icon: '✒', color: '#845ec2' },
       { id: 'readerexperience', label: 'Reader Experience', icon: '👁', color: '#00c9a7' },
+      { id: 'manuscript', label: 'Full Manuscript Check', icon: '📋', color: '#e8c96e' },
 
       { id: 'essential', label: 'Triage First (Essential)', icon: '⭐', color: '#ffd700' },
       { id: 'phase1', label: 'Phase 1 — Orientation', icon: '1️⃣', color: '#c8a660' },
@@ -5042,6 +4973,7 @@
       { id: 'essentials', label: 'Essentials', cats: ['essential'] },
       { id: 'phases', label: 'Recommended Phases', cats: ['phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'phase9', 'phase10'] },
       { id: 'engagement', label: 'Engagement', cats: ['tension', 'prose', 'readerexperience'] },
+      { id: 'manuscript', label: 'Full Manuscript Check', cats: ['manuscript'] },
       { id: 'create', label: 'Create', cats: ['character', 'world', 'location'] },
       { id: 'editors', label: 'Editors', cats: ['developmental', 'copy', 'line'] },
       { id: 'improve', label: 'Improve', cats: ['punch', 'paragraph', 'sentence'] },
@@ -5125,6 +5057,859 @@
     // The first 'textarea' field is the "primary" field used for pipeline piping
 
     const PROMPTS = {
+      manuscript: [
+        {
+          id: 'ms-full-check',
+          title: '⚠ Full Manuscript Analysis — Deep Report',
+          desc: 'Complete 22-pass editorial analysis with professional PDF report. WARNING: Very high token cost for long manuscripts.',
+          fields: [
+            { key: 'title', label: 'Manuscript title & genre', type: 'text' },
+            { key: 'synopsis', label: 'Brief synopsis (2–4 sentences)', type: 'textarea' },
+            { key: 'manuscript', label: 'Paste full manuscript OR leave blank if attaching file', type: 'textarea' }
+          ],
+          tpl: (f) => `# FULL MANUSCRIPT EDITORIAL ANALYSIS
+## "${f.title || '[MANUSCRIPT TITLE]'}"
+
+---
+
+⚠️ **IMPORTANT — READ BEFORE RUNNING:**
+
+**Claude.ai users:** Attach your manuscript as a .txt, .docx, or .pdf file directly in this chat window, then send this prompt.
+
+**API / Claude Code users:** Upload your manuscript as a .docx or .md file and reference it in your request. Ensure your context window is large enough (use claude-opus-4 or claude-sonnet-4 with extended context).
+
+**⚠ TOKEN COST WARNING:** A full novel (80,000–120,000 words) will consume 300,000–600,000+ tokens per analysis run. This will incur **significant API costs** — potentially $15–$60+ per run depending on your plan and model. Run this on completed or near-complete drafts only. For works-in-progress, use the individual chapter prompts in the Developmental and Chapter Review categories instead.
+
+---
+
+**SYNOPSIS PROVIDED:**
+${f.synopsis || '[No synopsis provided — infer from manuscript]'}
+
+**MANUSCRIPT:**
+${f.manuscript?.trim() ? f.manuscript : '[MANUSCRIPT IS ATTACHED AS FILE — analyze the attached document]'}
+
+---
+
+# YOUR TASK
+
+You are a team of world-class editors: a developmental editor, line editor, copy editor, sensitivity reader, and literary analyst. Perform a complete 22-pass editorial analysis of this manuscript and produce a **professional, beautifully formatted HTML report** as your final output.
+
+**Produce the full report as a single self-contained HTML document** that the user can save as a PDF (File → Print → Save as PDF in their browser). The HTML must include:
+
+- A professional cover page with title, date, and overall grade
+- A full table of contents with anchor links
+- All 22 analysis sections with detailed findings
+- Visual elements: pacing heatmap table, tension arc chart (SVG), character arc timeline, subplot tracker, word frequency bars, and a final scorecard
+- Professional typography using Google Fonts (Playfair Display + Inter)
+- A clean two-column layout where appropriate
+- Color-coded severity indicators (🔴 Critical / 🟡 Important / 🟢 Minor)
+- Page-break CSS for clean PDF output
+
+---
+
+## ANALYSIS PASSES — Complete ALL of the following:
+
+### PASS 1 — PLOT STRUCTURE ANALYSIS
+Evaluate the three-act structure: setup, confrontation, resolution. Identify the inciting incident (chapter/page), midpoint shift, all-is-lost moment (75% mark), climax, and resolution. Map hero's journey archetypes present and missing. **Rate structural integrity 1–10.** Cite specific chapter references for every issue.
+
+### PASS 2 — PACING HEATMAP
+Create a chapter-by-chapter pacing table: Chapter | Tension (1–10) | Pacing Rating (Too Fast/Fast/Good/Slow/Draggy) | Scene Types | Energy Level. Identify energy valleys, momentum problems, action-to-reflection imbalance. List top 10 pacing fixes ranked by impact.
+
+### PASS 3 — CHARACTER ARC CONSISTENCY
+For each major character: map their arc (start → turning points → end), identify growth evidence, flag regression moments, assess arc completion, check motivation consistency. Flag any character who changes too abruptly, doesn't change at all, or acts out of character for plot convenience.
+
+### PASS 4 — THEMATIC COHERENCE
+Identify the central theme beneath the plot. Assess how subplots reinforce or contrast the theme. Flag thematic drift. Map each character's journey to the theme. Evaluate the thematic resolution. Flag heavy-handed or preachy moments.
+
+### PASS 5 — WORLD-BUILDING CONTINUITY SCAN
+Check: setting contradictions (room layouts, geography, distances), rule violations (magic/tech/social), timeline errors (days/dates/seasons), character knowledge problems (knowing things they shouldn't), missing/disappeared characters, object tracking failures. Organize by severity: Critical / Important / Minor.
+
+### PASS 6 — STAKES ESCALATION
+Analyze personal stakes (what the protagonist loses), external stakes (widening consequences), urgency/ticking clock, cost of action increasing, point of no return, stakes at climax being the highest. Flag any moment where stakes plateau, decrease, or feel artificial.
+
+### PASS 7 — SUBPLOT TRACKING
+For each subplot: introduction chapter, purpose (serves main plot/theme how?), key beats, resolution quality, dropped threads. Flag redundant subplots, underdeveloped threads, and subplots that damage pacing.
+
+### PASS 8 — DIALOGUE AUTHENTICITY
+Rate each major character's voice uniqueness 1–10. Flag info-dumping ("As you know, Bob" moments). Identify best/worst subtext examples. Note unique speech patterns. Assess tag-vs-action-beat ratio. Flag emotionally inauthentic conversations. Suggest rewrites for the 10 worst dialogue passages.
+
+### PASS 9 — SHOW VS. TELL AUDIT
+Flag emotional telling, character description telling, backstory dumps, motivation telling, atmosphere telling. For the 10 worst offenders: quote original → write showing rewrite → explain why it's stronger. Note: flag only cases where showing would genuinely improve the experience.
+
+### PASS 10 — SCENE TENSION & CONFLICT CHECK
+For each scene: Goal (what does POV character want?) | Obstacle | Stakes | Outcome. Flag scenes where the character has no goal, there's no opposition, nothing changes, or tension is purely internal with no external manifestation. These are cut/strengthen candidates.
+
+### PASS 11 — TRANSITION SMOOTHNESS
+Check chapter endings (hook quality) and openings (orientation quality). Assess scene break clarity, POV shift handling, flashback/flash-forward mechanics, and tonal shift intentionality.
+
+### PASS 12 — EMOTIONAL BEAT MAPPING
+Chapter by chapter: dominant emotion, emotional high point, emotional low point, emotional variety. Assess: emotional monotone risk, whether big moments are properly set up, whether the emotional climax is the strongest moment, quiet intimate moments between action.
+
+### PASS 13 — SENSORY DETAIL AUDIT
+Sense inventory: which of the 5 senses are used/underused? Check for visual-heavy writing. Assess key scenes for sensory grounding. Evaluate setting atmosphere distinctiveness. Check character-filtered POV sensory details. Identify 10–15 scenes needing sensory enrichment with specific suggestions.
+
+### PASS 14 — INFO-DUMP & EXPOSITION DETECTION
+Flag: backstory dumps, world-building lectures, As-you-know-Bob dialogue, mirror descriptions, prologue front-loading. For each: quote passage, explain problem, suggest natural integration.
+
+### PASS 15 — COPY EDIT PASS
+Grammar errors, punctuation (especially dialogue), spelling, homophone errors, subject-verb agreement, tense consistency, comma splices, run-on sentences. List all errors with location and correction.
+
+### PASS 16 — LINE EDIT PASS
+Prose rhythm (sentence length variety, flow, musicality), word choice precision, verb strength (replace weak was/had/got), clarity (confusing sentences, ambiguous references), redundancy. Show 10 before/after improvement examples.
+
+### PASS 17 — OVERUSED WORDS & PHRASES
+Overused adverbs/weak verbs/filler words with estimated frequency. Crutch phrases. AI-sounding words (delve, tapestry, testament, visceral, nuanced, multifaceted, resonate, paradigm, myriad, beacon, realm). Repetitive sentence openers. Passive voice frequency (target <10%). Adverb density (target <5 per 1000 words).
+
+### PASS 18 — CRUTCH WORD ELIMINATION
+Flag every instance of: just, really, very, quite, actually, basically, literally, suddenly, felt/feeling, started to/began to, seemed/appeared, that (unnecessary), nodded/shrugged/sighed (overused). Provide prioritized cut list with estimated word savings.
+
+### PASS 19 — SENSITIVITY READ
+Cultural representation authenticity, stereotypes, language sensitivity (outdated/offensive terms), agency for marginalized characters, historical accuracy, unconscious bias patterns (who are the villains/heroes/victims). Flag for professional sensitivity reader review.
+
+### PASS 20 — BETA READER PANEL (5 Perspectives)
+**Reader 1 — The Casual Reader:** Gut reactions, boredom points, enjoyment rating 1–10
+**Reader 2 — The Genre Expert:** Genre compliance, trope execution, market positioning, rating 1–10
+**Reader 3 — The Harsh Critic:** Plot holes, weak motivations, clichés, the single biggest problem
+**Reader 4 — The Target Reader:** Emotional journey, favorite scenes, recommendation, rating 1–10
+**Reader 5 — The Superfan:** What made you keep reading? What almost made you stop? Would you pre-order the sequel?
+
+### PASS 21 — PROSE QUALITY SCORING
+Rate 1–10 across: Voice Distinctiveness | Sentence Variety | Imagery Quality | Dialogue Naturalism | Description Efficiency | Emotional Resonance | Tension Craft | World Integration
+
+### PASS 22 — FINAL SYNTHESIS & ACTION PLAN
+1. **Overall Grade:** A–F with full justification
+2. **Top 5 Strengths:** What to keep and amplify
+3. **Critical Fixes (10–20 items):** Must-do, ranked by priority, with chapter references
+4. **Important Improvements (10–20 items):** Should-do items
+5. **Polish Items (5–10 items):** Nice-to-have refinements
+6. **Revision Roadmap:** Pass 1 order → Pass 2 order → Pass 3 order of operations
+7. **Market Readiness Assessment:** Ready for beta readers / agent submission / self-publishing?
+8. **Encouraging Close:** What makes this manuscript worth finishing
+
+---
+
+## HTML REPORT REQUIREMENTS
+
+Structure your HTML output as follows. Use these exact design specifications:
+
+\`\`\`
+Fonts: Google Fonts — Playfair Display (headings) + Inter (body)
+Colors: #1a1a2e (dark bg), #e8c96e (gold accent), #fff (text), #f8f5f0 (light page bg), #2d2d44 (card bg)
+Cover page: full-bleed dark background, gold title, overall grade badge
+Section headers: gold numbered badges + section title
+Heatmap table: color-coded cells (red = high tension, green = low, yellow = medium)
+Charts: SVG-based tension arc line chart spanning full manuscript
+Character arc chart: horizontal timeline bars per character
+Subplot tracker: Gantt-style horizontal bars showing introduction → resolution
+Scorecard: radar/spider chart or score grid with colored bars
+Severity badges: 🔴 Critical (red pill), 🟡 Important (amber pill), 🟢 Minor (green pill)
+Print CSS: @media print with page-break-before on major sections
+\`\`\`
+
+Begin the HTML output with \`<!DOCTYPE html>\` and end with \`</html>\`. Do not wrap in markdown code fences — output raw HTML only. Make the report as detailed, specific, and actionable as possible. Reference specific chapters, scenes, characters, and quotes throughout.`
+        },
+        {
+          id: 'ms-structure-only',
+          title: 'Manuscript Structure & Plot Report',
+          desc: 'Focused analysis: plot structure, pacing, stakes, and subplots only. Lower cost than the full check.',
+          fields: [
+            { key: 'title', label: 'Manuscript title & genre', type: 'text' },
+            { key: 'synopsis', label: 'Brief synopsis', type: 'textarea' },
+            { key: 'manuscript', label: 'Paste manuscript or leave blank if attaching file', type: 'textarea' }
+          ],
+          tpl: (f) => `# MANUSCRIPT STRUCTURE & PLOT ANALYSIS
+## "${f.title || '[MANUSCRIPT TITLE]'}"
+
+⚠️ **Usage:** Attach your manuscript as a file in Claude.ai, or upload .docx/.md via API. This is a focused structural pass — for the complete 22-pass analysis, use "Full Manuscript Analysis — Deep Report."
+
+**⚠ TOKEN COST NOTE:** A full novel consumes 100,000–300,000+ tokens. Significant API costs apply for long documents.
+
+**SYNOPSIS:** ${f.synopsis || '[Infer from manuscript]'}
+
+**MANUSCRIPT:**
+${f.manuscript?.trim() ? f.manuscript : '[MANUSCRIPT ATTACHED AS FILE]'}
+
+---
+
+You are a developmental editor with 20+ years of experience. Perform a structural analysis of this manuscript and output a **professional HTML report** (self-contained, saveable as PDF via browser print).
+
+Cover these areas in detail:
+
+**1. THREE-ACT STRUCTURE** — Setup / Confrontation / Resolution proportions and clarity. Structural integrity score 1–10.
+
+**2. KEY STORY BEATS** — Inciting incident (when/strength), midpoint shift (genuine reversal?), all-is-lost moment (real despair?), climax (earned?), resolution (satisfying?). Rate each 1–10 with chapter references.
+
+**3. PACING HEATMAP** — Chapter-by-chapter table: Chapter | Tension 1–10 | Pace Rating | Scene Type | Notes. Identify valleys, rushes, and imbalances. Top 10 pacing fixes.
+
+**4. STAKES ESCALATION** — Personal stakes deepening, external consequences widening, urgency/ticking clock, cost of action, point of no return, climax stakes. Flag plateaus or artificial stakes.
+
+**5. SUBPLOT TRACKER** — Each subplot: intro chapter, purpose, key beats, resolution, dropped threads. Flag redundant or underdeveloped subplots.
+
+**6. HERO'S JOURNEY MAPPING** — Which archetypes are present, which are missing, which are underdeveloped.
+
+**HTML REPORT:** Professional design with Google Fonts (Playfair Display + Inter), gold accent color (#e8c96e), dark theme, pacing heatmap table with color-coded cells, stakes escalation chart (SVG), subplot Gantt bars, print-ready CSS. Output raw HTML only, no markdown fences.`
+        },
+        {
+          id: 'ms-character-theme',
+          title: 'Character Arcs & Theme Coherence Report',
+          desc: 'Deep analysis of all character arcs, motivations, and thematic consistency. Moderate token cost.',
+          fields: [
+            { key: 'title', label: 'Manuscript title & genre', type: 'text' },
+            { key: 'characters', label: 'List main characters (names + one-line description each)', type: 'textarea' },
+            { key: 'manuscript', label: 'Paste manuscript or leave blank if attaching file', type: 'textarea' }
+          ],
+          tpl: (f) => `# CHARACTER ARCS & THEME COHERENCE ANALYSIS
+## "${f.title || '[MANUSCRIPT TITLE]'}"
+
+⚠️ **Usage:** Attach manuscript as a file in Claude.ai, or upload .docx/.md via API. Token costs apply for long manuscripts.
+
+**MAIN CHARACTERS PROVIDED:**
+${f.characters || '[Identify from manuscript]'}
+
+**MANUSCRIPT:**
+${f.manuscript?.trim() ? f.manuscript : '[MANUSCRIPT ATTACHED AS FILE]'}
+
+---
+
+You are a developmental editor specializing in character psychology and thematic analysis. Produce a **professional HTML report** (saveable as PDF) covering:
+
+**1. CHARACTER ARC MAPPING** — For each major character: arc start → turning points → arc end | evidence of change in specific scenes | regression moments | arc completion | motivation consistency. Flag abrupt changes, flat arcs, or plot-convenience behavior.
+
+**2. CHARACTER ARC TIMELINE** — Visual HTML/SVG horizontal timeline showing each character's arc trajectory across the manuscript chapters.
+
+**3. RELATIONSHIP DYNAMICS** — How key relationships evolve, whether they serve the theme, and whether relationship arcs have satisfying resolutions.
+
+**4. THEMATIC IDENTIFICATION** — What is this book really about beneath the plot? Identify primary and secondary themes.
+
+**5. THEME IN SUBPLOTS** — Does each subplot reinforce or contrast the central theme?
+
+**6. THEMATIC DRIFT MAP** — Sections where the theme is lost or diluted. Chapters where it shines strongest.
+
+**7. THEME IN CHARACTER ARCS** — How each character's journey explores or challenges the theme.
+
+**8. THEMATIC RESOLUTION** — Does the ending make a clear statement? Is it earned? Heavy-handed moments?
+
+**9. EMOTIONAL BEAT MAP** — Chapter-by-chapter: dominant emotion | emotional high | emotional low | variety rating. Emotional monotone assessment.
+
+**HTML REPORT:** Playfair Display + Inter fonts, dark theme, gold accents (#e8c96e), character arc timeline SVG, emotional beat heatmap table, theme coherence radial chart, print CSS. Raw HTML output only.`
+        },
+        {
+          id: 'ms-line-copy',
+          title: 'Line Edit & Copy Edit Report',
+          desc: 'Prose quality, crutch words, show vs tell, dialogue, and copy errors. Best run on a single chapter or excerpt.',
+          fields: [
+            { key: 'title', label: 'Manuscript title & chapter reference', type: 'text' },
+            { key: 'manuscript', label: 'Paste the text to analyze (excerpt or full manuscript)', type: 'textarea' }
+          ],
+          tpl: (f) => `# LINE EDIT & COPY EDIT ANALYSIS
+## "${f.title || '[MANUSCRIPT / CHAPTER]'}"
+
+⚠️ **Usage note:** This prompt works best on excerpts of 5,000–20,000 words for detailed line-level feedback. For full novels, token costs will be very high and output may be truncated. Consider running chapter by chapter.
+
+**TEXT TO ANALYZE:**
+${f.manuscript?.trim() ? f.manuscript : '[ATTACH TEXT AS FILE OR PASTE ABOVE]'}
+
+---
+
+You are a senior line editor and copy editor. Produce a **professional HTML report** (saveable as PDF) with these sections:
+
+**1. PROSE QUALITY SCORECARD** — Rate 1–10: Voice Distinctiveness | Sentence Variety | Imagery Quality | Dialogue Naturalism | Description Efficiency | Emotional Resonance | Verb Strength | Clarity. Visualize as a colored bar chart.
+
+**2. SHOW VS. TELL AUDIT** — Flag emotional telling, description telling, backstory dumps, motivation telling, atmosphere telling. For 10 worst offenders: quote original → showing rewrite → explanation of improvement.
+
+**3. DIALOGUE AUTHENTICITY** — Rate each major character's voice uniqueness 1–10. Flag info-dumps in dialogue. Best/worst subtext examples. Tag vs action beat balance. 10 dialogue rewrites for worst passages.
+
+**4. OVERUSED WORDS FREQUENCY** — Top overused adverbs, weak verbs, filler words with estimated frequency. AI-sounding words detected (delve, tapestry, testament, visceral, nuanced, multifaceted, resonate, paradigm, myriad, beacon, realm). Visualize as horizontal bar chart.
+
+**5. CRUTCH WORD HIT LIST** — Every instance of: just, really, very, quite, actually, basically, literally, suddenly, felt/feeling, started to, began to, seemed, appeared, that (unnecessary), nodded, shrugged, sighed. Prioritized cut list with estimated word savings.
+
+**6. LINE EDIT IMPROVEMENTS** — 10 before/after examples showing: prose rhythm improvement | word choice precision | weak-to-vivid verb replacement | clarity fix | redundancy removal.
+
+**7. COPY EDIT ERRORS** — Grammar, punctuation (especially dialogue tags), spelling, homophones, subject-verb agreement, tense consistency, comma splices, run-ons. Full error list with corrections.
+
+**8. PASSIVE VOICE & ADVERB DENSITY** — Percentage estimates with benchmark targets (<10% passive, <5 adverbs/1000 words).
+
+**HTML REPORT:** Professional design with Playfair Display + Inter, gold accents, overused word bar charts, prose scorecard visualization, color-coded error severity, print CSS. Raw HTML output only.`
+        },
+        {
+          id: 'ms-report-to-html',
+          title: 'Convert Existing Report → Visual HTML',
+          desc: 'Turn any editorial report (.docx, .md, or pasted text) into a professional HTML document with charts, heatmaps, and visual graphics.',
+          fields: [
+            { key: 'title', label: 'Manuscript title (for the report cover)', type: 'text' },
+            { key: 'report', label: 'Paste your report text here (or leave blank and attach .docx / .md file)', type: 'textarea' }
+          ],
+          tpl: (f) => `# CONVERT EDITORIAL REPORT → PREMIUM VISUAL DASHBOARD
+## "${f.title || '[MANUSCRIPT TITLE]'}"
+
+---
+
+## HOW TO USE
+
+**Option A — Paste:** Copy your full report into the field and send this prompt.
+**Option B — File (Claude.ai):** Attach a .docx, .md, or .txt file directly in the chat window.
+**Option C — API:** Upload your .docx or .md file and reference it in your request.
+
+This prompt works with ANY editorial report — from the Full Manuscript Analysis above, another AI, a human editor, or your own notes.
+
+---
+
+## REPORT CONTENT
+
+${f.report?.trim() ? '"""\n' + f.report + '\n"""' : '**[NO TEXT PASTED — reading from attached file]**'}
+
+---
+
+## YOUR TASK
+
+You are an elite UI designer and data visualization engineer. Transform the editorial report above into a **stunning, publication-quality HTML dashboard** that looks like it was designed by a professional agency. Save as PDF via File → Print → Save as PDF.
+
+**Do not re-analyze the manuscript.** Parse the existing content and present it with maximum visual impact.
+
+---
+
+## DESIGN SYSTEM — IMPLEMENT EXACTLY AS SPECIFIED
+
+### CSS Custom Properties (declare ALL of these in :root)
+\`\`\`css
+:root {
+  /* Backgrounds */
+  --bg-page:    #0d0d14;
+  --bg-hero:    #0a0a10;
+  --bg-s1:      #12121e;
+  --bg-s2:      #1a1a2e;
+  --bg-card:    rgba(255,255,255,0.035);
+  --bg-card-hv: rgba(255,255,255,0.06);
+
+  /* Borders */
+  --border:     rgba(255,255,255,0.07);
+  --border-hv:  rgba(232,201,110,0.3);
+
+  /* Accent palette */
+  --gold:       #e8c96e;
+  --gold-dim:   rgba(232,201,110,0.15);
+  --gold-glow:  rgba(232,201,110,0.08);
+  --red:        #e74c3c;
+  --amber:      #f39c12;
+  --green:      #27ae60;
+  --blue:       #3498db;
+  --purple:     #9b59b6;
+  --teal:       #1abc9c;
+
+  /* Score colors */
+  --score-lo:   #e74c3c;   /* 1-4  */
+  --score-mid:  #f39c12;   /* 5-6  */
+  --score-hi:   #27ae60;   /* 7-8  */
+  --score-top:  #e8c96e;   /* 9-10 */
+
+  /* Severity */
+  --sev-critical: #e74c3c;
+  --sev-important: #f39c12;
+  --sev-minor:    #27ae60;
+
+  /* Text */
+  --text:       #e8e4f0;
+  --text-2:     #9090b0;
+  --text-3:     #5a5a7a;
+
+  /* Spacing */
+  --r:          12px;  /* card border-radius */
+  --r-sm:       8px;
+  --r-pill:     999px;
+}
+\`\`\`
+
+### Google Fonts (load in <head>)
+\`\`\`
+https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap
+\`\`\`
+
+---
+
+## PAGE LAYOUT
+
+### Body / Page Shell
+- Background: \`var(--bg-page)\` with a radial gradient mesh overlay:
+  \`background: #0d0d14; background-image: radial-gradient(ellipse at 20% 20%, rgba(232,201,110,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(52,152,219,0.04) 0%, transparent 50%)\`
+- Font: Inter throughout; Playfair Display for headings and cover
+- Color: \`var(--text)\`
+
+### Layout — IMPLEMENT EXACTLY AS SHOWN. DO NOT use CSS Grid or Flexbox for the sidebar + content split.
+
+The sidebar MUST use \`position: fixed\` so it is completely outside document flow and never competes with content width.
+
+HTML structure:
+\`\`\`html
+<body>
+  <nav class="sidebar-nav">...</nav>
+  <div class="page-shell">
+    <div class="hero">...</div>
+    <main class="main-content">
+      <!-- all section-card divs go here -->
+    </main>
+  </div>
+</body>
+\`\`\`
+
+CSS — copy exactly:
+\`\`\`css
+/* ── SIDEBAR: fixed, never in document flow ── */
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 210px;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-s1);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  z-index: 100;
+}
+
+/* ── PAGE SHELL: offset right to clear the fixed sidebar ── */
+.page-shell {
+  margin-left: 210px;          /* same as sidebar width */
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* ── MAIN CONTENT: centered, full available width ── */
+.main-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* ── On narrow screens: hide sidebar, full width content ── */
+@media (max-width: 860px) {
+  .sidebar-nav  { display: none; }
+  .page-shell   { margin-left: 0; }
+  .main-content { padding: 20px 14px 48px; }
+}
+
+@media (max-width: 480px) {
+  .main-content { padding: 14px 8px 32px; }
+}
+
+/* ── Section cards ── */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .section-card { padding: 16px 14px; }
+}
+\`\`\`
+
+### All charts / tables / SVGs inside cards — REQUIRED:
+- Tables: \`width: 100%; max-width: 100%; overflow-x: auto; display: block; box-sizing: border-box\`
+- SVGs: \`viewBox\` + \`width="100%"\` + \`height="auto"\` — never hardcode pixel widths wider than 400px
+- Gauge grids: \`grid-template-columns: repeat(auto-fill, minmax(110px, 1fr))\`
+- Bar fills: percentage widths only, never fixed px
+
+### Sidebar Navigation (position: fixed, visible ≥ 860px only)
+- "📋 Editorial Report" gold label at top, Inter monospace 10px
+- One link per section, smooth-scroll \`href="#section-id"\`
+- Active state: 2px gold left border + \`var(--gold-dim)\` tint background
+- Font: Inter 10px uppercase letter-spacing 0.08em, color \`var(--text-2)\`
+- On print: \`display: none\`
+
+---
+
+## HERO HEADER (full-width, above the grid)
+
+Design: full-width dark panel, height ~280px on screen
+\`\`\`
+background: linear-gradient(135deg, #0a0a10 0%, #12122a 50%, #0a0a10 100%)
+border-bottom: 1px solid var(--border)
+position: relative
+overflow: hidden
+\`\`\`
+
+Decorative elements (purely CSS, no images):
+- Top-right: large faint circle \`width:400px; height:400px; border-radius:50%; border: 1px solid rgba(232,201,110,0.06); position:absolute; top:-150px; right:-150px\`
+- Bottom-left: smaller circle, same style
+- Thin gold horizontal rule below the title: \`height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); width:60%; margin: 12px auto\`
+
+Content (centered):
+1. Eyebrow: "EDITORIAL ANALYSIS REPORT" — Inter 10px, uppercase, letter-spacing 0.2em, color \`var(--text-2)\`, margin-bottom 12px
+2. Manuscript title: Playfair Display 48px italic, color \`var(--gold)\`, text-shadow: \`0 0 40px rgba(232,201,110,0.3)\`
+3. Decorative gold rule (the thin line described above)
+4. Metadata bar (flex row, centered, gap 32px):
+   - Genre (if found in report)
+   - Word count (if found)
+   - Date: new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})
+   - Each item: Inter 11px, color \`var(--text-2)\`, with a small \`·\` separator
+5. **Overall Grade Badge** — centered below metadata:
+   - Large circle (100px diameter), thick ring border colored by grade: A=gold, B=green, C=amber, D/F=red
+   - Letter grade centered: Playfair Display 48px bold
+   - Sub-label: "Overall Grade" in Inter 10px uppercase below the circle
+   - If no grade found in report, omit this element
+
+---
+
+## SECTION CARDS (main content column)
+
+Each section of the report = one card:
+\`\`\`css
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease;
+}
+.section-card:hover { border-color: var(--border-hv); }
+\`\`\`
+
+Section header inside each card:
+- Gold left accent: \`border-left: 3px solid var(--gold); padding-left: 14px\`
+- Numbered badge: small circle \`24px\`, background \`var(--gold-dim)\`, border \`1px solid var(--gold)\`, text \`var(--gold)\`, Inter 10px bold — floated left of title
+- Section title: Playfair Display 20px, color \`var(--text)\`
+- Optional subtitle/summary line: Inter 13px, color \`var(--text-2)\`
+
+---
+
+## VISUAL COMPONENTS — BUILD ALL THAT APPLY TO THE SOURCE REPORT
+
+### A. ANIMATED SVG GAUGE RINGS (for any score rated 1–10 or letter grade)
+
+For EACH numerical score found in the report, render one gauge ring:
+
+\`\`\`
+SVG viewBox="0 0 100 100", width/height 100px
+Background circle: cx=50 cy=50 r=40, stroke=rgba(255,255,255,0.06), strokeWidth=8, fill=none
+Foreground arc: cx=50 cy=50 r=40, stroke=[score color], strokeWidth=8, fill=none
+  strokeDasharray = "251.2"  (2π × 40)
+  strokeDashoffset = 251.2 - (score/10 × 251.2)
+  strokeLinecap = "round"
+  transform = "rotate(-90 50 50)"
+  style: "transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1)"
+  data-target = [dashoffset value]  (for JS animation on load)
+Score number: <text x="50" y="54" textAnchor="middle" fontSize="22" fontWeight="700" fill=[color] fontFamily="Inter">N</text>
+Label below SVG: Inter 11px, color var(--text-2), text-align center, margin-top 6px
+\`\`\`
+
+Score color by value: 1–4=\`var(--score-lo)\` / 5–6=\`var(--score-mid)\` / 7–8=\`var(--score-hi)\` / 9–10=\`var(--score-top)\`
+
+Animate on page load with this JS (add to bottom of body):
+\`\`\`js
+document.querySelectorAll('[data-target]').forEach(el => {
+  setTimeout(() => { el.style.strokeDashoffset = el.dataset.target; }, 100);
+});
+\`\`\`
+
+Arrange gauge rings in a CSS Grid: \`grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px\`
+
+### B. CHAPTER/PACING HEATMAP TABLE
+
+For any chapter-by-chapter table with tension, pacing, or energy data:
+
+\`\`\`
+Table layout: sticky first column (chapter names), scrollable horizontally
+Header row: Inter 10px uppercase, letter-spacing 0.08em, color var(--text-2), border-bottom 1px solid var(--border)
+Cell padding: 10px 14px
+Cell background: computed via HSL interpolation:
+  For tension 1-10: hsl(calc(220 - (val - 1) * 22), 70%, 20%)
+    (1=cool blue #1a2a4a, 5=yellow-orange, 10=hot red #4a1a1a)
+  For pacing text labels:
+    Draggy   → background: rgba(231,76,60,0.25),  color: #ff8a80
+    Slow     → background: rgba(243,156,18,0.25), color: #ffcc80
+    Good     → background: rgba(39,174,96,0.25),  color: #80ffaa
+    Fast     → background: rgba(52,152,219,0.25), color: #80d8ff
+    Too Fast → background: rgba(155,89,182,0.25), color: #d0a0ff
+Row hover: background rgba(232,201,110,0.04)
+Alternating rows: odd rows get background rgba(255,255,255,0.015)
+\`\`\`
+
+### C. CHARACTER ARC SVG POLYLINES
+
+For each character arc found, render an individual SVG chart (width 100%, height 120px):
+
+\`\`\`
+viewBox: "0 0 [numChapters*60] 100"
+X-axis: chapters evenly spaced
+Y-axis: 0 (negative) to 100 (positive arc trajectory)
+Baseline: horizontal line at y=50, stroke rgba(255,255,255,0.1), strokeDasharray "4 4"
+
+Per character:
+  polyline connecting data points, stroke=[character color], strokeWidth=2.5, fill=none
+  Character colors (cycle): #e8c96e, #3498db, #e74c3c, #27ae60, #9b59b6, #1abc9c
+  
+  Data point circles: r=5, fill=[character color], stroke=var(--bg-s1), strokeWidth=2
+  Each circle has: title element = "Ch N: [value or event description]" (tooltip on hover)
+  
+  Turning point diamonds: larger circles r=7, fill=[character color], filter: drop-shadow(0 0 6px [color])
+
+Legend: flex row, each character name + small color swatch, Inter 11px
+\`\`\`
+
+If exact arc data points are not in the report, infer a reasonable trajectory from the textual description.
+
+### D. SUBPLOT GANTT BARS
+
+For subplot data (intro chapter → resolution chapter):
+
+\`\`\`
+Container: position relative, padding-left 160px for subplot labels
+Total chapters on X-axis: determine from report or estimate
+Each subplot row: height 36px, margin-bottom 8px
+
+Label (absolute left): Inter 12px, color var(--text-2), width 150px, text-overflow ellipsis
+Bar: position absolute, height 20px, border-radius var(--r-pill)
+  left: calc(startChapter / totalChapters * 100%)
+  width: calc((endChapter - startChapter) / totalChapters * 100%)
+  background: gradient from [subplot color] to [subplot color dim]
+  Subplot colors (cycle): same as character arc colors above
+
+Milestone marker (diamond) at key turning point chapters:
+  <div style="position:absolute; width:12px; height:12px; background:[color]; transform:rotate(45deg); top:50%; margin-top:-6px; left:[x]%; filter:drop-shadow(0 0 4px [color])">
+
+X-axis: chapter tick marks, Inter 9px, color var(--text-3)
+\`\`\`
+
+### E. WORD FREQUENCY GRADIENT BARS
+
+For overused word / frequency data:
+
+\`\`\`
+Each word row:
+  Label: Inter 13px, color var(--text), min-width 140px
+  Bar container: flex-1, height 28px, background rgba(255,255,255,0.04), border-radius var(--r-sm)
+  Bar fill: width = (count/maxCount * 100)%
+    background: linear-gradient(90deg, var(--red), rgba(231,76,60,0.4))
+    border-radius: var(--r-sm)
+    transition: width 0.8s ease
+    animation: grow-bar 0.8s ease forwards
+  Count badge: Inter 11px bold, color var(--red), margin-left 8px
+
+@keyframes grow-bar { from { width: 0 } to { width: [final]% } }
+
+Sort by frequency descending (most used at top)
+Color by severity if available: critical=red, important=amber, minor=green gradient
+\`\`\`
+
+### F. ISSUE SEVERITY CARDS
+
+For every issue list (critical/important/minor or tiered by priority):
+
+\`\`\`
+Issue card:
+  background: var(--bg-card)
+  border: 1px solid var(--border)
+  border-left: 3px solid [severity color]
+  border-radius: var(--r-sm)
+  padding: 14px 16px
+  margin-bottom: 8px
+
+  Header row (flex):
+    Severity badge: pill shape, Inter 10px bold uppercase, padding 2px 10px, border-radius var(--r-pill)
+      Critical  → background rgba(231,76,60,0.2),  color #ff6b6b, border 1px solid rgba(231,76,60,0.4)
+      Important → background rgba(243,156,18,0.2), color #ffc26b, border 1px solid rgba(243,156,18,0.4)
+      Minor     → background rgba(39,174,96,0.2),  color #6bffaa, border 1px solid rgba(39,174,96,0.4)
+    Chapter reference chip (if available): Inter 10px, background var(--gold-dim), color var(--gold), border-radius var(--r-pill), padding 2px 8px
+    Issue title: Inter 13px 600, color var(--text)
+  Body: Inter 13px, color var(--text-2), line-height 1.6, margin-top 8px
+
+Group issues by severity with expandable section headers (CSS :details or styled divs)
+Count badge next to each group header showing number of issues
+\`\`\`
+
+### G. BEFORE / AFTER COMPARISON CARDS
+
+For show-vs-tell rewrites, dialogue improvements, or any before/after examples:
+
+\`\`\`
+Two-column grid (gap 1px, unified border):
+  Left panel "BEFORE":
+    background: rgba(231,76,60,0.06)
+    border: 1px solid rgba(231,76,60,0.2)
+    border-radius: var(--r-sm) 0 0 var(--r-sm)
+    padding: 16px
+    Label: Inter 9px uppercase letter-spacing 0.15em, color #ff6b6b
+    Text: Inter 13px, color var(--text), line-height 1.7, font-style italic
+
+  Right panel "REWRITE":
+    background: rgba(39,174,96,0.06)
+    border: 1px solid rgba(39,174,96,0.2)
+    border-radius: 0 var(--r-sm) var(--r-sm) 0
+    padding: 16px
+    Label: Inter 9px uppercase letter-spacing 0.15em, color #6bffaa
+    Text: Inter 13px, color var(--text), line-height 1.7
+
+  Why it's stronger: full-width panel below, background rgba(232,201,110,0.06), border 1px solid var(--gold-dim), padding 10px 16px, Inter 12px, color var(--gold), border-radius 0 0 var(--r-sm) var(--r-sm)
+\`\`\`
+
+### H. BETA READER PERSONA CARDS
+
+For multi-perspective reader panel responses:
+
+\`\`\`
+Card grid: repeat(auto-fill, minmax(280px, 1fr)), gap 16px
+
+Each card:
+  background: var(--bg-card)
+  border: 1px solid var(--border)
+  border-radius: var(--r)
+  padding: 20px
+  
+  Avatar circle (60px): centered top, background linear-gradient([persona-color], [persona-color-dark])
+    Initial letters of persona name, Playfair Display 20px, color white
+    Persona colors: Casual=#3498db, Expert=#9b59b6, Critic=#e74c3c, Target=#27ae60, Superfan=#e8c96e
+  
+  Persona name: Playfair Display 15px, color var(--text), text-align center, margin 10px 0 2px
+  Persona type: Inter 10px uppercase, color var(--text-3), text-align center, letter-spacing 0.1em
+  
+  Star rating (if present): render ★ filled in gold, ☆ unfilled in var(--text-3), Inter 14px, centered
+  
+  Quote bubble: margin-top 14px, padding 14px, background rgba(255,255,255,0.03), border-radius var(--r-sm)
+    border-left: 2px solid [persona-color], Inter 13px, color var(--text-2), line-height 1.7
+    Opening " mark: Playfair Display 32px, color [persona-color], opacity 0.5, line-height 0.5
+\`\`\`
+
+### I. ACTION PLAN CHECKLIST
+
+For priority lists, revision roadmap, critical fixes:
+
+\`\`\`
+Numbered items with priority badge:
+  Container: border-left 2px solid var(--border), padding-left 20px
+
+  Item row (flex, gap 12px, padding 10px 0, border-bottom 1px solid rgba(255,255,255,0.04)):
+    Number badge: 28px circle, background var(--gold-dim), border 1px solid var(--gold), color var(--gold), Inter 12px bold, flex-shrink 0
+    Priority badge (if priority given):
+      Must-Do/Critical  → red pill
+      Should-Do         → amber pill
+      Nice-to-Have      → green pill
+    Chapter chip: if chapter referenced, small pill background var(--bg-s2), color var(--text-2), Inter 10px
+    Item text: Inter 14px, color var(--text), line-height 1.5
+    Sub-text/detail: Inter 12px, color var(--text-2), margin-top 4px
+\`\`\`
+
+### J. FINAL GRADE BADGE & MARKET READINESS
+
+Final grade badge (in hero header AND in final summary section):
+\`\`\`
+Circle: 120px diameter
+Outer ring: 6px, color by grade (A=var(--gold), B=var(--green), C=var(--amber), D/F=var(--red))
+Inner: background radial-gradient(circle, rgba([grade-color],0.15), transparent)
+Letter: Playfair Display 56px 700 italic, color [grade color]
+filter: drop-shadow(0 0 20px [grade color with 0.4 opacity])
+\`\`\`
+
+Market readiness progress bar:
+\`\`\`
+Four stages: Not Ready → Beta Readers → Agent Ready → Publication Ready
+Render as horizontal step indicator, completed steps filled gold, current step glowing, future steps dim
+\`\`\`
+
+### K. TABLE OF CONTENTS
+
+After hero, before first section:
+\`\`\`
+background: var(--bg-s1), border-radius var(--r), padding 24px
+Two-column grid on desktop
+
+Each TOC entry (flex row):
+  Section number: Inter 10px, color var(--gold), opacity 0.7, min-width 28px
+  Section title: Inter 13px 500, color var(--text-2), transition color 0.15s
+  Key finding (if extractable): Inter 11px, color var(--text-3), margin-left auto
+  Anchor link: text-decoration none, display block
+  
+  Hover: title color → var(--text), border-left 2px solid var(--gold)
+
+\`\`\`
+
+---
+
+## PRINT / PDF CSS
+\`\`\`css
+@media print {
+  @page { size: A4; margin: 15mm 12mm; }
+  .sidebar-nav, .no-print { display: none !important; }
+  .layout-grid { display: block; }
+  .section-card { page-break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+  .hero { page-break-after: always; }
+  body { background: white !important; color: #1a1a2e !important; }
+  .section-card { background: white !important; }
+  h2, h3 { color: #1a1a2e !important; }
+  p, li { color: #333 !important; }
+}
+\`\`\`
+
+---
+
+## JAVASCRIPT (inline in <script> at bottom of body)
+
+Add only this minimal JS (no libraries):
+\`\`\`js
+// Animate gauge rings on load
+document.querySelectorAll('[data-target]').forEach(el => {
+  requestAnimationFrame(() => setTimeout(() => {
+    el.style.strokeDashoffset = el.dataset.target;
+  }, 200));
+});
+
+// Animate bar widths
+document.querySelectorAll('[data-width]').forEach(el => {
+  requestAnimationFrame(() => setTimeout(() => {
+    el.style.width = el.dataset.width + '%';
+  }, 300));
+});
+
+// Sidebar active state on scroll
+const sections = document.querySelectorAll('.section-card[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === e.target.id));
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => obs.observe(s));
+\`\`\`
+
+---
+
+## SECTION DIVIDERS
+
+Between major sections, render a decorative divider:
+\`\`\`html
+<div style="height:1px; background: linear-gradient(90deg, transparent, rgba(232,201,110,0.2), transparent); margin: 32px 0;"></div>
+\`\`\`
+
+---
+
+## OUTPUT RULES
+
+1. Output **raw HTML only** — first character must be \`<\`, last must be \`>\`
+2. Do NOT use markdown code fences around the HTML output
+3. All CSS in a single \`<style>\` block in \`<head>\`; all JS in a single \`<script>\` at end of body
+4. Zero external dependencies except Google Fonts — no CDN libraries, no external scripts
+5. Every visual component listed above that has relevant data in the report **must** be rendered
+6. If data for a component is implied (e.g. "pacing drags in chapters 3–5") but not tabulated, generate reasonable representative values
+7. If a section has no data (e.g. no beta reader panel), skip that component entirely
+8. Sidebar nav must list every section present in the output
+9. The document must look **premium, dark, and polished** — not a generic AI-generated page
+10. Aim for the aesthetic of a high-end design agency dashboard, not a word processor
+
+Begin the HTML output now. Output only HTML, nothing else.`
+        }
+      ],
       style: [
         {
           id: 's1', title: 'Capture My Writing DNA', desc: 'Deep analysis of your unique voice and style fingerprint',
@@ -7118,7 +7903,7 @@ ${f.chapter || '[PASTE TEXT]'}
       series: { name: '', subName: '', bible: mkSec() },
       book: { title: '', bookNum: '', totalBooks: '', subNum: '', totalSub: '', bible: mkSec(), outline: mkSec(), chars: [{ id: mkId(), ...mkSec() }] },
       chapter: { mode: 'chapter', chapterNum: '', sceneNum: '', useFullChapters: true, fullChapters: [], breakdown: mkSec(), settings: [{ id: mkId(), ...mkSec() }] },
-      prompts: { cat: localStorage.getItem('na_prompts_cat') || 'character', promptId: null, fields: {}, output: '', running: false, abortCtrl: null },
+      prompts: { cat: (c => CATEGORIES.find(x => x.id === c) ? c : 'character')(localStorage.getItem('na_prompts_cat') || 'character'), promptId: null, fields: {}, output: '', running: false, abortCtrl: null },
       pipeline: { mode: 'refine', steps: [], running: false, results: [], abortCtrl: null, useWritingStyle: false },
     };
 
@@ -10614,6 +11399,12 @@ ${sourceText}`;
     function renderPromptList() {
       const list = document.getElementById('p_list'); if (!list) return;
       const cat = CATEGORIES.find(c => c.id === APP.prompts.cat);
+      if (!cat) {
+        // Fallback: reset to first available category
+        APP.prompts.cat = CATEGORIES[0].id;
+        renderPromptList();
+        return;
+      }
       const catPrompts = PROMPTS[APP.prompts.cat] || [];
       const customPrompts = getCustomTemplatesForCategory(APP.prompts.cat) || [];
       const allPrompts = [...catPrompts, ...customPrompts];
@@ -13563,6 +14354,7 @@ This will expand the book-level bible into a series-level reference.`);
       <div class="template-field">
         <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Category</label>
         <select id="template_cat" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+          <option value="manuscript">Full Manuscript Check</option>
           <option value="character">Character</option>
           <option value="world">World Building</option>
           <option value="location">Locations</option>
