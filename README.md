@@ -50,6 +50,13 @@ Many traditional publishers require zero AI usage to be published, if you are pe
 - **Secure API Key Storage**: Password-encrypted (AES-256), Prompt Each Session, or Session Only options
 - **Privacy-Focused**: All data stored locally in your browser
 
+- 1.35 Update
+- Added full manuscript check option (This is a lot of tokens depending on the length of the manuscript, potentially very expensive on API usage, it is better to use a tool with a subscription to check)
+- Also a prompt to take the output of that and create an html view of the report. Attach the report and put the prompt into the chat.
+![Manuscript report](https://github.com/user-attachments/assets/9d61c946-a0c7-4c77-aa25-f5f8122a5320)
+![Beta Reader feedback](https://github.com/user-attachments/assets/5c82c287-e585-43ed-b578-2363d23f9591)
+
+
 ## Getting Started
 
 1. Open `index.html` in your browser
