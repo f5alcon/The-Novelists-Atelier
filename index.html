@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Novelist's Atelier — 1.35 Beta</title>
+  <title>The Novelist's Atelier — 1.3 Beta</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -594,8 +594,6 @@
       right: 0;
       bottom: 0;
       background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
@@ -4498,12 +4496,6 @@
     /* All buttons get a base transition */
     button { transition: var(--transition); }
 
-    /* Modal overlays get a subtle backdrop blur */
-    [class*="-overlay"]:not(.search-modal-overlay) {
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-    }
-
     /* Context heading uses Playfair for headings */
     .ctx-head h2 {
       font-family: 'Playfair Display', serif;
@@ -4616,7 +4608,7 @@
       <div class="brand">
         <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
         <span class="brand-title">The Novelist's Atelier</span>
-        <span class="brand-ver">1.35 Beta</span>
+        <span class="brand-ver">1.3 Beta</span>
         <div class="project-selector" id="project_selector">
           <button class="project-current" id="project_current_btn">
             <span id="project_name_display">My Novel</span>
