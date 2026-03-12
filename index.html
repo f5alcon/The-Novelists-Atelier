@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Novelist's Atelier — 1.3 Beta</title>
+  <title>The Novelist's Atelier — 1.4 Beta</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -1568,7 +1568,37 @@
       border-right: 1px solid var(--border);
       overflow-y: auto;
       padding: 10px 0;
-      background: var(--bg2)
+      background: var(--bg2);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .p-sidebar-spacer {
+      flex: 1;
+    }
+
+    .p-sidebar-report-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      width: calc(100% - 20px);
+      margin: 8px 10px 4px;
+      padding: 8px 12px;
+      background: rgba(200,166,96,0.07);
+      border: 1px solid rgba(200,166,96,0.25);
+      border-radius: 4px;
+      color: #c8a660;
+      font-family: 'Inter', 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: left;
+    }
+
+    .p-sidebar-report-btn:hover {
+      background: rgba(200,166,96,0.14);
+      border-color: rgba(200,166,96,0.5);
     }
 
     .p-sidebar-lbl {
@@ -2007,6 +2037,235 @@
       background: #0f180d
     }
 
+    /* ── Visual Report button ── */
+    .report-btn {
+      padding: 4px 11px;
+      background: rgba(200,166,96,0.1);
+      border: 1px solid rgba(200,166,96,0.35);
+      border-radius: 2px;
+      color: #c8a660;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .05em;
+    }
+    .report-btn:hover {
+      background: rgba(200,166,96,0.18);
+      border-color: rgba(200,166,96,0.6);
+    }
+    .report-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    /* ── Compare Paste Modal ── */
+    #cmp-paste-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+    }
+    #cmp-paste-overlay.open { display: flex; }
+    #cmp-paste-modal {
+      background: #0e0c09;
+      border: 1px solid #3a3020;
+      border-radius: 8px;
+      width: 480px;
+      max-width: 92vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #cmp-paste-hd {
+      padding: 14px 18px;
+      background: #141209;
+      border-bottom: 1px solid #1e1a12;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    #cmp-paste-hd h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: #e0d3bc;
+    }
+    #cmp-paste-close {
+      background: none;
+      border: none;
+      color: #50483a;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #cmp-paste-close:hover { color: #c8a660; }
+    #cmp-paste-body {
+      padding: 16px 18px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    #cmp-paste-body label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #50483a;
+      margin-bottom: 5px;
+      margin-top: 12px;
+    }
+    #cmp-paste-body label:first-child { margin-top: 0; }
+    #cmp-paste-body input, #cmp-paste-body textarea {
+      width: 100%;
+      background: #0a0907;
+      border: 1px solid #1a1810;
+      border-radius: 3px;
+      color: #a89868;
+      font-family: 'Crimson Pro', serif;
+      font-size: 13px;
+      padding: 7px 10px;
+      outline: none;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    #cmp-paste-body input:focus, #cmp-paste-body textarea:focus { border-color: #3a3018; }
+    #cmp-paste-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #c8a660;
+      min-height: 14px;
+      margin-top: 10px;
+      letter-spacing: .04em;
+    }
+    #cmp-paste-foot {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 12px 18px;
+      border-top: 1px solid #1a1710;
+      flex-shrink: 0;
+    }
+
+    /* ── Visual Report modal ── */
+    #vr-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+    }
+    #vr-overlay.open { display: flex; }
+    #vr-modal {
+      background: #0e0c09;
+      border: 1px solid #3a3020;
+      border-radius: 8px;
+      width: 420px;
+      max-width: 90vw;
+      overflow: hidden;
+    }
+    #vr-modal-hd {
+      padding: 14px 18px;
+      background: #141209;
+      border-bottom: 1px solid #1e1a12;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #vr-modal-hd h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: #e0d3bc;
+    }
+    #vr-modal-close {
+      background: none;
+      border: none;
+      color: #50483a;
+      font-size: 16px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    #vr-modal-close:hover { color: #c8a660; }
+    #vr-modal-body { padding: 18px; }
+    #vr-modal-body label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #50483a;
+      margin-bottom: 5px;
+    }
+    #vr-modal-body input, #vr-modal-body select {
+      width: 100%;
+      background: #0a0907;
+      border: 1px solid #1a1810;
+      border-radius: 3px;
+      color: #a89868;
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      padding: 7px 10px;
+      outline: none;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    #vr-modal-body input:focus, #vr-modal-body select:focus {
+      border-color: #3a3018;
+    }
+    #vr-status-msg {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #c8a660;
+      min-height: 14px;
+      margin-bottom: 10px;
+      letter-spacing: .04em;
+    }
+    #vr-modal-foot {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 12px 18px;
+      border-top: 1px solid #1a1710;
+    }
+
+    /* Mode toggle inside VR modal */
+    #vr-mode-toggle {
+      display: flex;
+      border: 1px solid #1e1a12;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .vr-mode-btn {
+      flex: 1;
+      padding: 7px 6px;
+      background: transparent;
+      border: none;
+      color: #50483a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .12s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      border-right: 1px solid #1e1a12;
+      line-height: 1.3;
+    }
+    .vr-mode-btn:last-child { border-right: none; }
+    .vr-mode-btn.vron { background: #141109; color: #c8a660; }
+    .vr-mode-btn span:last-child { font-size: 7px; opacity: .55; font-style: italic; }
+
     .out-text {
       flex: 1;
       overflow-y: auto;
@@ -2054,6 +2313,299 @@
     /* ─── PIPELINE PANEL ──────────────────────────────── */
     #panel-pipeline {
       flex-direction: column !important
+    }
+
+    /* ── Compare Tab ── */
+    #panel-compare {
+      flex-direction: row !important;
+      overflow: hidden;
+    }
+    .cmp-sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg2);
+    }
+    .cmp-sidebar-hd {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cmp-sidebar-hd h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .cmp-sidebar-hd p {
+      font-size: 11px;
+      color: var(--text5);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .03em;
+    }
+    .cmp-slots {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cmp-slot {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .cmp-slot-hd {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+    .cmp-slot-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .cmp-slot-label input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border3);
+      color: var(--text);
+      font-size: 12px;
+      font-family: 'Crimson Pro', serif;
+      width: 100%;
+      outline: none;
+      padding: 1px 2px;
+    }
+    .cmp-slot-label input:focus { border-color: var(--accent); }
+    .cmp-slot-meta {
+      font-size: 10px;
+      color: var(--text5);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 6px;
+    }
+    .cmp-slot-preview {
+      font-size: 11px;
+      color: var(--text4);
+      font-family: 'Crimson Pro', serif;
+      line-height: 1.4;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .cmp-slot-del {
+      background: none;
+      border: none;
+      color: var(--text5);
+      font-size: 13px;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 0 2px;
+      line-height: 1;
+    }
+    .cmp-slot-del:hover { color: var(--accent3); }
+    .cmp-slot-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--border4);
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text5);
+      flex-shrink: 0;
+      margin-right: 6px;
+    }
+    .cmp-sidebar-foot {
+      padding: 12px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cmp-empty-slots {
+      padding: 24px 16px;
+      text-align: center;
+      color: var(--text5);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+    }
+    .cmp-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .cmp-main-hd {
+      padding: 14px 20px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .cmp-main-hd h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .cmp-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cmp-options label {
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text5);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .cmp-options select {
+      background: var(--bg3);
+      border: 1px solid var(--border3);
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 4px 8px;
+      border-radius: 3px;
+      outline: none;
+    }
+    .cmp-output {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 20px 24px;
+      min-width: 0;
+    }
+    .cmp-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 12px;
+      color: var(--text5);
+    }
+    .cmp-placeholder-icon {
+      font-size: 36px;
+      opacity: .3;
+    }
+    .cmp-placeholder p {
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .04em;
+      text-align: center;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+    /* conflict result sections */
+    .cmp-section {
+      margin-bottom: 28px;
+    }
+    .cmp-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--text2);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cmp-section-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text5);
+      font-style: normal;
+    }
+    .cmp-issue-card {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    .cmp-issue-card.conflict {
+      border-left: 3px solid #c06050;
+      background: rgba(192,96,80,0.04);
+    }
+    .cmp-issue-card.consensus {
+      border-left: 3px solid #7aac74;
+      background: rgba(122,172,116,0.04);
+    }
+    .cmp-issue-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-right: 6px;
+      margin-bottom: 8px;
+    }
+    .cmp-issue-tag.conflict-tag { background: rgba(192,96,80,0.15); color: #c06050; border: 1px solid rgba(192,96,80,0.3); }
+    .cmp-issue-tag.consensus-tag { background: rgba(122,172,116,0.15); color: #7aac74; border: 1px solid rgba(122,172,116,0.3); }
+    .cmp-issue-tag.source-tag { background: rgba(200,166,96,0.1); color: var(--text3); border: 1px solid var(--border3); }
+    .cmp-issue-tag.sev-critical { background: rgba(192,96,80,0.12); color: #c06050; border: 1px solid rgba(192,96,80,0.25); }
+    .cmp-issue-tag.sev-important { background: rgba(200,140,60,0.12); color: #c8903c; border: 1px solid rgba(200,140,60,0.25); }
+    .cmp-issue-tag.sev-minor { background: rgba(122,172,116,0.1); color: #7aac74; border: 1px solid rgba(122,172,116,0.2); }
+    .cmp-issue-body {
+      font-size: 13px;
+      color: var(--text3);
+      font-family: 'Crimson Pro', serif;
+      line-height: 1.65;
+    }
+    .cmp-conflict-sides {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .cmp-conflict-side {
+      background: var(--bg3);
+      border-radius: 4px;
+      padding: 10px 12px;
+    }
+    .cmp-conflict-side-lbl {
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text5);
+      margin-bottom: 6px;
+    }
+    .cmp-conflict-side-text {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: 'Crimson Pro', serif;
+      line-height: 1.55;
+    }
+    .cmp-status-bar {
+      padding: 8px 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text5);
+      letter-spacing: .04em;
+      flex-shrink: 0;
     }
 
     .pipe-layout {
@@ -4608,7 +5160,7 @@
       <div class="brand">
         <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
         <span class="brand-title">The Novelist's Atelier</span>
-        <span class="brand-ver">1.3 Beta</span>
+        <span class="brand-ver">1.4 Beta</span>
         <div class="project-selector" id="project_selector">
           <button class="project-current" id="project_current_btn">
             <span id="project_name_display">My Novel</span>
@@ -4647,6 +5199,7 @@
       <div id="panel-story" class="panel"></div>
       <div id="panel-prompts" class="panel"></div>
       <div id="panel-pipeline" class="panel"></div>
+      <div id="panel-compare" class="panel"></div>
       <div id="panel-settings" class="panel"></div>
       <div id="panel-help" class="panel"></div>
       <div id="scene-navigator" class="scene-navigator">
@@ -4675,6 +5228,7 @@
       { id: 'story', icon: '📖', label: 'Story' },
       { id: 'prompts', icon: '◆', label: 'Prompts' },
       { id: 'pipeline', icon: '⟹', label: 'Pipeline' },
+      { id: 'compare', icon: '⇄', label: 'Compare' },
       { id: 'settings', icon: '⚙', label: 'Settings' },
       { id: 'help', icon: '?', label: 'Help' },
     ];
@@ -5949,7 +6503,7 @@ ${f.new_text || '[PASTE NEW TEXT]'}
           fields: [{ key: 'synopsis', label: 'Story context / where we are in the novel', type: 'text' }, { key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
           tpl: (f) => {
             const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
-            return `You are a world-class developmental editor. Read this chapter and provide a structural audit.
+            return `You are a developmental editor. Read this chapter and provide a structural audit.
 
 Analyze:
 1. **Scene Goals** — Does every scene have a clear goal, conflict, and outcome?
@@ -6000,7 +6554,7 @@ ${text}
           fields: [{ key: 'synopsis', label: 'Story context / where we are in the novel', type: 'text' }, { key: 'chapter', label: 'Paste the chapter (or leave empty to use Chapter tab)', type: 'textarea' }],
           tpl: (f) => {
             const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
-            return `You are a developmental editor with expertise in narrative structure. Analyze the following manuscript excerpt and evaluate the story arc.
+            return `You are a developmental editor. Analyze the following manuscript excerpt and evaluate the story arc.
 
 Specifically assess:
 - Whether the setup, rising action, climax, falling action, and resolution are clearly defined and proportionate
@@ -6048,7 +6602,7 @@ ${chapterText}
           fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
           tpl: (f) => {
             const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
-            return `You are a developmental editor with expertise in multi-threaded narratives. Analyze the following manuscript excerpt and evaluate how subplots are introduced and resolved.
+            return `You are a developmental editor. Analyze the following manuscript excerpt and evaluate how subplots are introduced and resolved.
 
 Specifically assess:
 - Whether each subplot introduced is meaningfully resolved or intentionally left open (and whether the intent reads clearly)
@@ -6120,7 +6674,7 @@ ${chapterText}
           fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
           tpl: (f) => {
             const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
-            return `You are a literary editor with expertise in thematic analysis. Analyze the following manuscript excerpt and evaluate how effectively the central theme(s) are woven through the narrative.
+            return `You are a literary editor. Analyze the following manuscript excerpt and evaluate how effectively the central theme(s) are woven through the narrative.
 
 Specifically assess:
 - Whether the theme is embodied in action, image, and subtext — rather than stated outright through dialogue or narration
@@ -6214,7 +6768,7 @@ ${chapterText}
           fields: [{ key: 'chapter', label: 'Paste the chapter', type: 'textarea' }],
           tpl: (f) => {
             const chapterText = f.chapter?.trim() || '[SEE CONTEXT SECTION ABOVE FOR CHAPTER TEXT]';
-            return `You are a line editor with expertise in point-of-view craft. Analyze the following manuscript excerpt for POV consistency within each scene.
+            return `You are a line editor. Analyze the following manuscript excerpt for POV consistency within each scene.
 
 Specifically look for:
 - Head-hopping (shifting between character consciousnesses within a single scene without a clear break)
@@ -9407,97 +9961,88 @@ ${f.chapter || '[PASTE TEXT]'}
     function buildWritingPrefsInstructions() {
       const p = APP.writingPrefs;
       const rules = [];
-      if (p.pov === 'first') rules.push('Write in first person perspective.');
-      else if (p.pov === 'third') rules.push('Write in third person perspective.');
-      else rules.push('Use a mix of first and third person as appropriate.');
-      if (p.innerMonologue) rules.push('Assume text in italics represents inner monologue/thoughts.');
+      if (p.pov === 'first') rules.push('Write in first person.');
+      else if (p.pov === 'third') rules.push('Write in third person.');
+      else rules.push('Mix first and third person as appropriate.');
+      if (p.innerMonologue) rules.push('Italics = inner monologue.');
       if (p.punctuation) {
-        if (p.avoidEmDashes) rules.push('DO NOT use em-dashes (—). Use commas, parentheses, or rewrite instead.');
-        if (p.avoidSemicolons) rules.push('DO NOT use semicolons. Use periods or commas instead.');
-        if (p.avoidColons) rules.push('DO NOT use colons except in dialogue or when grammatically required.');
+        if (p.avoidEmDashes) rules.push('No em-dashes (—). Use commas or parentheses.');
+        if (p.avoidSemicolons) rules.push('No semicolons.');
+        if (p.avoidColons) rules.push('No colons except in dialogue or when required.');
       }
-      if (p.avoidTriplet) rules.push('DO NOT use triplet framing (e.g., "Fast, cheap, and out of control").');
-      if (p.avoidGoldenSunset) rules.push('AVOID the "Golden Sunset" Syndrome: Over-describing scenery to set a mood.');
-      if (p.avoidInspirationalPivot) rules.push('DO NOT use "Inspirational Pivot" framing (e.g., "This isn\'t just about X, it\'s about humanity"). Avoid "It\'s less about X and more about Y" constructions.');
-      if (p.avoidShowDontSummarize) rules.push('AVOID "AI bookending": Do not start with sweeping atmospheric descriptions or end with profound life lessons.');
-      if (p.avoidFavoriteWords) rules.push('Avoid repetitive word choices. Vary vocabulary.');
-      if (p.avoidFloweryProse) rules.push('AVOID flowery prose, purple prose, and clichéd metaphors.');
-      if (p.avoidAdjectiveOverload) rules.push('AVOID adjective overload: Do not use three adjectives where one strong verb would do.');
-      if (p.varySentenceStructure) rules.push('VARY sentence structure: Mix short punchy fragments with longer flowing thoughts.');
-      if (p.filterWords) rules.push('Use the "Ugly" Rule: Avoid filter words (e.g., "She saw the bird fly" → "The bird flew").');
-      if (p.snappyDialogue) rules.push('Keep dialogue SNAPPY and INDIRECT: Use subtext and interruptions.');
-      if (p.specificOverGeneric) rules.push('PREFER SPECIFIC over GENERIC: Instead of "he felt sad," describe the specific physical sensation.');
+      if (p.avoidTriplet) rules.push('No triplet framing ("Fast, cheap, and out of control").');
+      if (p.avoidGoldenSunset) rules.push('No mood-setting scenery without narrative payoff.');
+      if (p.avoidInspirationalPivot) rules.push('No "It\'s not about X, it\'s about Y" inspirational pivot.');
+      if (p.avoidShowDontSummarize) rules.push('No AI bookending: no sweeping openers or life-lesson closers.');
+      if (p.avoidFavoriteWords) rules.push('Vary vocabulary — no repetitive word choices.');
+      if (p.avoidFloweryProse) rules.push('No flowery/purple prose or clichéd metaphors.');
+      if (p.avoidAdjectiveOverload) rules.push('No adjective overload — prefer strong verbs.');
+      if (p.varySentenceStructure) rules.push('Vary sentence structure: mix short and long.');
+      if (p.filterWords) rules.push('No filter words ("She saw the bird fly" → "The bird flew").');
+      if (p.snappyDialogue) rules.push('Dialogue: snappy, indirect, use subtext and interruptions.');
+      if (p.specificOverGeneric) rules.push('Specific over generic: physical sensation, not "he felt sad".');
       
-      // New AI Writing Tropes - Word Choice
-      if (p.quietlyAdverbs) rules.push('AVOID "quietly", "deeply", "fundamentally", "remarkably", "arguably" — magic adverbs that make mundane descriptions feel significant.');
-      if (p.delveFriends) rules.push('AVOID "delve", "certainly", "utilize", "leverage", "robust", "streamline", "harness" — overused AI vocabulary.');
-      if (p.tapestry) rules.push('AVOID "tapestry", "landscape", "paradigm", "synergy", "ecosystem", "framework" where simpler words would do.');
-      if (p.servesAs) rules.push('AVOID "serves as", "stands as", "marks", "represents" — replace with simple "is/are".');
+      if (p.quietlyAdverbs) rules.push('No "quietly", "deeply", "fundamentally", "remarkably", "arguably".');
+      if (p.delveFriends) rules.push('No "delve", "utilize", "leverage", "robust", "streamline", "harness".');
+      if (p.tapestry) rules.push('No "tapestry", "landscape", "paradigm", "synergy", "ecosystem".');
+      if (p.servesAs) rules.push('No "serves as", "stands as" — use "is/are".');
       
-      // New AI Writing Tropes - Sentence Structure
-      if (p.negativeParallel) rules.push('AVOID "It\'s not X — it\'s Y" pattern. This is the most common AI writing tell. One instance can be effective; ten is insulting.');
-      if (p.notXNotY) rules.push('AVOID "Not X. Not Y. Just Z." dramatic countdown pattern.');
-      if (p.theXA_Y) rules.push('AVOID "The X? A Y." rhetorical questions answered immediately.');
-      if (p.anaphora) rules.push('AVOID repeating the same sentence opening multiple times (Anaphora).');
-      if (p.tricolon) rules.push('AVOID overusing rule-of-three, especially extended to four or five.');
-      if (p.worthNoting) rules.push('AVOID filler transitions: "It\'s worth noting", "Importantly", "Interestingly", "Notably".');
-      if (p.superficial) rules.push('AVOID shallow "-ing" phrases: "highlighting its importance", "reflecting broader trends".');
-      if (p.falseRanges) rules.push('AVOID "from X to Y" where X and Y aren\'t on any real scale.');
-      if (p.gerund) rules.push('AVOID streams of verbless gerund fragments: "Fixing bugs. Writing features. Implementing tickets."');
+      if (p.negativeParallel) rules.push('No "It\'s not X — it\'s Y" pattern.');
+      if (p.notXNotY) rules.push('No "Not X. Not Y. Just Z." countdown pattern.');
+      if (p.theXA_Y) rules.push('No rhetorical questions answered immediately.');
+      if (p.anaphora) rules.push('No repeated sentence openings (anaphora).');
+      if (p.tricolon) rules.push('No overused rule-of-three.');
+      if (p.worthNoting) rules.push('No filler transitions: "Worth noting", "Importantly", "Notably".');
+      if (p.superficial) rules.push('No shallow "-ing" phrases.');
+      if (p.falseRanges) rules.push('No "from X to Y" false scales.');
+      if (p.gerund) rules.push('No verbless gerund fragment streams.');
       
-      // New AI Writing Tropes - Paragraph Structure
-      if (p.shortPunchy) rules.push('AVOID excessive short sentence fragments as standalone paragraphs.');
-      if (p.listicle) rules.push('AVOID numbered points disguised as prose: "The first wall... The second wall..."');
+      if (p.shortPunchy) rules.push('No excessive one-sentence paragraphs.');
+      if (p.listicle) rules.push('No numbered points disguised as prose.');
       
-      // New AI Writing Tropes - Tone
-      if (p.hereKicker) rules.push('AVOID "Here\'s the kicker", "Here\'s the thing" — false suspense that delivers unremarkable points.');
-      if (p.thinkOf) rules.push('AVOID "Think of it as..." and "It\'s like a..." patronizing analogies.');
-      if (p.imagine) rules.push('AVOID "Imagine a world where..." invitations to futurism.');
-      if (p.falseVuln) rules.push('AVOID simulated self-awareness: "And yes, I\'m openly in love with...". Real vulnerability is specific.');
-      if (p.truthSimple) rules.push('AVOID asserting things are obvious: "The reality is simpler", "History is clear".');
-      if (p.grandiose) rules.push('AVOID inflating everything to world-historical significance.');
-      if (p.letsBreak) rules.push('AVOID "Let\'s break this down", "Let\'s unpack this" — assumes reader needs hand-holding.');
-      if (p.vagueAttr) rules.push('AVOID "experts argue", "observers note" without naming anyone.');
-      if (p.invented) rules.push('AVOID invented compound labels: "supervision paradox", "acceleration trap".');
+      if (p.hereKicker) rules.push('No "Here\'s the kicker / Here\'s the thing".');
+      if (p.thinkOf) rules.push('No "Think of it as..." analogies.');
+      if (p.imagine) rules.push('No "Imagine a world where..."');
+      if (p.falseVuln) rules.push('No simulated self-awareness.');
+      if (p.truthSimple) rules.push('No "The reality is simpler" assertions.');
+      if (p.grandiose) rules.push('No world-historical inflation.');
+      if (p.letsBreak) rules.push('No "Let\'s break this down / unpack this".');
+      if (p.vagueAttr) rules.push('No "experts argue" without naming them.');
+      if (p.invented) rules.push('No invented compound labels.');
       
-      // New AI Writing Tropes - Formatting
-      if (p.boldBullets) rules.push('AVOID every bullet starting with bold text: "**Security**: Environment-based..."');
-      if (p.unicode) rules.push('AVOID unicode arrows (->), smart quotes. Use straight quotes and -> or =>.');
+      if (p.boldBullets) rules.push('No bold-text bullet openers.');
+      if (p.unicode) rules.push('No unicode arrows. Use -> or =>.');
       
-      // New AI Writing Tropes - Composition
-      if (p.fractal) rules.push('AVOID "What I\'m going to tell you; what I\'m telling you" at every level.');
-      if (p.deadMetaphor) rules.push('AVOID latching onto a single metaphor and repeating it 5-10 times.');
-      if (p.historical) rules.push('AVOID rapid-fire historical listing: "Apple didn\'t build Uber. Facebook didn\'t build Spotify..."');
-      if (p.onePoint) rules.push('AVOID making one argument and restating it in 10 different ways.');
-      if (p.duplication) rules.push('AVOID repeating entire sections verbatim within the same piece.');
-      if (p.signposted) rules.push('AVOID "In conclusion", "To sum up", "In summary". The reader can feel it.');
-      if (p.despite) rules.push('AVOID "Despite its challenges..." rigid formula with immediate dismissal.');
+      if (p.fractal) rules.push('No tell/told/tell structure repetition.');
+      if (p.deadMetaphor) rules.push('No single metaphor repeated 5+ times.');
+      if (p.historical) rules.push('No rapid-fire historical listing.');
+      if (p.onePoint) rules.push('No restating one argument 10 different ways.');
+      if (p.duplication) rules.push('No verbatim repeated sections.');
+      if (p.signposted) rules.push('No "In conclusion", "To sum up".');
+      if (p.despite) rules.push('No "Despite its challenges..." formula.');
       
       if (p.doNotUseWords && p.doNotUseWords.trim()) {
         const words = p.doNotUseWords.split(',').map(w => w.trim()).filter(w => w);
-        if (words.length) rules.push(`DO NOT use these words: ${words.join(', ')}`);
+        if (words.length) rules.push(`Banned words: ${words.join(', ')}`);
       }
 
       let styleDNABlock = '';
       if (p.includeStyleDNA && isStyleDNA()) {
-        styleDNABlock = '\n\n══════════════════════════════════════════════════════\nYOUR STYLE DNA (Match this Voice):\n' + getStyleDNA() + '\n══════════════════════════════════════════════════════\n';
+        styleDNABlock = '\n\n## STYLE DNA:\n' + getStyleDNA() + '\n';
       }
 
       if (rules.length === 0 && !styleDNABlock) return '';
 
-      let header = '\n\n══════════════════════════════════════════════════════\nWRITING PREFERENCES (Strict Rules):\n';
-      let content = rules.map(r => '• ' + r).join('\n');
-
-      return header + content + styleDNABlock + '\n══════════════════════════════════════════════════════\n\n';
+      return '\n## WRITING RULES:\n' + rules.map(r => '- ' + r).join('\n') + styleDNABlock + '\n\n';
     }
 
     function buildGenreCompareInstructions() {
       const g = APP.genreCompare;
       if (g.preset === 'custom' && g.customText?.trim()) {
-        return '\n\n══════════════════════════════════════════════════════\nREFERENCE STYLE (compare to this):\n' + g.customText + '\n══════════════════════════════════════════════════════\n\n';
+        return '\n## REFERENCE STYLE:\n' + g.customText + '\n\n';
       }
       if (g.preset !== 'custom' && GENRE_PRESETS[g.preset]) {
-        return '\n\n══════════════════════════════════════════════════════\nGENRE CONTEXT: ' + g.preset.toUpperCase() + '\n' + GENRE_PRESETS[g.preset] + '\n══════════════════════════════════════════════════════\n\n';
+        return '\n## GENRE: ' + g.preset.toUpperCase() + '\n' + GENRE_PRESETS[g.preset] + '\n\n';
       }
       return '';
     }
@@ -9516,15 +10061,15 @@ ${f.chapter || '[PASTE TEXT]'}
         if (inc === 'off' || !text?.trim()) return null;
         if (inc === 'brief') {
           const w = text.trim().split(/\s+/);
-          return w.length > maxW ? w.slice(0, maxW).join(' ') + '\n\n*[— truncated: brief mode —]*' : text.trim();
+          return w.length > maxW ? w.slice(0, maxW).join(' ') + ' [brief]' : text.trim();
         }
         if (inc === 'extended') {
           const w = text.trim().split(/\s+/);
-          return w.length > 1000 ? w.slice(0, 1000).join(' ') + '\n\n*[— truncated: extended (1000 words) —]*' : text.trim();
+          return w.length > 1000 ? w.slice(0, 1000).join(' ') + ' [extended]' : text.trim();
         }
         if (inc === 'custom') {
           const w = text.trim().split(/\s+/);
-          return w.length > customWords ? w.slice(0, customWords).join(' ') + `\n\n*[— truncated: custom (${customWords} words) —]*` : text.trim();
+          return w.length > customWords ? w.slice(0, customWords).join(' ') + ` [${customWords}w]` : text.trim();
         }
         return text.trim();
       };
@@ -9534,7 +10079,7 @@ ${f.chapter || '[PASTE TEXT]'}
       if (APP.series.subName) sl.push(`**Sub-series:** ${APP.series.subName}`);
       const sb = extract(APP.series.bible.inclusion, APP.series.bible.text, 450, APP.series.bible.customWords || 500);
       if (sb) sl.push(`\n**Series Bible:**\n${sb}`);
-      if (sl.length) parts.push(`## ◈ Series / Project\n\n${sl.join('\n')}`);
+      if (sl.length) parts.push(`## Series\n\n${sl.join('\n')}`);
       // Book
       const bl = [];
       if (APP.book.title) {
@@ -9547,12 +10092,12 @@ ${f.chapter || '[PASTE TEXT]'}
       if (bb) bl.push(`\n**Book Bible:**\n${bb}`);
       const bo = extract(APP.book.outline.inclusion, APP.book.outline.text, 450, APP.book.outline.customWords || 500);
       if (bo) bl.push(`\n**Book Outline:**\n${bo}`);
-      if (bl.length) parts.push(`## ◉ Book\n\n${bl.join('\n')}`);
+      if (bl.length) parts.push(`## Book\n\n${bl.join('\n')}`);
       // Characters
       const ac = APP.book.chars.filter(c => c.inclusion !== 'off' && c.text?.trim());
       if (ac.length) {
         const cb = ac.map(c => extract(c.inclusion, c.text, 300, c.customWords || 500)).filter(Boolean);
-        if (cb.length) parts.push(`## ◑ Characters\n\n${cb.join('\n\n────────\n\n')}`);
+        if (cb.length) parts.push(`## Characters\n\n${cb.join('\n\n---\n\n')}`);
       }
       // Full chapters
       const fc = APP.chapter.fullChapters.filter(c => c.inclusion !== 'off' && c.text?.trim());
@@ -9590,19 +10135,19 @@ ${f.chapter || '[PASTE TEXT]'}
             const typeLabel = b.type === 'prologue' ? 'Prologue' : b.type === 'epilogue' ? 'Epilogue' : `Chapter ${b.number || ''}`;
             return `### ${typeLabel}\n\n${b.text.trim()}`;
           });
-          chl.push(`\n**Chapter Breakdowns:**\n${bdTexts.join('\n\n────────\n\n')}`);
+          chl.push(`\n**Chapter Breakdowns:**\n${bdTexts.join('\n\n---\n\n')}`);
         }
       }
       const as_ = APP.chapter.settings.filter(s => s.inclusion !== 'off' && s.text?.trim());
       if (as_.length) {
         const sb2 = as_.map(s => extract(s.inclusion, s.text, 200, s.customWords || 500)).filter(Boolean);
-        if (sb2.length) chl.push(`\n**Settings:**\n${sb2.join('\n\n────────\n\n')}`);
+        if (sb2.length) chl.push(`\n**Settings:**\n${sb2.join('\n\n---\n\n')}`);
       }
-      if (chl.length) parts.push(`## ❒ Chapter / Scene\n\n${chl.join('\n')}`);
+      if (chl.length) parts.push(`## Chapter\n\n${chl.join('\n')}`);
       if (!parts.length) return '';
-      return '# MANUSCRIPT CONTEXT\n\n_Use the following author-provided context to inform all editorial feedback. Preserve the established voice, world logic, character psychology, and narrative continuity._\n\n'
-        + parts.join('\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n')
-        + '\n\n══════════════════════════════════════════════════════\n\n';
+      return '## MANUSCRIPT CONTEXT\n_Preserve the established voice, world logic, character psychology, and narrative continuity._\n\n'
+        + parts.join('\n\n---\n\n')
+        + '\n\n---\n\n';
     }
 
     function getContextPills() {
@@ -10128,6 +10673,11 @@ ${f.chapter || '[PASTE TEXT]'}
             <h4>Pipeline</h4>
             <p>Chain multiple prompts together. Each step builds on the last for complex workflows.</p>
           </div>
+          <div class="home-card" onclick="showTab('compare')" style="cursor:pointer">
+            <span class="home-icon">⇄</span>
+            <h4>Compare</h4>
+            <p>Stack multiple AI analyses side-by-side. Detect conflicts and consensus across passes, then generate a unified Visual Report.</p>
+          </div>
           <div class="home-card" onclick="showTab('settings')" style="cursor:pointer">
             <span class="home-icon">⚙</span>
             <h4>Settings</h4>
@@ -10150,6 +10700,9 @@ ${f.chapter || '[PASTE TEXT]'}
           <li>Use Pipeline to chain multiple edits on the same text</li>
           <li>Local models via LM Studio work offline and keep your data private</li>
           <li>Use the Story tab for characters, relationships, and timeline - saved at series level for multi-book projects</li>
+          <li>Use <b>Compare</b> to run different prompt types (editorial read, show/tell audit, pacing map) and detect where they agree or contradict each other</li>
+          <li>Hit <b>+ Compare</b> in the Prompts output toolbar after any run to add it to a comparison slot instantly</li>
+          <li>Use <b>Visual Report</b> to turn any analysis output into a formatted, printable HTML document</li>
         </ul>
       </div>
 
@@ -11369,9 +11922,29 @@ ${sourceText}`;
         }).join('')}
         `;
       }).join('')}
+      <div class="p-sidebar-spacer"></div>
+      <button class="p-sidebar-report-btn" id="vr-sidebar-btn">
+        <span>⬡</span><span>Visual Report</span>
+      </button>
     </nav>
     <div class="p-list" id="p_list"></div>
     <div class="p-editor" id="p_editor"></div>`;
+
+      // Wire up the always-visible Visual Report button in the sidebar
+      p.querySelector('#vr-sidebar-btn')?.addEventListener('click', () => {
+        document.getElementById('vr-overlay').classList.add('open');
+        const titleEl = document.getElementById('vr-title');
+        if (!titleEl.value) {
+          const cat = CATEGORIES.find(c => c.id === APP.prompts.cat);
+          titleEl.value = cat ? cat.label + ' Report' : 'Editorial Report';
+        }
+        document.getElementById('vr-status-msg').textContent = '';
+        // Always sync source dropdown to actual state
+        const _hasOutput = !!(APP.prompts && APP.prompts.output);
+        document.getElementById('vr-source').value = _hasOutput ? 'output' : 'paste';
+        document.getElementById('vr-paste').style.display = _hasOutput ? 'none' : 'block';
+        titleEl.focus(); titleEl.select();
+      });
 
       p.querySelectorAll('.pcatbtn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -11522,6 +12095,8 @@ ${sourceText}`;
           <button class="sec-btn" id="copy_prompt_btn">Copy Prompt</button>
           <button class="sec-btn" id="copy_out_btn" disabled>Copy Output</button>
           <button class="sec-btn" id="dl_out_btn" disabled>↓ .md</button>
+          <button class="report-btn" id="vr_btn" disabled title="Convert output to a styled HTML report">⬡ Visual Report</button>
+          <button class="sec-btn" id="cmp_btn" disabled title="Add this output to the Compare tab">+ Compare</button>
           <button class="sec-btn" onclick="showTokenBreakdown(APP.prompts.tpl, APP.prompts.fields)" style="margin-left:8px">📊 Breakdown</button>
           <button class="stop-btn" id="stop_btn" style="display:none">■ Stop</button>
           <button class="run-btn" id="run_btn" ${APP.apiKey ? '' : 'title="Add API key in Settings"'}>▶ Run</button>
@@ -11542,7 +12117,27 @@ ${sourceText}`;
         document.getElementById('out_text').textContent = APP.prompts.output;
         document.getElementById('copy_out_btn').disabled = false;
         document.getElementById('dl_out_btn').disabled = false;
+        document.getElementById('vr_btn').disabled = false;
+        document.getElementById('cmp_btn').disabled = false;
       }
+
+      // Add to Compare
+      document.getElementById('cmp_btn').addEventListener('click', () => {
+        if (!APP.prompts.output) return;
+        const pr = APP.prompts;
+        const cat = CATEGORIES.find(c => c.id === pr.cat);
+        const promptDef = (PROMPTS[pr.cat] || []).find(p => p.id === pr.promptId);
+        addToCompare({
+          label: promptDef ? promptDef.label : (pr.promptId || 'Output'),
+          category: cat ? cat.label : pr.cat,
+          output: pr.output,
+          timestamp: Date.now()
+        });
+        const btn = document.getElementById('cmp_btn');
+        btn.textContent = '✓ Added';
+        btn.classList.add('ok');
+        setTimeout(() => { btn.textContent = '+ Compare'; btn.classList.remove('ok'); }, 2000);
+      });
 
       // Copy prompt
       document.getElementById('copy_prompt_btn').addEventListener('click', () => {
@@ -11653,6 +12248,8 @@ ${sourceText}`;
             setRunState(false, `Done · ${((Date.now() - t0) / 1000).toFixed(1)}s`);
             document.getElementById('copy_out_btn').disabled = false;
             document.getElementById('dl_out_btn').disabled = false;
+            document.getElementById('vr_btn').disabled = false;
+            document.getElementById('cmp_btn').disabled = false;
             // Log to activity
             const pr = APP.prompts;
             const cat = CATEGORIES.find(c => c.id === pr.cat);
@@ -11700,6 +12297,464 @@ ${sourceText}`;
       if (!pr) return null;
       const f = pr.fields.find(f => f.type === 'textarea');
       return f ? f.key : null;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // COMPARE TAB
+    // ═══════════════════════════════════════════════════════════
+
+    function getCmpSlots() {
+      try { return JSON.parse(localStorage.getItem('na_compare_slots') || '[]'); } catch { return []; }
+    }
+    function saveCmpSlots(slots) {
+      localStorage.setItem('na_compare_slots', JSON.stringify(slots));
+    }
+
+    function addToCompare(item) {
+      const slots = getCmpSlots();
+      slots.push({ id: 'cmp-' + Date.now(), ...item });
+      saveCmpSlots(slots);
+      // If compare tab is open, re-render the sidebar
+      if (APP.tab === 'compare') renderCompareSidebar();
+    }
+
+    function openCmpPasteModal() {
+      document.getElementById('cmp-paste-label').value = '';
+      document.getElementById('cmp-paste-cat').value = '';
+      document.getElementById('cmp-paste-text').value = '';
+      document.getElementById('cmp-paste-status').textContent = '';
+      document.getElementById('cmp-paste-overlay').classList.add('open');
+      document.getElementById('cmp-paste-label').focus();
+    }
+
+    let _cmpPasteWired = false;
+    function wireCmpPasteModal() {
+      if (_cmpPasteWired) return;
+      _cmpPasteWired = true;
+
+      // Inject modal HTML if not already present
+      if (!document.getElementById('cmp-paste-overlay')) {
+        const el = document.createElement('div');
+        el.id = 'cmp-paste-overlay';
+        el.innerHTML = `
+          <div id="cmp-paste-modal">
+            <div id="cmp-paste-hd">
+              <h3>+ Paste Analysis</h3>
+              <button id="cmp-paste-close">✕</button>
+            </div>
+            <div id="cmp-paste-body">
+              <label>Label <span style="opacity:.5">(e.g. "Pacing Map", "Line Edit Pass 2")</span></label>
+              <input id="cmp-paste-label" type="text" placeholder="Analysis label…" />
+              <label>Category <span style="opacity:.5">(optional)</span></label>
+              <input id="cmp-paste-cat" type="text" placeholder="e.g. Pacing, Line Edit…" />
+              <label>Paste output text</label>
+              <textarea id="cmp-paste-text" rows="10" placeholder="Paste your AI analysis output here…"></textarea>
+              <div id="cmp-paste-status"></div>
+            </div>
+            <div id="cmp-paste-foot">
+              <button class="sec-btn" id="cmp-paste-cancel">Cancel</button>
+              <button class="run-btn" id="cmp-paste-add" style="font-size:9px;padding:5px 18px">+ Add to Compare</button>
+            </div>
+          </div>`;
+        document.body.appendChild(el);
+      }
+
+      const close = () => document.getElementById('cmp-paste-overlay').classList.remove('open');
+
+      document.getElementById('cmp-paste-close').addEventListener('click', close);
+      document.getElementById('cmp-paste-cancel').addEventListener('click', close);
+      document.getElementById('cmp-paste-overlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('cmp-paste-overlay')) close();
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && document.getElementById('cmp-paste-overlay').classList.contains('open')) close();
+      });
+
+      document.getElementById('cmp-paste-add').addEventListener('click', () => {
+        const label = document.getElementById('cmp-paste-label').value.trim();
+        const cat   = document.getElementById('cmp-paste-cat').value.trim();
+        const text  = document.getElementById('cmp-paste-text').value.trim();
+        const status = document.getElementById('cmp-paste-status');
+
+        if (!label) { status.style.color = '#c06050'; status.textContent = 'Please enter a label.'; return; }
+        if (!text)  { status.style.color = '#c06050'; status.textContent = 'Please paste some text.'; return; }
+
+        addToCompare({ label, category: cat || 'Pasted', output: text, timestamp: Date.now() });
+        status.style.color = '#7aac74';
+        status.textContent = '✓ Added to Compare.';
+        setTimeout(close, 700);
+      });
+    }
+
+    function renderCompare() {
+      const p = document.getElementById('panel-compare');
+      p.innerHTML = `
+        <div class="cmp-sidebar">
+          <div class="cmp-sidebar-hd">
+            <h2>⇄ Compare</h2>
+            <p>Collected analyses</p>
+          </div>
+          <div class="cmp-slots" id="cmp-slots-list"></div>
+          <div class="cmp-sidebar-foot">
+            <button class="sec-btn" id="cmp-paste-btn" style="font-size:9px">+ Paste Analysis</button>
+            <button class="run-btn" id="cmp-run-btn" style="font-size:10px;padding:6px 14px" disabled>⇄ Run Conflict Analysis</button>
+            <button class="sec-btn" id="cmp-copy-prompt-btn" disabled style="font-size:9px" title="Copy the analysis prompt to use in Claude.ai or another chat app">Copy Prompt</button>
+            <button class="sec-btn" id="cmp-clear-btn" style="font-size:9px">Clear All</button>
+          </div>
+        </div>
+        <div class="cmp-main">
+          <div class="cmp-main-hd">
+            <h2>Analysis</h2>
+            <div class="cmp-options">
+              <label>Mode</label>
+              <select id="cmp-mode-select">
+                <option value="full">Full (conflicts + all issues)</option>
+                <option value="conflicts">Conflicts only</option>
+                <option value="consensus">Consensus only</option>
+              </select>
+              <button class="sec-btn" id="cmp-vr-btn" disabled style="font-size:9px">⬡ Visual Report</button>
+            </div>
+          </div>
+          <div class="cmp-output" id="cmp-output">
+            <div class="cmp-placeholder">
+              <div class="cmp-placeholder-icon">⇄</div>
+              <p>Add 2 or more prompt outputs using the<br><strong>+ Compare</strong> button in the Prompts tab,<br>then run conflict analysis.</p>
+            </div>
+          </div>
+          <div class="cmp-status-bar" id="cmp-status">Ready</div>
+        </div>`;
+
+      renderCompareSidebar();
+
+      document.getElementById('cmp-paste-btn').addEventListener('click', openCmpPasteModal);
+
+      document.getElementById('cmp-copy-prompt-btn').addEventListener('click', () => {
+        const slots = getCmpSlots();
+        if (slots.length < 2) return;
+        const mode = document.getElementById('cmp-mode-select')?.value || 'full';
+        const prompt = buildComparePrompt(slots, mode);
+        navigator.clipboard.writeText(prompt).then(() => {
+          const btn = document.getElementById('cmp-copy-prompt-btn');
+          btn.textContent = '✓ Copied';
+          btn.classList.add('ok');
+          setCmpStatus('Prompt copied — paste into Claude.ai or any chat app.');
+          setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('ok'); }, 2500);
+        }).catch(() => setCmpStatus('Clipboard access denied.', true));
+      });
+
+      document.getElementById('cmp-run-btn').addEventListener('click', runCompareAnalysis);
+
+      document.getElementById('cmp-clear-btn').addEventListener('click', () => {
+        if (!confirm('Clear all collected analyses?')) return;
+        saveCmpSlots([]);
+        renderCompareSidebar();
+        document.getElementById('cmp-output').innerHTML = `<div class="cmp-placeholder"><div class="cmp-placeholder-icon">⇄</div><p>Add analyses using <strong>+ Compare</strong> in the Prompts tab.</p></div>`;
+        setCmpStatus('Cleared.');
+      });
+
+      document.getElementById('cmp-vr-btn').addEventListener('click', () => {
+        const out = document.getElementById('cmp-output').dataset.rawOutput || '';
+        if (!out) return;
+        // re-use VR modal with this output pre-loaded
+        APP.prompts = APP.prompts || {};
+        APP.prompts._cmpOutputOverride = out;
+        openCmpVR(out);
+      });
+
+      wireCmpPasteModal();
+    }
+
+    function renderCompareSidebar() {
+      const slots = getCmpSlots();
+      const list = document.getElementById('cmp-slots-list');
+      const runBtn = document.getElementById('cmp-run-btn');
+      if (!list) return;
+
+      if (slots.length === 0) {
+        list.innerHTML = `<div class="cmp-empty-slots">No analyses yet.<br><br>Run a prompt and click<br><strong>+ Compare</strong> to add it here.</div>`;
+        if (runBtn) runBtn.disabled = true;
+        return;
+      }
+
+      list.innerHTML = slots.map((s, i) => `
+        <div class="cmp-slot" data-id="${s.id}">
+          <div class="cmp-slot-hd">
+            <div class="cmp-slot-label">
+              <span class="cmp-slot-num">${i + 1}</span>
+              <input type="text" value="${esc(s.label)}" data-slot-id="${s.id}" class="cmp-label-input" />
+            </div>
+            <button class="cmp-slot-del" data-del="${s.id}" title="Remove">✕</button>
+          </div>
+          <div class="cmp-slot-meta">${esc(s.category)} · ${new Date(s.timestamp).toLocaleString([], { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' })}</div>
+          <div class="cmp-slot-preview">${esc((s.output || '').slice(0, 120))}</div>
+        </div>`).join('');
+
+      if (runBtn) runBtn.disabled = slots.length < 2;
+      const copyBtn = document.getElementById('cmp-copy-prompt-btn');
+      if (copyBtn) copyBtn.disabled = slots.length < 2;
+
+      // Label editing
+      list.querySelectorAll('.cmp-label-input').forEach(input => {
+        input.addEventListener('change', () => {
+          const slots2 = getCmpSlots();
+          const s = slots2.find(s => s.id === input.dataset.slotId);
+          if (s) { s.label = input.value; saveCmpSlots(slots2); }
+        });
+      });
+
+      // Delete
+      list.querySelectorAll('.cmp-slot-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const slots2 = getCmpSlots().filter(s => s.id !== btn.dataset.del);
+          saveCmpSlots(slots2);
+          renderCompareSidebar();
+          if (slots2.length < 2 && document.getElementById('cmp-run-btn')) {
+            document.getElementById('cmp-run-btn').disabled = true;
+          }
+        });
+      });
+    }
+
+    function setCmpStatus(msg, isErr) {
+      const el = document.getElementById('cmp-status');
+      if (!el) return;
+      el.textContent = msg;
+      el.style.color = isErr ? 'var(--accent3)' : 'var(--text5)';
+    }
+
+    async function runCompareAnalysis() {
+      const slots = getCmpSlots();
+      if (slots.length < 2) return;
+
+      const mode = document.getElementById('cmp-mode-select')?.value || 'full';
+      const runBtn = document.getElementById('cmp-run-btn');
+      const output = document.getElementById('cmp-output');
+
+      runBtn.disabled = true;
+      runBtn.textContent = 'Analysing…';
+      setCmpStatus('Calling AI…');
+      output.innerHTML = `<div class="cmp-placeholder"><div class="cmp-placeholder-icon" style="animation:pulse 1.5s ease-in-out infinite">⇄</div><p>Detecting conflicts…</p></div>`;
+
+      const prompt = buildComparePrompt(slots, mode);
+      let raw = '';
+
+      try {
+        await callAPI(
+          prompt,
+          chunk => { raw += chunk; },
+          () => {
+            try {
+              let clean = raw.replace(/^```json\s*/i,'').replace(/^```\s*/i,'').replace(/```\s*$/i,'').trim();
+              const start = clean.indexOf('{'); if (start > 0) clean = clean.slice(start);
+              const json = JSON.parse(clean);
+              renderCompareOutput(json, mode);
+              output.dataset.rawOutput = JSON.stringify(json);
+              document.getElementById('cmp-vr-btn').disabled = false;
+              setCmpStatus(`Done · ${json.conflicts?.length || 0} conflicts · ${json.consensus?.length || 0} consensus · ${json.allIssues?.length || 0} total issues`);
+            } catch (e) {
+              output.innerHTML = `<div style="padding:20px;color:var(--accent3);font-size:13px">JSON parse error — try again.<br><small>${e.message}</small></div>`;
+              setCmpStatus('Parse error', true);
+            }
+            runBtn.disabled = false;
+            runBtn.textContent = '⇄ Run Conflict Analysis';
+          },
+          err => {
+            setCmpStatus('Error: ' + err, true);
+            output.innerHTML = `<div style="padding:20px;color:var(--accent3);font-size:13px">Error: ${esc(err)}</div>`;
+            runBtn.disabled = false;
+            runBtn.textContent = '⇄ Run Conflict Analysis';
+          },
+          null
+        );
+      } catch (err) {
+        setCmpStatus('Error: ' + err.message, true);
+        runBtn.disabled = false;
+        runBtn.textContent = '⇄ Run Conflict Analysis';
+      }
+    }
+
+    function buildComparePrompt(slots, mode) {
+      const analyses = slots.map((s, i) =>
+        `=== ANALYSIS ${i + 1}: ${s.label} (${s.category}) ===\n${s.output}\n`
+      ).join('\n');
+
+      const modeInstr = {
+        full: 'Return ALL THREE arrays: conflicts, consensus, allIssues.',
+        conflicts: 'Return conflicts and consensus arrays. Set allIssues to [].',
+        consensus: 'Return consensus and allIssues arrays. Set conflicts to [].',
+      }[mode] || 'Return ALL THREE arrays.';
+
+      return `You are a rigorous editorial conflict detector reviewing ${slots.length} analyses of the same text.
+
+CRITICAL RULES — you must follow these exactly:
+1. Do NOT summarize, condense, paraphrase, or merge any issue. Every specific flag must survive verbatim.
+2. Your ONLY synthesis task is: find contradictions and find agreements.
+3. Reproduce every issue from every analysis in full in allIssues. Do not truncate.
+4. When two analyses comment on the same passage or element with contradictory advice, that is a conflict.
+5. When two or more analyses independently flag the same problem (even with different wording), that is consensus.
+
+${modeInstr}
+
+Return ONLY a JSON object in this exact shape — no markdown fences, no preamble:
+{
+  "conflicts": [
+    {
+      "element": "brief label for the passage or element in question",
+      "sev": "critical|important|minor",
+      "sides": [
+        { "source": "Analysis 1 label", "stance": "exact quote of what this analysis says" },
+        { "source": "Analysis 2 label", "stance": "exact quote of what this analysis says" }
+      ],
+      "nature": "one sentence explaining the contradiction"
+    }
+  ],
+  "consensus": [
+    {
+      "element": "brief label",
+      "sev": "critical|important|minor",
+      "sources": ["Analysis 1 label", "Analysis 2 label"],
+      "finding": "verbatim or near-verbatim reproduction of the shared finding"
+    }
+  ],
+  "allIssues": [
+    {
+      "source": "Analysis N label",
+      "sev": "critical|important|minor",
+      "element": "brief label",
+      "body": "full verbatim text of the issue as written in the original analysis"
+    }
+  ]
+}
+
+Sev detection: critical/must/error/conflict → "critical"; important/suggested/flag/warning → "important"; optional/minor/consider → "minor". Default to "important" if unclear.
+
+ANALYSES TO COMPARE:
+${analyses}
+
+Output the JSON object now. Start with {`;
+    }
+
+    function renderCompareOutput(json, mode) {
+      const output = document.getElementById('cmp-output');
+      const slots = getCmpSlots();
+      const slotColors = ['#c8a660','#7aac74','#6090c8','#c87050','#a870c8','#50b8c8'];
+
+      function sevTag(sev) {
+        const cls = sev === 'critical' ? 'sev-critical' : sev === 'important' ? 'sev-important' : 'sev-minor';
+        return `<span class="cmp-issue-tag ${cls}">${sev || 'note'}</span>`;
+      }
+      function sourceTag(src, idx) {
+        const color = slotColors[slots.findIndex(s => s.label === src) % slotColors.length] || '#c8a660';
+        return `<span class="cmp-issue-tag source-tag" style="color:${color};border-color:${color}44">${esc(src)}</span>`;
+      }
+
+      let html = '';
+
+      // ── Conflicts ──
+      const conflicts = json.conflicts || [];
+      if (conflicts.length > 0) {
+        html += `<div class="cmp-section">
+          <div class="cmp-section-title">⚡ Conflicts <span class="cmp-section-count">${conflicts.length} found</span></div>
+          ${conflicts.map(c => `
+            <div class="cmp-issue-card conflict">
+              <div>${sevTag(c.sev)}<span class="cmp-issue-tag conflict-tag">Conflict</span><strong style="font-size:13px;color:var(--text)">${esc(c.element)}</strong></div>
+              <div class="cmp-conflict-sides">
+                ${(c.sides || []).map((side, si) => `
+                  <div class="cmp-conflict-side">
+                    <div class="cmp-conflict-side-lbl">${sourceTag(side.source, si)}</div>
+                    <div class="cmp-conflict-side-text">${esc(side.stance)}</div>
+                  </div>`).join('')}
+              </div>
+              ${c.nature ? `<div style="margin-top:10px;font-size:12px;color:var(--text5);font-style:italic;font-family:'Crimson Pro',serif">${esc(c.nature)}</div>` : ''}
+            </div>`).join('')}
+        </div>`;
+      } else if (mode !== 'consensus') {
+        html += `<div class="cmp-section"><div class="cmp-section-title">⚡ Conflicts</div><div style="font-size:12px;color:var(--text5);padding:8px 0">No conflicts found — analyses are in agreement.</div></div>`;
+      }
+
+      // ── Consensus ──
+      const consensus = json.consensus || [];
+      if (consensus.length > 0) {
+        html += `<div class="cmp-section">
+          <div class="cmp-section-title">✓ Consensus <span class="cmp-section-count">${consensus.length} shared findings</span></div>
+          ${consensus.map(c => `
+            <div class="cmp-issue-card consensus">
+              <div>${sevTag(c.sev)}<span class="cmp-issue-tag consensus-tag">Consensus</span>${(c.sources || []).map((s,i) => sourceTag(s,i)).join('')}</div>
+              <div style="font-size:12px;color:var(--text4);font-family:'JetBrains Mono',monospace;margin-bottom:6px">${esc(c.element)}</div>
+              <div class="cmp-issue-body">${esc(c.finding)}</div>
+            </div>`).join('')}
+        </div>`;
+      }
+
+      // ── All Issues ──
+      const allIssues = json.allIssues || [];
+      if (allIssues.length > 0 && mode !== 'conflicts') {
+        // Group by source
+        const grouped = {};
+        allIssues.forEach(issue => {
+          if (!grouped[issue.source]) grouped[issue.source] = [];
+          grouped[issue.source].push(issue);
+        });
+
+        html += `<div class="cmp-section">
+          <div class="cmp-section-title">📋 All Issues <span class="cmp-section-count">${allIssues.length} total (verbatim)</span></div>
+          ${Object.entries(grouped).map(([src, issues]) => `
+            <div style="margin-bottom:20px">
+              <div style="font-size:10px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text5);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)">
+                ${sourceTag(src, 0)} — ${issues.length} issue${issues.length !== 1 ? 's' : ''}
+              </div>
+              ${issues.map(issue => `
+                <div class="cmp-issue-card" style="margin-bottom:8px">
+                  <div style="margin-bottom:6px">${sevTag(issue.sev)}<span style="font-size:12px;color:var(--text4);font-family:'JetBrains Mono',monospace">${esc(issue.element)}</span></div>
+                  <div class="cmp-issue-body">${esc(issue.body)}</div>
+                </div>`).join('')}
+            </div>`).join('')}
+        </div>`;
+      }
+
+      output.innerHTML = html || `<div class="cmp-placeholder"><p>No results to display for this mode.</p></div>`;
+    }
+
+    function openCmpVR(rawJSON) {
+      // Parse stored JSON and build a text summary to feed into the VR system
+      try {
+        const json = typeof rawJSON === 'string' ? JSON.parse(rawJSON) : rawJSON;
+        let text = '';
+        if (json.conflicts?.length) {
+          text += '## Conflicts\n\n';
+          json.conflicts.forEach(c => {
+            text += `### ${c.element} [${c.sev}]\n`;
+            (c.sides || []).forEach(s => { text += `**${s.source}:** ${s.stance}\n\n`; });
+            if (c.nature) text += `*${c.nature}*\n\n`;
+          });
+        }
+        if (json.consensus?.length) {
+          text += '## Consensus Findings\n\n';
+          json.consensus.forEach(c => {
+            text += `### ${c.element}\n${c.finding}\n\n`;
+          });
+        }
+        if (json.allIssues?.length) {
+          text += '## All Issues\n\n';
+          const grouped = {};
+          json.allIssues.forEach(i => { (grouped[i.source] = grouped[i.source] || []).push(i); });
+          Object.entries(grouped).forEach(([src, issues]) => {
+            text += `### ${src}\n`;
+            issues.forEach(i => { text += `- **${i.element}** [${i.sev}]: ${i.body}\n`; });
+            text += '\n';
+          });
+        }
+        // Pre-load VR modal with this text
+        document.getElementById('vr-source').value = 'paste';
+        document.getElementById('vr-paste').value = text;
+        document.getElementById('vr-paste').style.display = 'block';
+        document.getElementById('vr-title').value = 'Conflict Analysis Report';
+        document.getElementById('vr-subtitle').value = '';
+        document.getElementById('vr-status-msg').textContent = '';
+        document.getElementById('vr-overlay').classList.add('open');
+      } catch(e) {
+        alert('Could not open Visual Report: ' + e.message);
+      }
     }
 
     function renderPipeline() {
@@ -13231,6 +14286,14 @@ ${sourceText}`;
       <h3>Welcome to The Novelist's Atelier</h3>
       <p>Your AI-powered writing assistant for editing and world-building across multi-book projects.</p>
 
+      <h4>What's New in 1.4</h4>
+      <ul style="color:#a89868;line-height:1.8">
+        <li><b>Compare Tab</b> — Stack multiple AI analyses of the same chapter and run an automated conflict detector. Finds where analyses agree (consensus) and where they contradict each other (conflicts), then lists every issue verbatim.</li>
+        <li><b>Visual Report</b> — Convert any analysis output into a formatted, printable HTML document with sidebar navigation, severity tags, and section cards. Available in Local (instant, no API) or AI Enhanced mode.</li>
+        <li><b>Copy Prompt</b> — Export the Compare conflict-detection prompt to your clipboard to run manually in Claude.ai or any chat interface.</li>
+        <li><b>Paste Analysis</b> — Add outputs generated outside the app (from a chat session, another tool, etc.) directly into a Compare slot.</li>
+      </ul>
+
       <h4>Quick Start</h4>
       <ol style="color:#a89868;line-height:1.8">
         <li>Start in <b>Series</b> to set up your world-building and genre</li>
@@ -13239,14 +14302,16 @@ ${sourceText}`;
         <li>Work on <b>Chapter</b> level with scene settings and text</li>
         <li>Use <b>Prompts</b> for AI-powered editing and generation</li>
         <li>Chain prompts in <b>Pipeline</b> for complex workflows</li>
+        <li>Use <b>Compare</b> to cross-examine multiple analyses of the same chapter</li>
       </ol>
 
       <h4>Key Concepts</h4>
       <ul style="color:#a89868;line-height:1.8">
-        <li><b>Inclusion Modes</b> - Control what gets included in AI prompts (Full, Brief, Extended, Custom, Off)</li>
-        <li><b>Projects</b> - Organize separate stories in different projects</li>
-        <li><b>Series Level</b> - Timeline and some elements span multiple books</li>
-        <li><b>Custom Templates</b> - Create your own prompt templates in Prompts tab</li>
+        <li><b>Inclusion Modes</b> — Control what gets included in AI prompts (Full, Brief, Extended, Custom, Off)</li>
+        <li><b>Projects</b> — Organize separate stories in different projects</li>
+        <li><b>Series Level</b> — Timeline and some elements span multiple books</li>
+        <li><b>Custom Templates</b> — Create your own prompt templates in Prompts tab</li>
+        <li><b>Compare Slots</b> — Named analysis snapshots that persist across sessions in localStorage</li>
       </ul>
     </div>
   `;
@@ -13387,6 +14452,45 @@ ${sourceText}`;
           <li><strong>Genre-Specific:</strong> 14 genre categories</li>
         </ul>
         <p><strong>Data Sources:</strong> Select Series Bible, Book Bible, Characters, Relationships, Timeline, Chapters to include in AI context.</p>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>⇄ Compare Tab</h4></summary>
+        <p><strong>Overview:</strong> Run multiple different AI analyses on the same chapter, then compare them to find where they agree and where they contradict each other.</p>
+        <p><strong>Workflow:</strong></p>
+        <ol>
+          <li>Run a prompt in the Prompts tab, then click <strong>+ Compare</strong> in the output toolbar</li>
+          <li>Run a second (different) prompt on the same chapter and click <strong>+ Compare</strong> again</li>
+          <li>Switch to the Compare tab — your slots appear in the left sidebar</li>
+          <li>Click <strong>⇄ Run Conflict Analysis</strong> (uses API) or <strong>Copy Prompt</strong> to paste into a chat</li>
+          <li>Results show Conflicts, Consensus, and every issue verbatim under All Issues</li>
+        </ol>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li><strong>Slots:</strong> Inline-editable labels, persistent across sessions</li>
+          <li><strong>Paste Analysis:</strong> Add outputs from outside the app (Claude.ai, another session)</li>
+          <li><strong>Mode:</strong> Full / Conflicts only / Consensus only view filter</li>
+          <li><strong>Visual Report:</strong> Convert the conflict analysis into a formatted HTML document</li>
+          <li><strong>Copy Prompt:</strong> Export the full comparison prompt to clipboard for use in any chat app</li>
+        </ul>
+        <p><strong>Tips:</strong> For best results, compare analyses from different prompt categories — e.g. a Chapter Review alongside a Show/Tell Audit. Each catches different things. Conflicts tell you where the AI disagreed with itself; consensus is your highest-confidence edit list.</p>
+      </details>
+
+      <details class="help-guide">
+        <summary><h4>📄 Visual Report</h4></summary>
+        <p><strong>Overview:</strong> Convert any AI analysis output into a formatted, printable HTML document with sidebar navigation, severity-coded cards, and section headers.</p>
+        <p><strong>How to open:</strong></p>
+        <ul>
+          <li>From <strong>Prompts tab</strong>: click the <strong>⬡ Visual Report</strong> button in the output toolbar after a run</li>
+          <li>From <strong>Compare tab</strong>: click <strong>⬡ Visual Report</strong> after running conflict analysis</li>
+        </ul>
+        <p><strong>Modes:</strong></p>
+        <ul>
+          <li><strong>⚡ Local Parser</strong> (default) — instant, no API call, parses markdown structure from the output</li>
+          <li><strong>✦ AI Enhanced</strong> — sends output to the API for smarter section extraction and severity tagging</li>
+        </ul>
+        <p><strong>Output:</strong> Opens as a standalone HTML document in a new tab. Can be saved, printed, or shared.</p>
+        <p><strong>Tips:</strong> Use Local mode for quick scans; switch to AI Enhanced for long or complex outputs where the local parser misses structure. The report preserves all original text — nothing is summarised or omitted.</p>
       </details>
 
       <details class="help-guide">
@@ -13657,7 +14761,7 @@ ${sourceText}`;
     // TAB NAVIGATION
     // ═══════════════════════════════════════════════════════════
 
-    const RENDER_FNS = { home: renderHome, series: renderSeries, book: renderBook, chapter: renderChapter, story: renderStory, prompts: renderPrompts, pipeline: renderPipeline, settings: renderSettings, help: renderHelp };
+    const RENDER_FNS = { home: renderHome, series: renderSeries, book: renderBook, chapter: renderChapter, story: renderStory, prompts: renderPrompts, pipeline: renderPipeline, compare: renderCompare, settings: renderSettings, help: renderHelp };
     const rendered = {};
 
     function showTab(id) {
@@ -14587,6 +15691,787 @@ This will expand the book-level bible into a series-level reference.`);
       </div>
     </div>
   </div>
+
+  <!-- ══ VISUAL REPORT MODAL ══════════════════════════════════════════ -->
+  <div id="vr-overlay">
+    <div id="vr-modal">
+      <div id="vr-modal-hd">
+        <h3>⬡ Generate Visual Report</h3>
+        <button id="vr-modal-close">✕</button>
+      </div>
+      <div id="vr-modal-body">
+        <label>Generation Mode</label>
+        <div id="vr-mode-toggle">
+          <button class="vr-mode-btn vron" data-mode="local">
+            <span>⚡ Local Parser</span>
+            <span>Instant · no API needed</span>
+          </button>
+          <button class="vr-mode-btn" data-mode="api">
+            <span>✦ AI Enhanced</span>
+            <span>Smarter · uses your API key</span>
+          </button>
+        </div>
+        <label>Report Title</label>
+        <input id="vr-title" type="text" placeholder="e.g. Chapter 8 Editorial Analysis" />
+        <label>Subtitle / Scope</label>
+        <input id="vr-subtitle" type="text" placeholder="e.g. Line Edit · Draft 2" />
+        <label>Source Text</label>
+        <select id="vr-source">
+          <option value="output">Current prompt output</option>
+          <option value="paste">Paste my own text below</option>
+        </select>
+        <textarea id="vr-paste" rows="6" style="display:none;width:100%;background:#0a0907;border:1px solid #1a1810;border-radius:3px;color:#a89868;font-family:'Crimson Pro',serif;font-size:13px;padding:7px 10px;outline:none;resize:vertical;box-sizing:border-box;margin-bottom:12px;line-height:1.5" placeholder="Paste your AI output here…"></textarea>
+        <div id="vr-status-msg"></div>
+      </div>
+      <div id="vr-modal-foot">
+        <button class="sec-btn" id="vr-cancel">Cancel</button>
+        <button class="sec-btn" id="vr-copy-prompt" title="Copy the generation prompt to use in Claude.ai or another chat app">Copy Prompt</button>
+        <button class="run-btn" id="vr-generate" style="font-size:9px;padding:5px 18px">⬡ Generate</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ══ VISUAL REPORT FEATURE ══════════════════════════════════════════
+  (function () {
+
+    let vrMode = 'local'; // 'local' | 'api'
+
+    // ── Mode toggle ──────────────────────────────────────────────────
+    document.querySelectorAll('.vr-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        vrMode = btn.dataset.mode;
+        document.querySelectorAll('.vr-mode-btn').forEach(b => b.classList.toggle('vron', b.dataset.mode === vrMode));
+        // Copy Prompt only makes sense in API mode
+        document.getElementById('vr-copy-prompt').style.display = vrMode === 'api' ? '' : 'none';
+      });
+    });
+
+    // ── Open modal ───────────────────────────────────────────────────
+    document.addEventListener('click', e => { if (e.target && e.target.id === 'vr_btn') openVRModal(); });
+
+    function openVRModal() {
+      const titleEl = document.getElementById('vr-title');
+      if (!titleEl.value) {
+        const cat = (typeof CATEGORIES !== 'undefined' ? CATEGORIES : []).find(c => c.id === APP.prompts.cat);
+        titleEl.value = cat ? cat.label + ' Report' : 'Editorial Report';
+      }
+      document.getElementById('vr-status-msg').textContent = '';
+      const hasOutput = !!(APP && APP.prompts && APP.prompts.output);
+      const srcEl   = document.getElementById('vr-source');
+      const pasteEl = document.getElementById('vr-paste');
+      if (hasOutput) {
+        srcEl.value = 'output';
+        pasteEl.style.display = 'none';
+      } else {
+        srcEl.value = 'paste';
+        pasteEl.style.display = 'block';
+      }
+      document.getElementById('vr-overlay').classList.add('open');
+      titleEl.focus(); titleEl.select();
+    }
+
+    document.getElementById('vr-modal-close').addEventListener('click', closeVRModal);
+    document.getElementById('vr-cancel').addEventListener('click', closeVRModal);
+    document.getElementById('vr-overlay').addEventListener('click', e => { if (e.target === document.getElementById('vr-overlay')) closeVRModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVRModal(); });
+    function closeVRModal() { document.getElementById('vr-overlay').classList.remove('open'); }
+
+    document.getElementById('vr-source').addEventListener('change', function () {
+      document.getElementById('vr-paste').style.display = this.value === 'paste' ? 'block' : 'none';
+    });
+
+    // ── Copy Prompt (API mode only) ───────────────────────────────────
+    document.getElementById('vr-copy-prompt').addEventListener('click', function () {
+      const { titleVal, subtitleVal, rawText } = getVRInputs();
+      if (!rawText) { setVRStatus('No text yet — paste your output first.', true); return; }
+      navigator.clipboard.writeText(buildVRPrompt(rawText, titleVal, subtitleVal)).then(() => {
+        this.textContent = '✓ Copied'; this.classList.add('ok');
+        setVRStatus('Prompt copied — paste into Claude.ai or any chat app.');
+        setTimeout(() => { this.textContent = 'Copy Prompt'; this.classList.remove('ok'); }, 2500);
+      }).catch(() => setVRStatus('Clipboard access denied.', true));
+    });
+
+    // ── Generate ──────────────────────────────────────────────────────
+    document.getElementById('vr-generate').addEventListener('click', async function () {
+      const { titleVal, subtitleVal, rawText } = getVRInputs();
+      if (!rawText) { setVRStatus('No text to convert — run a prompt first or paste text.', true); return; }
+
+      const genBtn = this;
+      genBtn.disabled = true;
+
+      if (vrMode === 'local') {
+        genBtn.textContent = 'Parsing…';
+        setVRStatus('Building report locally…');
+        try {
+          const html = localParseReport(rawText, titleVal, subtitleVal);
+          downloadHTML(html, titleVal);
+          setVRStatus('✓ Report downloaded!');
+        } catch (err) {
+          setVRStatus('Parse error: ' + err.message, true);
+        }
+        genBtn.disabled = false;
+        genBtn.textContent = '⬡ Generate';
+        return;
+      }
+
+      // API mode
+      const apiKey = await getApiKeyForProvider(APP.provider);
+      if (!apiKey) { setVRStatus('No API key — add it in Settings.', true); genBtn.disabled = false; return; }
+
+      genBtn.textContent = 'Generating…';
+      setVRStatus('Calling AI… parsing structure, assembling template locally…');
+      let jsonRaw = '';
+      try {
+        await callAPI(
+          buildVRPrompt(rawText, titleVal, subtitleVal),
+          chunk => { jsonRaw += chunk; },
+          () => {
+            try {
+              // Strip any accidental fences
+              let clean = jsonRaw.replace(/^```json\s*/i,'').replace(/^```\s*/i,'').replace(/```\s*$/i,'').trim();
+              // Find first { in case model prefixed with text
+              const start = clean.indexOf('{');
+              if (start > 0) clean = clean.slice(start);
+              const json = JSON.parse(clean);
+              const html = assembleFromJSON(json, titleVal, subtitleVal);
+              downloadHTML(html, titleVal);
+              setVRStatus('✓ Report downloaded! (AI parsed · local template)');
+            } catch (parseErr) {
+              setVRStatus('JSON parse error — try again or use Local Parser. ' + parseErr.message, true);
+            }
+            genBtn.disabled = false; genBtn.textContent = '⬡ Generate';
+          },
+          err => { setVRStatus('Error: ' + err, true); genBtn.disabled = false; genBtn.textContent = '⬡ Generate'; },
+          null
+        );
+      } catch (err) {
+        setVRStatus('Error: ' + (err.message || err), true);
+        genBtn.disabled = false; genBtn.textContent = '⬡ Generate';
+      }
+    });
+
+    // ── Helpers ───────────────────────────────────────────────────────
+    function getVRInputs() {
+      return {
+        titleVal:    (document.getElementById('vr-title').value    || '').trim() || 'Editorial Report',
+        subtitleVal: (document.getElementById('vr-subtitle').value || '').trim(),
+        rawText: document.getElementById('vr-source').value === 'paste'
+          ? (document.getElementById('vr-paste').value || '').trim()
+          : (APP && APP.prompts && APP.prompts.output || '')
+      };
+    }
+
+    function setVRStatus(msg, isErr) {
+      const el = document.getElementById('vr-status-msg');
+      el.textContent = msg;
+      el.style.color = isErr ? '#c06050' : '#c8a660';
+    }
+
+    function downloadHTML(html, title) {
+      const slug = title.replace(/[^a-z0-9]+/gi,'-').toLowerCase().replace(/^-+|-+$/g,'');
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = (slug||'report') + '.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+
+    // ══ LOCAL JS PARSER ═══════════════════════════════════════════════
+    function localParseReport(raw, title, subtitle) {
+      const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+      // ── severity detection ──
+      function severity(text) {
+        const t = text.toLowerCase();
+        if (/\b(critical|must.fix|must.change|must.resolve|error|conflict)\b/.test(t)) return 'critical';
+        if (/\b(important|suggested?|should|recommend|flag|warning|issue)\b/.test(t)) return 'important';
+        if (/\b(optional|minor|consider|nice.to.have|low.priority)\b/.test(t)) return 'minor';
+        return null;
+      }
+      const sevColor = { critical:'#e74c3c', important:'#f39c12', minor:'#27ae60' };
+      const sevLabel = { critical:'Critical', important:'Important', minor:'Minor' };
+      const sevBg    = { critical:'rgba(231,76,60,0.08)', important:'rgba(243,156,18,0.06)', minor:'rgba(39,174,96,0.06)' };
+
+      // ── inline markdown ──
+      function inlineMd(s) {
+        return esc(s)
+          .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+          .replace(/\*\*(.+?)\*\*/g,     '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g,         '<em>$1</em>')
+          .replace(/`([^`]+)`/g,         '<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;font-size:0.9em;font-family:monospace">$1</code>')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#e8c96e">$1</a>');
+      }
+
+      // ── split lines ──
+      const lines = raw.split(/\r?\n/);
+
+      // ── first pass: collect sections (h2/h3 become cards) ──
+      const sections = [];
+      let cur = null;
+
+      function pushCur() { if (cur) { sections.push(cur); cur = null; } }
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const h1 = line.match(/^#\s+(.+)/);
+        const h2 = line.match(/^##\s+(.+)/);
+        const h3 = line.match(/^###\s+(.+)/);
+
+        if (h1) { pushCur(); /* h1 goes in hero only */ continue; }
+        if (h2) {
+          pushCur();
+          cur = { title: h2[1].replace(/\*/g,''), lines: [], sev: severity(h2[1]) };
+          continue;
+        }
+        if (h3 && cur) {
+          cur.lines.push({ type:'h3', text: h3[1].replace(/\*/g,'') });
+          continue;
+        }
+        if (cur) cur.lines.push({ type:'raw', text: line });
+      }
+      pushCur();
+
+      // if no h2 headings found, treat whole text as one section
+      if (sections.length === 0) {
+        sections.push({ title: title, lines: lines.map(l => ({ type:'raw', text:l })), sev: null });
+      }
+
+      // ── render section content ──
+      function renderLines(lineObjs) {
+        const out = [];
+        let i = 0;
+        while (i < lineObjs.length) {
+          const { type, text } = lineObjs[i];
+
+          // h3
+          if (type === 'h3') {
+            out.push(`<h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:#e8e4f0;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.07)">${inlineMd(text)}</h3>`);
+            i++; continue;
+          }
+
+          const t = text;
+
+          // blank line
+          if (!t.trim()) { i++; continue; }
+
+          // horizontal rule
+          if (/^---+$/.test(t.trim())) {
+            out.push('<hr style="border:none;border-top:1px solid rgba(232,201,110,0.15);margin:24px 0">');
+            i++; continue;
+          }
+
+          // fenced code block
+          if (/^```/.test(t)) {
+            const lang = t.replace(/^```/,'').trim();
+            const codeLines = [];
+            i++;
+            while (i < lineObjs.length && !/^```/.test(lineObjs[i].text)) {
+              codeLines.push(esc(lineObjs[i].text)); i++;
+            }
+            i++; // skip closing ```
+            out.push(`<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:#9090b0;line-height:1.7;overflow-x:auto;white-space:pre-wrap">${codeLines.join('\n')}</div>`);
+            continue;
+          }
+
+          // blockquote — check for Before/After pattern
+          if (/^>\s*/.test(t)) {
+            const bqLines = [];
+            while (i < lineObjs.length && /^>\s*/.test(lineObjs[i].text)) {
+              bqLines.push(lineObjs[i].text.replace(/^>\s*/,'')); i++;
+            }
+            const bqText = bqLines.join(' ');
+            out.push(`<blockquote style="background:rgba(232,201,110,0.05);border-left:3px solid rgba(232,201,110,0.4);border-radius:0 8px 8px 0;margin:12px 0;padding:12px 16px;color:#b0a888;font-style:italic">${inlineMd(bqText)}</blockquote>`);
+            continue;
+          }
+
+          // before/after comparison: look for **Before:** ... **After:** on consecutive items
+          const isBefore = /^\*{0,2}Before:?\*{0,2}/i.test(t);
+          if (isBefore) {
+            const beforeText = t.replace(/^\*{0,2}Before:?\*{0,2}\s*/i,'');
+            let afterText = '';
+            let whyText = '';
+            let j = i + 1;
+            while (j < lineObjs.length && !lineObjs[j].text.trim()) j++;
+            if (j < lineObjs.length && /^\*{0,2}After:?\*{0,2}/i.test(lineObjs[j].text)) {
+              afterText = lineObjs[j].text.replace(/^\*{0,2}After:?\*{0,2}\s*/i,'');
+              j++;
+              while (j < lineObjs.length && !lineObjs[j].text.trim()) j++;
+              if (j < lineObjs.length && /^\*{0,2}Why.{0,20}stronger/i.test(lineObjs[j].text)) {
+                whyText = lineObjs[j].text.replace(/^\*{0,2}Why.{0,20}stronger:?\*{0,2}\s*/i,'');
+                j++;
+              }
+              out.push(`<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07);border-radius:8px;overflow:hidden;margin:14px 0">
+                <div style="background:rgba(231,76,60,0.07);padding:14px 16px">
+                  <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.15em;color:#ff6b6b;margin-bottom:8px;font-weight:600">Before</div>
+                  <div style="font-size:13px;color:#e8e4f0;line-height:1.7;font-style:italic">${inlineMd(beforeText)}</div>
+                </div>
+                <div style="background:rgba(39,174,96,0.07);padding:14px 16px">
+                  <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.15em;color:#6bffaa;margin-bottom:8px;font-weight:600">After</div>
+                  <div style="font-size:13px;color:#e8e4f0;line-height:1.7">${inlineMd(afterText)}</div>
+                </div>
+                ${whyText ? `<div style="grid-column:1/-1;background:rgba(232,201,110,0.07);border-top:1px solid rgba(232,201,110,0.15);padding:10px 16px;font-size:12px;color:#e8c96e">${inlineMd(whyText)}</div>` : ''}
+              </div>`);
+              i = j; continue;
+            }
+          }
+
+          // resolution / fix box
+          if (/^[\*_]{0,2}(✓|resolution|fix|recommended\s+version):?[\*_]{0,2}/i.test(t)) {
+            const label = t.match(/^[\*_]{0,2}(✓\s*\w*|resolution|fix|recommended\s+version)/i)?.[0].replace(/[\*_]/g,'') || '✓ Resolution';
+            const resLines = [t.replace(/^[\*_]{0,2}(✓[^:]*|resolution|fix|recommended\s+version):?\s*[\*_]{0,2}\s*/i,'')];
+            i++;
+            while (i < lineObjs.length && lineObjs[i].text.trim() && !/^#/.test(lineObjs[i].text)) {
+              resLines.push(lineObjs[i].text); i++;
+            }
+            out.push(`<div style="background:rgba(39,174,96,0.07);border:1px solid rgba(39,174,96,0.2);border-radius:8px;padding:16px 18px;margin:14px 0">
+              <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#6bffaa;margin-bottom:10px;font-weight:600">${esc(label.trim())}</div>
+              <div style="font-size:13px;color:#e8e4f0;line-height:1.7">${resLines.map(inlineMd).join('<br>')}</div>
+            </div>`);
+            continue;
+          }
+
+          // numbered list item  (1. text)
+          if (/^\d+\.\s/.test(t)) {
+            const items = [];
+            while (i < lineObjs.length && /^\d+\.\s/.test(lineObjs[i].text)) {
+              const itemText = lineObjs[i].text.replace(/^\d+\.\s*/,'');
+              const sev = severity(itemText);
+              items.push({ text: itemText, sev });
+              i++;
+            }
+            out.push('<ol style="list-style:none;padding:0;margin:10px 0;display:flex;flex-direction:column;gap:8px">');
+            items.forEach((item, idx) => {
+              const c = item.sev ? sevColor[item.sev] : '#e8c96e';
+              const bg = item.sev ? sevBg[item.sev] : 'rgba(255,255,255,0.03)';
+              out.push(`<li style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:${bg};border-radius:6px;border-left:2px solid ${c}">
+                <span style="min-width:22px;height:22px;border-radius:50%;border:1px solid ${c};background:transparent;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:${c};flex-shrink:0">${idx+1}</span>
+                <span style="font-size:13px;color:#e8e4f0;line-height:1.6">${inlineMd(item.text)}</span>
+              </li>`);
+            });
+            out.push('</ol>');
+            continue;
+          }
+
+          // unordered list item
+          if (/^[-*+]\s/.test(t)) {
+            const items = [];
+            while (i < lineObjs.length && /^[-*+]\s/.test(lineObjs[i].text)) {
+              const itemText = lineObjs[i].text.replace(/^[-*+]\s*/,'');
+              const sev = severity(itemText);
+              items.push({ text: itemText, sev });
+              i++;
+            }
+            out.push('<ul style="list-style:none;padding:0;margin:10px 0;display:flex;flex-direction:column;gap:6px">');
+            items.forEach(item => {
+              const c = item.sev ? sevColor[item.sev] : 'rgba(232,201,110,0.5)';
+              const bg = item.sev ? sevBg[item.sev] : 'transparent';
+              out.push(`<li style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:${bg};border-radius:6px${item.sev ? ';border-left:2px solid '+c : ''}">
+                <span style="color:${c};margin-top:3px;flex-shrink:0">●</span>
+                <span style="font-size:13px;color:#e8e4f0;line-height:1.6">${inlineMd(item.text)}</span>
+              </li>`);
+            });
+            out.push('</ul>');
+            continue;
+          }
+
+          // issue/flag card: line starting with a bold label that has severity
+          const boldLabel = t.match(/^\*\*([^*]+)\*\*[:\s]/);
+          if (boldLabel) {
+            const label = boldLabel[1];
+            const rest = t.slice(boldLabel[0].length);
+            const sev = severity(label + ' ' + rest);
+            if (sev) {
+              const c = sevColor[sev];
+              const bg = sevBg[sev];
+              out.push(`<div style="background:${bg};border:1px solid ${c}33;border-left:3px solid ${c};border-radius:8px;padding:14px 18px;margin:10px 0">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                  <span style="background:${c}33;color:${c};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:3px 10px;border-radius:999px;border:1px solid ${c}66">${sevLabel[sev]}</span>
+                  <span style="font-size:14px;font-weight:600;color:#e8e4f0">${inlineMd(label)}</span>
+                </div>
+                <div style="font-size:13px;color:#9090b0;line-height:1.7">${inlineMd(rest)}</div>
+              </div>`);
+              i++; continue;
+            }
+          }
+
+          // plain paragraph
+          out.push(`<p style="font-size:14px;color:#c8c4d4;line-height:1.75;margin:8px 0">${inlineMd(t)}</p>`);
+          i++;
+        }
+        return out.join('\n');
+      }
+
+      // ── build TOC + sidebar ──
+      const tocEntries = sections.map((s, idx) => {
+        const id = 'section-' + (idx + 1);
+        return { id, title: s.title, num: String(idx + 1).padStart(2,'0') };
+      });
+
+      const sidebarLinks = tocEntries.map(e =>
+        `<a href="#${e.id}" class="nav-link"><span class="nav-num">${e.num}</span>${esc(e.title)}</a>`
+      ).join('\n');
+
+      const tocGrid = tocEntries.map(e =>
+        `<a href="#${e.id}" class="toc-entry"><span class="num">${e.num}</span><span class="title">${esc(e.title)}</span></a>`
+      ).join('\n');
+
+      // ── build section cards ──
+      const cards = sections.map((s, idx) => {
+        const id = tocEntries[idx].id;
+        const num = idx + 1;
+        const sev = s.sev;
+        const accentColor = sev ? sevColor[sev] : '#e8c96e';
+        return `<section id="${id}" class="section-card">
+          <div class="section-header">
+            <div class="section-badge">${num}</div>
+            <div class="section-title-wrap" style="border-left:3px solid ${accentColor}">
+              <h2 class="section-title">${esc(s.title)}</h2>
+              ${sev ? `<p class="section-subtitle"><span style="color:${accentColor};font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">${sevLabel[sev]}</span></p>` : ''}
+            </div>
+          </div>
+          ${renderLines(s.lines)}
+        </section>`;
+      }).join('\n');
+
+      // ── assemble full HTML ──
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(title)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-page:#0d0d14;--bg-s1:#12121e;--bg-s2:#1a1a2e;
+  --bg-card:rgba(255,255,255,0.035);--border:rgba(255,255,255,0.07);
+  --border-hv:rgba(232,201,110,0.3);
+  --gold:#e8c96e;--gold-dim:rgba(232,201,110,0.15);
+  --red:#e74c3c;--amber:#f39c12;--green:#27ae60;
+  --text:#e8e4f0;--text-2:#9090b0;--text-3:#5a5a7a;
+  --r:12px;--r-sm:8px;--r-pill:999px;
+}
+body{background:var(--bg-page);background-image:radial-gradient(ellipse at 20% 20%,rgba(232,201,110,0.04) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(52,152,219,0.04) 0%,transparent 50%);font-family:'Inter',-apple-system,sans-serif;color:var(--text);line-height:1.6;min-height:100vh}
+.sidebar-nav{position:fixed;top:0;left:0;width:210px;height:100vh;overflow-y:auto;background:var(--bg-s1);border-right:1px solid var(--border);padding:20px 0;z-index:100}
+.sidebar-logo{padding:0 20px 16px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.sidebar-logo span{font-family:'Inter',monospace;font-size:12px;color:var(--gold);letter-spacing:0.02em}
+.nav-link{display:block;padding:9px 20px;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-2);text-decoration:none;border-left:3px solid transparent;transition:all 0.2s}
+.nav-link:hover,.nav-link.active{background:var(--gold-dim);border-left-color:var(--gold);color:var(--text)}
+.nav-link .nav-num{color:var(--gold);opacity:0.6;margin-right:8px}
+.page-shell{margin-left:210px;min-width:0}
+.hero{background:linear-gradient(135deg,#0a0a10 0%,#12122a 50%,#0a0a10 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;padding:60px 40px;text-align:center}
+.hero::before{content:'';position:absolute;top:-150px;right:-150px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(232,201,110,0.06)}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:250px;height:250px;border-radius:50%;border:1px solid rgba(52,152,219,0.06)}
+.hero-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--text-2);margin-bottom:12px;position:relative;z-index:1}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:42px;font-style:italic;color:var(--gold);text-shadow:0 0 40px rgba(232,201,110,0.3);position:relative;z-index:1;margin-bottom:4px}
+.hero-subtitle{font-size:14px;color:var(--text-2);position:relative;z-index:1;margin-bottom:16px}
+.hero-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);width:60%;margin:0 auto 16px;position:relative;z-index:1}
+.main-content{max-width:860px;margin:0 auto;padding:32px 24px 64px;box-sizing:border-box;width:100%}
+.toc{background:var(--bg-s1);border-radius:var(--r);padding:24px 28px;margin-bottom:28px}
+.toc-title{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.toc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px}
+.toc-entry{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--r-sm);text-decoration:none;transition:all 0.15s;border-left:2px solid transparent}
+.toc-entry:hover{background:var(--gold-dim);border-left-color:var(--gold)}
+.toc-entry .num{font-size:10px;color:var(--gold);opacity:0.7;min-width:26px}
+.toc-entry .title{font-size:13px;font-weight:500;color:var(--text-2)}
+.toc-entry:hover .title{color:var(--text)}
+.section-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;width:100%;box-sizing:border-box;overflow:hidden;transition:border-color 0.2s}
+.section-card:hover{border-color:var(--border-hv)}
+.section-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.section-badge{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--gold)}
+.section-title-wrap{padding-left:12px}
+.section-title{font-family:'Playfair Display',Georgia,serif;font-size:21px;color:var(--text);font-weight:400}
+.section-subtitle{font-size:12px;color:var(--text-2);margin-top:3px}
+@media(max-width:860px){.sidebar-nav{display:none}.page-shell{margin-left:0}.main-content{padding:16px 12px 40px}.toc-grid{grid-template-columns:1fr}.hero{padding:40px 20px}.hero-title{font-size:28px}}
+@media print{.sidebar-nav,.no-print{display:none!important}.page-shell{margin-left:0}body{background:#fff!important;color:#111!important}.section-card{background:#fff!important;border:1px solid #ddd!important;page-break-inside:avoid}}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg-s1)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+</style>
+</head>
+<body>
+<nav class="sidebar-nav">
+  <div class="sidebar-logo"><span>📋 Editorial Report</span></div>
+  ${sidebarLinks}
+</nav>
+<div class="page-shell">
+  <header class="hero">
+    <div class="hero-eyebrow">Editorial Analysis Report</div>
+    <h1 class="hero-title">${esc(title)}</h1>
+    ${subtitle ? `<p class="hero-subtitle">${esc(subtitle)}</p>` : ''}
+    <div class="hero-rule"></div>
+  </header>
+  <main class="main-content">
+    <nav class="toc">
+      <h2 class="toc-title">Table of Contents</h2>
+      <div class="toc-grid">${tocGrid}</div>
+    </nav>
+    ${cards}
+  </main>
+</div>
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+const navLinks=document.querySelectorAll('.nav-link');
+const sections=document.querySelectorAll('.section-card');
+if('IntersectionObserver' in window){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id=entry.target.id;
+        navLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+id)});
+      }
+    });
+  },{threshold:0.3});
+  sections.forEach(s=>obs.observe(s));
+}
+<\/script>
+</body>
+</html>`;
+    }
+    // ══ END LOCAL PARSER ══════════════════════════════════════════════
+
+    // ── API prompt builder ─────────────────────────────────────────────
+    // ── API: JSON-only prompt (no CSS/JS/boilerplate in output) ───────
+    function buildVRPrompt(rawText, title, subtitle) {
+      return `You are an editorial analyst. Parse the following text and return ONLY a JSON object — no markdown fences, no explanation, nothing else.
+
+The JSON must match this exact shape:
+{
+  "sections": [
+    {
+      "id": "section-1",
+      "title": "Section Title",
+      "sev": null,
+      "content": [
+        { "type": "p", "text": "Plain paragraph text." },
+        { "type": "h3", "text": "Subheading" },
+        { "type": "list", "ordered": false, "items": [
+            { "text": "Item one", "sev": "critical" },
+            { "text": "Item two", "sev": null }
+        ]},
+        { "type": "code", "text": "verbatim code or quoted text here" },
+        { "type": "comparison", "before": "old text", "after": "new text", "why": "reason it is stronger" },
+        { "type": "resolution", "label": "✓ Resolution", "text": "resolution text" },
+        { "type": "flag", "label": "Flag Title", "sev": "important", "text": "description" },
+        { "type": "blockquote", "text": "quoted text" },
+        { "type": "rule" }
+      ]
+    }
+  ]
+}
+
+FIELD RULES:
+- "sev" on a section or item: null | "critical" | "important" | "minor"
+  Detect from language: critical/must/error/conflict → "critical"; important/suggested/flag/warning → "important"; optional/minor/consider → "minor"
+- "type" values: p | h3 | list | code | comparison | resolution | flag | blockquote | rule
+- For "comparison": include "why" only if a "why it's stronger" or rationale sentence follows the after text
+- All text values: plain text only, no markdown — use ** for bold and * for italic if needed, they will be rendered
+- Keep all section titles, content, and wording faithful to the source — do not summarize or rewrite
+- "id" values: "section-1", "section-2", etc. in order
+
+REPORT TITLE: "${title}"
+REPORT SUBTITLE: "${subtitle || 'Editorial Analysis'}"
+
+INPUT TEXT:
+---
+${rawText}
+---
+
+Output the JSON object now. Start with { and end with }.`;
+    }
+
+    // ── Assemble full HTML from JSON payload (template is pre-baked) ──
+    function assembleFromJSON(json, title, subtitle) {
+      const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+      function inlineMd(s) {
+        return esc(s)
+          .replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>')
+          .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g,'<em>$1</em>')
+          .replace(/`([^`]+)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;font-size:.9em;font-family:monospace">$1</code>');
+      }
+
+      const sevColor = { critical:'#e74c3c', important:'#f39c12', minor:'#27ae60' };
+      const sevBg    = { critical:'rgba(231,76,60,0.08)', important:'rgba(243,156,18,0.06)', minor:'rgba(39,174,96,0.06)' };
+      const sevLabel = { critical:'Critical', important:'Important', minor:'Minor' };
+
+      function renderBlock(b) {
+        switch (b.type) {
+          case 'p':
+            return `<p style="font-size:14px;color:#c8c4d4;line-height:1.75;margin:8px 0">${inlineMd(b.text)}</p>`;
+          case 'h3':
+            return `<h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:#e8e4f0;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.07)">${inlineMd(b.text)}</h3>`;
+          case 'rule':
+            return `<hr style="border:none;border-top:1px solid rgba(232,201,110,0.15);margin:24px 0">`;
+          case 'blockquote':
+            return `<blockquote style="background:rgba(232,201,110,0.05);border-left:3px solid rgba(232,201,110,0.4);border-radius:0 8px 8px 0;margin:12px 0;padding:12px 16px;color:#b0a888;font-style:italic">${inlineMd(b.text)}</blockquote>`;
+          case 'code':
+            return `<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:#9090b0;line-height:1.7;overflow-x:auto;white-space:pre-wrap">${esc(b.text)}</div>`;
+          case 'resolution': {
+            const lbl = b.label || '✓ Resolution';
+            return `<div style="background:rgba(39,174,96,0.07);border:1px solid rgba(39,174,96,0.2);border-radius:8px;padding:16px 18px;margin:14px 0">
+              <div style="font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#6bffaa;margin-bottom:10px;font-weight:600">${esc(lbl)}</div>
+              <div style="font-size:13px;color:#e8e4f0;line-height:1.7">${inlineMd(b.text)}</div>
+            </div>`;
+          }
+          case 'comparison': {
+            const why = b.why ? `<div style="grid-column:1/-1;background:rgba(232,201,110,0.07);border-top:1px solid rgba(232,201,110,0.15);padding:10px 16px;font-size:12px;color:#e8c96e">${inlineMd(b.why)}</div>` : '';
+            return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07);border-radius:8px;overflow:hidden;margin:14px 0">
+              <div style="background:rgba(231,76,60,0.07);padding:14px 16px">
+                <div style="font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#ff6b6b;margin-bottom:8px;font-weight:600">Before</div>
+                <div style="font-size:13px;color:#e8e4f0;line-height:1.7;font-style:italic">${inlineMd(b.before)}</div>
+              </div>
+              <div style="background:rgba(39,174,96,0.07);padding:14px 16px">
+                <div style="font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#6bffaa;margin-bottom:8px;font-weight:600">After</div>
+                <div style="font-size:13px;color:#e8e4f0;line-height:1.7">${inlineMd(b.after)}</div>
+              </div>
+              ${why}
+            </div>`;
+          }
+          case 'flag': {
+            const c  = b.sev ? sevColor[b.sev] : '#e8c96e';
+            const bg = b.sev ? sevBg[b.sev]    : 'rgba(255,255,255,0.03)';
+            const pill = b.sev ? `<span style="background:${c}33;color:${c};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:999px;border:1px solid ${c}66">${sevLabel[b.sev]}</span>` : '';
+            return `<div style="background:${bg};border:1px solid ${b.sev ? c+'33' : 'rgba(255,255,255,0.07)'};border-left:3px solid ${c};border-radius:8px;padding:14px 18px;margin:10px 0">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">${pill}<span style="font-size:14px;font-weight:600;color:#e8e4f0">${inlineMd(b.label||'')}</span></div>
+              <div style="font-size:13px;color:#9090b0;line-height:1.7">${inlineMd(b.text||'')}</div>
+            </div>`;
+          }
+          case 'list': {
+            const tag = b.ordered ? 'ol' : 'ul';
+            const items = (b.items || []).map((item, idx) => {
+              const c  = item.sev ? sevColor[item.sev] : (b.ordered ? '#e8c96e' : 'rgba(232,201,110,0.5)');
+              const bg = item.sev ? sevBg[item.sev]    : 'transparent';
+              const marker = b.ordered
+                ? `<span style="min-width:22px;height:22px;border-radius:50%;border:1px solid ${c};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:${c};flex-shrink:0">${idx+1}</span>`
+                : `<span style="color:${c};margin-top:3px;flex-shrink:0">●</span>`;
+              return `<li style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:${bg};border-radius:6px${item.sev?';border-left:2px solid '+c:''}">
+                ${marker}
+                <span style="font-size:13px;color:#e8e4f0;line-height:1.6">${inlineMd(item.text)}</span>
+              </li>`;
+            }).join('');
+            return `<${tag} style="list-style:none;padding:0;margin:10px 0;display:flex;flex-direction:column;gap:6px">${items}</${tag}>`;
+          }
+          default: return '';
+        }
+      }
+
+      const sections = json.sections || [];
+      const sidebarLinks = sections.map((s,i) =>
+        `<a href="#${s.id}" class="nav-link"><span class="nav-num">${String(i+1).padStart(2,'0')}</span>${esc(s.title)}</a>`
+      ).join('\n');
+      const tocGrid = sections.map((s,i) =>
+        `<a href="#${s.id}" class="toc-entry"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="title">${esc(s.title)}</span></a>`
+      ).join('\n');
+      const cards = sections.map((s,i) => {
+        const c = s.sev ? sevColor[s.sev] : '#e8c96e';
+        const pill = s.sev ? `<p class="section-subtitle"><span style="color:${c};font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">${sevLabel[s.sev]}</span></p>` : '';
+        const content = (s.content || []).map(renderBlock).join('\n');
+        return `<section id="${s.id}" class="section-card">
+          <div class="section-header">
+            <div class="section-badge">${i+1}</div>
+            <div class="section-title-wrap" style="border-left:3px solid ${c}">
+              <h2 class="section-title">${esc(s.title)}</h2>${pill}
+            </div>
+          </div>
+          ${content}
+        </section>`;
+      }).join('\n');
+
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(title)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg-page:#0d0d14;--bg-s1:#12121e;--bg-s2:#1a1a2e;--bg-card:rgba(255,255,255,0.035);--border:rgba(255,255,255,0.07);--border-hv:rgba(232,201,110,0.3);--gold:#e8c96e;--gold-dim:rgba(232,201,110,0.15);--red:#e74c3c;--amber:#f39c12;--green:#27ae60;--text:#e8e4f0;--text-2:#9090b0;--text-3:#5a5a7a;--r:12px;--r-sm:8px;--r-pill:999px}
+body{background:var(--bg-page);background-image:radial-gradient(ellipse at 20% 20%,rgba(232,201,110,0.04) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(52,152,219,0.04) 0%,transparent 50%);font-family:'Inter',-apple-system,sans-serif;color:var(--text);line-height:1.6;min-height:100vh}
+.sidebar-nav{position:fixed;top:0;left:0;width:210px;height:100vh;overflow-y:auto;background:var(--bg-s1);border-right:1px solid var(--border);padding:20px 0;z-index:100}
+.sidebar-logo{padding:0 20px 16px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.sidebar-logo span{font-size:12px;color:var(--gold);letter-spacing:.02em}
+.nav-link{display:block;padding:9px 20px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-2);text-decoration:none;border-left:3px solid transparent;transition:all .2s}
+.nav-link:hover,.nav-link.active{background:var(--gold-dim);border-left-color:var(--gold);color:var(--text)}
+.nav-link .nav-num{color:var(--gold);opacity:.6;margin-right:8px}
+.page-shell{margin-left:210px;min-width:0}
+.hero{background:linear-gradient(135deg,#0a0a10 0%,#12122a 50%,#0a0a10 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;padding:60px 40px;text-align:center}
+.hero::before{content:'';position:absolute;top:-150px;right:-150px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(232,201,110,0.06)}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:250px;height:250px;border-radius:50%;border:1px solid rgba(52,152,219,0.06)}
+.hero-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--text-2);margin-bottom:12px;position:relative;z-index:1}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:42px;font-style:italic;color:var(--gold);text-shadow:0 0 40px rgba(232,201,110,0.3);position:relative;z-index:1;margin-bottom:4px}
+.hero-subtitle{font-size:14px;color:var(--text-2);position:relative;z-index:1;margin-bottom:16px}
+.hero-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);width:60%;margin:0 auto 16px;position:relative;z-index:1}
+.main-content{max-width:860px;margin:0 auto;padding:32px 24px 64px;box-sizing:border-box;width:100%}
+.toc{background:var(--bg-s1);border-radius:var(--r);padding:24px 28px;margin-bottom:28px}
+.toc-title{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.toc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px}
+.toc-entry{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--r-sm);text-decoration:none;transition:all .15s;border-left:2px solid transparent}
+.toc-entry:hover{background:var(--gold-dim);border-left-color:var(--gold)}
+.toc-entry .num{font-size:10px;color:var(--gold);opacity:.7;min-width:26px}
+.toc-entry .title{font-size:13px;font-weight:500;color:var(--text-2)}
+.toc-entry:hover .title{color:var(--text)}
+.section-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;width:100%;box-sizing:border-box;overflow:hidden;transition:border-color .2s}
+.section-card:hover{border-color:var(--border-hv)}
+.section-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.section-badge{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--gold)}
+.section-title-wrap{padding-left:12px}
+.section-title{font-family:'Playfair Display',Georgia,serif;font-size:21px;color:var(--text);font-weight:400}
+.section-subtitle{font-size:12px;color:var(--text-2);margin-top:3px}
+@media(max-width:860px){.sidebar-nav{display:none}.page-shell{margin-left:0}.main-content{padding:16px 12px 40px}.toc-grid{grid-template-columns:1fr}.hero{padding:40px 20px}.hero-title{font-size:28px}}
+@media print{.sidebar-nav,.no-print{display:none!important}.page-shell{margin-left:0}body{background:#fff!important;color:#111!important}.section-card{background:#fff!important;border:1px solid #ddd!important;page-break-inside:avoid}}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:var(--bg-s1)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+</style>
+</head>
+<body>
+<nav class="sidebar-nav">
+  <div class="sidebar-logo"><span>📋 Editorial Report</span></div>
+  ${sidebarLinks}
+</nav>
+<div class="page-shell">
+  <header class="hero">
+    <div class="hero-eyebrow">Editorial Analysis Report</div>
+    <h1 class="hero-title">${esc(title)}</h1>
+    ${subtitle ? `<p class="hero-subtitle">${esc(subtitle)}</p>` : ''}
+    <div class="hero-rule"></div>
+  </header>
+  <main class="main-content">
+    <nav class="toc">
+      <h2 class="toc-title">Table of Contents</h2>
+      <div class="toc-grid">${tocGrid}</div>
+    </nav>
+    ${cards}
+  </main>
+</div>
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}});
+});
+if('IntersectionObserver' in window){
+  const links=document.querySelectorAll('.nav-link');
+  new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id))}})},{threshold:0.3})
+  .observe||document.querySelectorAll('.section-card').forEach(s=>new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}})},{threshold:0.3}).observe(s));
+  document.querySelectorAll('.section-card').forEach(s=>{const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))})},{threshold:0.3});obs.observe(s)});
+}
+<\/script>
+</body>
+</html>`;
+    }
+
+  })();
+  </script>
 
 </body>
 
