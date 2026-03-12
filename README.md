@@ -11,6 +11,9 @@ Many traditional publishers require zero AI usage to be published, if you are pe
 
 ## Features
 
+![Settings](https://github.com/user-attachments/assets/59193865-7f38-4ee2-9af7-00998272d289)
+![Home](https://github.com/user-attachments/assets/ae144c5e-be2c-4dbb-a1c5-7f8a5dc59627)
+
 - **Multiple AI Providers**: OpenRouter, Anthropic Direct (Claude), OpenAI Direct (GPT), Google Direct (Gemini), and LM Studio (local models)
 - **Flexible Context**: Add details at Series, Book, or Chapter level to customize AI prompts
 - **AI-Powered Editing Tools**:
