@@ -2,6 +2,8 @@
 
 AI-powered writing assistant for editing and world-building. Features multiple AI providers (Claude, GPT, Gemini), flexible context management at Series/Book/Chapter levels, and a privacy-first design with all data stored locally in your browser.
 
+Version 1.4 Beta is feature complete. I do not expect to add more features to the tool, so unless more APIs or bug fixes are needed this should be the same as 1.0 Release. Going forward this single HTML version will stay free and open source. I am working on a more complete suite of tools that can go from idea to planning to writing to editing to marketing to publishing, but it will be a seperate project.  
+
 ## Disclaimer
 Many traditional publishers require zero AI usage to be published, if you are persuing this distribution method you are using this tool at your own risk. For self publishing refer to your local laws and regulations. [Authors Guild stance on AI](https://authorsguild.org/resource/ai-best-practices-for-authors/)
 
@@ -34,6 +36,10 @@ Many traditional publishers require zero AI usage to be published, if you are pe
     - Scene-level conflict
   - And more...
 - **Pipeline Mode**: Chain multiple prompts together for complex workflows
+- **Local mode** — instant, no API call, parses markdown structure directly
+- **AI Enhanced mode** — smarter extraction for complex or irregular outputs
+- Works from both the Prompts output toolbar and the Compare tab
+- Output opens in a new tab and can be saved, printed, or shared
 - **Auto-Save & Backups**:
   - Auto-save every 30 seconds
   - Visual save indicator in header
@@ -58,6 +64,22 @@ Many traditional publishers require zero AI usage to be published, if you are pe
 - Also a prompt to take the output of that and create an html view of the report. Attach the report and put the prompt into the chat.
 ![Manuscript report](https://github.com/user-attachments/assets/9d61c946-a0c7-4c77-aa25-f5f8122a5320)
 ![Beta Reader feedback](https://github.com/user-attachments/assets/5c82c287-e585-43ed-b578-2363d23f9591)
+
+-1.4 Update
+- ### ⇄ Compare Tab
+
+Run multiple different AI analyses on the same chapter, then cross-examine them automatically. The Compare tab finds **conflicts** (where two analyses give contradictory advice on the same passage) and **consensus** (where they independently flag the same problem), and reproduces every issue verbatim so nothing gets lost in synthesis.
+
+**Why it matters:** A pacing audit and a show/tell audit will catch different things — but they'll also sometimes contradict each other. Knowing which flags are backed by both analyses tells you where to spend your revision time first.
+
+- Add analyses from the Prompts tab with a single click, or paste in outputs from Claude.ai or any other session
+- Run automated conflict detection via API, or copy the prompt to use in a chat interface
+- Filter results by Conflicts only, Consensus only, or Full view
+- Convert the comparison into a formatted **Visual Report** document
+
+### 📄 Visual Report
+
+Turn any AI analysis output into a formatted, printable HTML document — structured with a sidebar, section cards, and severity tags (Critical / Important / Minor).
 
 
 ## Getting Started
@@ -118,7 +140,7 @@ Toggle sections On/Off in the Chapter tab to control what context the AI receive
 
 ## Version
 
-1.3 Beta
+1.4 Beta
 
 ## License
 
