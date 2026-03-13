@@ -850,6 +850,196 @@ When using Prompts, select context from:
 - **Refine**: Sequential (output → input)
 - **Parallel**: Simultaneous independent analysis
 
+## Compare Tab
+
+The Compare tab lets you stack multiple AI analyses of the same chapter and find where they agree or contradict each other. Instead of reading through two long outputs and mentally cross-referencing them, the app does it for you — surfacing conflicts, shared findings, and every original issue verbatim.
+
+### When to use it
+
+Run Compare when you've done more than one type of analysis on the same chapter. For example:
+
+- A **Chapter Review** (broad editorial read) + a **Show/Tell Audit**
+- A **Pacing Map** + a **Line Edit** pass
+- Two runs of the same prompt with different models
+
+Each prompt type catches different things. The conflict detector tells you where they disagree — and where they agree is your highest-confidence edit list.
+
+---
+
+### Step 1 — Add your first analysis
+
+Run any prompt in the **Prompts** tab as normal. Once output appears, look for the **+ Compare** button in the output toolbar (right side, next to Visual Report).
+
+Click it. The button flashes **✓ Added** to confirm. The slot is saved automatically with the prompt's label and category.
+
+> **Tip:** Run two different prompt categories on the same chapter text before switching to Compare — e.g. select "Chapter Review" and run, then select "Show/Tell Audit" and run again.
+
+---
+
+### Step 2 — Add your second analysis
+
+Run a second prompt on the same chapter (different category works best). Click **+ Compare** again.
+
+You can add up to as many slots as you want. Each is stored independently with its label, category, timestamp, and full output text.
+
+---
+
+### Step 3 — Paste external analyses (optional)
+
+If you've run analyses in Claude.ai, another session, or a different tool, you can add those too without re-running them.
+
+In the **Compare tab**, click **+ Paste Analysis** in the sidebar footer. A modal opens with:
+
+- **Label** (required) — e.g. "Claude.ai Editorial Read"
+- **Category** (optional) — e.g. "Editorial", "Pacing"
+- **Text area** — paste the full output
+
+Click **+ Add to Compare**. It appears as a slot in the sidebar alongside your in-app analyses.
+
+---
+
+### Step 4 — Review your slots
+
+Switch to the **Compare** tab. The left sidebar lists all your slots as numbered cards showing:
+
+- The label and category
+- The timestamp
+- A two-line preview of the output
+
+Click any label to rename it inline. Click **✕** to remove a slot. **Clear All** removes everything.
+
+The **⇄ Run Conflict Analysis** and **Copy Prompt** buttons in the footer enable once you have 2 or more slots.
+
+---
+
+### Step 5 — Run the conflict analysis
+
+You have two options:
+
+#### Option A — Run via API (automatic)
+
+Click **⇄ Run Conflict Analysis**. The app sends all your slot contents to the AI with a structured prompt that:
+
+- Forbids summarising or merging any issue
+- Requires every flag to be reproduced verbatim
+- Detects contradictions between analyses (conflicts)
+- Detects independently-flagged problems (consensus)
+- Returns JSON with three arrays: `conflicts`, `consensus`, `allIssues`
+
+Results appear in the main panel.
+
+#### Option B — Copy Prompt (for Claude.ai or another chat)
+
+Click **Copy Prompt**. The full comparison prompt — including all your slot contents — is copied to your clipboard. Paste it into Claude.ai or any other chat interface and send. When you get the response, copy it and paste it back using **+ Paste Analysis** if you want to run a Visual Report on it.
+
+> **Note:** Copy Prompt respects the mode dropdown — set it to "Conflicts only" or "Consensus only" before copying if you want a narrower focus.
+
+---
+
+### Step 6 — Read the results
+
+Results are displayed in three sections:
+
+#### ⚡ Conflicts
+Passages where two analyses give contradictory advice. Each conflict card shows:
+- The element or passage in question
+- Side-by-side panels with the exact wording from each analysis
+- A one-line explanation of the contradiction
+- Severity tag (Critical / Important / Minor)
+
+Conflicts don't mean one analysis is wrong — they mean you have an editorial decision to make. Read both stances and decide which direction serves your chapter.
+
+#### ✓ Consensus
+Issues independently flagged by two or more analyses. These are your **highest-confidence edits** — when an editorial read and a show/tell audit both flag the same passage without knowing what the other said, that's a strong signal.
+
+#### 📋 All Issues
+Every flag from every analysis, reproduced in full, grouped by source. Nothing is condensed or paraphrased. Use this section as your working edit checklist.
+
+---
+
+### Step 7 — Change the view mode
+
+Use the **mode dropdown** above the results to filter:
+
+- **Full** — all three sections
+- **Conflicts only** — just the contradictions
+- **Consensus only** — just the shared findings
+
+This also controls what gets sent if you use **Copy Prompt**.
+
+---
+
+### Step 8 — Generate a Visual Report
+
+Click **⬡ Visual Report** in the Compare main panel to convert your conflict analysis into a formatted HTML document. See the [Visual Report](#visual-report) section below for full details.
+
+---
+
+---
+
+## Visual Report
+
+Visual Report converts any AI analysis output into a structured, printable HTML document — with sidebar navigation, section cards, and severity-coded tags.
+
+### Opening Visual Report
+
+**From the Prompts tab:** After any prompt run, click **⬡ Visual Report** in the output toolbar.
+
+**From the Compare tab:** After running conflict analysis, click **⬡ Visual Report** in the main panel.
+
+A modal opens with a preview of the source text and two mode options.
+
+---
+
+### Mode toggle
+
+#### ⚡ Local Parser (default)
+Parses the markdown structure of the output instantly, with no API call. It identifies headers, bullet points, severity keywords, and quoted passages to build the document structure.
+
+Use this for: quick reads, well-structured outputs, saving API credits.
+
+#### ✦ AI Enhanced
+Sends the output to the API for smarter extraction. The AI identifies section boundaries, assigns severity levels, and structures irregular or dense outputs that the local parser may not handle cleanly.
+
+Use this for: long outputs, outputs with unusual formatting, Compare conflict JSON.
+
+> **Tip:** Start with Local mode. If the report looks garbled or sections are missing, switch to AI Enhanced and regenerate.
+
+---
+
+### Generating the report
+
+1. Select your mode (Local or AI Enhanced)
+2. The source text is pre-filled from the output — edit in the text area if needed
+3. Click **Generate Visual Report**
+4. The report opens in a new browser tab
+
+The report includes:
+- A hero header with the chapter title and analysis type
+- Sidebar navigation with scroll-spy
+- Collapsible section cards
+- Severity tags on each issue (Critical / Important / Minor)
+- All original text preserved — nothing summarised
+
+---
+
+### Saving or sharing
+
+The report is a standalone HTML file. To save it:
+
+- **Right-click → Save Page As** in your browser
+- **Print → Save as PDF** for a portable version
+- Copy the URL from the new tab if you want to return to it in the same session
+
+---
+
+### Using Visual Report with Compare
+
+After running conflict analysis in the Compare tab, the Visual Report pre-loads the conflict JSON and generates a structured report with three sections: Conflicts, Consensus, and All Issues — each with source labels, severity tags, and verbatim issue text.
+
+This is the most useful output format for sharing analysis results with a co-author, editor, or beta reader who doesn't use the app.
+
+
 ---
 
 *Tutorial version 1.0 | The Novelist's Atelier*
