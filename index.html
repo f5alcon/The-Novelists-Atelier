@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Novelist's Atelier — 1.4 Beta</title>
+  <title>The Novelist's Atelier — 1.41 Beta</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -21,6 +21,8 @@
 
     :root {
       --ui-scale: 1;
+      --text-brightness: 1.12;
+      --text-color-mode: theme;
       /* Theme: Default Dark */
       --bg: #090807;
       --bg2: #0b0908;
@@ -404,7 +406,7 @@
 
     .mobile-toggle label {
       font-size: 8px;
-      color: #50483a;
+      color: var(--text5);
     }
 
     ::-webkit-scrollbar {
@@ -460,14 +462,14 @@
       font-family: 'Playfair Display', serif;
       font-size: 17px;
       font-weight: 700;
-      color: #e0d3bc;
+      color: var(--text);
       letter-spacing: .02em
     }
 
     .brand-ver {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
-      color: #3a3020;
+      color: var(--text5);
       letter-spacing: .1em
     }
 
@@ -488,7 +490,7 @@
 
     .save-time {
       font-size: 10px;
-      color: #605840;
+      color: var(--text5);
       margin-left: 8px
     }
 
@@ -507,14 +509,14 @@
     }
 
     .backup-time {
-      color: #c8a660;
+      color: var(--text2);
       flex: 1
     }
 
     .backup-restore {
       background: transparent;
       border: 1px solid #3a3020;
-      color: #a09080;
+      color: var(--text3);
       padding: 2px 6px;
       font-size: 10px;
       cursor: pointer;
@@ -523,7 +525,7 @@
 
     .backup-restore:hover {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .scene-navigator {
@@ -557,25 +559,25 @@
     .scene-nav-header h3 {
       margin: 0;
       font-size: 13px;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .scene-nav-close {
       background: none;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 18px;
       cursor: pointer
     }
 
     .scene-nav-close:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .scene-nav-toggle {
       background: transparent;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 10px;
       cursor: pointer;
       margin-left: 12px;
@@ -583,7 +585,7 @@
     }
 
     .scene-nav-toggle:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .search-modal-overlay {
@@ -628,7 +630,7 @@
     .search-modal-hd h3 {
       margin: 0;
       font-size: 14px;
-      color: #c8a660;
+      color: var(--text2);
       flex: 1;
     }
 
@@ -638,14 +640,14 @@
       background: #0f0c09;
       border: 1px solid #3a3020;
       border-radius: var(--r-sm);
-      color: #c8a660;
+      color: var(--text2);
       font-size: 14px;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     .search-input:focus {
       outline: none;
-      border-color: #c8a660;
+      border-color: var(--text2);
       box-shadow: 0 0 0 2px rgba(200,166,96,0.15);
     }
 
@@ -660,7 +662,7 @@
 
     .search-options label {
       font-size: 11px;
-      color: #605840;
+      color: var(--text5);
       display: flex;
       align-items: center;
       gap: 4px;
@@ -668,7 +670,7 @@
     }
 
     .search-options input[type="checkbox"] {
-      accent-color: #c8a660
+      accent-color: var(--text2)
     }
 
     .search-results {
@@ -687,25 +689,25 @@
     }
 
     .search-result-item:hover {
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .search-result-type {
       font-size: 10px;
-      color: #c8a660;
+      color: var(--text2);
       text-transform: uppercase;
       margin-bottom: 2px
     }
 
     .search-result-title {
       font-size: 12px;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 2px
     }
 
     .search-result-snippet {
       font-size: 11px;
-      color: #a09080;
+      color: var(--text3);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis
@@ -713,13 +715,13 @@
 
     .search-result-snippet mark {
       background: #c8a66033;
-      color: #c8a660;
+      color: var(--text2);
       padding: 0 2px
     }
 
     .search-results-count {
       font-size: 11px;
-      color: #605840;
+      color: var(--text5);
       padding: 8px 16px;
       border-top: 1px solid #252015
     }
@@ -740,12 +742,12 @@
       cursor: pointer;
       background: transparent;
       border: 1px solid #3a3020;
-      color: #a09080
+      color: var(--text3)
     }
 
     .search-btn:hover {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .search-btn-primary {
@@ -762,7 +764,7 @@
       padding: 6px 12px;
       background: transparent;
       border: 1px solid #3a3020;
-      color: #a09080;
+      color: var(--text3);
       font-size: 11px;
       cursor: pointer;
       border-radius: 2px
@@ -770,12 +772,12 @@
 
     .search-tab-btn:hover {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .search-tab-btn.active {
       background: #c8a660;
-      border-color: #c8a660;
+      border-color: var(--text2);
       color: #090807
     }
 
@@ -793,18 +795,18 @@
     }
 
     .scene-nav-item:hover {
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .scene-nav-item-title {
       font-size: 12px;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 4px
     }
 
     .scene-nav-item-meta {
       font-size: 10px;
-      color: #605840
+      color: var(--text5)
     }
 
     .project-selector {
@@ -820,7 +822,7 @@
       background: #1a1512;
       border: 1px solid #3a3020;
       border-radius: 2px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -829,12 +831,12 @@
 
     .project-current:hover {
       background: #252015;
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .project-caret {
       font-size: 8px;
-      color: #605840
+      color: var(--text5)
     }
 
     .project-dropdown {
@@ -864,7 +866,7 @@
     .project-item {
       padding: 8px 12px;
       font-size: 11px;
-      color: #a09080;
+      color: var(--text3);
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -873,12 +875,12 @@
 
     .project-item:hover {
       background: #252015;
-      color: #e0d3bc
+      color: var(--text)
     }
 
     .project-item.active {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .project-actions {
@@ -892,7 +894,7 @@
       padding: 6px 10px;
       background: transparent;
       border: 1px solid #3a3020;
-      color: #807060;
+      color: var(--text4);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -902,8 +904,8 @@
 
     .project-action:hover {
       background: #252015;
-      color: #c8a660;
-      border-color: #c8a660
+      color: var(--text2);
+      border-color: var(--text2)
     }
 
     .stats-badge {
@@ -912,7 +914,7 @@
       background: #1a1512;
       border: 1px solid #3a3020;
       border-radius: 2px;
-      color: #605840;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: default;
@@ -921,7 +923,7 @@
 
     .stats-badge:hover {
       border-color: #504830;
-      color: #a09080
+      color: var(--text3)
     }
 
     .tab-nav {
@@ -933,7 +935,7 @@
       padding: 5px 14px;
       background: transparent;
       border: 1px solid transparent;
-      color: #50483a;
+      color: var(--text5);
       font-family: 'Inter', 'JetBrains Mono', monospace;
       font-size: 9px;
       letter-spacing: .08em;
@@ -947,14 +949,14 @@
     }
 
     .tab-btn:hover {
-      color: #a09070;
+      color: var(--text3);
       border-color: #2a2118;
       background: rgba(200,166,96,0.04);
     }
 
     .tab-btn.active {
-      color: #c8a660;
-      border-color: #3a3020;
+      color: var(--text2);
+      border-color: var(--text5);
       background: #141109;
       box-shadow: inset 0 1px 0 rgba(200,166,96,0.08);
     }
@@ -1010,13 +1012,13 @@
       font-family: 'Playfair Display', serif;
       font-size: 22px;
       font-style: italic;
-      color: #e0d3bc;
+      color: var(--text);
       margin-bottom: 3px
     }
 
     .ctx-head p {
       font-size: 13px;
-      color: #50483a;
+      color: var(--text5);
       font-style: italic
     }
 
@@ -1027,7 +1029,7 @@
     .home-section h3 {
       font-family: 'Playfair Display', serif;
       font-size: 16px;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 12px;
       border-bottom: 1px solid #252015;
       padding-bottom: 6px
@@ -1049,13 +1051,13 @@
 
     .home-card:hover {
       background: #12100a;
-      border-color: #3a3020
+      border-color: var(--text5)
     }
 
     .home-card h4 {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: #e0d3bc;
+      color: var(--text);
       margin: 8px 0 6px;
       text-transform: uppercase;
       letter-spacing: .05em
@@ -1063,19 +1065,19 @@
 
     .home-card p {
       font-size: 12px;
-      color: #706858;
+      color: var(--text4);
       line-height: 1.5;
       margin: 0
     }
 
     .home-icon {
       font-size: 20px;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .home-modes {
       font-size: 12px;
-      color: #a89868;
+      color: var(--text3);
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -1105,7 +1107,7 @@
 
     .mode-badge.extended {
       background: #201510;
-      color: #c8a060;
+      color: var(--text2);
       border: 1px solid #3d2a1a
     }
 
@@ -1185,7 +1187,7 @@
       font-size: 8px;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: #40382a
+      color: var(--text5)
     }
 
     .help-icon {
@@ -1195,7 +1197,7 @@
       border-radius: 50%;
       background: #1a1510;
       border: 1px solid #40382a;
-      color: #6a5a4a;
+      color: var(--text4);
       font-size: 9px;
       font-family: 'JetBrains Mono', monospace;
       text-align: center;
@@ -1207,14 +1209,14 @@
 
     .help-icon:hover {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .tooltip {
       position: fixed;
       background: #1a1510;
       border: 1px solid #c8a660;
-      color: #e0d3bc;
+      color: var(--text);
       padding: 8px 12px;
       border-radius: 4px;
       font-size: 11px;
@@ -1231,7 +1233,7 @@
       right: 6px;
       background: none;
       border: none;
-      color: #6a5a4a;
+      color: var(--text4);
       cursor: pointer;
       font-size: 12px
     }
@@ -1241,7 +1243,7 @@
       background: #0d0b08;
       border: 1px solid #1e1a12;
       border-radius: 2px;
-      color: #b8a878;
+      color: var(--text2);
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
       padding: 5px 9px;
@@ -1262,7 +1264,7 @@
 
     select.minput option {
       background: #0d0b08;
-      color: #b8a878
+      color: var(--text2)
     }
 
     /* section block */
@@ -1300,12 +1302,12 @@
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
       font-weight: 600;
-      color: #b8a878
+      color: var(--text2)
     }
 
     .sb-desc {
       font-size: 11px;
-      color: #40382a;
+      color: var(--text5);
       font-style: italic
     }
 
@@ -1329,7 +1331,7 @@
       background: transparent;
       border: none;
       border-right: 1px solid #1e1a12;
-      color: #3a3020;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       letter-spacing: .05em;
@@ -1342,7 +1344,7 @@
     }
 
     .ibtn:hover {
-      color: #7a6848;
+      color: var(--text3);
       background: #141109
     }
 
@@ -1358,7 +1360,7 @@
 
     .ibtn.i-extended.on {
       background: #201510;
-      color: #c8a060
+      color: var(--text2)
     }
 
     .ibtn.i-custom.on {
@@ -1376,7 +1378,7 @@
       background: #111009;
       border: 1px solid #252015;
       border-radius: 2px;
-      color: #60584a;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       letter-spacing: .05em;
@@ -1386,7 +1388,7 @@
     }
 
     .smbtn:hover {
-      color: #c8a660;
+      color: var(--text2);
       border-color: #4a3a18
     }
 
@@ -1399,7 +1401,7 @@
       width: 100%;
       background: #0b0908;
       border: none;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
       line-height: 1.7;
@@ -1430,7 +1432,7 @@
       font-size: 8px;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: #3a3020
+      color: var(--text5)
     }
 
     .add-btn {
@@ -1447,8 +1449,8 @@
     }
 
     .add-btn:hover {
-      border-color: #c8a660;
-      color: #c8a660
+      border-color: var(--text2);
+      color: var(--text2)
     }
 
     .list-item {
@@ -1495,7 +1497,7 @@
       background: transparent;
       border: none;
       border-right: 1px solid #1e1a12;
-      color: #3a3020;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       letter-spacing: .08em;
@@ -1510,7 +1512,7 @@
 
     .mbtn.mon {
       background: #141109;
-      color: #c8a660
+      color: var(--text2)
     }
 
     /* export bar */
@@ -1538,7 +1540,7 @@
       background: #181610;
       border: 1px solid #3a3018;
       border-radius: 2px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -1548,7 +1550,7 @@
 
     .export-btn:hover {
       background: #201e12;
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .divider {
@@ -1587,7 +1589,7 @@
       background: rgba(200,166,96,0.07);
       border: 1px solid rgba(200,166,96,0.25);
       border-radius: 4px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'Inter', 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: .04em;
@@ -1606,7 +1608,7 @@
       font-size: 7px;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: #302818;
+      color: var(--text5);
       padding: 4px 13px 7px
     }
 
@@ -1615,7 +1617,7 @@
       font-size: 6px;
       letter-spacing: .16em;
       text-transform: uppercase;
-      color: #4a3a20;
+      color: var(--text5);
       padding: 12px 13px 4px;
       border-top: 1px solid #181510;
       margin-top: 4px
@@ -1633,19 +1635,19 @@
       gap: 8px;
       font-family: 'Inter', 'Crimson Pro', serif;
       font-size: 12.5px;
-      color: #60584a;
+      color: var(--text4);
       text-align: left;
       transition: var(--transition);
       border-radius: 0 var(--r-sm) var(--r-sm) 0;
     }
 
     .pcatbtn:hover {
-      color: #a89868;
+      color: var(--text3);
       background: rgba(200,166,96,0.05);
     }
 
     .pcatbtn.pca {
-      color: #e0d3bc;
+      color: var(--text);
       background: rgba(200,166,96,0.07);
       border-left-color: var(--cc);
     }
@@ -1686,7 +1688,7 @@
     .p-list-name {
       font-family: 'Playfair Display', serif;
       font-size: 14px;
-      color: #e0d3bc;
+      color: var(--text);
       display: flex;
       align-items: center;
       gap: 6px
@@ -1695,7 +1697,7 @@
     .p-list-cnt {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #302818;
+      color: var(--text5);
       margin-top: 2px;
       letter-spacing: .06em
     }
@@ -1728,17 +1730,17 @@
       font-family: 'Inter', 'Crimson Pro', serif;
       font-size: 12.5px;
       font-weight: 500;
-      color: #a89868;
+      color: var(--text3);
       margin-bottom: 3px;
     }
 
     .pcra .pcrd-t {
-      color: #e0d3bc;
+      color: var(--text);
     }
 
     .pcrd-d {
       font-size: 10.5px;
-      color: #40382a;
+      color: var(--text4);
       font-style: italic;
       line-height: 1.45;
     }
@@ -1782,13 +1784,13 @@
     .p-etit {
       font-family: 'Playfair Display', serif;
       font-size: 17px;
-      color: #e0d3bc;
+      color: var(--text);
       margin-bottom: 3px
     }
 
     .p-edesc {
       font-size: 12px;
-      color: #50483a;
+      color: var(--text5);
       font-style: italic
     }
 
@@ -1815,7 +1817,7 @@
       font-size: 8px;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: #50483a
+      color: var(--text3)
     }
 
     .pfl input,
@@ -1823,7 +1825,7 @@
       background: #0a0907;
       border: 1px solid #1a1810;
       border-radius: 2px;
-      color: #a89868;
+      color: var(--text);
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
       padding: 6px 9px;
@@ -1843,7 +1845,7 @@
 
     .pfl input::placeholder,
     .pfl textarea::placeholder {
-      color: #201c10
+      color: var(--text4)
     }
 
     .pfl textarea {
@@ -1866,7 +1868,7 @@
     .ctx-bar-lbl {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #3a3020;
+      color: var(--text5);
       letter-spacing: .08em;
       text-transform: uppercase;
       flex-shrink: 0
@@ -1929,7 +1931,7 @@
     .out-status {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #3a3020;
+      color: var(--text5);
       letter-spacing: .08em;
       text-transform: uppercase;
       display: flex;
@@ -1942,7 +1944,7 @@
       width: 8px;
       height: 8px;
       border: 1px solid #3a3020;
-      border-top-color: #c8a660;
+      border-top-color: var(--text2);
       border-radius: 50%;
       animation: spin .6s linear infinite;
     }
@@ -1991,7 +1993,7 @@
 
     .run-btn.running {
       background: #8a6a30;
-      color: #e0d3bc;
+      color: var(--text);
     }
 
     .stop-btn {
@@ -2018,7 +2020,7 @@
       background: #141209;
       border: 1px solid #252015;
       border-radius: 2px;
-      color: #60584a;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -2027,7 +2029,7 @@
     }
 
     .sec-btn:hover {
-      color: #c8a660;
+      color: var(--text2);
       border-color: #4a3a18
     }
 
@@ -2043,7 +2045,7 @@
       background: rgba(200,166,96,0.1);
       border: 1px solid rgba(200,166,96,0.35);
       border-radius: 2px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -2094,16 +2096,16 @@
       font-family: 'Playfair Display', serif;
       font-size: 15px;
       font-style: italic;
-      color: #e0d3bc;
+      color: var(--text);
     }
     #cmp-paste-close {
       background: none;
       border: none;
-      color: #50483a;
+      color: var(--text5);
       font-size: 16px;
       cursor: pointer;
     }
-    #cmp-paste-close:hover { color: #c8a660; }
+    #cmp-paste-close:hover { color: var(--text2); }
     #cmp-paste-body {
       padding: 16px 18px;
       overflow-y: auto;
@@ -2115,7 +2117,7 @@
       font-size: 8px;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: #50483a;
+      color: var(--text5);
       margin-bottom: 5px;
       margin-top: 12px;
     }
@@ -2125,7 +2127,7 @@
       background: #0a0907;
       border: 1px solid #1a1810;
       border-radius: 3px;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
       padding: 7px 10px;
@@ -2137,7 +2139,7 @@
     #cmp-paste-status {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
-      color: #c8a660;
+      color: var(--text2);
       min-height: 14px;
       margin-top: 10px;
       letter-spacing: .04em;
@@ -2182,17 +2184,17 @@
       font-family: 'Playfair Display', serif;
       font-size: 15px;
       font-style: italic;
-      color: #e0d3bc;
+      color: var(--text);
     }
     #vr-modal-close {
       background: none;
       border: none;
-      color: #50483a;
+      color: var(--text5);
       font-size: 16px;
       cursor: pointer;
       line-height: 1;
     }
-    #vr-modal-close:hover { color: #c8a660; }
+    #vr-modal-close:hover { color: var(--text2); }
     #vr-modal-body { padding: 18px; }
     #vr-modal-body label {
       display: block;
@@ -2200,7 +2202,7 @@
       font-size: 8px;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: #50483a;
+      color: var(--text5);
       margin-bottom: 5px;
     }
     #vr-modal-body input, #vr-modal-body select {
@@ -2208,7 +2210,7 @@
       background: #0a0907;
       border: 1px solid #1a1810;
       border-radius: 3px;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
       padding: 7px 10px;
@@ -2222,7 +2224,7 @@
     #vr-status-msg {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
-      color: #c8a660;
+      color: var(--text2);
       min-height: 14px;
       margin-bottom: 10px;
       letter-spacing: .04em;
@@ -2248,7 +2250,7 @@
       padding: 7px 6px;
       background: transparent;
       border: none;
-      color: #50483a;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       letter-spacing: .06em;
@@ -2263,7 +2265,7 @@
       line-height: 1.3;
     }
     .vr-mode-btn:last-child { border-right: none; }
-    .vr-mode-btn.vron { background: #141109; color: #c8a660; }
+    .vr-mode-btn.vron { background: #141109; color: var(--text2); }
     .vr-mode-btn span:last-child { font-size: 7px; opacity: .55; font-style: italic; }
 
     .out-text {
@@ -2273,7 +2275,7 @@
       padding: 10px 18px;
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
-      color: #80786a;
+      color: var(--text4);
       line-height: 1.75;
       white-space: pre-wrap;
       word-break: break-word;
@@ -2645,13 +2647,13 @@
       font-family: 'Playfair Display', serif;
       font-size: 18px;
       font-style: italic;
-      color: #e0d3bc;
+      color: var(--text);
       margin-bottom: 3px
     }
 
     .pipe-hd p {
       font-size: 12px;
-      color: #50483a;
+      color: var(--text5);
       font-style: italic
     }
 
@@ -2670,7 +2672,7 @@
       background: transparent;
       border: none;
       border-right: 1px solid #1e1a12;
-      color: #3a3020;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       letter-spacing: .07em;
@@ -2689,7 +2691,7 @@
 
     .pm-btn.pmon {
       background: #141109;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .pm-btn span:last-child {
@@ -2723,7 +2725,7 @@
       border-radius: 50%;
       border: 1px solid #3a3020;
       background: #181410;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       display: flex;
@@ -2743,7 +2745,7 @@
       background: #0a0907;
       border: 1px solid #1a1810;
       border-radius: 2px;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 12px;
       padding: 3px 6px;
@@ -2759,7 +2761,7 @@
 
     .step-sel option {
       background: #0a0907;
-      color: #a89868
+      color: var(--text3)
     }
 
     .step-rm {
@@ -2803,14 +2805,14 @@
     .pipe-tog label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #60584a;
+      color: var(--text5);
       letter-spacing: .06em;
       cursor: pointer;
       flex: 1
     }
 
     .pipe-tog input[type=checkbox] {
-      accent-color: #c8a660;
+      accent-color: var(--text2);
       cursor: pointer
     }
 
@@ -2823,7 +2825,7 @@
     .step-field label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #40382a;
+      color: var(--text5);
       letter-spacing: .08em;
       text-transform: uppercase
     }
@@ -2833,7 +2835,7 @@
       background: #090806;
       border: 1px solid #181510;
       border-radius: var(--r-sm);
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Inter', 'Crimson Pro', serif;
       font-size: 13px;
       padding: 6px 10px;
@@ -2876,7 +2878,7 @@
       align-items: center;
       justify-content: center;
       padding: 3px 0;
-      color: #3a3020;
+      color: var(--text5);
       font-size: 12px;
     }
 
@@ -2920,7 +2922,7 @@
 
     .pipe-run-btn.running {
       background: #8a6a30;
-      color: #e0d3bc
+      color: var(--text)
     }
 
     .pipe-clear-btn {
@@ -2928,7 +2930,7 @@
       background: #141209;
       border: 1px solid #252015;
       border-radius: 2px;
-      color: #60584a;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -2937,7 +2939,7 @@
     }
 
     .pipe-clear-btn:hover {
-      color: #c8a660;
+      color: var(--text2);
       border-color: #4a3a18
     }
 
@@ -2977,7 +2979,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 16px;
       font-style: italic;
-      color: #e0d3bc
+      color: var(--text)
     }
 
     .res-empty {
@@ -3012,7 +3014,7 @@
       border-radius: 50%;
       border: 1px solid #3a3020;
       background: #181410;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       display: flex;
@@ -3025,19 +3027,19 @@
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
       font-weight: 600;
-      color: #b8a878;
+      color: var(--text2);
       flex: 1
     }
 
     .res-step-status {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #50483a;
+      color: var(--text5);
       letter-spacing: .06em;
     }
 
     .res-step-status.running {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .res-step-status.done {
@@ -3055,7 +3057,7 @@
       padding: 10px 13px;
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
-      color: #80786a;
+      color: var(--text4);
       line-height: 1.75;
       white-space: pre-wrap;
       word-break: break-word;
@@ -3087,13 +3089,13 @@
       font-family: 'Playfair Display', serif;
       font-size: 22px;
       font-style: italic;
-      color: #e0d3bc;
+      color: var(--text);
       margin-bottom: 3px
     }
 
     .settings-hd p {
       font-size: 13px;
-      color: #50483a;
+      color: var(--text5);
       font-style: italic
     }
 
@@ -3136,14 +3138,14 @@
     }
 
     .stats-label {
-      color: #605840;
+      color: var(--text5);
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .1em
     }
 
     .stats-value {
-      color: #c8a660;
+      color: var(--text2);
       font-size: 22px;
       font-family: 'JetBrains Mono', monospace
     }
@@ -3158,7 +3160,7 @@
       padding: 6px 0;
       border-bottom: 1px solid #1f1a12;
       font-size: 12px;
-      color: #a89868
+      color: var(--text3)
     }
 
     .stats-row:last-child {
@@ -3167,12 +3169,12 @@
 
     .stats-sec {
       min-width: 90px;
-      color: #605840
+      color: var(--text5)
     }
 
     .stats-num {
       font-family: 'JetBrains Mono', monospace;
-      color: #c8a660;
+      color: var(--text2);
       margin-left: auto
     }
 
@@ -3189,7 +3191,7 @@
       padding-top: 12px;
       border-top: 1px solid #252015;
       font-size: 11px;
-      color: #605840
+      color: var(--text5)
     }
 
     .template-modal-overlay {
@@ -3232,14 +3234,14 @@
     .template-modal-hd h3 {
       margin: 0;
       font-size: 14px;
-      color: #c8a660;
+      color: var(--text2);
       font-weight: normal
     }
 
     .template-modal-close {
       background: none;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 18px;
       cursor: pointer;
       padding: 0;
@@ -3247,7 +3249,7 @@
     }
 
     .template-modal-close:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .template-modal-body {
@@ -3274,7 +3276,7 @@
       padding: 6px 8px;
       background: #1a1512;
       border: 1px solid #3a3020;
-      color: #c8a660;
+      color: var(--text2);
       font-size: 12px
     }
 
@@ -3282,7 +3284,7 @@
       padding: 6px;
       background: #1a1512;
       border: 1px solid #3a3020;
-      color: #c8a660;
+      color: var(--text2);
       font-size: 12px
     }
 
@@ -3301,7 +3303,7 @@
       padding: 6px 12px;
       background: transparent;
       border: 1px solid #3a3020;
-      color: #807060;
+      color: var(--text4);
       font-size: 11px;
       cursor: pointer;
       border-radius: 2px;
@@ -3310,12 +3312,12 @@
 
     .template-add-field:hover {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .template-tpl-label {
       font-size: 11px;
-      color: #605840;
+      color: var(--text5);
       margin-bottom: 6px;
       display: block
     }
@@ -3326,7 +3328,7 @@
       padding: 10px;
       background: #141209;
       border: 1px solid #3a3020;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       line-height: 1.5;
@@ -3363,12 +3365,12 @@
     .template-btn-secondary {
       background: transparent;
       border: 1px solid #3a3020;
-      color: #a09080
+      color: var(--text3)
     }
 
     .template-btn-secondary:hover {
       background: #252015;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .template-preview {
@@ -3378,7 +3380,7 @@
       border: 1px solid #252015;
       border-radius: 3px;
       font-size: 12px;
-      color: #a09080;
+      color: var(--text3);
       white-space: pre-wrap;
       max-height: 150px;
       overflow-y: auto
@@ -3389,7 +3391,7 @@
       padding: 6px 10px;
       background: #1a1512;
       border: 1px solid #3a3020;
-      color: #c8a660;
+      color: var(--text2);
       font-size: 11px;
       cursor: pointer;
       border-radius: 2px;
@@ -3398,13 +3400,13 @@
 
     .create-template-btn:hover {
       background: #252015;
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .p-custom-header {
       padding: 8px 10px;
       font-size: 10px;
-      color: #605840;
+      color: var(--text5);
       text-transform: uppercase;
       letter-spacing: .1em;
       border-bottom: 1px solid #1f1a12;
@@ -3448,8 +3450,8 @@
     }
 
     .pcrd-edit:hover {
-      color: #c8a660;
-      border-color: #c8a660
+      color: var(--text2);
+      border-color: var(--text2)
     }
 
     .pcrd-delete:hover {
@@ -3467,25 +3469,25 @@
 
     .rel-names {
       font-size: 12px;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 4px
     }
 
     .rel-arrow {
-      color: #605840;
+      color: var(--text5);
       margin: 0 6px
     }
 
     .rel-type {
       font-size: 10px;
-      color: #807060;
+      color: var(--text4);
       text-transform: uppercase;
       letter-spacing: .05em
     }
 
     .rel-desc {
       font-size: 11px;
-      color: #a09080;
+      color: var(--text3);
       margin-top: 6px;
       font-style: italic
     }
@@ -3504,12 +3506,12 @@
       border: 1px solid #3a3020;
       border-radius: 2px;
       cursor: pointer;
-      color: #a09080
+      color: var(--text3)
     }
 
     .rel-edit:hover {
-      color: #c8a660;
-      border-color: #c8a660
+      color: var(--text2);
+      border-color: var(--text2)
     }
 
     .rel-delete:hover {
@@ -3567,19 +3569,19 @@
     .rel-modal-hd h3 {
       margin: 0;
       font-size: 14px;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .rel-modal-close {
       background: none;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 18px;
       cursor: pointer
     }
 
     .rel-modal-close:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .rel-modal-body {
@@ -3593,7 +3595,7 @@
     .rel-field label {
       display: block;
       font-size: 11px;
-      color: #605840;
+      color: var(--text5);
       margin-bottom: 4px
     }
 
@@ -3603,7 +3605,7 @@
       padding: 8px;
       background: #141209;
       border: 1px solid #3a3020;
-      color: #c8a660;
+      color: var(--text2);
       font-size: 12px
     }
 
@@ -3630,7 +3632,7 @@
     .rel-btn-cancel {
       background: transparent;
       border: 1px solid #3a3020;
-      color: #a09080
+      color: var(--text3)
     }
 
     .rel-btn-cancel:hover {
@@ -3687,19 +3689,19 @@
     .rel-map-hd h3 {
       margin: 0;
       font-size: 14px;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .rel-map-close {
       background: none;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 18px;
       cursor: pointer
     }
 
     .rel-map-close:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .rel-map-body {
@@ -3725,7 +3727,7 @@
       padding: 10px 20px;
       background: transparent;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 12px;
       cursor: pointer;
       border-bottom: 2px solid transparent;
@@ -3733,12 +3735,12 @@
     }
 
     .story-subtab:hover {
-      color: #a09080
+      color: var(--text3)
     }
 
     .story-subtab.active {
-      color: #c8a660;
-      border-bottom-color: #c8a660
+      color: var(--text2);
+      border-bottom-color: var(--text2)
     }
 
     .ch-item {
@@ -3764,12 +3766,12 @@
 
     .ch-title {
       font-size: 13px;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .ch-item-bd {
       font-size: 11px;
-      color: #a09080;
+      color: var(--text3);
       line-height: 1.4;
       margin-bottom: 8px
     }
@@ -3787,12 +3789,12 @@
       border: 1px solid #3a3020;
       border-radius: 2px;
       cursor: pointer;
-      color: #a09080
+      color: var(--text3)
     }
 
     .ch-edit:hover {
-      color: #c8a660;
-      border-color: #c8a660
+      color: var(--text2);
+      border-color: var(--text2)
     }
 
     .ch-delete:hover {
@@ -3810,7 +3812,7 @@
 
     .timeline-title {
       font-size: 13px;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 4px
     }
 
@@ -3823,14 +3825,14 @@
 
     .timeline-desc {
       font-size: 11px;
-      color: #a09080;
+      color: var(--text3);
       margin-bottom: 6px;
       font-style: italic
     }
 
     .timeline-meta {
       font-size: 10px;
-      color: #605840;
+      color: var(--text5);
       margin-bottom: 8px
     }
 
@@ -3847,12 +3849,12 @@
       border: 1px solid #3a3020;
       border-radius: 2px;
       cursor: pointer;
-      color: #a09080
+      color: var(--text3)
     }
 
     .timeline-edit:hover {
-      color: #c8a660;
-      border-color: #c8a660
+      color: var(--text2);
+      border-color: var(--text2)
     }
 
     .timeline-delete:hover {
@@ -3912,21 +3914,21 @@
     .timeline-visual-hd h3 {
       margin: 0;
       font-size: 14px;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .timeline-modal-close,
     .timeline-visual-close {
       background: none;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 18px;
       cursor: pointer
     }
 
     .timeline-modal-close:hover,
     .timeline-visual-close:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .timeline-modal-body {
@@ -3940,7 +3942,7 @@
     .timeline-field label {
       display: block;
       font-size: 11px;
-      color: #605840;
+      color: var(--text5);
       margin-bottom: 4px
     }
 
@@ -3951,7 +3953,7 @@
       padding: 8px;
       background: #141209;
       border: 1px solid #3a3020;
-      color: #c8a660;
+      color: var(--text2);
       font-size: 12px
     }
 
@@ -3978,7 +3980,7 @@
     .timeline-btn-cancel {
       background: transparent;
       border: 1px solid #3a3020;
-      color: #a09080
+      color: var(--text3)
     }
 
     .timeline-btn-cancel:hover {
@@ -4041,26 +4043,26 @@
 
     .timeline-visual-title {
       font-size: 13px;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 4px
     }
 
     .timeline-visual-type {
       font-size: 10px;
-      color: #807060;
+      color: var(--text4);
       text-transform: uppercase;
       margin-bottom: 6px
     }
 
     .timeline-visual-desc {
       font-size: 11px;
-      color: #a09080;
+      color: var(--text3);
       margin-bottom: 6px
     }
 
     .timeline-visual-date {
       font-size: 10px;
-      color: #605840
+      color: var(--text5)
     }
 
     .help-subtabs {
@@ -4074,7 +4076,7 @@
       padding: 10px 20px;
       background: transparent;
       border: none;
-      color: #605840;
+      color: var(--text5);
       font-size: 12px;
       cursor: pointer;
       border-bottom: 2px solid transparent;
@@ -4082,27 +4084,27 @@
     }
 
     .help-subtab:hover {
-      color: #a09080
+      color: var(--text3)
     }
 
     .help-subtab.active {
-      color: #c8a660;
-      border-bottom-color: #c8a660
+      color: var(--text2);
+      border-bottom-color: var(--text2)
     }
 
     .help-section {
-      color: #a89868
+      color: var(--text3)
     }
 
     .help-section h3 {
-      color: #c8a660;
+      color: var(--text2);
       margin: 0 0 12px;
       font-size: 16px;
       font-weight: normal
     }
 
     .help-section h4 {
-      color: #c8a660;
+      color: var(--text2);
       margin: 16px 0 8px;
       font-size: 13px;
       font-weight: normal
@@ -4127,7 +4129,7 @@
     }
 
     .help-shortcut-group h4 {
-      color: #c8a660;
+      color: var(--text2);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .05em;
@@ -4144,13 +4146,13 @@
     .help-key {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: #c8a660;
+      color: var(--text2);
       min-width: 120px
     }
 
     .help-desc {
       font-size: 12px;
-      color: #807060
+      color: var(--text4)
     }
 
     .help-guide {
@@ -4160,7 +4162,7 @@
     }
 
     .help-guide h4 {
-      color: #c8a660;
+      color: var(--text2);
       margin: 0 0 6px;
       font-size: 13px;
       font-weight: normal
@@ -4172,7 +4174,7 @@
 
     .help-guide summary {
       cursor: pointer;
-      color: #c8a660;
+      color: var(--text2);
       padding: 8px 12px;
       background: #1a1610;
       border-radius: 4px;
@@ -4203,7 +4205,7 @@
       border-radius: 0 0 4px 4px;
       font-size: 12px;
       line-height: 1.6;
-      color: #a89868;
+      color: var(--text3);
     }
 
     .help-guide details ul {
@@ -4241,7 +4243,7 @@
 
     .activity-desc {
       font-size: 12px;
-      color: #a09080
+      color: var(--text3)
     }
 
     @keyframes fadeIn {
@@ -4286,7 +4288,7 @@
       background: #141209;
       border: 1px solid #252015;
       border-radius: 2px;
-      color: #60584a;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       cursor: pointer;
@@ -4295,7 +4297,7 @@
     }
 
     .api-show:hover {
-      color: #c8a660;
+      color: var(--text2);
       border-color: #4a3a18
     }
 
@@ -4304,7 +4306,7 @@
       background: #141209;
       border: 1px solid #3a3020;
       border-radius: 2px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -4317,7 +4319,7 @@
 
     .test-btn:hover {
       background: #1c1a10;
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .api-status {
@@ -4337,19 +4339,19 @@
     }
 
     .api-status.checking {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .api-note {
       margin-top: 7px;
       font-size: 12px;
-      color: #40382a;
+      color: var(--text5);
       line-height: 1.5;
       font-style: italic
     }
 
     .api-note a {
-      color: #c8a660;
+      color: var(--text2);
       text-decoration: none
     }
 
@@ -4425,17 +4427,17 @@
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
       font-weight: 600;
-      color: #a89868
+      color: var(--text3)
     }
 
     .model-row.msel .model-name {
-      color: #e0d3bc
+      color: var(--text)
     }
 
     .model-meta {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #3a3020;
+      color: var(--text5);
       letter-spacing: .04em;
       margin-top: 1px
     }
@@ -4469,7 +4471,7 @@
     }
 
     .model-collapse-hd:hover {
-      color: #c8a660
+      color: var(--text2)
     }
 
     .model-collapse-icon {
@@ -4515,7 +4517,7 @@
       background: #1a1010;
       border: 1px solid #3a3020;
       border-radius: 2px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -4526,7 +4528,7 @@
     .export-btn:hover,
     .import-btn:hover {
       background: #252015;
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
 
@@ -4538,7 +4540,7 @@
 
     .tok-note {
       font-size: 12px;
-      color: #40382a;
+      color: var(--text5);
       font-style: italic
     }
 
@@ -4602,13 +4604,13 @@
     .mobile-toggle input[type=checkbox] {
       width: 14px;
       height: 14px;
-      accent-color: #c8a660
+      accent-color: var(--text2)
     }
 
     .mobile-toggle label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
-      color: #50483a;
+      color: var(--text5);
       letter-spacing: .05em
     }
 
@@ -4622,7 +4624,7 @@
       font-size: 8px;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: #50483a;
+      color: var(--text5);
       margin-bottom: 6px
     }
 
@@ -4636,13 +4638,13 @@
     .pref-row label {
       flex: 1;
       font-size: 13px;
-      color: #a89868
+      color: var(--text3)
     }
 
     .pref-row input[type=checkbox] {
       width: 16px;
       height: 16px;
-      accent-color: #c8a660
+      accent-color: var(--text2)
     }
 
     .pref-toggle {
@@ -4697,7 +4699,7 @@
 
     .pref-radio label {
       font-size: 12px;
-      color: #a89868;
+      color: var(--text3);
       display: flex;
       align-items: center;
       gap: 4px;
@@ -4705,7 +4707,7 @@
     }
 
     .pref-radio input {
-      accent-color: #c8a660
+      accent-color: var(--text2)
     }
 
     .pref-group {
@@ -4719,7 +4721,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       letter-spacing: .08em;
-      color: #c8a660;
+      color: var(--text2);
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -4737,7 +4739,7 @@
 
     .pref-sub label {
       font-size: 11px;
-      color: #80786a
+      color: var(--text4)
     }
 
     .dnu-text {
@@ -4748,7 +4750,7 @@
       background: #0a0907;
       border: 1px solid #1a1810;
       border-radius: 2px;
-      color: #a89868;
+      color: var(--text3);
       padding: 6px;
       resize: vertical
     }
@@ -4769,7 +4771,7 @@
       background: #0d0b08;
       border: 1px solid #1e1a12;
       border-radius: 2px;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
       padding: 5px 9px;
@@ -4783,7 +4785,7 @@
       background: #0a0907;
       border: 1px solid #1a1810;
       border-radius: 2px;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
       padding: 8px;
@@ -4802,7 +4804,7 @@
       background: #141209;
       border: 1px solid #252015;
       border-radius: 2px;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       cursor: pointer;
@@ -4811,7 +4813,7 @@
 
     .extract-btn:hover {
       background: #1c1a10;
-      border-color: #c8a660
+      border-color: var(--text2)
     }
 
     .extract-result {
@@ -4829,7 +4831,7 @@
       min-height: 100px;
       background: transparent;
       border: none;
-      color: #a89868;
+      color: var(--text3);
       font-family: 'Crimson Pro', serif;
       font-size: 12px;
       resize: vertical
@@ -4850,7 +4852,7 @@
       background: transparent;
       border: none;
       border-right: 1px solid #1e1a12;
-      color: #3a3020;
+      color: var(--text5);
       font-family: 'JetBrains Mono', monospace;
       font-size: 8px;
       letter-spacing: .07em;
@@ -4865,7 +4867,7 @@
 
     .fc-btn.fcon {
       background: #141109;
-      color: #c8a660
+      color: var(--text2)
     }
 
     .fc-chapters {
@@ -4894,7 +4896,7 @@
     .fc-chap-lbl {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
-      color: #c8a660;
+      color: var(--text2);
       letter-spacing: .06em
     }
 
@@ -4903,7 +4905,7 @@
       min-height: 120px;
       background: #0b0908;
       border: none;
-      color: #a89868;
+      color: var(--text);
       font-family: 'Crimson Pro', serif;
       font-size: 13px;
       padding: 8px;
@@ -4911,7 +4913,7 @@
     }
 
     .fc-chap textarea::placeholder {
-      color: #252015
+      color: var(--text4)
     }
 
     .fc-warning {
@@ -4919,7 +4921,7 @@
       background: #1a1410;
       border: 1px solid #4a3020;
       border-radius: 2px;
-      color: #c8a660;
+      color: var(--text2);
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
       margin-bottom: 14px;
@@ -4952,7 +4954,7 @@
     }
 
     .token-warning.warn {
-      color: #c8a660;
+      color: var(--text2);
       background: #1a1810
     }
 
@@ -4980,12 +4982,12 @@
     }
 
     .bible-opt input[type=checkbox] {
-      accent-color: #c8a660
+      accent-color: var(--text2)
     }
 
     .bible-opt label {
       font-size: 12px;
-      color: #a89868;
+      color: var(--text3);
       cursor: pointer
     }
 
@@ -5003,7 +5005,7 @@
 
     .char-match-row label {
       font-size: 12px;
-      color: #c8a660;
+      color: var(--text2);
       flex: 1
     }
 
@@ -5026,12 +5028,12 @@
     }
 
     .pipeline-style-opt input[type=checkbox] {
-      accent-color: #c8a660;
+      accent-color: var(--text2);
     }
 
     .pipeline-style-opt label {
       font-size: 12px;
-      color: #a89868;
+      color: var(--text3);
       flex: 1;
     }
 
@@ -5063,7 +5065,7 @@
     .p-list-name {
       font-family: 'Playfair Display', serif;
       font-size: 14px;
-      color: #e0d3bc;
+      color: var(--text);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -5090,6 +5092,105 @@
     /* Print baseline */
     @media print {
       .tab-btn, #app-header nav, .p-list, .p-sidebar { display: none !important; }
+    }
+
+    /* Settings cards */
+    .scard {
+      background: #1a1512;
+      border: 1px solid #252015;
+      border-radius: 2px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .scard-hd {
+      font-weight: 600;
+      color: var(--text2);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .scard-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .meta-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mlabel {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+    }
+
+    .quick-btn {
+      background: #0f0c09;
+      border: 1px solid #252015;
+      color: var(--text2);
+      padding: 4px 8px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .quick-btn:hover {
+      background: #1a1512;
+      border-color: #352a1a;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #252015;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #c8a660;
+      cursor: pointer;
+      border: 1px solid #a89070;
+    }
+
+    input[type="range"]::-moz-range-track {
+      background: transparent;
+      border: none;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #c8a660;
+      cursor: pointer;
+      border: 1px solid #a89070;
+    }
+
+    select {
+      background: #0b0908;
+      color: var(--text2);
+      border: 1px solid #252015;
+      padding: 6px 10px;
+      border-radius: 2px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #0b0908;
+      color: var(--text2);
     }
   </style>
 
@@ -5160,7 +5261,7 @@
       <div class="brand">
         <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
         <span class="brand-title">The Novelist's Atelier</span>
-        <span class="brand-ver">1.4 Beta</span>
+        <span class="brand-ver">1.41 Beta</span>
         <div class="project-selector" id="project_selector">
           <button class="project-current" id="project_current_btn">
             <span id="project_name_display">My Novel</span>
@@ -8432,6 +8533,10 @@ ${f.chapter || '[PASTE TEXT]'}
       theme: localStorage.getItem('na_theme') || 'default',
       uiScale: parseFloat(localStorage.getItem('na_uiscale')) || 1.5,
       headerScale: parseFloat(localStorage.getItem('na_hscale')) || 1,
+      textBrightness: parseFloat(localStorage.getItem('na_text_brightness') || '1.12'),
+      textColorMode: localStorage.getItem('na_text_color_mode') || 'theme',
+      textColorCustom: localStorage.getItem('na_text_color_custom') || '#ffffff',
+      textColorBase: null,
       provider: localStorage.getItem('na_provider') || 'openrouter',
       apiKeys: {
         openrouter: localStorage.getItem('na_key') || '',
@@ -8453,16 +8558,116 @@ ${f.chapter || '[PASTE TEXT]'}
       pipeline: { mode: 'refine', steps: [], running: false, results: [], abortCtrl: null, useWritingStyle: false },
     };
 
+    const TEXT_COLOR_VARS = ['--text', '--text2', '--text3', '--text4', '--text5'];
+
+    function parseRgbTriplet(value) {
+      const raw = (value || '').trim();
+      const rgbMatch = raw.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+      if (rgbMatch) {
+        return {
+          r: parseInt(rgbMatch[1], 10),
+          g: parseInt(rgbMatch[2], 10),
+          b: parseInt(rgbMatch[3], 10)
+        };
+      }
+      const hexMatch = raw.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+      if (hexMatch) {
+        const hex = hexMatch[1];
+        const full = hex.length === 3 ? hex.split('').map((ch) => ch + ch).join('') : hex;
+        return {
+          r: parseInt(full.slice(0, 2), 16),
+          g: parseInt(full.slice(2, 4), 16),
+          b: parseInt(full.slice(4, 6), 16)
+        };
+      }
+      return { r: 255, g: 255, b: 255 };
+    }
+
+    function brightenRgb(rgb, brightness) {
+      const safe = Math.max(1, Math.min(2, Number(brightness) || 1));
+      const boost = safe - 1;
+      return {
+        r: Math.round(rgb.r + (255 - rgb.r) * boost),
+        g: Math.round(rgb.g + (255 - rgb.g) * boost),
+        b: Math.round(rgb.b + (255 - rgb.b) * boost)
+      };
+    }
+
+    function tintRgb(rgb, mode) {
+      const presets = {
+        theme: { r: 255, g: 255, b: 255, strength: 0 },
+        warm: { r: 255, g: 240, b: 220, strength: 0.22 },
+        neutral: { r: 245, g: 245, b: 245, strength: 0.18 },
+        cool: { r: 220, g: 238, b: 255, strength: 0.22 },
+        contrast: { r: 255, g: 255, b: 255, strength: 0.34 }
+      };
+
+      let tint;
+      if (mode === 'custom') {
+        const customColor = parseRgbTriplet(APP.textColorCustom);
+        tint = { ...customColor, strength: 0.35 };
+      } else {
+        tint = presets[mode] || presets.theme;
+      }
+
+      return {
+        r: Math.round(rgb.r + (tint.r - rgb.r) * tint.strength),
+        g: Math.round(rgb.g + (tint.g - rgb.g) * tint.strength),
+        b: Math.round(rgb.b + (tint.b - rgb.b) * tint.strength)
+      };
+    }
+
+    function refreshTextBrightnessBases() {
+      const themeColors = {
+        default: { '--text': '#e0d3bc', '--text2': '#c8a660', '--text3': '#a89868', '--text4': '#80786a', '--text5': '#50483a' },
+        'soft-beach': { '--text': '#d0e8f0', '--text2': '#51e2f5', '--text3': '#9df9ef', '--text4': '#7ac8d8', '--text5': '#5088a0' },
+        'pink-sand': { '--text': '#f0d8e0', '--text2': '#ffa8b6', '--text3': '#ffc8d0', '--text4': '#d8a0b0', '--text5': '#a87888' },
+        'dark-sand': { '--text': '#d8d0c8', '--text2': '#a28089', '--text3': '#b8a098', '--text4': '#908078', '--text5': '#686058' },
+        'ice-cold': { '--text': '#d0e8f8', '--text2': '#a0d2eb', '--text3': '#b8e0f0', '--text4': '#90c0d8', '--text5': '#70a0c0' },
+        'freeze-purple': { '--text': '#e0e0f0', '--text2': '#e5eaf5', '--text3': '#f0f0ff', '--text4': '#c0c0d8', '--text5': '#a0a0b8' },
+        'medium-purple': { '--text': '#e0d8f0', '--text2': '#d0bdf4', '--text3': '#e0c8ff', '--text4': '#b8a8d8', '--text5': '#9888b8' },
+        'purple-pain': { '--text': '#d8d0e8', '--text2': '#8458b3', '--text3': '#a068c8', '--text4': '#9048a0', '--text5': '#683878' },
+        'heavy-purple': { '--text': '#e8d8e0', '--text2': '#a28089', '--text3': '#b898a0', '--text4': '#887878', '--text5': '#685858' },
+        'yass-queen': { '--text': '#f8d0e0', '--text2': '#ff1d58', '--text3': '#ff4080', '--text4': '#d81848', '--text5': '#a01038' },
+        'sister-sister': { '--text': '#f0d8f0', '--text2': '#f75990', '--text3': '#ff78a8', '--text4': '#d84878', '--text5': '#a83860' },
+        'crown-yellow': { '--text': '#e8e8d0', '--text2': '#fff685', '--text3': '#ffffa0', '--text4': '#d8d870', '--text5': '#b0b058' },
+        'blue-light': { '--text': '#d0f0f8', '--text2': '#00ddff', '--text3': '#40e0ff', '--text4': '#00b8d8', '--text5': '#0090b0' },
+        'brutal-blue': { '--text': '#d0d8f0', '--text2': '#0049b7', '--text3': '#2060d8', '--text4': '#003898', '--text5': '#002870' }
+      };
+
+      const currentTheme = APP.theme || 'default';
+      const colors = themeColors[currentTheme] || themeColors.default;
+
+      APP.textColorBase = {};
+      TEXT_COLOR_VARS.forEach((varName) => {
+        APP.textColorBase[varName] = parseRgbTriplet(colors[varName] || '#ffffff');
+      });
+    }
+
+    function applyTextBrightness() {
+      if (!APP.textColorBase) refreshTextBrightnessBases();
+      APP.textBrightness = Math.max(1, Math.min(2, Number(APP.textBrightness) || 1));
+      document.documentElement.style.setProperty('--text-brightness', APP.textBrightness.toFixed(2), 'important');
+      document.documentElement.style.setProperty('--text-color-mode', APP.textColorMode || 'theme', 'important');
+      TEXT_COLOR_VARS.forEach((varName) => {
+        const tinted = tintRgb(APP.textColorBase[varName], APP.textColorMode);
+        const next = brightenRgb(tinted, APP.textBrightness);
+        document.documentElement.style.setProperty(varName, `rgb(${next.r}, ${next.g}, ${next.b})`, 'important');
+      });
+    }
+
     // Apply UI scale and mobile
     document.documentElement.style.setProperty('--ui-scale', APP.uiScale);
     if (APP.headerScale && APP.headerScale !== 1) {
       const h = document.getElementById('app-header');
-      h.style.transform = 'scale(' + APP.headerScale + ')';
-      h.style.transformOrigin = 'left center';
+      h.style.fontSize = (17 * APP.headerScale) + 'px';
       h.style.height = (50 * APP.headerScale) + 'px';
-      h.style.whiteSpace = 'nowrap';
+      h.style.padding = '0 ' + (20 * APP.headerScale) + 'px';
+      h.style.gap = (10 * APP.headerScale) + 'px';
     }
     if (APP.theme && APP.theme !== 'default') document.body.classList.add('theme-' + APP.theme);
+    refreshTextBrightnessBases();
+    applyTextBrightness();
 
     // ═══════════════════════════════════════════════════════════
     // SECURE KEY STORAGE
@@ -8613,13 +8818,13 @@ ${f.chapter || '[PASTE TEXT]'}
         overlay.id = 'unlock-keys-overlay';
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
         overlay.innerHTML = `
-      <div style="background:#1a1512;border:1px solid #c8a660;padding:30px;width:400px;border-radius:4px">
-        <h3 style="color:#c8a660;margin:0 0 15px">🔐 Unlock API Keys</h3>
-        <p style="color:#a89070;font-size:13px;margin-bottom:15px">Enter your password to decrypt your API keys.</p>
-        <input type="password" id="unlock-password" placeholder="Password" style="width:100%;padding:10px;background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:monospace;margin-bottom:15px">
+      <div style="background:#1a1512;border:1px solid var(--text2);padding:30px;width:400px;border-radius:4px">
+        <h3 style="color:var(--text2);margin:0 0 15px">🔐 Unlock API Keys</h3>
+        <p style="color:var(--text3);font-size:13px;margin-bottom:15px">Enter your password to decrypt your API keys.</p>
+        <input type="password" id="unlock-password" placeholder="Password" style="width:100%;padding:10px;background:#0b0908;border:1px solid #252015;color:var(--text);font-family:monospace;margin-bottom:15px">
         <div style="display:flex;gap:10px;justify-content:flex-end">
           <button id="unlock-cancel" style="padding:8px 16px;background:transparent;border:1px solid #555;color:#888;cursor:pointer">Cancel</button>
-          <button id="unlock-confirm" style="padding:8px 16px;background:#c8a660;border:none;color:#0b0908;cursor:pointer;font-weight:bold">Unlock</button>
+          <button id="unlock-confirm" style="padding:8px 16px;background:var(--text2);border:none;color:#0b0908;cursor:pointer;font-weight:bold">Unlock</button>
         </div>
       </div>
     `;
@@ -8659,13 +8864,13 @@ ${f.chapter || '[PASTE TEXT]'}
         overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;';
         const labels = { openrouter: 'OpenRouter', anthropic: 'Anthropic', openai: 'OpenAI', google: 'Google', lmstudio: 'LM Studio' };
         overlay.innerHTML = `
-      <div style="background:#1a1512;border:1px solid #c8a660;padding:30px;width:450px;border-radius:4px">
-        <h3 style="color:#c8a660;margin:0 0 15px">🔑 Enter ${labels[provider]} Key</h3>
-        <p style="color:#a89070;font-size:13px;margin-bottom:15px">This key will be used for this session only and won't be stored.</p>
-        <input type="password" id="session-key-input" placeholder="API Key" style="width:100%;padding:10px;background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:monospace;margin-bottom:15px">
+      <div style="background:#1a1512;border:1px solid var(--text2);padding:30px;width:450px;border-radius:4px">
+        <h3 style="color:var(--text2);margin:0 0 15px">🔑 Enter ${labels[provider]} Key</h3>
+        <p style="color:var(--text3);font-size:13px;margin-bottom:15px">This key will be used for this session only and won't be stored.</p>
+        <input type="password" id="session-key-input" placeholder="API Key" style="width:100%;padding:10px;background:#0b0908;border:1px solid #252015;color:var(--text);font-family:monospace;margin-bottom:15px">
         <div style="display:flex;gap:10px;justify-content:flex-end">
           <button id="prompt-key-cancel" style="padding:8px 16px;background:transparent;border:1px solid #555;color:#888;cursor:pointer">Cancel</button>
-          <button id="prompt-key-confirm" style="padding:8px 16px;background:#c8a660;border:none;color:#0b0908;cursor:pointer;font-weight:bold">Use Key</button>
+          <button id="prompt-key-confirm" style="padding:8px 16px;background:var(--text2);border:none;color:#0b0908;cursor:pointer;font-weight:bold">Use Key</button>
         </div>
       </div>
     `;
@@ -8865,10 +9070,10 @@ ${f.chapter || '[PASTE TEXT]'}
       const pid = getCurrentProjectId();
       const el = document.getElementById('backup_list');
       if (!el) return;
-      if (!pid) { el.innerHTML = '<p style="font-size:11px;color:#605840">No project selected</p>'; return; }
+      if (!pid) { el.innerHTML = '<p style="font-size:11px;color:var(--text5)">No project selected</p>'; return; }
       const backups = getBackupList(pid);
       if (backups.length === 0) {
-        el.innerHTML = '<p style="font-size:11px;color:#605840">No backups yet. Backups created hourly.</p>';
+        el.innerHTML = '<p style="font-size:11px;color:var(--text5)">No backups yet. Backups created hourly.</p>';
         return;
       }
       el.innerHTML = backups.slice(0, 24).map(b => {
@@ -9057,7 +9262,7 @@ ${f.chapter || '[PASTE TEXT]'}
       const countEl = document.getElementById('search_results_count');
 
       if (results.length === 0) {
-        container.innerHTML = '<p style="font-size:12px;color:#605840;text-align:center;padding:20px">No results found</p>';
+        container.innerHTML = '<p style="font-size:12px;color:var(--text5);text-align:center;padding:20px">No results found</p>';
         countEl.innerHTML = '';
         return;
       }
@@ -9334,7 +9539,7 @@ ${f.chapter || '[PASTE TEXT]'}
       const countEl = document.getElementById('findall_count');
 
       if (results.length === 0) {
-        container.innerHTML = '<p style="font-size:12px;color:#605840;text-align:center;padding:20px">No occurrences found</p>';
+        container.innerHTML = '<p style="font-size:12px;color:var(--text5);text-align:center;padding:20px">No occurrences found</p>';
         countEl.innerHTML = '';
         return;
       }
@@ -9427,7 +9632,7 @@ ${f.chapter || '[PASTE TEXT]'}
       if (isStyleDNA()) {
         indicator.innerHTML = '<span style="color:#4a8">🔒 Style DNA</span>';
       } else {
-        indicator.innerHTML = '<span style="color:#605840">Style DNA</span>';
+        indicator.innerHTML = '<span style="color:var(--text5)">Style DNA</span>';
       }
     }
     window.updateStyleDNAIndicator = updateStyleDNAIndicator;
@@ -9496,12 +9701,12 @@ ${f.chapter || '[PASTE TEXT]'}
 
       const html = '<div id="char_edit_modal" class="char-edit-modal-overlay" style="display:flex;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:2000;align-items:center;justify-content:center">' +
         '<div class="char-edit-modal" style="background:#1a1512;border:1px solid #3a3020;width:90%;max-width:500px;border-radius:4px;padding:20px">' +
-        '<h3 style="color:#c8a660;margin:0 0 15px 0">Edit Character</h3>' +
-        '<div style="margin-bottom:12px"><label style="font-size:11px;color:#605840">Name</label><input type="text" id="char_edit_name" value="' + esc(name) + '" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660"></div>' +
-        '<div style="margin-bottom:12px"><label style="font-size:11px;color:#605840">Description</label><textarea id="char_edit_text" rows="6" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660;resize:vertical">' + esc(text) + '</textarea></div>' +
-        '<div style="margin-bottom:12px"><label style="font-size:11px;color:#605840">Tags (comma separated)</label><input type="text" id="char_edit_tags" value="' + esc(tags) + '" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660"></div>' +
-        '<div style="margin-bottom:15px"><label style="font-size:11px;color:#605840">Inclusion</label><select id="char_edit_incl" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:#c8a660"><option value="full"' + (incl === 'full' ? ' selected' : '') + '>Full</option><option value="brief"' + (incl === 'brief' ? ' selected' : '') + '>Brief</option><option value="off"' + (incl === 'off' ? ' selected' : '') + '>Off</option></select></div>' +
-        '<div style="display:flex;gap:10px;justify-content:flex-end"><button onclick="document.getElementById(\'char_edit_modal\').remove()" style="padding:8px 16px;background:transparent;border:1px solid #3a3020;color:#a09080;cursor:pointer">Cancel</button><button onclick="saveCharEdit(' + idx + ')" style="padding:8px 16px;background:#c8a660;border:none;color:#090807;cursor:pointer">Save</button></div>' +
+        '<h3 style="color:var(--text2);margin:0 0 15px 0">Edit Character</h3>' +
+        '<div style="margin-bottom:12px"><label style="font-size:11px;color:var(--text5)">Name</label><input type="text" id="char_edit_name" value="' + esc(name) + '" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:var(--text)"></div>' +
+        '<div style="margin-bottom:12px"><label style="font-size:11px;color:var(--text5)">Description</label><textarea id="char_edit_text" rows="6" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:var(--text);resize:vertical">' + esc(text) + '</textarea></div>' +
+        '<div style="margin-bottom:12px"><label style="font-size:11px;color:var(--text5)">Tags (comma separated)</label><input type="text" id="char_edit_tags" value="' + esc(tags) + '" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:var(--text)"></div>' +
+        '<div style="margin-bottom:15px"><label style="font-size:11px;color:var(--text5)">Inclusion</label><select id="char_edit_incl" style="width:100%;padding:8px;background:#141209;border:1px solid #3a3020;color:var(--text)"><option value="full"' + (incl === 'full' ? ' selected' : '') + '>Full</option><option value="brief"' + (incl === 'brief' ? ' selected' : '') + '>Brief</option><option value="off"' + (incl === 'off' ? ' selected' : '') + '>Off</option></select></div>' +
+        '<div style="display:flex;gap:10px;justify-content:flex-end"><button onclick="document.getElementById(\'char_edit_modal\').remove()" style="padding:8px 16px;background:transparent;border:1px solid #3a3020;color:var(--text3);cursor:pointer">Cancel</button><button onclick="saveCharEdit(' + idx + ')" style="padding:8px 16px;background:var(--text2);border:none;color:#090807;cursor:pointer">Save</button></div>' +
         '</div></div>';
       document.body.insertAdjacentHTML('beforeend', html);
     }
@@ -9525,7 +9730,7 @@ ${f.chapter || '[PASTE TEXT]'}
       chars[idx].inclusion = document.getElementById('char_edit_incl').value;
       saveProjectState(getCurrentProjectId());
       document.getElementById('char_edit_modal').remove();
-      renderStoryCharacters(document.getElementById('story-sub-content'));
+      renderStoryCharacters(document.getElementById('story-content'));
     }
     window.saveCharEdit = saveCharEdit;
 
@@ -9535,7 +9740,7 @@ ${f.chapter || '[PASTE TEXT]'}
       if (confirm('Delete this character?')) {
         chars.splice(idx, 1);
         saveProjectState(getCurrentProjectId());
-        const container = document.getElementById('story-sub-content');
+        const container = document.getElementById('story-content');
         if (container) renderStoryCharacters(container);
       }
     }
@@ -9556,7 +9761,7 @@ ${f.chapter || '[PASTE TEXT]'}
     </div>
     <div style="margin-top:8px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <span style="font-size:10px;color:#605840;font-family:'JetBrains Mono',monospace;letter-spacing:.05em">CAPTURED OUTPUT</span>
+        <span style="font-size:10px;color:var(--text5);font-family:'JetBrains Mono',monospace;letter-spacing:.05em">CAPTURED OUTPUT</span>
         <div style="display:flex;gap:6px">
           <button class="add-btn" onclick="
             var ta = document.getElementById('style_dna_output_box');
@@ -9576,7 +9781,7 @@ ${f.chapter || '[PASTE TEXT]'}
           " style="font-size:10px;color:#4a8">Lock</button>` : ''}
         </div>
       </div>
-      <textarea id="style_dna_output_box" ${locked ? 'readonly' : ''} placeholder="Paste your Capture Writing DNA output here, then click Lock to save it as your Style DNA..." style="width:100%;min-height:160px;max-height:300px;resize:vertical;background:#141209;border:1px solid ${locked ? '#1c2e1c' : '#252015'};border-radius:4px;padding:10px;font-size:12px;color:#a09080;font-family:'Crimson Pro',Georgia,serif;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;overflow-y:auto;box-sizing:border-box">${dna ? esc(dna) : ''}</textarea>
+      <textarea id="style_dna_output_box" ${locked ? 'readonly' : ''} placeholder="Paste your Capture Writing DNA output here, then click Lock to save it as your Style DNA..." style="width:100%;min-height:160px;max-height:300px;resize:vertical;background:#141209;border:1px solid ${locked ? '#1c2e1c' : '#252015'};border-radius:4px;padding:10px;font-size:12px;color:var(--text3);font-family:'Crimson Pro',Georgia,serif;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;overflow-y:auto;box-sizing:border-box">${dna ? esc(dna) : ''}</textarea>
     </div>
     
     <div style="background:#0e0c09;padding:10px;border-radius:4px;border:1px solid #1c1912;margin-top:10px;display:flex;align-items:center;gap:10px">
@@ -9585,7 +9790,7 @@ ${f.chapter || '[PASTE TEXT]'}
         saveWritingPrefs();
         showToast(this.checked ? 'Applied Style DNA to prompts' : 'Removed Style DNA from prompts');
       ">
-      <label for="include_style_dna_toggle" style="font-size:12px;color:#c8a660;cursor:pointer">Include in All Editing Prompts</label>
+      <label for="include_style_dna_toggle" style="font-size:12px;color:var(--text2);cursor:pointer">Include in All Editing Prompts</label>
     </div>
 
     <p style="font-size:10px;color:#d44;margin-top:8px">⚠️ Style DNA requires AI usage to analyze your writing and apply the voice.</p>
@@ -9599,7 +9804,7 @@ ${f.chapter || '[PASTE TEXT]'}
 
       const chapters = APP.chapter?.fullChapters || APP.chapter?.chapters || [];
       if (chapters.length === 0) {
-        content.innerHTML = '<p style="font-size:11px;color:#605840">No chapters yet.</p>';
+        content.innerHTML = '<p style="font-size:11px;color:var(--text5)">No chapters yet.</p>';
         return;
       }
 
@@ -10537,8 +10742,8 @@ ${f.chapter || '[PASTE TEXT]'}
         </div>
       </div>
       <div id="custom_words_row_${containerId}" style="display:${val.inclusion === 'custom' ? 'flex' : 'none'};padding:4px 8px;background:#0f0d09;border-bottom:1px solid #181510;gap:8px;align-items:center">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#60584a">Words:</span>
-        <input type="number" id="custom_words_${containerId}" value="${customWords}" min="100" max="5000" step="100" style="width:70px;background:#0a0907;border:1px solid #1e1a12;border-radius:2px;color:#a89868;font-size:12px;padding:2px 5px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text3)">Words:</span>
+        <input type="number" id="custom_words_${containerId}" value="${customWords}" min="100" max="5000" step="100" style="width:70px;background:#0a0907;border:1px solid #1e1a12;border-radius:2px;color:var(--text);font-size:12px;padding:2px 5px">
       </div>
       <textarea class="sb-ta" style="min-height:${rows * 22}px" placeholder="Paste or upload ${title.toLowerCase()} here…">${esc(val.text)}</textarea>
     </div>`;
@@ -10616,13 +10821,13 @@ ${f.chapter || '[PASTE TEXT]'}
           <span>📊 Project Stats</span>
         </div>
         <div class="scard-body" id="stats_card_content">
-          <div style="color:#605840;font-size:12px">Loading stats...</div>
+          <div style="color:var(--text5);font-size:12px">Loading stats...</div>
         </div>
       </div>
 
       <div class="home-section">
         <h3>Contributions</h3>
-        <p style="color:#a89868;font-size:14px;margin-bottom:12px">
+        <p style="color:var(--text);font-size:14px;margin-bottom:12px">
           Contributions like yours help me fix bugs, smooth out the syntax, and ensure The Novelist's Atelier is the best tool it can be for authors.<br><br>
           Here's to better drafts and fewer red pens!
         </p>
@@ -10631,7 +10836,7 @@ ${f.chapter || '[PASTE TEXT]'}
 
       <div class="home-section">
         <h3>Getting Started</h3>
-        <ol style="margin:0;padding-left:20px;color:#a89868;font-size:14px;line-height:1.8">
+        <ol style="margin:0;padding-left:20px;color:var(--text);font-size:14px;line-height:1.8">
           <li>Go to <b>Settings</b> to configure your API key (or use LM Studio for local models)</li>
           <li>Add your series details in <b>Series</b> (optional but recommended)</li>
           <li>Add your book details in <b>Book</b> (optional)</li>
@@ -10693,7 +10898,7 @@ ${f.chapter || '[PASTE TEXT]'}
 
       <div class="home-section">
         <h3>Tips</h3>
-        <ul style="margin:0;padding-left:20px;color:#a89868;font-size:13px;line-height:1.7">
+        <ul style="margin:0;padding-left:20px;color:var(--text);font-size:13px;line-height:1.7">
           <li>The more context you provide (Series → Book → Chapter), the better the AI can assist you</li>
           <li>Use "Full" for sections you want fully included in prompts</li>
           <li>Use "Brief" for long sections where you want a summary included</li>
@@ -10708,7 +10913,7 @@ ${f.chapter || '[PASTE TEXT]'}
 
       <div class="home-section">
         <h3>Inclusion Modes</h3>
-        <p style="color:#a89868;font-size:13px;margin-bottom:10px">In Series, Book, and Chapter tabs, each section has toggle buttons:</p>
+        <p style="color:var(--text);font-size:13px;margin-bottom:10px">In Series, Book, and Chapter tabs, each section has toggle buttons:</p>
         <div class="home-modes">
           <span class="mode-badge full">Full</span> Include all text
         </div>
@@ -10724,22 +10929,22 @@ ${f.chapter || '[PASTE TEXT]'}
         <div class="home-modes">
           <span class="mode-badge off">Off</span> Exclude from prompts
         </div>
-        <p style="color:#60584a;font-size:12px;margin-top:10px">Toggle sections On/Off in the Chapter tab to control what context gets sent to the AI.</p>
+        <p style="color:var(--text3);font-size:12px;margin-top:10px">Toggle sections On/Off in the Chapter tab to control what context gets sent to the AI.</p>
       </div>
 
       <div class="home-section">
         <h3>AI Usage</h3>
-        <p style="color:#a89868;font-size:13px;margin-bottom:10px">
+        <p style="color:var(--text);font-size:13px;margin-bottom:10px">
           <b>The Novelist's Atelier</b> was built using AI assistance, specifically <b>Claude Sonnet 4.6</b>, <b>MiniMax M2.5</b>, and <b>OpenCode Big Pickle</b>.
         </p>
-        <p style="color:#a89868;font-size:13px;margin-bottom:10px">
+        <p style="color:var(--text);font-size:13px;margin-bottom:10px">
           For authors concerned about AI usage in their workflow, see the <b>Authors Guild</b> resources on AI best practices:
         </p>
-        <ul style="margin:0;padding-left:20px;color:#a89868;font-size:13px;line-height:1.7">
-          <li><a href="https://authorsguild.org/resource/ai-best-practices-for-authors/" target="_blank" style="color:#c8a660">AI Best Practices for Authors</a></li>
-          <li><a href="https://authorsguild.org/advocacy/artificial-intelligence/faq/" target="_blank" style="color:#c8a660">Authors Guild AI FAQ</a></li>
+        <ul style="margin:0;padding-left:20px;color:var(--text);font-size:13px;line-height:1.7">
+          <li><a href="https://authorsguild.org/resource/ai-best-practices-for-authors/" target="_blank" style="color:var(--text2)">AI Best Practices for Authors</a></li>
+          <li><a href="https://authorsguild.org/advocacy/artificial-intelligence/faq/" target="_blank" style="color:var(--text2)">Authors Guild AI FAQ</a></li>
         </ul>
-        <p style="color:#60584a;font-size:12px;margin-top:10px">
+        <p style="color:var(--text3);font-size:12px;margin-top:10px">
           This tool is designed to assist authors, not replace their creative voice. All generated content should be reviewed and refined by you.
         </p>
       </div>
@@ -11100,7 +11305,7 @@ ${f.chapter || '[PASTE TEXT]'}
         <h2>Chapter / Scene</h2>
         <p>The current chapter or scene you're working on. This granular context is injected into editing prompts.</p>
         <div style="margin-top:8px">
-          <button class="add-btn" onclick="autoToggleContext()" style="background:#1a1512;border-color:#c8a660;color:#c8a660;margin-right:8px">🧠 Smart Context</button>
+          <button class="add-btn" onclick="autoToggleContext()" style="background:#1a1512;border-color:var(--text2);color:var(--text2);margin-right:8px">🧠 Smart Context</button>
           <button class="add-btn" onclick="analyzeLocalText()" style="background:#1a1512;border-color:#7aac74;color:#7aac74">📊 Local Analysis</button>
         </div>
       </div>
@@ -11144,7 +11349,7 @@ ${f.chapter || '[PASTE TEXT]'}
       </div>
       <div id="settings_list"></div>
       <div class="export-bar">
-        <button class="add-btn" onclick="autoToggleContext()" style="background:#1a1512;border-color:#c8a660;color:#c8a660;margin-right:8px">🧠 Smart Context</button>
+        <button class="add-btn" onclick="autoToggleContext()" style="background:#1a1512;border-color:var(--text2);color:var(--text2);margin-right:8px">🧠 Smart Context</button>
         <button class="add-btn" onclick="analyzeLocalText()" style="background:#1a1512;border-color:#7aac74;color:#7aac74;margin-right:8px">📊 Local Analysis</button>
         <span class="export-lbl">Export complete chapter package as a single .md file</span>
         <button class="export-btn" id="ch_export">↓ Export Chapter .md</button>
@@ -11285,7 +11490,7 @@ ${f.chapter || '[PASTE TEXT]'}
       });
 
       if (APP.chapter.fullChapters.length === 0) {
-        container.innerHTML = '<div style="padding:20px;text-align:center;color:#50483a;font-style:italic">No chapters added yet. Click "+ Add Chapter" to begin.</div>';
+        container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-style:italic">No chapters added yet. Click "+ Add Chapter" to begin.</div>';
       }
     }
 
@@ -11298,7 +11503,7 @@ ${f.chapter || '[PASTE TEXT]'}
       const typeLabel = val.type === 'prologue' ? 'Prologue' : val.type === 'epilogue' ? 'Epilogue' : (isSceneLevel ? 'Scene' : 'Chapter');
       const displayLabel = val.type !== 'chapter' ? typeLabel : (isSceneLevel ? `Scene ${val.number || ''}.${val.sceneNumber || ''}` : `Chapter ${val.number || ''}`);
 
-      const sceneNumField = isSceneLevel ? `<input type="number" class="fc-scene-num" data-field="sceneNumber" value="${val.sceneNumber || ''}" placeholder="Sc#" style="width:50px;background:#0d0b08;border:1px solid #252015;color:#a89868;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 5px;border-radius:2px">` : '';
+      const sceneNumField = isSceneLevel ? `<input type="number" class="fc-scene-num" data-field="sceneNumber" value="${val.sceneNumber || ''}" placeholder="Sc#" style="width:50px;background:#0d0b08;border:1px solid #252015;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 5px;border-radius:2px">` : '';
 
       div.innerHTML = `
     <div class="fc-chap-hd" style="display:flex;justify-content:space-between;align-items:center">
@@ -11309,12 +11514,12 @@ ${f.chapter || '[PASTE TEXT]'}
       <button class="rm-chap-btn" data-idx="${idx}" style="background:transparent;border:none;color:#c06050;cursor:pointer;font-size:14px">×</button>
     </div>
     <div style="display:flex;gap:8px;padding:8px;background:#0a0807;border-bottom:1px solid #181510">
-      <select class="fc-type-select" data-field="type" style="background:#0d0b08;border:1px solid #252015;color:#a89868;font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 5px;border-radius:2px">
+      <select class="fc-type-select" data-field="type" style="background:#0d0b08;border:1px solid #252015;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 5px;border-radius:2px">
         <option value="prologue" ${val.type === 'prologue' ? 'selected' : ''}>Prologue</option>
         <option value="chapter" ${val.type === 'chapter' ? 'selected' : ''}>${isSceneLevel ? 'Chapter/Scene' : 'Chapter'}</option>
         <option value="epilogue" ${val.type === 'epilogue' ? 'selected' : ''}>Epilogue</option>
       </select>
-      <input type="number" class="fc-chap-num" data-field="number" value="${val.number || ''}" placeholder="${isSceneLevel ? 'Ch#' : '#'}" style="width:50px;background:#0d0b08;border:1px solid #252015;color:#a89868;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 5px;border-radius:2px">
+      <input type="number" class="fc-chap-num" data-field="number" value="${val.number || ''}" placeholder="${isSceneLevel ? 'Ch#' : '#'}" style="width:50px;background:#0d0b08;border:1px solid #252015;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 5px;border-radius:2px">
       ${sceneNumField}
     </div>
     <textarea placeholder="${isSceneLevel ? 'Paste scene text here...' : 'Paste chapter text here...'}">${esc(val.text)}</textarea>
@@ -11396,12 +11601,12 @@ ${f.chapter || '[PASTE TEXT]'}
         <button class="rm-chap-btn" data-idx="${idx}" style="background:transparent;border:none;color:#c06050;cursor:pointer;font-size:14px">×</button>
       </div>
       <div style="display:flex;gap:8px;padding:8px;background:#0a0807;border-bottom:1px solid #181510">
-        <select class="breakdown-type-select" data-field="type" style="background:#0d0b08;border:1px solid #252015;color:#a89868;font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 5px;border-radius:2px">
+        <select class="breakdown-type-select" data-field="type" style="background:#0d0b08;border:1px solid #252015;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 5px;border-radius:2px">
           <option value="prologue" ${val.type === 'prologue' ? 'selected' : ''}>Prologue</option>
           <option value="chapter" ${val.type === 'chapter' ? 'selected' : ''}>Chapter</option>
           <option value="epilogue" ${val.type === 'epilogue' ? 'selected' : ''}>Epilogue</option>
         </select>
-        <input type="number" class="breakdown-num" data-field="number" value="${val.number || ''}" placeholder="#" style="width:50px;background:#0d0b08;border:1px solid #252015;color:#a89868;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 5px;border-radius:2px">
+        <input type="number" class="breakdown-num" data-field="number" value="${val.number || ''}" placeholder="#" style="width:50px;background:#0d0b08;border:1px solid #252015;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 5px;border-radius:2px">
       </div>
       <textarea class="sb-ta" placeholder="POV, synopsis, theme, hook, conflict, resolution, reader questions, plot points, alternative versions...">${esc(val.text)}</textarea>
     `;
@@ -11445,7 +11650,7 @@ ${f.chapter || '[PASTE TEXT]'}
       });
 
       if (breakdowns.length === 0) {
-        container.innerHTML = '<div style="padding:20px;text-align:center;color:#50483a;font-style:italic">No breakdowns added yet. Click "+ Add Breakdown" to begin.</div>';
+        container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-style:italic">No breakdowns added yet. Click "+ Add Breakdown" to begin.</div>';
       }
     }
 
@@ -11673,7 +11878,7 @@ ${sourceText}`;
     <div class="list-hd">
       <span class="list-lbl">Relationships (${rels.length})</span>
       <button class="add-btn" onclick="openRelationshipModal()">+ Add Relationship</button>
-      <button class="add-btn" onclick="openRelationshipMapModal()" style="margin-left:8px;background:#1a1512;border-color:#3a3020;color:#c8a660">View Map</button>
+      <button class="add-btn" onclick="openRelationshipMapModal()" style="margin-left:8px;background:#1a1512;border-color:var(--text5);color:var(--text2)">View Map</button>
     </div>
     <div id="story-rels-list"></div>
   `;
@@ -11690,7 +11895,7 @@ ${sourceText}`;
     <div class="list-hd">
       <span class="list-lbl">Timeline Events (${timeline.length})</span>
       <button class="add-btn" onclick="openTimelineEventModal()">+ Add Event</button>
-      <button class="add-btn" onclick="openTimelineVisualModal()" style="margin-left:8px;background:#1a1512;border-color:#3a3020;color:#c8a660">View Timeline</button>
+      <button class="add-btn" onclick="openTimelineVisualModal()" style="margin-left:8px;background:#1a1512;border-color:var(--text5);color:var(--text2)">View Timeline</button>
     </div>
     <div id="story-timeline-list"></div>
   `;
@@ -11989,7 +12194,7 @@ ${sourceText}`;
     ${showExtract ? `
     <div class="extract-section" style="padding:10px;border-bottom:1px solid #181510;margin-bottom:8px">
       <div class="mlabel" style="margin-bottom:6px">Extract from Chapters</div>
-      <textarea class="extract-text" id="extract_text" placeholder="Paste chapter text to extract from..." style="width:100%;min-height:60px;background:#0b0908;border:1px solid #1c1912;border-radius:2px;color:#a89868;font-family:'Crimson Pro',serif;font-size:12px;padding:8px;resize:vertical;margin-bottom:8px"></textarea>
+      <textarea class="extract-text" id="extract_text" placeholder="Paste chapter text to extract from..." style="width:100%;min-height:60px;background:#0b0908;border:1px solid #1c1912;border-radius:2px;color:var(--text);font-family:'Crimson Pro',serif;font-size:12px;padding:8px;resize:vertical;margin-bottom:8px"></textarea>
       <div class="extract-row">
         ${extractBtn}
       </div>
@@ -12794,7 +12999,7 @@ Output the JSON object now. Start with {`;
             <button class="sec-btn" id="pipe_save_all" disabled>↓ Save All</button>
           </div>
         </div>
-        <div id="res_summary" style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#40382a;letter-spacing:.06em;margin-bottom:8px"></div>
+        <div id="res_summary" style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text5);letter-spacing:.06em;margin-bottom:8px"></div>
         <div id="res_content"><div class="res-empty">Add steps and run to see results here</div></div>
       </div>
     </div>`;
@@ -12840,7 +13045,7 @@ Output the JSON object now. Start with {`;
     function renderPipelineSteps() {
       const container = document.getElementById('pipeline_steps'); if (!container) return;
       if (APP.pipeline.steps.length === 0) {
-        container.innerHTML = `<div style="padding:16px;font-family:'Crimson Pro',serif;font-size:13px;color:#40382a;font-style:italic;text-align:center">No steps yet — click "+ Step" to begin</div>`;
+        container.innerHTML = `<div style="padding:16px;font-family:'Crimson Pro',serif;font-size:13px;color:var(--text5);font-style:italic;text-align:center">No steps yet — click "+ Step" to begin</div>`;
         return;
       }
       container.innerHTML = '';
@@ -13108,34 +13313,34 @@ Output the JSON object now. Start with {`;
       p.innerHTML = `
     <div class="settings-scroll">
       <div class="settings-section">
-        <div class="scard" style="background:#1a1512;border-color:#c8a660">
-          <div class="scard-hd" style="color:#c8a660">🔒 Security Notice</div>
+        <div class="scard" style="background:#1a1512;border-color:var(--text2)">
+          <div class="scard-hd" style="color:var(--text2)">🔒 Security Notice</div>
           <div class="scard-body">
-            <p style="color:#a89070;font-size:13px;line-height:1.5">Your API keys can be stored in different ways. Choose the option that best fits your security needs:</p>
+            <p style="color:var(--text3);font-size:13px;line-height:1.5">Your API keys can be stored in different ways. Choose the option that best fits your security needs:</p>
 
             <div style="margin-top:12px;padding:10px;background:#0b0908;border-radius:3px">
-              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">🔐 Password-Encrypted (Recommended)</div>
-              <p style="color:#a89070;font-size:11px;margin:0">Keys encrypted with AES-256 before storing. You'll be prompted for your password when needed. Most secure option. <strong>Default mode.</strong></p>
+              <div style="color:var(--text2);font-size:12px;margin-bottom:4px">🔐 Password-Encrypted (Recommended)</div>
+              <p style="color:var(--text3);font-size:11px;margin:0">Keys encrypted with AES-256 before storing. You'll be prompted for your password when needed. Most secure option. <strong>Default mode.</strong></p>
             </div>
 
             <div style="margin-top:8px;padding:10px;background:#0b0908;border-radius:3px">
-              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">📄 Plaintext</div>
-              <p style="color:#a89070;font-size:11px;margin:0">Keys stored directly in browser localStorage. Convenient but readable by browser extensions.</p>
+              <div style="color:var(--text2);font-size:12px;margin-bottom:4px">📄 Plaintext</div>
+              <p style="color:var(--text3);font-size:11px;margin:0">Keys stored directly in browser localStorage. Convenient but readable by browser extensions.</p>
             </div>
 
             <div style="margin-top:8px;padding:10px;background:#0b0908;border-radius:3px">
-              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">⌨️ Prompt Each Session</div>
-              <p style="color:#a89070;font-size:11px;margin:0">Keys never stored. You'll be prompted to enter them when you first use the AI. Highest security - nothing stored.</p>
+              <div style="color:var(--text2);font-size:12px;margin-bottom:4px">⌨️ Prompt Each Session</div>
+              <p style="color:var(--text3);font-size:11px;margin:0">Keys never stored. You'll be prompted to enter them when you first use the AI. Highest security - nothing stored.</p>
             </div>
 
             <div style="margin-top:8px;padding:10px;background:#0b0908;border-radius:3px">
-              <div style="color:#c8a660;font-size:12px;margin-bottom:4px">⏱️ Session Only</div>
-              <p style="color:#a89070;font-size:11px;margin:0">Keys stored in sessionStorage. Cleared automatically when you close the browser tab.</p>
+              <div style="color:var(--text2);font-size:12px;margin-bottom:4px">⏱️ Session Only</div>
+              <p style="color:var(--text3);font-size:11px;margin:0">Keys stored in sessionStorage. Cleared automatically when you close the browser tab.</p>
             </div>
 
             <div style="margin-top:15px;padding-top:15px;border-top:1px solid #252015">
-              <label class="mlabel" style="color:#c8a660">API Key Storage Mode</label>
-              <select id="storage_mode_select" style="background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;border-radius:2px;width:100%;margin-top:5px">
+              <label class="mlabel" style="color:var(--text2)">API Key Storage Mode</label>
+              <select id="storage_mode_select" style="background:#0b0908;border:1px solid #252015;color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;border-radius:2px;width:100%;margin-top:5px">
                 <option value="plaintext" ${getStorageMode() === 'plaintext' ? 'selected' : ''}>Plaintext</option>
                 <option value="encrypted" ${getStorageMode() === 'encrypted' ? 'selected' : ''}>Password-Encrypted (Recommended)</option>
                 <option value="prompt" ${getStorageMode() === 'prompt' ? 'selected' : ''}>Prompt Each Session</option>
@@ -13157,7 +13362,7 @@ Output the JSON object now. Start with {`;
           <div class="scard-body">
             <div class="meta-field">
               <label class="mlabel">Select Provider</label>
-              <select id="provider_select" style="background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;border-radius:2px;width:100%">
+              <select id="provider_select" style="background:#0b0908;border:1px solid #252015;color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;border-radius:2px;width:100%">
                 <option value="openrouter" ${APP.provider === 'openrouter' ? 'selected' : ''}>OpenRouter (Default)</option>
                 <option value="anthropic" ${APP.provider === 'anthropic' ? 'selected' : ''}>Anthropic Direct (Claude)</option>
                 <option value="openai" ${APP.provider === 'openai' ? 'selected' : ''}>OpenAI Direct</option>
@@ -13300,7 +13505,7 @@ Output the JSON object now. Start with {`;
           <div class="scard-body">
             <div class="scale-row">
               <label class="mlabel" style="flex:1">Theme</label>
-              <select id="theme_select" style="background:#0b0908;border:1px solid #252015;color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 8px;border-radius:2px">
+              <select id="theme_select" style="background:#0b0908;border:1px solid #252015;color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 8px;border-radius:2px">
                 <option value="default" ${APP.theme === 'default' ? 'selected' : ''}>Default Dark</option>
                 <option value="soft-beach" ${APP.theme === 'soft-beach' ? 'selected' : ''}>Soft Beach</option>
                 <option value="pink-sand" ${APP.theme === 'pink-sand' ? 'selected' : ''}>Pink Sand</option>
@@ -13331,6 +13536,27 @@ Output the JSON object now. Start with {`;
                 <button class="smbtn" id="hscale_down">−</button>
                 <span class="scale-val" id="hscale_val" style="min-width:40px;text-align:center">${APP.headerScale || 1}x</span>
                 <button class="smbtn" id="hscale_up">+</button>
+              </div>
+            </div>
+            <div class="scale-row" style="margin-top:12px">
+              <label class="mlabel" style="flex:1">Text Brightness</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input id="textbright_slider" type="range" min="1" max="2" step="0.01" value="${(APP.textBrightness || 1).toFixed(2)}" style="width:160px">
+                <span class="scale-val" id="textbright_val" style="min-width:48px;text-align:center">${(APP.textBrightness || 1).toFixed(2)}x</span>
+              </div>
+            </div>
+            <div class="scale-row" style="margin-top:12px">
+              <label class="mlabel" style="flex:1">Text Color</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <select id="textcolor_select" style="background:#0b0908;border:1px solid #252015;color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 8px;border-radius:2px;min-width:160px">
+                  <option value="theme" ${APP.textColorMode === 'theme' ? 'selected' : ''}>Theme Original</option>
+                  <option value="warm" ${APP.textColorMode === 'warm' ? 'selected' : ''}>Warm</option>
+                  <option value="neutral" ${APP.textColorMode === 'neutral' ? 'selected' : ''}>Neutral</option>
+                  <option value="cool" ${APP.textColorMode === 'cool' ? 'selected' : ''}>Cool</option>
+                  <option value="contrast" ${APP.textColorMode === 'contrast' ? 'selected' : ''}>High Contrast</option>
+                  <option value="custom" ${APP.textColorMode === 'custom' ? 'selected' : ''}>Custom Color</option>
+                </select>
+                <input id="textcolor_custom" type="color" value="${APP.textColorCustom || '#ffffff'}" style="width:40px;height:28px;border:1px solid #252015;border-radius:2px;cursor:pointer;display:none">
               </div>
             </div>
           </div>
@@ -13375,7 +13601,7 @@ Output the JSON object now. Start with {`;
               
               <!-- Basic Rules - Always Visible -->
               <div class="pref-group">
-                <div class="pref-group-lbl"><input type="checkbox" id="ai_rules_basic_all" checked style="accent-color:#c8a660"> Basic Rules (11)</div>
+                <div class="pref-group-lbl"><input type="checkbox" id="ai_rules_basic_all" checked style="accent-color:var(--text2)"> Basic Rules (11)</div>
                 <div class="pref-sub" id="basic_rules_sub">
                   <div class="pref-row"><label title="Avoid em-dashes for dramatic pauses">No em-dashes (—)</label><input type="checkbox" id="avoid_emdashes" ${APP.writingPrefs.avoidEmDashes ? 'checked' : ''}></div>
                   <div class="pref-row"><label title="Avoid semicolons">No semicolons</label><input type="checkbox" id="avoid_semicolons" ${APP.writingPrefs.avoidSemicolons ? 'checked' : ''}></div>
@@ -13496,7 +13722,7 @@ Output the JSON object now. Start with {`;
               <input type="file" id="import_file" accept=".json" style="display:none">
             </div>
 
-            <div class="import-status" id="import_status" style="margin-top:8px;font-size:12px;color:#c8a660"></div>
+            <div class="import-status" id="import_status" style="margin-top:8px;font-size:12px;color:var(--text2)"></div>
             <div style="margin-top:12px;padding-top:12px;border-top:1px solid #252015">
               <p class="api-note" style="margin-bottom:10px">Backup History (last 24 hours)</p>
               <div class="backup-list" id="backup_list"></div>
@@ -13551,15 +13777,15 @@ Output the JSON object now. Start with {`;
         const mode = getStorageMode();
         if (mode === 'encrypted') {
           storageActions.innerHTML = `
-        <button id="set_password_btn" class="add-btn" style="background:#1a1512;border-color:#c8a660;color:#c8a660;margin-top:5px">${localStorage.getItem('na_encrypted_keys') ? 'Change Password' : 'Set Password'}</button>
+        <button id="set_password_btn" class="add-btn" style="background:#1a1512;border-color:var(--text2);color:var(--text2);margin-top:5px">${localStorage.getItem('na_encrypted_keys') ? 'Change Password' : 'Set Password'}</button>
         ${APP_KEY_PASSWORD ? '<span style="color:#7aac74;font-size:12px;margin-left:10px">✓ Keys Unlocked</span>' : ''}
       `;
           storageStatus.textContent = APP_KEY_PASSWORD ? 'Keys are unlocked for this session' : 'Keys are locked - password required on next use';
         } else if (mode === 'prompt') {
-          storageActions.innerHTML = '<span style="color:#c8a660;font-size:12px">You will be prompted for API keys when needed</span>';
+          storageActions.innerHTML = '<span style="color:var(--text2);font-size:12px">You will be prompted for API keys when needed</span>';
           storageStatus.textContent = '';
         } else if (mode === 'session') {
-          storageActions.innerHTML = '<span style="color:#c8a660;font-size:12px">Keys cleared when browser closes</span>';
+          storageActions.innerHTML = '<span style="color:var(--text2);font-size:12px">Keys cleared when browser closes</span>';
           storageStatus.textContent = '';
         } else {
           storageActions.innerHTML = '';
@@ -14091,6 +14317,8 @@ Output the JSON object now. Start with {`;
         APP.theme = e.target.value;
         localStorage.setItem('na_theme', APP.theme);
         document.body.className = APP.theme === 'default' ? '' : 'theme-' + APP.theme;
+        refreshTextBrightnessBases();
+        applyTextBrightness();
       });
 
       // UI Scale
@@ -14127,6 +14355,30 @@ Output the JSON object now. Start with {`;
         h.style.padding = '0 ' + (20 * APP.headerScale) + 'px';
         h.style.gap = (10 * APP.headerScale) + 'px';
         localStorage.setItem('na_hscale', APP.headerScale);
+      });
+
+      // Initialize custom color picker display
+      document.getElementById('textcolor_custom').style.display = APP.textColorMode === 'custom' ? 'block' : 'none';
+
+      // Text Brightness
+      document.getElementById('textbright_slider').addEventListener('input', (e) => {
+        APP.textBrightness = Math.max(1, Math.min(2, Number(e.target.value) || 1));
+        document.getElementById('textbright_val').textContent = APP.textBrightness.toFixed(2) + 'x';
+        applyTextBrightness();
+        localStorage.setItem('na_text_brightness', APP.textBrightness.toFixed(2));
+      });
+
+      document.getElementById('textcolor_select').addEventListener('change', (e) => {
+        APP.textColorMode = e.target.value || 'theme';
+        document.getElementById('textcolor_custom').style.display = APP.textColorMode === 'custom' ? 'block' : 'none';
+        applyTextBrightness();
+        localStorage.setItem('na_text_color_mode', APP.textColorMode);
+      });
+
+      document.getElementById('textcolor_custom').addEventListener('input', (e) => {
+        APP.textColorCustom = e.target.value;
+        applyTextBrightness();
+        localStorage.setItem('na_text_color_custom', APP.textColorCustom);
       });
 
       // Writing Preferences
@@ -14287,7 +14539,7 @@ Output the JSON object now. Start with {`;
       <p>Your AI-powered writing assistant for editing and world-building across multi-book projects.</p>
 
       <h4>What's New in 1.4</h4>
-      <ul style="color:#a89868;line-height:1.8">
+      <ul style="color:var(--text);line-height:1.8">
         <li><b>Compare Tab</b> — Stack multiple AI analyses of the same chapter and run an automated conflict detector. Finds where analyses agree (consensus) and where they contradict each other (conflicts), then lists every issue verbatim.</li>
         <li><b>Visual Report</b> — Convert any analysis output into a formatted, printable HTML document with sidebar navigation, severity tags, and section cards. Available in Local (instant, no API) or AI Enhanced mode.</li>
         <li><b>Copy Prompt</b> — Export the Compare conflict-detection prompt to your clipboard to run manually in Claude.ai or any chat interface.</li>
@@ -14295,7 +14547,7 @@ Output the JSON object now. Start with {`;
       </ul>
 
       <h4>Quick Start</h4>
-      <ol style="color:#a89868;line-height:1.8">
+      <ol style="color:var(--text);line-height:1.8">
         <li>Start in <b>Series</b> to set up your world-building and genre</li>
         <li>Add your first <b>Book</b> with title and outline</li>
         <li>Use <b>Story</b> tab to create characters and plan your timeline</li>
@@ -14306,7 +14558,7 @@ Output the JSON object now. Start with {`;
       </ol>
 
       <h4>Key Concepts</h4>
-      <ul style="color:#a89868;line-height:1.8">
+      <ul style="color:var(--text);line-height:1.8">
         <li><b>Inclusion Modes</b> — Control what gets included in AI prompts (Full, Brief, Extended, Custom, Off)</li>
         <li><b>Projects</b> — Organize separate stories in different projects</li>
         <li><b>Series Level</b> — Timeline and some elements span multiple books</li>
@@ -14321,7 +14573,7 @@ Output the JSON object now. Start with {`;
       container.innerHTML = `
     <div class="help-section">
       <h3>Keyboard Shortcuts</h3>
-      <p style="color:#a89868;margin-bottom:16px">Use these shortcuts to work faster. Works with Ctrl (Windows/Linux) or Cmd (Mac).</p>
+      <p style="color:var(--text);margin-bottom:16px">Use these shortcuts to work faster. Works with Ctrl (Windows/Linux) or Cmd (Mac).</p>
 
       <div class="help-shortcut-group">
         <h4>Navigation</h4>
@@ -14350,7 +14602,7 @@ Output the JSON object now. Start with {`;
       container.innerHTML = `
     <div class="help-section">
       <h3>Tab Guides</h3>
-      <p style="color:#a89868;margin-bottom:16px">Click any section to expand.</p>
+      <p style="color:var(--text);margin-bottom:16px">Click any section to expand.</p>
 
       <details class="help-guide">
         <summary><h4>📖 Series Tab</h4></summary>
@@ -14615,7 +14867,7 @@ Output the JSON object now. Start with {`;
       container.innerHTML = `
     <div class="help-section">
       <h3>Activity Log</h3>
-      <p style="color:#a89868;margin-bottom:16px">Recent AI generations (last ${log.length} of 50). Newest entries appear at bottom.</p>
+      <p style="color:var(--text);margin-bottom:16px">Recent AI generations (last ${log.length} of 50). Newest entries appear at bottom.</p>
 
       <div class="activity-log">
         ${log.length === 0 ? '<div class="empty-msg">No AI generations yet. Use the Prompts tab to generate content.</div>' :
@@ -14752,7 +15004,7 @@ Output the JSON object now. Start with {`;
       const toast = document.createElement('div');
       toast.id = 'toast-notification';
       toast.textContent = msg;
-      toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#1a1512;border:1px solid #c8a660;color:#c8a660;padding:10px 20px;border-radius:4px;font-size:12px;z-index:9999;animation:fadeIn 0.2s';
+      toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#1a1512;border:1px solid #c8a660;color:var(--text2);padding:10px 20px;border-radius:4px;font-size:12px;z-index:9999;animation:fadeIn 0.2s';
       document.body.appendChild(toast);
       setTimeout(() => { toast.remove(); }, 2000);
     }
@@ -14959,8 +15211,8 @@ This will expand the book-level bible into a series-level reference.`);
 
     function showProgress(initial, message) {
       const div = document.createElement('div');
-      div.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111009;border:1px solid #c8a660;padding:20px 30px;border-radius:4px;z-index:9999;color:#e0d3bc;font-family:Crimson Pro,serif;font-size:14px;box-shadow:0 4px 20px rgba(0,0,0,0.5)';
-      div.innerHTML = `<div style="text-align:center"><div style="margin-bottom:10px">⚡</div>${message}</div><pre id="prompt_output" style="margin-top:15px;max-height:200px;overflow:auto;background:#0b0908;padding:10px;border-radius:2px;font-size:11px;color:#a89868;white-space:pre-wrap;text-align:left"></pre>`;
+      div.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111009;border:1px solid #c8a660;padding:20px 30px;border-radius:4px;z-index:9999;color:var(--text);font-family:Crimson Pro,serif;font-size:14px;box-shadow:0 4px 20px rgba(0,0,0,0.5)';
+      div.innerHTML = `<div style="text-align:center"><div style="margin-bottom:10px">⚡</div>${message}</div><pre id="prompt_output" style="margin-top:15px;max-height:200px;overflow:auto;background:#0b0908;padding:10px;border-radius:2px;font-size:11px;color:var(--text);white-space:pre-wrap;text-align:left"></pre>`;
       document.body.appendChild(div);
       let text = '';
       return {
@@ -14995,15 +15247,15 @@ This will expand the book-level bible into a series-level reference.`);
 
     function showGeneratedOutput(text, title) {
       const div = document.createElement('div');
-      div.style.cssText = 'position:fixed;top:5%;left:5%;width:90%;height:90%;background:#111009;border:1px solid #c8a660;padding:20px;border-radius:4px;z-index:9999;color:#e0d3bc;font-family:Crimson Pro,serif;font-size:14px;box-shadow:0 4px 30px rgba(0,0,0,0.7)';
+      div.style.cssText = 'position:fixed;top:5%;left:5%;width:90%;height:90%;background:#111009;border:1px solid #c8a660;padding:20px;border-radius:4px;z-index:9999;color:var(--text);font-family:Crimson Pro,serif;font-size:14px;box-shadow:0 4px 30px rgba(0,0,0,0.7)';
       div.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;border-bottom:1px solid #252015;padding-bottom:10px">
-      <h3 style="margin:0;color:#c8a660">${title}</h3>
-      <button id="gen_output_close" style="background:transparent;border:none;color:#80786a;font-size:20px;cursor:pointer">✕</button>
+      <h3 style="margin:0;color:var(--text2)">${title}</h3>
+      <button id="gen_output_close" style="background:transparent;border:none;color:var(--text4);font-size:20px;cursor:pointer">✕</button>
     </div>
-    <textarea id="gen_output_text" style="width:100%;height:calc(100% - 60px);background:#0b0908;border:1px solid #252015;color:#a89868;font-family:Crimson Pro,serif;font-size:13px;padding:10px;resize:none">${esc(text)}</textarea>
+    <textarea id="gen_output_text" style="width:100%;height:calc(100% - 60px);background:#0b0908;border:1px solid #252015;color:var(--text);font-family:Crimson Pro,serif;font-size:13px;padding:10px;resize:none">${esc(text)}</textarea>
     <div style="margin-top:10px;display:flex;gap:10px;justify-content:flex-end">
-      <button id="gen_copy_btn" style="padding:8px 16px;background:#141209;border:1px solid #3a3020;border-radius:2px;color:#c8a660;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer">Copy to Clipboard</button>
+      <button id="gen_copy_btn" style="padding:8px 16px;background:#141209;border:1px solid #3a3020;border-radius:2px;color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer">Copy to Clipboard</button>
       <button id="gen_save_btn" style="padding:8px 16px;background:#0f180d;border:1px solid #263422;border-radius:2px;color:#7aac74;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer">Save as .md</button>
     </div>
   `;
@@ -15448,8 +15700,8 @@ This will expand the book-level bible into a series-level reference.`);
     </div>
     <div class="template-modal-body">
       <div class="template-field">
-        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Category</label>
-        <select id="template_cat" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+        <label style="display:block;font-size:11px;color:var(--text5);margin-bottom:6px">Category</label>
+        <select id="template_cat" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:var(--text2);font-size:12px">
           <option value="manuscript">Full Manuscript Check</option>
           <option value="character">Character</option>
           <option value="world">World Building</option>
@@ -15463,15 +15715,15 @@ This will expand the book-level bible into a series-level reference.`);
         </select>
       </div>
       <div class="template-field">
-        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Title</label>
-        <input type="text" id="template_title" placeholder="My Custom Prompt" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+        <label style="display:block;font-size:11px;color:var(--text5);margin-bottom:6px">Title</label>
+        <input type="text" id="template_title" placeholder="My Custom Prompt" style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:var(--text2);font-size:12px">
       </div>
       <div class="template-field">
-        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Description</label>
-        <input type="text" id="template_desc" placeholder="What this prompt does..." style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:#c8a660;font-size:12px">
+        <label style="display:block;font-size:11px;color:var(--text5);margin-bottom:6px">Description</label>
+        <input type="text" id="template_desc" placeholder="What this prompt does..." style="width:100%;padding:8px;background:#1a1512;border:1px solid #3a3020;color:var(--text2);font-size:12px">
       </div>
       <div class="template-field">
-        <label style="display:block;font-size:11px;color:#605840;margin-bottom:6px">Fields</label>
+        <label style="display:block;font-size:11px;color:var(--text5);margin-bottom:6px">Fields</label>
         <div id="template_fields"></div>
         <button class="template-add-field" onclick="addTemplateField()">+ Add Field</button>
       </div>
@@ -15648,11 +15900,11 @@ This will expand the book-level bible into a series-level reference.`);
       <div id="find_tab_content" style="display:none">
         <div style="padding:12px">
           <div style="margin-bottom:10px">
-            <label style="font-size:11px;color:#605840;display:block;margin-bottom:4px">Find:</label>
+            <label style="font-size:11px;color:var(--text5);display:block;margin-bottom:4px">Find:</label>
             <input type="text" id="find_input" class="search-input" placeholder="Find text...">
           </div>
           <div style="margin-bottom:10px">
-            <label style="font-size:11px;color:#605840;display:block;margin-bottom:4px">Replace:</label>
+            <label style="font-size:11px;color:var(--text5);display:block;margin-bottom:4px">Replace:</label>
             <input type="text" id="replace_input" class="search-input" placeholder="Replace with...">
           </div>
           <div class="search-options" style="padding:8px 0">
@@ -15672,7 +15924,7 @@ This will expand the book-level bible into a series-level reference.`);
       <div id="findall_tab_content" style="display:none">
         <div style="padding:12px">
           <div style="margin-bottom:10px">
-            <label style="font-size:11px;color:#605840;display:block;margin-bottom:4px">Find:</label>
+            <label style="font-size:11px;color:var(--text5);display:block;margin-bottom:4px">Find:</label>
             <input type="text" id="findall_input" class="search-input" placeholder="Find all occurrences...">
           </div>
           <div class="search-options" style="padding:8px 0">
@@ -15720,7 +15972,7 @@ This will expand the book-level bible into a series-level reference.`);
           <option value="output">Current prompt output</option>
           <option value="paste">Paste my own text below</option>
         </select>
-        <textarea id="vr-paste" rows="6" style="display:none;width:100%;background:#0a0907;border:1px solid #1a1810;border-radius:3px;color:#a89868;font-family:'Crimson Pro',serif;font-size:13px;padding:7px 10px;outline:none;resize:vertical;box-sizing:border-box;margin-bottom:12px;line-height:1.5" placeholder="Paste your AI output here…"></textarea>
+        <textarea id="vr-paste" rows="6" style="display:none;width:100%;background:#0a0907;border:1px solid #1a1810;border-radius:3px;color:var(--text);font-family:'Crimson Pro',serif;font-size:13px;padding:7px 10px;outline:none;resize:vertical;box-sizing:border-box;margin-bottom:12px;line-height:1.5" placeholder="Paste your AI output here…"></textarea>
         <div id="vr-status-msg"></div>
       </div>
       <div id="vr-modal-foot">
@@ -15971,7 +16223,7 @@ This will expand the book-level bible into a series-level reference.`);
               codeLines.push(esc(lineObjs[i].text)); i++;
             }
             i++; // skip closing ```
-            out.push(`<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:#9090b0;line-height:1.7;overflow-x:auto;white-space:pre-wrap">${codeLines.join('\n')}</div>`);
+            out.push(`<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:var(--text4);line-height:1.7;overflow-x:auto;white-space:pre-wrap">${codeLines.join('\n')}</div>`);
             continue;
           }
 
@@ -15982,7 +16234,7 @@ This will expand the book-level bible into a series-level reference.`);
               bqLines.push(lineObjs[i].text.replace(/^>\s*/,'')); i++;
             }
             const bqText = bqLines.join(' ');
-            out.push(`<blockquote style="background:rgba(232,201,110,0.05);border-left:3px solid rgba(232,201,110,0.4);border-radius:0 8px 8px 0;margin:12px 0;padding:12px 16px;color:#b0a888;font-style:italic">${inlineMd(bqText)}</blockquote>`);
+            out.push(`<blockquote style="background:rgba(232,201,110,0.05);border-left:3px solid rgba(232,201,110,0.4);border-radius:0 8px 8px 0;margin:12px 0;padding:12px 16px;color:var(--text3);font-style:italic">${inlineMd(bqText)}</blockquote>`);
             continue;
           }
 
@@ -16090,7 +16342,7 @@ This will expand the book-level bible into a series-level reference.`);
                   <span style="background:${c}33;color:${c};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:3px 10px;border-radius:999px;border:1px solid ${c}66">${sevLabel[sev]}</span>
                   <span style="font-size:14px;font-weight:600;color:#e8e4f0">${inlineMd(label)}</span>
                 </div>
-                <div style="font-size:13px;color:#9090b0;line-height:1.7">${inlineMd(rest)}</div>
+                <div style="font-size:13px;color:var(--text4);line-height:1.7">${inlineMd(rest)}</div>
               </div>`);
               i++; continue;
             }
@@ -16314,9 +16566,9 @@ Output the JSON object now. Start with { and end with }.`;
           case 'rule':
             return `<hr style="border:none;border-top:1px solid rgba(232,201,110,0.15);margin:24px 0">`;
           case 'blockquote':
-            return `<blockquote style="background:rgba(232,201,110,0.05);border-left:3px solid rgba(232,201,110,0.4);border-radius:0 8px 8px 0;margin:12px 0;padding:12px 16px;color:#b0a888;font-style:italic">${inlineMd(b.text)}</blockquote>`;
+            return `<blockquote style="background:rgba(232,201,110,0.05);border-left:3px solid rgba(232,201,110,0.4);border-radius:0 8px 8px 0;margin:12px 0;padding:12px 16px;color:var(--text3);font-style:italic">${inlineMd(b.text)}</blockquote>`;
           case 'code':
-            return `<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:#9090b0;line-height:1.7;overflow-x:auto;white-space:pre-wrap">${esc(b.text)}</div>`;
+            return `<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:var(--text4);line-height:1.7;overflow-x:auto;white-space:pre-wrap">${esc(b.text)}</div>`;
           case 'resolution': {
             const lbl = b.label || '✓ Resolution';
             return `<div style="background:rgba(39,174,96,0.07);border:1px solid rgba(39,174,96,0.2);border-radius:8px;padding:16px 18px;margin:14px 0">
@@ -16344,7 +16596,7 @@ Output the JSON object now. Start with { and end with }.`;
             const pill = b.sev ? `<span style="background:${c}33;color:${c};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:999px;border:1px solid ${c}66">${sevLabel[b.sev]}</span>` : '';
             return `<div style="background:${bg};border:1px solid ${b.sev ? c+'33' : 'rgba(255,255,255,0.07)'};border-left:3px solid ${c};border-radius:8px;padding:14px 18px;margin:10px 0">
               <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">${pill}<span style="font-size:14px;font-weight:600;color:#e8e4f0">${inlineMd(b.label||'')}</span></div>
-              <div style="font-size:13px;color:#9090b0;line-height:1.7">${inlineMd(b.text||'')}</div>
+              <div style="font-size:13px;color:var(--text4);line-height:1.7">${inlineMd(b.text||'')}</div>
             </div>`;
           }
           case 'list': {

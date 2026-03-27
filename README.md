@@ -2,19 +2,7 @@
 
 AI-powered writing assistant for editing and world-building. Features multiple AI providers (Claude, GPT, Gemini), flexible context management at Series/Book/Chapter levels, and a privacy-first design with all data stored locally in your browser.
 
-Version 1.4 Beta is feature complete. I do not expect to add more features to the tool, so unless more APIs or bug fixes are needed this should be the same as 1.0 Release. Going forward this single HTML version will stay free and open source. I am working on a more complete suite of tools that can go from idea to planning to writing to editing to marketing to publishing, but it will be a seperate project.  
-
-## Disclaimer
-Many traditional publishers require zero AI usage to be published, if you are persuing this distribution method you are using this tool at your own risk. For self publishing refer to your local laws and regulations. [Authors Guild stance on AI](https://authorsguild.org/resource/ai-best-practices-for-authors/)
-
-## Tutorials
-[Youtube Tutorial](https://youtu.be/watch?v=9akdLTKwpg0)
-[Written Tutorial](https://github.com/f5alcon/The-Novelists-Atelier/blob/main/Tutorial/Tutorial.md)
-
 ## Features
-
-![Settings](https://github.com/user-attachments/assets/59193865-7f38-4ee2-9af7-00998272d289)
-![Home](https://github.com/user-attachments/assets/ae144c5e-be2c-4dbb-a1c5-7f8a5dc59627)
 
 - **Multiple AI Providers**: OpenRouter, Anthropic Direct (Claude), OpenAI Direct (GPT), Google Direct (Gemini), and LM Studio (local models)
 - **Flexible Context**: Add details at Series, Book, or Chapter level to customize AI prompts
@@ -24,6 +12,8 @@ Many traditional publishers require zero AI usage to be published, if you are pe
   - Copy editing
   - Line editing (sentence variety, word choice, dialogue naturalism)
   - Developmental editing:
+    - Chapter Purpose/Theme Identification
+    - Key Events Summary
     - Story arc structure
     - Stakes escalation
     - Subplot resolution
@@ -34,12 +24,34 @@ Many traditional publishers require zero AI usage to be published, if you are pe
     - Scene openings & endings
     - POV consistency
     - Scene-level conflict
-  - And more...
+    - Information clarity & relevance
+    - Tropes identification & subversion
+  - Tension & Engagement:
+    - Micro-tension audit
+    - Reader curiosity tracker
+    - Chapter hook & cliffhanger audit
+  - Prose Craft:
+    - Metaphor & simile audit
+    - Tonal consistency check
+    - White space & paragraph rhythm
+  - Genre-Specific Prompts (14 genres, hidden by default):
+    - Fantasy (Epic/Secondary World)
+    - Fantasy (Grimdark)
+    - Urban Fantasy
+    - Science Fiction (Hard)
+    - Science Fiction (Space Opera)
+    - Literary Fiction
+    - Mystery/Detective
+    - Horror
+    - Historical Fiction
+    - Thriller
+    - Crime Fiction
+    - Romance
+    - Young Adult
+    - Middle Grade
+  - **10-Phase Editing Workflow**: Structured approach from orientation to final polish
+  - **Essential Quick List**: 10 high-impact prompts for fast triage
 - **Pipeline Mode**: Chain multiple prompts together for complex workflows
-- **Local mode** — instant, no API call, parses markdown structure directly
-- **AI Enhanced mode** — smarter extraction for complex or irregular outputs
-- Works from both the Prompts output toolbar and the Compare tab
-- Output opens in a new tab and can be saved, printed, or shared
 - **Auto-Save & Backups**:
   - Auto-save every 30 seconds
   - Visual save indicator in header
@@ -58,29 +70,6 @@ Many traditional publishers require zero AI usage to be published, if you are pe
 - **Token Breakdown**: See exactly how tokens are distributed in your prompts
 - **Secure API Key Storage**: Password-encrypted (AES-256), Prompt Each Session, or Session Only options
 - **Privacy-Focused**: All data stored locally in your browser
-
-- 1.35 Update
-- Added full manuscript check option (This is a lot of tokens depending on the length of the manuscript, potentially very expensive on API usage, it is better to use a tool with a subscription to check)
-- Also a prompt to take the output of that and create an html view of the report. Attach the report and put the prompt into the chat.
-![Manuscript report](https://github.com/user-attachments/assets/9d61c946-a0c7-4c77-aa25-f5f8122a5320)
-![Beta Reader feedback](https://github.com/user-attachments/assets/5c82c287-e585-43ed-b578-2363d23f9591)
-
--1.4 Update
-- ### ⇄ Compare Tab
-
-Run multiple different AI analyses on the same chapter, then cross-examine them automatically. The Compare tab finds **conflicts** (where two analyses give contradictory advice on the same passage) and **consensus** (where they independently flag the same problem), and reproduces every issue verbatim so nothing gets lost in synthesis.
-
-**Why it matters:** A pacing audit and a show/tell audit will catch different things — but they'll also sometimes contradict each other. Knowing which flags are backed by both analyses tells you where to spend your revision time first.
-
-- Add analyses from the Prompts tab with a single click, or paste in outputs from Claude.ai or any other session
-- Run automated conflict detection via API, or copy the prompt to use in a chat interface
-- Filter results by Conflicts only, Consensus only, or Full view
-- Convert the comparison into a formatted **Visual Report** document
-
-### 📄 Visual Report
-
-Turn any AI analysis output into a formatted, printable HTML document — structured with a sidebar, section cards, and severity tags (Critical / Important / Minor).
-
 
 ## Getting Started
 
@@ -140,7 +129,23 @@ Toggle sections On/Off in the Chapter tab to control what context the AI receive
 
 ## Version
 
-1.4 Beta
+1.41 Beta
+
+## Changelog
+
+### v1.41 Beta
+- **Text Brightness Slider**: Adjust text brightness (1.0x–1.35x) with live preview and persistent setting
+- **Text Color Modes**: Choose from Theme Original, Warm, Neutral, Cool, and High Contrast color tones across all text
+- **Nav & Prompts Page Colors**: Top bar, menu tabs, and prompts sidebar/list text now respond to brightness and color settings
+- **Header Scale Fix**: Fixed a bug where a saved header scale would push navigation elements off-screen on reload
+- **Add Character Fix**: Fixed a crash when adding or saving characters on the Story tab (wrong element ID reference)
+
+### v1.4 Beta
+- Pipeline mode for chaining multiple prompts
+- Style DNA for defining writing style
+- Smart context auto-toggling
+- Local text analysis (word count, readability, sentiment)
+- Token breakdown view
 
 ## License
 
