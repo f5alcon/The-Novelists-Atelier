@@ -11852,9 +11852,9 @@ ${sourceText}`;
     <div class="ch-item" data-idx="${i}">
       <div class="ch-item-hd">
         <span class="ch-num">${i + 1}</span>
-        <span class="ch-title">${esc(c.data?.text?.split('\n')[0] || 'Unnamed')}</span>
+        <span class="ch-title">${esc(c.name || 'Unnamed')}</span>
       </div>
-      <div class="ch-item-bd">${esc(c.data?.text || '').substring(0, 100)}${c.data?.text?.length > 100 ? '...' : ''}</div>
+      <div class="ch-item-bd">${esc(c.text || '').substring(0, 100)}${c.text?.length > 100 ? '...' : ''}</div>
       <div class="ch-item-ft">
         <button class="ch-edit" data-idx="${i}" onclick="editCharacter(${i})">Edit</button>
         <button class="ch-delete" data-idx="${i}" onclick="deleteCharacter(${i})">Delete</button>
