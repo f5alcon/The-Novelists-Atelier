@@ -11080,11 +11080,9 @@ ${f.chapter || '[PASTE TEXT]'}
     // ═══════════════════════════════════════════════════════════
 
     function renderRelsList() {
-      const list = document.getElementById('rels_list');
+      const list = document.getElementById('story-rels-list');
       if (!list) return;
-      const cnt = document.getElementById('rel_cnt');
       const rels = getBookRelationships();
-      if (cnt) cnt.textContent = rels.length;
       if (rels.length === 0) {
         list.innerHTML = '<div class="empty-msg">No relationships defined. Add at least 2 characters, then click to the Book tab "+ Add Relationship" above to connect them. Use "View Map" to see a visual diagram.</div>';
         return;
@@ -11094,7 +11092,7 @@ ${f.chapter || '[PASTE TEXT]'}
         const c2 = getCharacterById(r.char2Id);
         const typeInfo = getRelationshipTypes().find(t => t.id === r.type);
         return '<div class="rel-item" style="border-left:3px solid ' + (typeInfo?.color || '#c8a660') + '">' +
-          '<div class="rel-names">' + (c1?.data?.text?.split('\n')[0] || 'Unknown') + ' <span class="rel-arrow">' + (r.bidirectional ? '↔' : '→') + '</span> ' + (c2?.data?.text?.split('\n')[0] || 'Unknown') + '</div>' +
+          '<div class="rel-names">' + (c1?.name || 'Unknown') + ' <span class="rel-arrow">' + (r.bidirectional ? '↔' : '→') + '</span> ' + (c2?.name || 'Unknown') + '</div>' +
           '<div class="rel-type">' + (typeInfo?.label || r.type) + '</div>' +
           (r.description ? '<div class="rel-desc">' + esc(r.description) + '</div>' : '') +
           '<div class="rel-actions">' +
@@ -11118,8 +11116,8 @@ ${f.chapter || '[PASTE TEXT]'}
         '<div class="rel-modal">' +
         '<div class="rel-modal-hd"><h3>' + (existing ? 'Edit Relationship' : 'Add Relationship') + '</h3><button class="rel-modal-close" onclick="closeRelationshipModal()">×</button></div>' +
         '<div class="rel-modal-body">' +
-        '<div class="rel-field"><label>Character 1</label><select id="rel_char1">' + (chars.map(c => '<option value="' + c.id + '" ' + (existing?.char1Id === c.id ? 'selected' : '') + '>' + esc(c.text?.split('\n')[0] || 'Unnamed') + '</option>').join('')) + '</select></div>' +
-        '<div class="rel-field"><label>Character 2</label><select id="rel_char2">' + (chars.map(c => '<option value="' + c.id + '" ' + (existing?.char2Id === c.id ? 'selected' : '') + '>' + esc(c.text?.split('\n')[0] || 'Unnamed') + '</option>').join('')) + '</select></div>' +
+        '<div class="rel-field"><label>Character 1</label><select id="rel_char1">' + (chars.map(c => '<option value="' + c.id + '" ' + (existing?.char1Id === c.id ? 'selected' : '') + '>' + esc(c.name || 'Unnamed') + '</option>').join('')) + '</select></div>' +
+        '<div class="rel-field"><label>Character 2</label><select id="rel_char2">' + (chars.map(c => '<option value="' + c.id + '" ' + (existing?.char2Id === c.id ? 'selected' : '') + '>' + esc(c.name || 'Unnamed') + '</option>').join('')) + '</select></div>' +
         '<div class="rel-field"><label>Relationship Type</label><select id="rel_type">' + (types.map(t => '<option value="' + t.id + '" ' + (existing?.type === t.id ? 'selected' : '') + '>' + t.label + '</option>').join('')) + '</select></div>' +
         '<div class="rel-field"><label>Description</label><textarea id="rel_desc" placeholder="Describe the relationship...">' + (existing?.description || '') + '</textarea></div>' +
         '<div class="rel-field"><label><input type="checkbox" id="rel_bi" ' + (existing?.bidirectional ? 'checked' : '') + '> Bidirectional (mutual)</label></div>' +
@@ -11185,7 +11183,7 @@ ${f.chapter || '[PASTE TEXT]'}
         const angle = (2 * Math.PI * i) / chars.length - Math.PI / 2;
         const cx = rect.width / 2 + (Math.min(rect.width, rect.height) / 2 - 60) * Math.cos(angle);
         const cy = rect.height / 2 + (Math.min(rect.width, rect.height) / 2 - 60) * Math.sin(angle);
-        return { cx, cy, id: c.id, name: c.text?.split('\n')[0] || 'Unnamed', x: cx, y: cy };
+        return { cx, cy, id: c.id, name: c.name || 'Unnamed', x: cx, y: cy };
       });
       rels.forEach(r => {
         const n1 = nodes.find(n => n.id === r.char1Id);
