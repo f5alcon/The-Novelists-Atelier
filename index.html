@@ -12615,6 +12615,11 @@ ${sourceText}`;
                 <option value="conflicts">Conflicts only</option>
                 <option value="consensus">Consensus only</option>
               </select>
+              <label>Detail</label>
+              <select id="cmp-detail-select">
+                <option value="limited">Limited (summaries)</option>
+                <option value="full">Full (verbatim)</option>
+              </select>
               <button class="sec-btn" id="cmp-vr-btn" disabled style="font-size:9px">⬡ Visual Report</button>
             </div>
           </div>
@@ -12730,6 +12735,7 @@ ${sourceText}`;
       if (slots.length < 2) return;
 
       const mode = document.getElementById('cmp-mode-select')?.value || 'full';
+      const detail = document.getElementById('cmp-detail-select')?.value || 'limited';
       const runBtn = document.getElementById('cmp-run-btn');
       const output = document.getElementById('cmp-output');
 
@@ -12738,8 +12744,12 @@ ${sourceText}`;
       setCmpStatus('Calling AI…');
       output.innerHTML = `<div class="cmp-placeholder"><div class="cmp-placeholder-icon" style="animation:pulse 1.5s ease-in-out infinite">⇄</div><p>Detecting conflicts…</p></div>`;
 
-      const prompt = buildComparePrompt(slots, mode);
+      const prompt = buildComparePrompt(slots, mode, detail);
       let raw = '';
+
+      // Full/verbatim mode generates much larger responses — raise token ceiling.
+      const _prevTokens = APP.maxTokens;
+      APP.maxTokens = Math.max(APP.maxTokens, detail === 'full' ? 50000 : 6000);
 
       try {
         await callAPI(
@@ -12748,8 +12758,63 @@ ${sourceText}`;
           () => {
             try {
               let clean = raw.replace(/^```json\s*/i,'').replace(/^```\s*/i,'').replace(/```\s*$/i,'').trim();
-              const start = clean.indexOf('{'); if (start > 0) clean = clean.slice(start);
-              const json = JSON.parse(clean);
+              const start = clean.indexOf('{');
+              if (start > 0) clean = clean.slice(start);
+
+              // Single-pass: extract complete JSON object + repair common AI output
+              // issues, all while respecting string boundaries.
+              let repaired = '';
+              let inStr = false;
+              let esc = false;
+              let depth = 0;
+              let started = false;
+              for (let i = 0; i < clean.length; i++) {
+                const c = clean[i];
+                if (esc) { repaired += c; esc = false; continue; }
+                if (inStr) {
+                  if (c === '\\') { esc = true; repaired += c; continue; }
+                  // Literal newline/tab inside a string — escape it
+                  if (c === '\n') { repaired += '\\n'; continue; }
+                  if (c === '\r') { repaired += '\\r'; continue; }
+                  if (c === '\t') { repaired += '\\t'; continue; }
+                  if (c === '"') {
+                    // A real closing quote is always followed (past whitespace) by
+                    // one of:  :  ,  }  ]
+                    let j = i + 1;
+                    while (j < clean.length && ' \t\r\n'.includes(clean[j])) j++;
+                    const nx = clean[j];
+                    if (nx === ':' || nx === ',' || nx === '}' || nx === ']') {
+                      inStr = false; repaired += c;
+                    } else {
+                      repaired += '\\"'; // escape rogue interior quote
+                    }
+                    continue;
+                  }
+                  repaired += c; continue;
+                }
+                // Outside a string
+                if (c === '"') { inStr = true; repaired += c; continue; }
+                if (c === '{') { depth++; started = true; repaired += c; continue; }
+                if (c === '}') {
+                  depth--; repaired += c;
+                  if (depth === 0 && started) break; // stop at the outermost closing brace
+                  continue;
+                }
+                repaired += c;
+              }
+
+              // Strip trailing commas before } or ] (invalid in JSON, fine in JS)
+              repaired = repaired.replace(/,(\s*[}\]])/g, '$1');
+
+              const json = JSON.parse(repaired);
+              // Build allIssues client-side from the raw slot outputs —
+              // no need to ask the AI to reproduce everything verbatim.
+              json.allIssues = getCmpSlots().map(s => ({
+                source: s.label,
+                sev: 'important',
+                element: s.category,
+                body: s.output,
+              }));
               renderCompareOutput(json, mode);
               output.dataset.rawOutput = JSON.stringify(json);
               document.getElementById('cmp-vr-btn').disabled = false;
@@ -12773,40 +12838,44 @@ ${sourceText}`;
         setCmpStatus('Error: ' + err.message, true);
         runBtn.disabled = false;
         runBtn.textContent = '⇄ Run Conflict Analysis';
+      } finally {
+        APP.maxTokens = _prevTokens;
       }
     }
 
-    function buildComparePrompt(slots, mode) {
+    function buildComparePrompt(slots, mode, detail) {
       const analyses = slots.map((s, i) =>
         `=== ANALYSIS ${i + 1}: ${s.label} (${s.category}) ===\n${s.output}\n`
       ).join('\n');
 
       const modeInstr = {
-        full: 'Return ALL THREE arrays: conflicts, consensus, allIssues.',
-        conflicts: 'Return conflicts and consensus arrays. Set allIssues to [].',
-        consensus: 'Return consensus and allIssues arrays. Set conflicts to [].',
-      }[mode] || 'Return ALL THREE arrays.';
+        conflicts: 'Return ONLY the conflicts array. Set consensus to [].',
+        consensus: 'Return ONLY the consensus array. Set conflicts to [].',
+      }[mode] || 'Return both conflicts and consensus arrays.';
+
+      const detailInstr = detail === 'full'
+        ? 'Reproduce the exact wording from each analysis in "stance" and "finding" fields — do not paraphrase.'
+        : 'Keep "stance" and "finding" fields to 1–2 sentences each. Do not reproduce the full text of any analysis.';
 
       return `You are a rigorous editorial conflict detector reviewing ${slots.length} analyses of the same text.
 
-CRITICAL RULES — you must follow these exactly:
-1. Do NOT summarize, condense, paraphrase, or merge any issue. Every specific flag must survive verbatim.
-2. Your ONLY synthesis task is: find contradictions and find agreements.
-3. Reproduce every issue from every analysis in full in allIssues. Do not truncate.
-4. When two analyses comment on the same passage or element with contradictory advice, that is a conflict.
-5. When two or more analyses independently flag the same problem (even with different wording), that is consensus.
+Your ONLY tasks are:
+1. Find contradictions: when two analyses give opposing advice about the same passage or element → conflicts.
+2. Find agreements: when two or more analyses independently flag the same problem → consensus.
+
+${detailInstr}
 
 ${modeInstr}
 
-Return ONLY a JSON object in this exact shape — no markdown fences, no preamble:
+Return ONLY a JSON object — no markdown fences, no preamble:
 {
   "conflicts": [
     {
-      "element": "brief label for the passage or element in question",
+      "element": "brief label for the passage or element",
       "sev": "critical|important|minor",
       "sides": [
-        { "source": "Analysis 1 label", "stance": "exact quote of what this analysis says" },
-        { "source": "Analysis 2 label", "stance": "exact quote of what this analysis says" }
+        { "source": "Analysis 1 label", "stance": "what this analysis says" },
+        { "source": "Analysis 2 label", "stance": "what this analysis says" }
       ],
       "nature": "one sentence explaining the contradiction"
     }
@@ -12816,20 +12885,12 @@ Return ONLY a JSON object in this exact shape — no markdown fences, no preambl
       "element": "brief label",
       "sev": "critical|important|minor",
       "sources": ["Analysis 1 label", "Analysis 2 label"],
-      "finding": "verbatim or near-verbatim reproduction of the shared finding"
-    }
-  ],
-  "allIssues": [
-    {
-      "source": "Analysis N label",
-      "sev": "critical|important|minor",
-      "element": "brief label",
-      "body": "full verbatim text of the issue as written in the original analysis"
+      "finding": "the shared finding"
     }
   ]
 }
 
-Sev detection: critical/must/error/conflict → "critical"; important/suggested/flag/warning → "important"; optional/minor/consider → "minor". Default to "important" if unclear.
+Sev: critical/must/error → "critical"; important/suggested/flag → "important"; optional/minor/consider → "minor". Default "important".
 
 ANALYSES TO COMPARE:
 ${analyses}
