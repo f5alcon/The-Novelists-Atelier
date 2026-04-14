@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Novelist's Atelier — 1.41 Beta</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file: blob: data: https:; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' file: data: blob: https:; font-src 'self' file: data: https://fonts.gstatic.com; style-src 'self' file: 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' file: 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' file: blob: https:; media-src 'self' file: blob: data:; worker-src 'self' file: blob:; manifest-src 'self' file:">
+  <title>The Novelist's Atelier — 1.50 Beta</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" integrity="sha384-nFoSjZIoH3CCp8W639jJyQkuPHinJ2NHe7on1xvlUA7SuGfJAfvMldrsoAVm6ECz" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap"
     rel="stylesheet">
@@ -5261,7 +5264,7 @@
       <div class="brand">
         <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
         <span class="brand-title">The Novelist's Atelier</span>
-        <span class="brand-ver">1.41 Beta</span>
+        <span class="brand-ver">1.5 Beta</span>
         <div class="project-selector" id="project_selector">
           <button class="project-current" id="project_current_btn">
             <span id="project_name_display">My Novel</span>
@@ -5316,6 +5319,115 @@
 
   <script>
     'use strict';
+
+    // ═══════════════════════════════════════════════════════════
+    // SECURITY HELPERS
+    // ═══════════════════════════════════════════════════════════
+
+    const SAFE_URL_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:']);
+
+    function sanitizeUrl(value, opts = {}) {
+      const raw = String(value == null ? '' : value).trim();
+      const allowHash = opts.allowHash !== false;
+      const allowBlob = opts.allowBlob !== false;
+      const allowImageData = !!opts.allowImageData;
+
+      if (!raw) return '';
+      if (allowHash && raw.startsWith('#')) return raw;
+      if (/^(?:\/|\.\/|\.\.\/)/.test(raw)) return raw;
+      if (allowBlob && raw.startsWith('blob:')) return raw;
+      if (allowImageData && /^data:image\//i.test(raw)) return raw;
+
+      try {
+        const parsed = new URL(raw, window.location.href);
+        if (window.location.protocol === 'file:' && parsed.protocol === 'file:') return raw;
+        return SAFE_URL_PROTOCOLS.has(parsed.protocol) ? parsed.href : '';
+      } catch {
+        return '';
+      }
+    }
+
+    function jsq(value) {
+      return String(value == null ? '' : value)
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/\r/g, '\\r')
+        .replace(/\n/g, '\\n')
+        .replace(/</g, '\\x3C');
+    }
+
+    function safeAnchorHtml(label, href, extraAttrs = '') {
+      const safeHref = sanitizeUrl(href, { allowHash: false });
+      const safeLabel = String(label == null ? '' : label)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+      return safeHref
+        ? '<a href="' + safeHref + '" target="_blank" rel="noopener noreferrer"' + extraAttrs + '>' + safeLabel + '</a>'
+        : safeLabel;
+    }
+
+    function hardenAnchorElement(anchor) {
+      if (!anchor || anchor.tagName !== 'A') return;
+
+      const href = anchor.getAttribute('href');
+      if (href) {
+        const safeHref = sanitizeUrl(href, { allowHash: true });
+        if (!safeHref) anchor.setAttribute('href', '#');
+        else if (safeHref !== href) anchor.setAttribute('href', safeHref);
+      }
+
+      if (anchor.getAttribute('target') === '_blank') {
+        const currentRel = anchor.getAttribute('rel') || '';
+        const rel = new Set(currentRel.split(/\s+/).filter(Boolean));
+        rel.add('noopener');
+        rel.add('noreferrer');
+        const nextRel = Array.from(rel).join(' ');
+        if (nextRel !== currentRel) anchor.setAttribute('rel', nextRel);
+      }
+    }
+
+    function hardenExternalAnchors(root = document) {
+      if (root.matches && root.matches('a[href], a[target="_blank"]')) hardenAnchorElement(root);
+      if (!root.querySelectorAll) return;
+      root.querySelectorAll('a[href], a[target="_blank"]').forEach(hardenAnchorElement);
+    }
+
+    function initLinkHardening() {
+      hardenExternalAnchors(document);
+
+      if ('MutationObserver' in window && document.body) {
+        new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.target?.tagName === 'A') {
+              hardenAnchorElement(mutation.target);
+              return;
+            }
+
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1) hardenExternalAnchors(node);
+            });
+          });
+        }).observe(document.body, {
+          subtree: true,
+          childList: true
+        });
+      }
+
+      document.addEventListener('click', function (e) {
+        const anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!anchor) return;
+        const safeHref = sanitizeUrl(anchor.getAttribute('href'), { allowHash: true });
+        if (!safeHref) {
+          e.preventDefault();
+          anchor.setAttribute('href', '#');
+        }
+      }, true);
+    }
+
+    initLinkHardening();
 
     // ═══════════════════════════════════════════════════════════
     // CONSTANTS
@@ -9079,7 +9191,7 @@ ${f.chapter || '[PASTE TEXT]'}
       el.innerHTML = backups.slice(0, 24).map(b => {
         const date = new Date(b.timestamp);
         const timeStr = date.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        return '<div class="backup-item"><span class="backup-time">' + timeStr + '</span><button class="backup-restore" onclick="restoreBackup(\'' + pid + '\', \'' + b.hour + '\')">Restore</button></div>';
+        return '<div class="backup-item"><span class="backup-time">' + timeStr + '</span><button class="backup-restore" onclick="restoreBackup(\'' + jsq(pid) + '\', \'' + jsq(b.hour) + '\')">Restore</button></div>';
       }).join('');
     }
 
@@ -9294,7 +9406,7 @@ ${f.chapter || '[PASTE TEXT]'}
           : escaped.replace(new RegExp('(' + escapeRegex(query) + ')', 'gi'), '<mark>$1</mark>');
 
         return '<div class="search-result-item" onclick="navigateToSearchResult(' + idx + ')">' +
-          '<div class="search-result-type">' + r.type + '</div>' +
+          '<div class="search-result-type">' + escapeHtml(r.type) + '</div>' +
           '<div class="search-result-title">' + escapeHtml(r.title) + '</div>' +
           '<div class="search-result-snippet">' + highlighted + '</div>' +
           '</div>';
@@ -9308,7 +9420,12 @@ ${f.chapter || '[PASTE TEXT]'}
     }
 
     function escapeHtml(str) {
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     function navigateToSearchResult(idx) {
@@ -9552,9 +9669,13 @@ ${f.chapter || '[PASTE TEXT]'}
         : 'Found ' + totalResults + ' occurrences';
 
       container.innerHTML = displayResults.map(function (r, idx) {
-        const highlighted = r.snippet.replace(regex, '<mark>' + r.match + '</mark>');
-        return '<div class="search-result-item" onclick="goToFindResult(' + r.index + ', ' + (r.sceneIndex || 0) + ', \'' + r.field + '\')">' +
-          '<div class="search-result-type">' + r.type + '</div>' +
+        const escapedSnippet = escapeHtml(r.snippet);
+        const escapedMatch = escapeHtml(r.match);
+        const highlighted = escapedMatch
+          ? escapedSnippet.replace(new RegExp(escapeRegex(escapedMatch), 'gi'), '<mark>$&</mark>')
+          : escapedSnippet;
+        return '<div class="search-result-item" onclick="goToFindResult(' + r.index + ', ' + (r.sceneIndex || 0) + ', \'' + jsq(r.field) + '\')">' +
+          '<div class="search-result-type">' + escapeHtml(r.type) + '</div>' +
           '<div class="search-result-title">' + escapeHtml(r.title) + '</div>' +
           '<div class="search-result-snippet">' + highlighted + '</div>' +
           '</div>';
@@ -9958,8 +10079,8 @@ ${f.chapter || '[PASTE TEXT]'}
 
       const listEl = document.getElementById('project_list');
       listEl.innerHTML = projects.map(p =>
-        '<div class="project-item' + (p.id === currentPid ? ' active' : '') + '" data-pid="' + p.id + '">' +
-        '<span>' + p.name + '</span>' +
+        '<div class="project-item' + (p.id === currentPid ? ' active' : '') + '" data-pid="' + esc(p.id) + '">' +
+        '<span>' + esc(p.name) + '</span>' +
         '</div>'
       ).join('');
 
@@ -10675,7 +10796,7 @@ ${f.chapter || '[PASTE TEXT]'}
       document.body.removeChild(a); URL.revokeObjectURL(u);
     }
 
-    function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
+    function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
 
     function addHelp(parent, text) {
       const icon = document.createElement('span');
@@ -10686,7 +10807,7 @@ ${f.chapter || '[PASTE TEXT]'}
       const tooltip = document.createElement('div');
       tooltip.className = 'tooltip';
       tooltip.style.display = 'none';
-      tooltip.innerHTML = text + '<button class="tooltip-close">×</button>';
+      tooltip.innerHTML = esc(text).replace(/\n/g, '<br>') + '<button class="tooltip-close">×</button>';
       document.body.appendChild(tooltip);
       icon.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -11116,12 +11237,12 @@ ${f.chapter || '[PASTE TEXT]'}
         '<div class="rel-modal">' +
         '<div class="rel-modal-hd"><h3>' + (existing ? 'Edit Relationship' : 'Add Relationship') + '</h3><button class="rel-modal-close" onclick="closeRelationshipModal()">×</button></div>' +
         '<div class="rel-modal-body">' +
-        '<div class="rel-field"><label>Character 1</label><select id="rel_char1">' + (chars.map(c => '<option value="' + c.id + '" ' + (existing?.char1Id === c.id ? 'selected' : '') + '>' + esc(c.name || 'Unnamed') + '</option>').join('')) + '</select></div>' +
-        '<div class="rel-field"><label>Character 2</label><select id="rel_char2">' + (chars.map(c => '<option value="' + c.id + '" ' + (existing?.char2Id === c.id ? 'selected' : '') + '>' + esc(c.name || 'Unnamed') + '</option>').join('')) + '</select></div>' +
-        '<div class="rel-field"><label>Relationship Type</label><select id="rel_type">' + (types.map(t => '<option value="' + t.id + '" ' + (existing?.type === t.id ? 'selected' : '') + '>' + t.label + '</option>').join('')) + '</select></div>' +
-        '<div class="rel-field"><label>Description</label><textarea id="rel_desc" placeholder="Describe the relationship...">' + (existing?.description || '') + '</textarea></div>' +
+        '<div class="rel-field"><label>Character 1</label><select id="rel_char1">' + (chars.map(c => '<option value="' + esc(c.id) + '" ' + (existing?.char1Id === c.id ? 'selected' : '') + '>' + esc(c.name || 'Unnamed') + '</option>').join('')) + '</select></div>' +
+        '<div class="rel-field"><label>Character 2</label><select id="rel_char2">' + (chars.map(c => '<option value="' + esc(c.id) + '" ' + (existing?.char2Id === c.id ? 'selected' : '') + '>' + esc(c.name || 'Unnamed') + '</option>').join('')) + '</select></div>' +
+        '<div class="rel-field"><label>Relationship Type</label><select id="rel_type">' + (types.map(t => '<option value="' + esc(t.id) + '" ' + (existing?.type === t.id ? 'selected' : '') + '>' + esc(t.label) + '</option>').join('')) + '</select></div>' +
+        '<div class="rel-field"><label>Description</label><textarea id="rel_desc" placeholder="Describe the relationship...">' + esc(existing?.description || '') + '</textarea></div>' +
         '<div class="rel-field"><label><input type="checkbox" id="rel_bi" ' + (existing?.bidirectional ? 'checked' : '') + '> Bidirectional (mutual)</label></div>' +
-        '<div class="rel-actions-row"><button class="rel-btn-cancel" onclick="closeRelationshipModal()">Cancel</button><button class="rel-btn-save" onclick="saveRelationshipFromModal(\'' + (editId || '') + '\')">' + (existing ? 'Update' : 'Add') + '</button></div>' +
+        '<div class="rel-actions-row"><button class="rel-btn-cancel" onclick="closeRelationshipModal()">Cancel</button><button class="rel-btn-save" onclick="saveRelationshipFromModal(\'' + jsq(editId || '') + '\')">' + (existing ? 'Update' : 'Add') + '</button></div>' +
         '</div>' +
         '</div>' +
         '</div>';
@@ -11954,12 +12075,12 @@ ${sourceText}`;
       </div>
       <div class="timeline-modal-body">
         <div class="timeline-field"><label>Title *</label><input type="text" id="timeline_title" value="${existing ? esc(existing.title) : ''}" placeholder="Event title"></div>
-        <div class="timeline-field"><label>Event Type</label><select id="timeline_type">${types.map(t => `<option value="${t.id}" ${existing?.eventType === t.id ? 'selected' : ''}>${t.label}</option>`).join('')}</select></div>
+        <div class="timeline-field"><label>Event Type</label><select id="timeline_type">${types.map(t => `<option value="${esc(t.id)}" ${existing?.eventType === t.id ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select></div>
         <div class="timeline-field"><label>Description</label><textarea id="timeline_desc" placeholder="What happens...">${existing ? esc(existing.description) : ''}</textarea></div>
         <div class="timeline-field"><label>Book (optional)</label><select id="timeline_book"><option value="">-- None --</option>${books.map(b => `<option value="book" ${existing?.bookId === 'book' ? 'selected' : ''}>${esc(b.title)}</option>`).join('')}</select></div>
-        <div class="timeline-field"><label>Chapter (optional)</label><select id="timeline_chapter"><option value="">-- None --</option>${chapters.map((c, i) => `<option value="${c.id}" ${existing?.chapterId === c.id ? 'selected' : ''}>Chapter ${i + 1}: ${esc(c.title || c.text?.substring(0, 20) || 'Untitled')}</option>`).join('')}</select></div>
+        <div class="timeline-field"><label>Chapter (optional)</label><select id="timeline_chapter"><option value="">-- None --</option>${chapters.map((c, i) => `<option value="${esc(c.id)}" ${existing?.chapterId === c.id ? 'selected' : ''}>Chapter ${i + 1}: ${esc(c.title || c.text?.substring(0, 20) || 'Untitled')}</option>`).join('')}</select></div>
         <div class="timeline-field"><label>Date/Order</label><input type="text" id="timeline_date" value="${existing ? esc(existing.date) : ''}" placeholder="e.g., Year 1, Day 45, etc."></div>
-        <div class="timeline-actions-row"><button class="timeline-btn-cancel" onclick="closeTimelineEventModal()">Cancel</button><button class="timeline-btn-save" onclick="saveTimelineEvent('${editId || ''}')">${existing ? 'Update' : 'Add'}</button></div>
+        <div class="timeline-actions-row"><button class="timeline-btn-cancel" onclick="closeTimelineEventModal()">Cancel</button><button class="timeline-btn-save" onclick="saveTimelineEvent('${jsq(editId || '')}')">${existing ? 'Update' : 'Add'}</button></div>
       </div>
     </div>
   </div>`;
@@ -12187,7 +12308,7 @@ ${sourceText}`;
       <div class="p-list-cnt">${allPrompts.length} prompt${allPrompts.length !== 1 ? 's' : ''}</div>
     </div>
     <div style="padding:8px 10px;border-bottom:1px solid #181510">
-      <button class="create-template-btn" onclick="openTemplateModal('${APP.prompts.cat}', null)">+ Create Template</button>
+      <button class="create-template-btn" onclick="openTemplateModal('${jsq(APP.prompts.cat)}', null)">+ Create Template</button>
     </div>
     ${showExtract ? `
     <div class="extract-section" style="padding:10px;border-bottom:1px solid #181510;margin-bottom:8px">
@@ -12207,12 +12328,12 @@ ${sourceText}`;
       </button>`).join('')}
     ${customPrompts.length > 0 ? '<div class="p-custom-header">Custom Templates</div>' : ''}
     ${customPrompts.map(pr => `
-      <button class="pcrd custom-prompt${APP.prompts.promptId === pr.id ? ' pcra' : ''}" data-pid="${pr.id}" data-custom="true" style="--cc:${cat.color}">
+      <button class="pcrd custom-prompt${APP.prompts.promptId === pr.id ? ' pcra' : ''}" data-pid="${esc(pr.id)}" data-custom="true" style="--cc:${cat.color}">
         <div class="pcrd-t">${esc(pr.title)} <span class="custom-badge">Custom</span></div>
         <div class="pcrd-d">${esc(pr.desc)}</div>
         <div class="pcrd-actions">
-          <span class="pcrd-edit" onclick="event.stopPropagation();openTemplateModal('${APP.prompts.cat}', '${pr.id}')">Edit</span>
-          <span class="pcrd-delete" onclick="event.stopPropagation();deleteTemplate('${APP.prompts.cat}', '${pr.id}')">Delete</span>
+          <span class="pcrd-edit" onclick="event.stopPropagation();openTemplateModal('${jsq(APP.prompts.cat)}', '${jsq(pr.id)}')">Edit</span>
+          <span class="pcrd-delete" onclick="event.stopPropagation();deleteTemplate('${jsq(APP.prompts.cat)}', '${jsq(pr.id)}')">Delete</span>
         </div>
       </button>`).join('')}`;
 
@@ -15516,7 +15637,7 @@ This will expand the book-level bible into a series-level reference.`);
     // ═══════════════════════════════════════════════════════════
 
     window.onerror = function (msg, url, line, col, error) {
-      document.getElementById('app-main').innerHTML = '<div style="padding:20px;color:#c06060;font-size:14px"><b>JavaScript Error:</b><br>' + msg + '<br>Line: ' + line + '</div>';
+      document.getElementById('app-main').innerHTML = '<div style="padding:20px;color:#c06060;font-size:14px"><b>JavaScript Error:</b><br>' + esc(msg) + '<br>Line: ' + esc(line) + '</div>';
       return true;
     };
 
@@ -16212,7 +16333,7 @@ This will expand the book-level bible into a series-level reference.`);
           .replace(/\*\*(.+?)\*\*/g,     '<strong>$1</strong>')
           .replace(/\*(.+?)\*/g,         '<em>$1</em>')
           .replace(/`([^`]+)`/g,         '<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;font-size:0.9em;font-family:monospace">$1</code>')
-          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#e8c96e">$1</a>');
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => safeAnchorHtml(label, href, ' style="color:#e8c96e"'));
       }
 
       // ── split lines ──
@@ -16609,7 +16730,8 @@ Output the JSON object now. Start with { and end with }.`;
           .replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>')
           .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
           .replace(/\*(.+?)\*/g,'<em>$1</em>')
-          .replace(/`([^`]+)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;font-size:.9em;font-family:monospace">$1</code>');
+          .replace(/`([^`]+)`/g,'<code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;font-size:.9em;font-family:monospace">$1</code>')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => safeAnchorHtml(label, href, ' style="color:#e8c96e"'));
       }
 
       const sevColor = { critical:'#e74c3c', important:'#f39c12', minor:'#27ae60' };
