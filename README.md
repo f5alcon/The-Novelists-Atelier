@@ -129,9 +129,13 @@ Toggle sections On/Off in the Chapter tab to control what context the AI receive
 
 ## Version
 
-1.41 Beta
+1.5
 
 ## Changelog
+### v1.5
+Launch version
+Added full model selector to Openrouter to run any model that they offer. 
+
 
 ### v1.41 Beta
 - **Text Brightness Slider**: Adjust text brightness (1.0x–1.35x) with live preview and persistent setting
