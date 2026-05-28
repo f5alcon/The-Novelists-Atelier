@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' file: blob: data: https:; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' file: data: blob: https:; font-src 'self' file: data: https://fonts.gstatic.com; style-src 'self' file: 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' file: 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' file: blob: https:; media-src 'self' file: blob: data:; worker-src 'self' file: blob:; manifest-src 'self' file:">
-  <title>The Novelist's Atelier — 1.50 Beta</title>
+  <title>The Novelist's Atelier — 1.50</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" integrity="sha384-nFoSjZIoH3CCp8W639jJyQkuPHinJ2NHe7on1xvlUA7SuGfJAfvMldrsoAVm6ECz" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -4507,6 +4507,163 @@
       border-color: #b05040
     }
 
+    /* OpenRouter model picker */
+    .or-picker-wrap {
+      position: relative
+    }
+    .or-picker-input {
+      width: 100%;
+      padding: 6px 10px;
+      background: #0b0908;
+      border: 1px solid #252015;
+      color: var(--text2);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      border-radius: 2px;
+      outline: none;
+      box-sizing: border-box
+    }
+    .or-picker-input:focus {
+      border-color: var(--text2)
+    }
+    .or-picker-btns {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px
+    }
+    .or-picker-btn {
+      padding: 5px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      background: #0b0908;
+      border: 1px solid #252015;
+      color: var(--text3);
+      border-radius: 2px;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all .12s
+    }
+    .or-picker-btn:hover {
+      border-color: var(--text2);
+      color: var(--text2)
+    }
+    .or-picker-btn.accent {
+      color: var(--text2);
+      border-color: var(--text2)
+    }
+    .or-picker-btn.accent:hover {
+      background: #151005;
+    }
+    .or-picker-btn:disabled {
+      opacity: .5;
+      cursor: default
+    }
+    .or-picker-error {
+      color: #b05050;
+      font-size: 11px;
+      margin-top: 4px
+    }
+    .or-picker-info {
+      color: var(--text5);
+      font-size: 10px;
+      margin-top: 3px
+    }
+    .or-dropdown {
+      position: fixed;
+      z-index: 99999;
+      background: #12100c;
+      border: 1px solid #252015;
+      border-radius: 3px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.5);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column
+    }
+    .or-dropdown input {
+      width: 100%;
+      padding: 4px 8px;
+      font-size: 11px;
+      background: #0b0908;
+      border: 1px solid #252015;
+      color: var(--text2);
+      font-family: 'JetBrains Mono', monospace;
+      border-radius: 2px;
+      outline: none;
+      box-sizing: border-box
+    }
+    .or-dropdown input:focus {
+      border-color: var(--text2)
+    }
+    .or-dropdown-header {
+      padding: 7px 10px 3px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-top: 1px solid #1c1912
+    }
+    .or-dropdown-header:first-of-type {
+      border-top: none
+    }
+    .or-dropdown-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background .08s
+    }
+    .or-dropdown-row:hover {
+      background: rgba(200,166,96,0.08)
+    }
+    .or-dropdown-row.selected {
+      background: #1c1912
+    }
+    .or-dropdown-row-inner {
+      flex: 1;
+      color: var(--text3);
+      font-size: 11px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+    .or-dropdown-row-id {
+      color: var(--text5);
+      margin-left: 6px;
+      font-size: 10px
+    }
+    .or-free-badge {
+      font-size: 8px;
+      padding: 1px 4px;
+      border-radius: 2px;
+      background: rgba(74,158,106,0.25);
+      color: #4a9e6a;
+      font-weight: 700;
+      flex-shrink: 0
+    }
+    .or-ctx-badge {
+      font-size: 9px;
+      color: var(--text5);
+      flex-shrink: 0
+    }
+    .or-price-badge {
+      font-size: 9px;
+      color: var(--text5);
+      flex-shrink: 0
+    }
+    .or-dropdown-empty {
+      padding: 14px;
+      color: var(--text5);
+      font-size: 11px;
+      text-align: center
+    }
+    .or-dropdown-foot {
+      padding: 8px 10px;
+      border-top: 1px solid #1c1912;
+      color: var(--text5);
+      font-size: 10px
+    }
+
     .export-import-row {
       display: flex;
       gap: 10px;
@@ -5264,7 +5421,7 @@
       <div class="brand">
         <a href="NALogo.png" target="_blank"><img src="NALogo.png" class="brand-logo" alt="Logo"></a>
         <span class="brand-title">The Novelist's Atelier</span>
-        <span class="brand-ver">1.5 Beta</span>
+        <span class="brand-ver">1.5</span>
         <div class="project-selector" id="project_selector">
           <button class="project-current" id="project_current_btn">
             <span id="project_name_display">My Novel</span>
@@ -5478,6 +5635,40 @@
       // LM Studio (Local)
       { id: 'local', name: 'Load model in LM Studio, then click Test', provider: 'lmstudio', ctx: 'varies', color: '#888888' },
     ];
+
+    // ═══════════════════════════════════════════════════════════
+    // OPENROUTER MODEL PICKER
+    // ═══════════════════════════════════════════════════════════
+
+    const OR_CACHE_KEY = 'na_or_models_cache';
+    const OR_CACHE_TS_KEY = 'na_or_models_ts';
+    const OR_CACHE_TTL = 24 * 60 * 60 * 1000;
+
+    const OR_CURATED_MODELS = [
+      // Free tier
+      { id: 'nvidia/nemtron-3-super:free',        name: 'Nemtron-3 Super',   tier: 'free',     ctx: '128k' },
+      { id: 'google/gemma-3-27b-it:free',         name: 'Gemma 3 27B',       tier: 'free',     ctx: '131k' },
+      { id: 'meta-llama/llama-4-maverick:free',   name: 'Llama 4 Maverick',  tier: 'free',     ctx: '1M'   },
+      { id: 'deepseek/deepseek-r1:free',          name: 'DeepSeek R1',       tier: 'free',     ctx: '163k' },
+      { id: 'mistralai/mistral-small-3.1-24b:free', name: 'Mistral Small 3.1', tier: 'free',   ctx: '128k' },
+      // Budget
+      { id: 'thudm/glm-4-flash',                  name: 'GLM-4 Flash',       tier: 'budget',   ctx: '128k' },
+      { id: 'mistralai/mistral-small-3.1-24b',    name: 'Mistral Small 3.1', tier: 'budget',   ctx: '128k' },
+      { id: 'qwen/qwen-2.5-72b-instruct',         name: 'Qwen 2.5 72B',      tier: 'budget',   ctx: '131k' },
+      { id: 'google/gemini-flash-1.5',            name: 'Gemini Flash 1.5',  tier: 'budget',   ctx: '1M'   },
+      { id: 'deepseek/deepseek-chat-v3-0324',     name: 'DeepSeek V3',       tier: 'budget',   ctx: '64k'  },
+      // Standard / Premium
+      { id: 'anthropic/claude-3.5-sonnet-20241022', name: 'Claude 3.5 Sonnet',  tier: 'standard', ctx: '200k' },
+      { id: 'anthropic/claude-sonnet-4-5',          name: 'Claude Sonnet 4.5',  tier: 'standard', ctx: '200k' },
+      { id: 'anthropic/claude-3-haiku-20240307',    name: 'Claude 3 Haiku',     tier: 'standard', ctx: '200k' },
+      { id: 'openai/gpt-4o',                        name: 'GPT-4o',             tier: 'standard', ctx: '128k' },
+      { id: 'openai/gpt-4o-mini',                   name: 'GPT-4o Mini',        tier: 'standard', ctx: '128k' },
+      { id: 'google/gemini-2.5-pro-preview',        name: 'Gemini 2.5 Pro',     tier: 'standard', ctx: '1M'   },
+      { id: 'deepseek/deepseek-r1',                 name: 'DeepSeek R1',        tier: 'standard', ctx: '163k' },
+    ];
+
+    const OR_TIER_LABELS = { free: '◉ Free Tier', budget: '◐ Budget (<$0.50/1M)', standard: '◆ Standard / Premium' };
+    const OR_TIER_COLORS = { free: '#4a9e6a', budget: '#9e8030', standard: '#5a7aaa' };
 
     // ═══════════════════════════════════════════════════════════
     // CUSTOM PROMPT TEMPLATES (GLOBAL)
@@ -9766,7 +9957,7 @@ ${f.chapter || '[PASTE TEXT]'}
       const name = prompt('Enter name for export:', 'My Style DNA');
       if (!name) return;
       const data = {
-        version: '1.2 Beta',
+        version: '1.2',
         name: name,
         styleDNA: getStyleDNA(),
         created: new Date().toISOString()
@@ -13655,28 +13846,9 @@ Output the JSON object now. Start with {`;
           </div>
         </div>
 
-        <div class="scard">
+        <div class="scard" id="model_card">
           <div class="scard-hd">Model</div>
-          <div class="scard-body">
-            <div class="model-collapse-hd" id="model_collapse_hd">
-              <span>Select model</span>
-              <span class="model-collapse-icon">▼</span>
-            </div>
-            <div class="model-grid" id="model_grid">
-              ${Object.entries(grouped).map(([provider, models]) => `
-                <div class="model-section-lbl">${provider}</div>
-                ${models.map(m => `
-                  <div class="model-row${APP.model === m.id ? ' msel' : ''}" data-mid="${m.id}" style="--mc:${m.color}">
-                    <div class="model-radio"><div class="model-radio-dot"></div></div>
-                    <div class="model-info">
-                      <div class="model-name">${esc(m.name)}</div>
-                      <div class="model-meta">${esc(m.id)} · ${m.ctx} ctx</div>
-                    </div>
-                    <span class="model-provider" style="color:${m.color};border-color:${m.color}22">${esc(provider)}</span>
-                  </div>`).join('')}
-              `).join('')}
-            </div>
-            <p class="api-note" style="margin-top:10px">${APP.provider === 'openrouter' ? 'Model IDs are OpenRouter paths. Check <a href="https://openrouter.ai/models" target="_blank">openrouter.ai/models</a> for availability.' : APP.provider === 'anthropic' ? 'Select a Claude model. Check <a href="https://docs.anthropic.com/en/docs/models-overview" target="_blank">docs.anthropic.com</a> for models.' : APP.provider === 'google' ? 'Select a Gemini model. Check <a href="https://ai.google.dev/docs" target="_blank">ai.google.dev/docs</a> for models.' : 'Select a GPT model. Check <a href="https://platform.openai.com/docs/models" target="_blank">platform.openai.com</a> for models.'}</p>
+          <div class="scard-body" id="model_card_body">
           </div>
         </div>
 
@@ -13928,6 +14100,8 @@ Output the JSON object now. Start with {`;
       </div>
     </div>`;
 
+      renderModelCard();
+
       // Provider selector
       p.querySelector('#provider_select').addEventListener('change', e => {
         APP.provider = e.target.value;
@@ -13938,13 +14112,7 @@ Output the JSON object now. Start with {`;
         p.querySelector('#openai_card').style.display = APP.provider === 'openai' ? 'block' : 'none';
         p.querySelector('#google_card').style.display = APP.provider === 'google' ? 'block' : 'none';
         p.querySelector('#lmstudio_card').style.display = APP.provider === 'lmstudio' ? 'block' : 'none';
-        // Auto-select first available model for provider
-        const availableModels = MODELS.filter(m => m.provider === APP.provider);
-        if (availableModels.length > 0 && !availableModels.find(m => m.id === APP.model)) {
-          APP.model = availableModels[0].id;
-          localStorage.setItem('na_model', APP.model);
-        }
-        renderSettings(); // Re-render to update model list
+        renderModelCard();
         updateTabDot();
       });
 
@@ -14038,14 +14206,28 @@ Output the JSON object now. Start with {`;
 
       p.addEventListener('click', async function (e) {
         if (e.target.id === 'set_password_btn') {
-          const password = prompt('Enter new password for encrypting API keys:');
-          if (!password) return;
-          const confirm = prompt('Confirm password:');
-          if (confirm !== password) {
+          // First verify the current password and load keys
+          const oldPassword = prompt('Enter your current password to unlock keys:');
+          if (!oldPassword) return;
+          const encrypted = localStorage.getItem('na_encrypted_keys');
+          if (encrypted) {
+            try {
+              const keys = await decryptKeys(encrypted, oldPassword);
+              setAllApiKeys(keys);
+              APP_KEY_PASSWORD = oldPassword;
+            } catch (e) {
+              alert('Wrong current password. Keys not updated.');
+              return;
+            }
+          }
+          const newPassword = prompt('Enter new password for encrypting API keys:');
+          if (!newPassword) return;
+          const confirm = prompt('Confirm new password:');
+          if (confirm !== newPassword) {
             alert('Passwords do not match');
             return;
           }
-          await saveKeysSecurely(password);
+          await saveKeysSecurely(newPassword);
           updateStorageModeUI();
           storageStatus.textContent = 'Password updated!';
         }
@@ -14305,25 +14487,6 @@ Output the JSON object now. Start with {`;
           status.textContent = '✗ ' + msg;
         }
       });
-
-      // Model selection
-      p.querySelectorAll('.model-row').forEach(row => {
-        row.addEventListener('click', () => {
-          APP.model = row.dataset.mid;
-          localStorage.setItem('na_model', APP.model);
-          p.querySelectorAll('.model-row').forEach(r => r.classList.toggle('msel', r.dataset.mid === APP.model));
-        });
-      });
-
-      // Model collapse toggle
-      const mch = document.getElementById('model_collapse_hd');
-      const mg = document.getElementById('model_grid');
-      mch.addEventListener('click', () => {
-        mch.classList.toggle('collapsed');
-        mg.classList.toggle('collapsed');
-      });
-
-      // Max tokens
       p.querySelector('#max_tok').addEventListener('input', e => {
         APP.maxTokens = parseInt(e.target.value) || 4000;
         localStorage.setItem('na_maxtok', APP.maxTokens);
@@ -14349,7 +14512,7 @@ Output the JSON object now. Start with {`;
       const currentProject = projects.find(p => p.id === currentPid);
       p.querySelector('#export_btn').addEventListener('click', () => {
         const exportData = {
-          version: '1.0-beta',
+          version: '1.0',
           exportedAt: new Date().toISOString(),
           projectName: currentProject ? currentProject.name : 'Unnamed Project',
           series: APP.series,
@@ -14656,6 +14819,299 @@ Output the JSON object now. Start with {`;
 
       // Render backup list
       renderBackupList();
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // OPENROUTER MODEL PICKER
+    // ═══════════════════════════════════════════════════════════
+
+    let _orDropdownActive = false;
+    let _orFetchedModels = null;
+    let _orHandlers = null;
+
+    function loadOrCachedModels() {
+      try {
+        const ts = parseInt(localStorage.getItem(OR_CACHE_TS_KEY) || '0', 10);
+        if (Date.now() - ts < OR_CACHE_TTL) {
+          const cached = JSON.parse(localStorage.getItem(OR_CACHE_KEY) || 'null');
+          if (cached && cached.length) _orFetchedModels = cached;
+        }
+      } catch {}
+    }
+    loadOrCachedModels();
+
+    function renderModelCard() {
+      const body = document.getElementById('model_card_body');
+      if (!body) return;
+      const isOr = APP.provider === 'openrouter';
+
+      if (isOr) {
+        body.innerHTML = `
+          <div class="or-picker-wrap">
+            <input class="or-picker-input" id="or_model_input" value="${esc(APP.model)}" placeholder="e.g. anthropic/claude-3.5-sonnet-20241022">
+            <div class="or-picker-btns">
+              <button type="button" class="or-picker-btn" id="or_browse_btn">▴ Browse models</button>
+              <button type="button" class="or-picker-btn accent" id="or_fetch_btn">${_orFetchedModels ? '🔄 Refresh' : '⬇ Fetch all'}</button>
+            </div>
+            <div class="or-picker-error" id="or_picker_error"></div>
+            <div class="or-picker-info" id="or_picker_info">${_orFetchedModels ? _orFetchedModels.length + ' models loaded · refreshes every 24 h' : 'Showing curated list · click Fetch all for all 300+ OpenRouter models'}</div>
+          </div>`;
+
+        // Input change
+        body.querySelector('#or_model_input').addEventListener('input', function() {
+          APP.model = this.value;
+          localStorage.setItem('na_model', APP.model);
+        });
+
+        // Browse button
+        body.querySelector('#or_browse_btn').addEventListener('click', function() {
+          if (_orDropdownActive) { closeOrDropdown(); return; }
+          const rect = this.getBoundingClientRect();
+          const maxH = 320;
+          const minDropW = Math.max(rect.width, 440);
+          const desiredLeft = Math.min(rect.left, window.innerWidth - minDropW - 8);
+          const spaceBelow = window.innerHeight - rect.bottom - 4;
+          const spaceAbove = rect.top - 4;
+          let top, bottom, availH;
+          if (spaceBelow >= Math.min(maxH, 160) || spaceBelow >= spaceAbove) {
+            availH = Math.max(120, Math.min(maxH, spaceBelow));
+            top = rect.bottom + 2;
+            bottom = null;
+          } else {
+            availH = Math.max(120, Math.min(maxH, spaceAbove));
+            top = null;
+            bottom = window.innerHeight - rect.top + 2;
+          }
+          openOrDropdown(top, bottom, desiredLeft, minDropW, availH);
+        });
+
+        // Fetch button
+        body.querySelector('#or_fetch_btn').addEventListener('click', async function() {
+          const apiKey = APP.apiKeys.openrouter;
+          if (!apiKey) {
+            document.getElementById('or_picker_error').textContent = 'Enter your OpenRouter API key first';
+            return;
+          }
+          this.disabled = true;
+          this.textContent = 'Loading…';
+          document.getElementById('or_picker_error').textContent = '';
+          try {
+            const res = await fetch('https://openrouter.ai/api/v1/models', {
+              headers: { Authorization: 'Bearer ' + apiKey }
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+            const list = (data.data || []).map(m => ({
+              id: m.id,
+              name: m.name || m.id,
+              ctx: m.context_length
+                ? (m.context_length >= 1000000 ? Math.round(m.context_length / 1000000) + 'M' : Math.round(m.context_length / 1000) + 'k')
+                : '',
+              pricePer1M: m.pricing && m.pricing.prompt != null ? parseFloat(m.pricing.prompt) * 1000000 : null,
+              isFree: m.pricing && m.pricing.prompt === '0' || m.id.endsWith(':free')
+            }));
+            localStorage.setItem(OR_CACHE_KEY, JSON.stringify(list));
+            localStorage.setItem(OR_CACHE_TS_KEY, String(Date.now()));
+            _orFetchedModels = list;
+            document.getElementById('or_picker_info').textContent = list.length + ' models loaded · refreshes every 24 h';
+            this.textContent = '🔄 Refresh';
+            this.disabled = false;
+          } catch (err) {
+            document.getElementById('or_picker_error').textContent = 'Fetch failed: ' + err.message;
+            this.textContent = _orFetchedModels ? '🔄 Refresh' : '⬇ Fetch all';
+            this.disabled = false;
+          }
+        });
+
+      } else {
+        // Non-OpenRouter: render the static grid
+        const filteredModels = MODELS.filter(m => m.provider === APP.provider);
+        const grouped = {};
+        filteredModels.forEach(m => { if (!grouped[m.provider]) grouped[m.provider] = []; grouped[m.provider].push(m); });
+        let note = '';
+        if (APP.provider === 'anthropic') note = 'Select a Claude model. Check <a href="https://docs.anthropic.com/en/docs/models-overview" target="_blank">docs.anthropic.com</a> for models.';
+        else if (APP.provider === 'google') note = 'Select a Gemini model. Check <a href="https://ai.google.dev/docs" target="_blank">ai.google.dev/docs</a> for models.';
+        else if (APP.provider === 'openai') note = 'Select a GPT model. Check <a href="https://platform.openai.com/docs/models" target="_blank">platform.openai.com</a> for models.';
+        else if (APP.provider === 'lmstudio') note = '';
+
+        body.innerHTML = `
+          <div class="model-collapse-hd" id="model_collapse_hd">
+            <span>Select model</span>
+            <span class="model-collapse-icon">▼</span>
+          </div>
+          <div class="model-grid" id="model_grid">
+            ${Object.entries(grouped).map(([provider, models]) => `
+              <div class="model-section-lbl">${provider}</div>
+              ${models.map(m => `
+                <div class="model-row${APP.model === m.id ? ' msel' : ''}" data-mid="${m.id}" style="--mc:${m.color}">
+                  <div class="model-radio"><div class="model-radio-dot"></div></div>
+                  <div class="model-info">
+                    <div class="model-name">${esc(m.name)}</div>
+                    <div class="model-meta">${esc(m.id)} · ${m.ctx} ctx</div>
+                  </div>
+                  <span class="model-provider" style="color:${m.color};border-color:${m.color}22">${esc(provider)}</span>
+                </div>`).join('')}
+            `).join('')}
+          </div>
+          ${note ? '<p class="api-note" style="margin-top:10px">' + note + '</p>' : ''}`;
+
+        // Model click handlers
+        body.querySelectorAll('.model-row').forEach(row => {
+          row.addEventListener('click', () => {
+            APP.model = row.dataset.mid;
+            localStorage.setItem('na_model', APP.model);
+            body.querySelectorAll('.model-row').forEach(r => r.classList.toggle('msel', r.dataset.mid === APP.model));
+          });
+        });
+
+        // Collapse toggle
+        const mch = body.querySelector('#model_collapse_hd');
+        const mg = body.querySelector('#model_grid');
+        if (mch && mg) {
+          mch.addEventListener('click', () => {
+            mch.classList.toggle('collapsed');
+            mg.classList.toggle('collapsed');
+          });
+        }
+
+        // Auto-select first model for provider if current model not available
+        if (filteredModels.length > 0 && !filteredModels.find(m => m.id === APP.model)) {
+          APP.model = filteredModels[0].id;
+          localStorage.setItem('na_model', APP.model);
+        }
+      }
+    }
+
+    function buildOrList(search) {
+      const q = search.toLowerCase();
+      const source = _orFetchedModels || OR_CURATED_MODELS;
+
+      let filtered;
+      if (_orFetchedModels) {
+        filtered = source.filter(m => !q || m.id.toLowerCase().includes(q) || m.name.toLowerCase().includes(q));
+        const freeItems = filtered.filter(m => m.isFree);
+        const budgetItems = filtered.filter(m => !m.isFree && m.pricePer1M != null && m.pricePer1M < 0.5);
+        const standardItems = filtered.filter(m => !m.isFree && (m.pricePer1M == null || m.pricePer1M >= 0.5));
+        const result = [];
+        const addGroup = (tier, label, items) => {
+          if (!items.length) return;
+          result.push({ isHeader: true, key: 'h-' + tier, tier: tier, label: label });
+          items.forEach(m => result.push({ id: m.id, name: m.name, isFree: m.isFree, ctx: m.ctx, price: m.pricePer1M != null ? m.pricePer1M.toFixed(3) : null }));
+        };
+        addGroup('free', OR_TIER_LABELS.free, freeItems);
+        addGroup('budget', OR_TIER_LABELS.budget, budgetItems);
+        addGroup('standard', OR_TIER_LABELS.standard, standardItems);
+        return result;
+      } else {
+        filtered = source.filter(m => !q || m.id.toLowerCase().includes(q) || m.name.toLowerCase().includes(q));
+        const result = [];
+        for (const tier of ['free', 'budget', 'standard']) {
+          const items = filtered.filter(m => m.tier === tier);
+          if (!items.length) continue;
+          result.push({ isHeader: true, key: 'h-' + tier, tier: tier, label: OR_TIER_LABELS[tier] });
+          items.forEach(m => result.push({ id: m.id, name: m.name, isFree: tier === 'free', ctx: m.ctx, price: null }));
+        }
+        return result;
+      }
+    }
+
+    function openOrDropdown(top, bottom, left, width, maxHeight) {
+      closeOrDropdown();
+      _orDropdownActive = true;
+
+      const dd = document.createElement('div');
+      dd.id = 'or_dropdown';
+      dd.className = 'or-dropdown';
+      dd.style.cssText = 'top:' + (top != null ? top + 'px' : 'auto') + ';bottom:' + (bottom != null ? bottom + 'px' : 'auto') + ';left:' + left + 'px;width:' + width + 'px;max-height:' + maxHeight + 'px';
+      document.body.appendChild(dd);
+
+      const searchInput = document.createElement('input');
+      searchInput.placeholder = 'Filter models…';
+      searchInput.style.cssText = 'position:sticky;top:0;z-index:1;padding:6px 8px;background:#12100c;border-bottom:1px solid #1c1912;width:100%;margin:0';
+      dd.appendChild(searchInput);
+      setTimeout(() => searchInput.focus(), 10);
+
+      const listContainer = document.createElement('div');
+      listContainer.style.cssText = 'overflow-y:auto;flex:1';
+
+      function renderOrList(q) {
+        const items = buildOrList(q);
+        listContainer.innerHTML = '';
+        if (items.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'or-dropdown-empty';
+          empty.textContent = 'No matches';
+          listContainer.appendChild(empty);
+          return;
+        }
+        items.forEach(item => {
+          if (item.isHeader) {
+            const h = document.createElement('div');
+            h.className = 'or-dropdown-header';
+            h.textContent = item.label;
+            h.style.color = OR_TIER_COLORS[item.tier] || 'var(--text5)';
+            listContainer.appendChild(h);
+          } else {
+            const row = document.createElement('div');
+            row.className = 'or-dropdown-row' + (item.id === APP.model ? ' selected' : '');
+            row.innerHTML = '<div class="or-dropdown-row-inner">' + esc(item.name) + '<span class="or-dropdown-row-id">' + esc(item.id) + '</span></div>'
+              + (item.isFree ? '<span class="or-free-badge">FREE</span>' : '')
+              + (item.ctx ? '<span class="or-ctx-badge">' + item.ctx + '</span>' : '')
+              + (item.price != null ? '<span class="or-price-badge">$' + item.price + '/1M</span>' : '');
+            row.addEventListener('mousedown', function() {
+              APP.model = item.id;
+              localStorage.setItem('na_model', APP.model);
+              document.getElementById('or_model_input').value = item.id;
+              closeOrDropdown();
+            });
+            listContainer.appendChild(row);
+          }
+        });
+      }
+      renderOrList('');
+
+      searchInput.addEventListener('input', function() {
+        renderOrList(this.value);
+      });
+
+      dd.appendChild(listContainer);
+
+      if (!_orFetchedModels) {
+        const foot = document.createElement('div');
+        foot.className = 'or-dropdown-foot';
+        foot.textContent = 'Showing curated list · click ⬇ Fetch all for all 300+ OpenRouter models';
+        dd.appendChild(foot);
+      }
+
+      // Close on outside click — NOT on scroll inside the dropdown
+      const mousedownHandler = function(e) {
+        const dd = document.getElementById('or_dropdown');
+        if (dd && !dd.contains(e.target) && e.target.id !== 'or_browse_btn') {
+          closeOrDropdown();
+        }
+      };
+      const scrollHandler = function(e) {
+        // Don't close if scrolling inside the dropdown (overflow scroll)
+        const dd = document.getElementById('or_dropdown');
+        if (dd && dd.contains(e.target)) return;
+        closeOrDropdown();
+      };
+      _orHandlers = { mousedown: mousedownHandler, scroll: scrollHandler };
+      setTimeout(() => {
+        document.addEventListener('mousedown', mousedownHandler);
+        document.addEventListener('scroll', scrollHandler, true);
+      }, 0);
+    }
+
+    function closeOrDropdown() {
+      _orDropdownActive = false;
+      const dd = document.getElementById('or_dropdown');
+      if (dd) dd.remove();
+      if (_orHandlers) {
+        document.removeEventListener('mousedown', _orHandlers.mousedown);
+        document.removeEventListener('scroll', _orHandlers.scroll, true);
+        _orHandlers = null;
+      }
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -15683,7 +16139,7 @@ This will expand the book-level bible into a series-level reference.`);
             const projects = getProjects();
             const currentProject = projects.find(p => p.id === pid);
             const exportData = {
-              version: '1.0-beta',
+              version: '1.0',
               exportedAt: new Date().toISOString(),
               projectName: currentProject ? currentProject.name : 'Unnamed Project',
               series: APP.series,
